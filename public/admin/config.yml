@@ -149,7 +149,29 @@ collections:
     preview_path: "shops/{{slug}}"
     fields:
       - { label: "Shop Name", name: "title", widget: "string" }
+      - {
+          label: "Hero location line",
+          name: "hero_location",
+          widget: "string",
+          required: false,
+          hint: "e.g. Bottesford — large white line on the hero. Leave empty to use the full shop name.",
+        }
+      - {
+          label: "Hero tagline",
+          name: "hero_tagline",
+          widget: "string",
+          required: false,
+          default: "Hospice Shop",
+          hint: "Yellow line under the location (only if Hero location is set).",
+        }
       - { label: "Shop info", name: "shop_info", widget: "markdown" }
+      - {
+          label: "Callout box",
+          name: "callout",
+          widget: "markdown",
+          required: false,
+          hint: "Optional highlight below the main story (heart icon box).",
+        }
       - { label: "Shop Main Image", name: "shop_main_image", widget: "image" }
       - { label: "Opening hours", name: "opening_hours", widget: "markdown" }
       - label: "Gallery"
@@ -160,6 +182,20 @@ collections:
       - { label: "Button Colour", name: "button_colour", widget: "string", default: "#2d6fb3" }
       - { label: "Phone", name: "phone", widget: "string" }
       - { label: "Address", name: "address", widget: "text" }
+      - {
+          label: "Map embed URL",
+          name: "map_embed_url",
+          widget: "string",
+          required: false,
+          hint: "Optional. Paste the iframe src from Google Maps → Share → Embed. If empty, a map is generated from the address.",
+        }
+      - {
+          label: "Donations blurb",
+          name: "donations_blurb",
+          widget: "text",
+          required: false,
+          hint: "Short text for the Visit sidebar (what donations you accept).",
+        }
       - { label: "Facebook Link", name: "facebook_link", widget: "string", required: false }
       - { label: "Instagram Link", name: "instagram_link", widget: "string", required: false }
       - { label: "Html Test", name: "html_test", widget: "text", required: false }

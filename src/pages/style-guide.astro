@@ -37,7 +37,10 @@ const typeTokens = [
     <div class="container">
       <header class="guide-header">
         <h1>Dove Cottage Style Guide</h1>
-        <p>Reference for global tokens, typography scale, button styles, and spacing rhythm.</p>
+        <p>
+          Reference for global tokens, typography scale, button styles, spacing rhythm, and motion so
+          the same patterns can be reused across the site.
+        </p>
       </header>
 
       <section class="panel">
@@ -95,8 +98,131 @@ const typeTokens = [
           <div class="space space-48">48</div>
         </div>
       </section>
+
+      <section class="panel motion-guide">
+        <h2>Motion &amp; animation</h2>
+        <p class="motion-lead">
+          Motion is calm and supportive: short fades with a soft ease-out, modest vertical travel, and
+          no autoplaying distractions. Always respect <code>prefers-reduced-motion</code> (handled in
+          CSS and in the scroll script).
+        </p>
+
+        <h3 class="motion-sub">Design tokens</h3>
+        <p class="motion-note">
+          Defined on <code>:root</code> in <code>src/styles/global.css</code>. Use these when adding
+          new animations so timing stays consistent.
+        </p>
+        <div class="motion-token-table" role="table" aria-label="Motion tokens">
+          <div class="motion-token-row motion-token-head" role="row">
+            <span role="columnheader">Token</span>
+            <span role="columnheader">Role</span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-ease-out</code>
+            <span role="cell">Primary easing for entrances (cubic-bezier)</span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-duration-reveal</code>
+            <span role="cell">Section scroll reveal (opacity + transform)</span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-duration-stagger</code>
+            <span role="cell">Card / grid item fade-up after section is visible</span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-duration-hero</code>
+            <span role="cell">Hero headline / body / CTA row (see <code>HeroSection.astro</code>)</span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-duration-video</code>
+            <span role="cell">Video embed emphasis when its section appears</span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-distance</code>
+            <span role="cell">Vertical shift for scroll reveals and <code>motion-fade-up</code></span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-distance-hero</code>
+            <span role="cell">Hero line stagger distance</span>
+          </div>
+          <div class="motion-token-row" role="row">
+            <code role="cell">--motion-stagger-step</code>
+            <span role="cell">Delay step between grid columns (multiples used for nth-child)</span>
+          </div>
+        </div>
+
+        <h3 class="motion-sub">Scroll reveal (site-wide)</h3>
+        <ol class="motion-steps">
+          <li>
+            Wrap the page content that should participate in motion with
+            <code>class="motion-scope"</code> (the homepage also uses <code>page-home</code> for any
+            legacy hooks).
+          </li>
+          <li>
+            Use normal <code>&lt;section&gt;</code> blocks. Sections named with
+            <code>.hero-section</code> are excluded from scroll reveal so the hero can use its own
+            entrance animation.
+          </li>
+          <li>
+            Import and call <code>initMotionScrollReveal()</code> from
+            <code>src/scripts/motion-scroll-reveal.ts</code> (optional selector; default
+            <code>".motion-scope"</code>).
+          </li>
+          <li>
+            Use the same grid class names as the homepage for staggered children:
+            <code>.cards-grid</code>, <code>.impact-grid</code>, <code>.featured-grid</code>, plus
+            <code>.reach-grid &gt; .main-card</code> and <code>.side-stack &gt; .side-card</code>, and
+            <code>.video-frame</code> for video blocks.
+          </li>
+        </ol>
+
+        <pre class="code-block" tabindex="0"><code>&lt;div class="motion-scope"&gt;
+  &lt;HeroSection /&gt; &lt;!-- .hero-section: not observed --&gt;
+  &lt;section&gt;…&lt;/section&gt;
+&lt;/div&gt;
+&lt;script&gt;
+  import &#123; initMotionScrollReveal &#125; from "../scripts/motion-scroll-reveal.ts";
+  initMotionScrollReveal();
+&lt;/script&gt;</code></pre>
+
+        <h3 class="motion-sub">Hero stagger</h3>
+        <p class="motion-note">
+          Apply <code>class="hero-animate"</code> to the hero title, supporting copy, and CTA row in
+          <code>HeroSection.astro</code>. Keyframes use <code>--motion-duration-hero</code>,
+          <code>--motion-ease-out</code>, and <code>--motion-distance-hero</code>.
+        </p>
+
+        <h3 class="motion-sub">Live example (scroll reveal)</h3>
+        <p class="motion-note">
+          Scroll this panel: sections below use the same classes as the homepage. A second section
+          includes a <code>.cards-grid</code> to show stagger.
+        </p>
+
+        <div class="motion-demo motion-scope">
+          <section class="motion-demo-block">
+            <h4 class="motion-demo-title">Sample section A</h4>
+            <p class="motion-demo-copy">
+              This block uses <code>reveal-on-scroll</code> and <code>is-visible</code> once it
+              enters the viewport.
+            </p>
+          </section>
+          <section class="motion-demo-block">
+            <h4 class="motion-demo-title">Sample section B (grid stagger)</h4>
+            <div class="cards-grid motion-demo-cards">
+              <article class="motion-demo-card">Card one</article>
+              <article class="motion-demo-card">Card two</article>
+              <article class="motion-demo-card">Card three</article>
+            </div>
+          </section>
+        </div>
+      </section>
     </div>
   </section>
+
+  <script>
+    import { initMotionScrollReveal } from "../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal(".motion-demo");
+  </script>
 </BaseLayout>
 
 <style>
@@ -248,5 +374,147 @@ const typeTokens = [
   }
   .space-48 {
     height: 68px;
+  }
+
+  .motion-guide .motion-lead {
+    margin: 0 0 16px;
+    color: #334862;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+  }
+
+  .motion-guide .motion-lead code {
+    font-size: 0.92em;
+  }
+
+  .motion-sub {
+    margin: 22px 0 8px;
+    font-size: var(--type-subtitle);
+    color: #10243d;
+    font-weight: 700;
+  }
+
+  .motion-sub:first-of-type {
+    margin-top: 0;
+  }
+
+  .motion-note {
+    margin: 0 0 12px;
+    color: #4a5e78;
+    font-size: var(--type-body-small);
+    line-height: 1.5;
+  }
+
+  .motion-token-table {
+    border: 1px solid #e7edf7;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: var(--type-body-small);
+  }
+
+  .motion-token-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: 10px;
+    padding: 10px 12px;
+    border-top: 1px solid #eef3fa;
+    align-items: start;
+  }
+
+  .motion-token-row:first-child {
+    border-top: none;
+  }
+
+  .motion-token-head {
+    background: #f5f8fd;
+    font-weight: 700;
+    color: #10243d;
+    font-size: var(--type-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .motion-token-row code {
+    font-size: 0.88rem;
+    word-break: break-word;
+  }
+
+  .motion-steps {
+    margin: 0 0 16px;
+    padding-left: 1.2rem;
+    color: #334862;
+    font-size: var(--type-body);
+    line-height: 1.55;
+  }
+
+  .motion-steps li {
+    margin-bottom: 8px;
+  }
+
+  .motion-steps code {
+    font-size: 0.9em;
+  }
+
+  .code-block {
+    margin: 0 0 18px;
+    padding: 14px 16px;
+    background: #0f1f33;
+    color: #e8f0ff;
+    border-radius: 10px;
+    font-size: var(--type-body-small);
+    line-height: 1.5;
+    overflow-x: auto;
+  }
+
+  .code-block code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  .motion-demo {
+    margin-top: 12px;
+    padding: 18px;
+    background: var(--color-lavender);
+    border-radius: 12px;
+    border: 1px dashed #c5d4eb;
+  }
+
+  .motion-demo-block {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    border: 1px solid #e5ebf5;
+  }
+
+  .motion-demo-block:last-child {
+    margin-bottom: 0;
+  }
+
+  .motion-demo-title {
+    margin: 0 0 8px;
+    font-size: var(--type-body);
+    color: var(--color-steel-blue);
+  }
+
+  .motion-demo-copy {
+    margin: 0;
+    color: #4a5e78;
+    font-size: var(--type-body-small);
+    line-height: 1.5;
+  }
+
+  .motion-demo-cards {
+    margin-top: 12px;
+  }
+
+  .motion-demo-card {
+    margin: 0;
+    padding: 14px;
+    background: #fbfdff;
+    border: 1px solid #e5ebf5;
+    border-radius: 10px;
+    font-size: var(--type-body-small);
+    font-weight: 600;
+    color: #132746;
   }
 </style>

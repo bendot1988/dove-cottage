@@ -28,6 +28,15 @@ const shops = defineCollection({
     facebook_link: z.string().optional(),
     instagram_link: z.string().optional(),
     html_test: z.string().optional(),
+    /** Split hero title, e.g. "Bottesford" + tagline (default "Hospice Shop") */
+    hero_location: z.string().optional(),
+    hero_tagline: z.string().optional(),
+    /** Highlight box below the main story (markdown) */
+    callout: z.string().optional(),
+    /** Short text for the Visit sidebar (donations accepted) */
+    donations_blurb: z.string().optional(),
+    /** Optional Google Maps embed `src` from Share → Embed map */
+    map_embed_url: z.string().optional(),
     draft: z.boolean().default(false)
   })
 });

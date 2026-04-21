@@ -12,171 +12,715 @@ export async function getStaticPaths() {
 }
 
 const { shop } = Astro.props as { shop: CollectionEntry<"shops"> };
+
+const allShops = await getCollection("shops", ({ data }) => !data.draft);
+const otherShops = allShops
+  .filter((s) => s.slug !== shop.slug)
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const telHref = `tel:${shop.data.phone.replace(/\s+/g, "")}`;
+const mapSrc =
+  shop.data.map_embed_url?.trim() ||
+  `https://www.google.com/maps?q=${encodeURIComponent(shop.data.address)}&output=embed`;
+
+const heroLine1 = shop.data.hero_location ?? shop.data.title;
+const heroLine2 = shop.data.hero_location
+  ? (shop.data.hero_tagline ?? "Hospice Shop")
+  : null;
 ---
 
 <BaseLayout title={`${shop.data.title} | Our Shops | Dove Cottage`}>
-  <section class="shop-detail">
-    <div class="container">
-      <p class="back"><a href="/shops/">← Back to Our Shops</a></p>
-      <h1>{shop.data.title}</h1>
-
-      <img class="hero-image" src={shop.data.shop_main_image} alt={shop.data.title} />
-
-      <div class="detail-grid">
-        <article class="panel">
-          <h2>Shop Info</h2>
-          <div class="rich-content" set:html={marked.parse(shop.data.shop_info)} />
-        </article>
-
-        <article class="panel">
-          <h2>Opening Hours</h2>
-          <div class="rich-content" set:html={marked.parse(shop.data.opening_hours)} />
-        </article>
+  <section class="shop-hero" style={`background-image: url('${shop.data.shop_main_image}')`}>
+    <div class="shop-hero-overlay" aria-hidden="true"></div>
+    <div class="container shop-hero-inner">
+      <p class="shop-back">
+        <a href="/shops/">← Back to Our Shops</a>
+      </p>
+      <div class="shop-hero-titles">
+        {
+          heroLine2 ? (
+            <>
+              <span class="shop-hero-name">{heroLine1}</span>
+              <span class="shop-hero-tagline">{heroLine2}</span>
+            </>
+          ) : (
+            <span class="shop-hero-name shop-hero-name-only">{heroLine1}</span>
+          )
+        }
       </div>
-
-      <article class="panel contact-panel">
-        <h2>Contact Details</h2>
-        <p><strong>Phone:</strong> <a href={`tel:${shop.data.phone.replace(/\s+/g, "")}`}>{shop.data.phone}</a></p>
-        <p><strong>Address:</strong> {shop.data.address}</p>
-        <p class="social-links">
-          {shop.data.facebook_link && (
-            <a href={shop.data.facebook_link} target="_blank" rel="noreferrer">Facebook</a>
-          )}
-          {shop.data.instagram_link && (
-            <a href={shop.data.instagram_link} target="_blank" rel="noreferrer">Instagram</a>
-          )}
+      <div class="shop-hero-meta">
+        <a href={telHref} class="shop-hero-phone">
+          <span class="shop-hero-icon" aria-hidden="true">☎</span>
+          {shop.data.phone}
+        </a>
+        <p class="shop-hero-address">
+          <span class="shop-hero-pin" aria-hidden="true">📍</span>
+          {shop.data.address}
         </p>
-      </article>
-
-      {shop.data.gallery.length > 0 && (
-        <section class="gallery">
-          <h2>Gallery</h2>
-          <div class="gallery-grid">
-            {shop.data.gallery.map((image) => <img src={image} alt="" loading="lazy" />)}
-          </div>
-        </section>
-      )}
-
-      {shop.data.html_test && <section class="panel custom-html" set:html={shop.data.html_test} />}
+      </div>
     </div>
   </section>
+
+  <div class="motion-scope shop-page">
+    <section class="shop-main">
+      <div class="container shop-layout">
+        <div class="shop-primary">
+          <p class="shop-eyebrow">About the shop</p>
+          <div class="shop-story rich-content" set:html={marked.parse(shop.data.shop_info)} />
+
+          {
+            shop.data.callout && (
+              <aside class="shop-callout" aria-label="How your purchase helps">
+                <span class="shop-callout-icon" aria-hidden="true">♥</span>
+                <div class="shop-callout-body rich-content" set:html={marked.parse(shop.data.callout)} />
+              </aside>
+            )
+          }
+
+          {
+            shop.data.gallery.length > 0 && (
+              <div class="shop-gallery-block">
+                <h2 class="shop-gallery-title">Gallery</h2>
+                <div class="shop-gallery-grid cards-grid">
+                  {shop.data.gallery.map((image, i) => (
+                    <figure class="shop-gallery-item">
+                      <img
+                        src={image}
+                        alt=""
+                        loading={i < 2 ? "eager" : "lazy"}
+                        decoding="async"
+                      />
+                    </figure>
+                  ))}
+                </div>
+              </div>
+            )
+          }
+
+          {shop.data.html_test && <div class="shop-custom rich-content" set:html={shop.data.html_test} />}
+        </div>
+
+        <aside class="visit-card" aria-label="Visit this shop">
+          <h2 class="visit-title">Visit us</h2>
+          <div class="visit-map">
+            <iframe
+              src={mapSrc}
+              title={`Map of ${shop.data.title}`}
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            />
+          </div>
+          <ul class="visit-list">
+            <li>
+              <span class="visit-icon" aria-hidden="true">📍</span>
+              <span>{shop.data.address}</span>
+            </li>
+            {
+              shop.data.facebook_link && (
+                <li>
+                  <span class="visit-icon" aria-hidden="true">f</span>
+                  <a href={shop.data.facebook_link} target="_blank" rel="noreferrer">
+                    Facebook
+                  </a>
+                </li>
+              )
+            }
+            {
+              shop.data.instagram_link && (
+                <li>
+                  <span class="visit-icon visit-icon-ig" aria-hidden="true">◎</span>
+                  <a href={shop.data.instagram_link} target="_blank" rel="noreferrer">
+                    Instagram
+                  </a>
+                </li>
+              )
+            }
+            <li>
+              <span class="visit-icon" aria-hidden="true">☎</span>
+              <a href={telHref}>{shop.data.phone}</a>
+            </li>
+            {
+              shop.data.donations_blurb && (
+                <li class="visit-donations">
+                  <span class="visit-icon" aria-hidden="true">♥</span>
+                  <span class="visit-donations-text">{shop.data.donations_blurb}</span>
+                </li>
+              )
+            }
+            <li class="visit-hours">
+              <span class="visit-icon" aria-hidden="true">🕐</span>
+              <div class="visit-hours-body rich-content" set:html={marked.parse(shop.data.opening_hours)} />
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-shine visit-donate">Donate to support our hospice</a>
+        </aside>
+      </div>
+    </section>
+
+    {
+      otherShops.length > 0 && (
+        <section class="shop-other">
+          <div class="container">
+            <h2 class="shop-other-title">Other locations</h2>
+            <div class="shop-other-grid cards-grid">
+              {otherShops.map((s) => (
+                <a href={`/shops/${s.slug}/`} class="shop-other-card">
+                  <div class="shop-other-image" style={`background-image:url('${s.data.shop_main_image}')`} />
+                  <span class="shop-other-label">{s.data.title}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+      )
+    }
+
+    <section class="shop-mid-cta" aria-label="Support the hospice">
+      <div class="container shop-mid-cta-inner">
+        <p>
+          Every donation helps us provide palliative care and support to local families.
+        </p>
+        <div class="shop-mid-cta-actions">
+          <a href="#" class="btn btn-secondary shop-mid-donate">Donate now</a>
+          <a href="tel:01949860303" class="shop-mid-phone">01949 860303</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
 
 <style>
-  .shop-detail {
-    background: var(--color-lavender);
-    padding: 56px 0 72px;
+  .shop-hero {
+    position: relative;
+    min-height: min(52vh, 560px);
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+  }
+
+  .shop-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      120deg,
+      rgba(16, 34, 58, 0.72) 0%,
+      rgba(16, 34, 58, 0.45) 45%,
+      rgba(16, 34, 58, 0.65) 100%
+    );
+  }
+
+  .shop-hero-inner {
+    position: relative;
+    width: min(1200px, 94%);
+    margin: 0 auto;
+    padding: 28px 0 40px;
+    min-height: min(52vh, 560px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
   }
 
   .container {
-    width: min(1100px, 95%);
+    width: min(1200px, 95%);
     margin: 0 auto;
   }
 
-  .back {
-    margin: 0 0 10px;
+  .shop-back {
+    position: absolute;
+    top: 22px;
+    left: 0;
+    margin: 0;
   }
 
-  .back a {
-    color: var(--color-steel-blue);
+  .shop-back a {
+    color: rgba(255, 255, 255, 0.92);
     text-decoration: none;
     font-weight: 700;
+    font-size: var(--type-body-small);
   }
 
-  h1 {
-    margin: 0 0 18px;
-    font-size: var(--type-section-title);
-    color: #102a4e;
+  .shop-back a:hover,
+  .shop-back a:focus-visible {
+    text-decoration: underline;
   }
 
-  .hero-image {
-    width: 100%;
-    border-radius: 14px;
-    border: 1px solid #dce5f2;
+  .shop-hero-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     margin-bottom: 18px;
   }
 
-  .detail-grid {
+  .shop-hero-name {
+    font-size: clamp(2.1rem, 5vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    text-shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .shop-hero-name-only {
+    max-width: 18ch;
+  }
+
+  .shop-hero-tagline {
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    font-weight: 800;
+    color: var(--color-golden-yellow);
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.3);
+  }
+
+  .shop-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 20px;
+  }
+
+  .shop-hero-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-weight: 700;
+    font-size: var(--type-body-large);
+    text-decoration: none;
+  }
+
+  .shop-hero-phone:hover,
+  .shop-hero-phone:focus-visible {
+    text-decoration: underline;
+  }
+
+  .shop-hero-icon {
+    opacity: 0.9;
+  }
+
+  .shop-hero-address {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    background: rgba(13, 27, 62, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: var(--type-body-small);
+    font-weight: 600;
+    line-height: 1.35;
+    max-width: min(100%, 380px);
+  }
+
+  .shop-hero-pin {
+    flex-shrink: 0;
+  }
+
+  .shop-page {
+    background: var(--color-lavender);
+  }
+
+  .shop-main {
+    padding: 48px 0 56px;
+  }
+
+  .shop-layout {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 28px;
+    align-items: start;
   }
 
-  .panel {
-    background: #fff;
-    border: 1px solid #dce5f2;
-    border-radius: 14px;
-    padding: 18px;
-  }
-
-  h2 {
+  .shop-eyebrow {
     margin: 0 0 10px;
-    font-size: var(--type-card-title);
-    color: #15345f;
-  }
-
-  .rich-content {
-    color: #3a4f6a;
-    font-size: var(--type-body);
-    line-height: 1.6;
-  }
-
-  .rich-content :global(p) {
-    margin: 0 0 10px;
-  }
-
-  .contact-panel p {
-    margin: 0 0 8px;
-    color: #344860;
-    font-size: var(--type-body);
-  }
-
-  .contact-panel a {
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--color-steel-blue);
   }
 
-  .social-links {
+  .shop-story {
+    color: #3a4f6a;
+    font-size: var(--type-body-large);
+    line-height: 1.65;
+  }
+
+  .shop-story :global(p) {
+    margin: 0 0 16px;
+  }
+
+  .shop-story :global(strong) {
+    color: #1a3050;
+  }
+
+  .shop-callout {
+    margin-top: 22px;
     display: flex;
+    gap: 14px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: var(--color-alice-blue);
+    border: 1px solid #d0e0f4;
+  }
+
+  .shop-callout-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--color-golden-yellow);
+    color: #1a3050;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+
+  .shop-callout-body {
+    flex: 1;
+    margin: 0;
+    color: #2c3f58;
+    font-size: var(--type-body);
+    line-height: 1.55;
+  }
+
+  .shop-callout-body :global(p) {
+    margin: 0;
+  }
+
+  .shop-gallery-block {
+    margin-top: 36px;
+  }
+
+  .shop-gallery-title {
+    margin: 0 0 16px;
+    font-size: var(--type-section-title);
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .shop-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
   }
 
-  .gallery {
-    margin-top: 18px;
+  .shop-gallery-item {
+    margin: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #dce5f2;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(19, 47, 82, 0.06);
+    transition:
+      transform 0.25s var(--motion-ease-out, ease),
+      box-shadow 0.25s ease;
   }
 
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
+  .shop-gallery-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 22px rgba(19, 47, 82, 0.1);
   }
 
-  .gallery-grid img {
+  .shop-gallery-item img {
     width: 100%;
     aspect-ratio: 4/3;
     object-fit: cover;
-    border-radius: 10px;
+    display: block;
+  }
+
+  .shop-custom {
+    margin-top: 22px;
+    padding: 16px 18px;
+    background: #fff;
+    border-radius: 12px;
     border: 1px solid #dce5f2;
+    font-size: var(--type-body);
+    color: #3a4f6a;
+  }
+
+  .visit-card {
+    position: sticky;
+    top: 16px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #dde6f4;
+    padding: 18px;
+    box-shadow: 0 12px 32px rgba(18, 44, 83, 0.08);
+  }
+
+  .visit-title {
+    margin: 0 0 14px;
+    font-size: var(--type-card-title);
+    color: var(--color-steel-blue);
+    font-weight: 700;
+  }
+
+  .visit-map {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e9f5;
+    aspect-ratio: 4/3;
+    background: #e8eef8;
+  }
+
+  .visit-map iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    border: 0;
+    display: block;
+  }
+
+  .visit-list {
+    list-style: none;
+    margin: 16px 0 18px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: var(--type-body-small);
+    color: #344860;
+  }
+
+  .visit-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .visit-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: var(--color-ghost-white);
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .visit-icon-ig {
+    font-size: 1rem;
+  }
+
+  .visit-list a {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .visit-list a:hover,
+  .visit-list a:focus-visible {
+    text-decoration: underline;
+  }
+
+  .visit-donations {
+    align-items: flex-start;
+  }
+
+  .visit-donations-text {
+    line-height: 1.5;
+  }
+
+  .visit-hours {
+    align-items: flex-start;
+  }
+
+  .visit-hours-body {
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .visit-hours-body :global(p) {
+    margin: 0 0 6px;
+  }
+
+  .visit-hours-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .visit-hours-body :global(strong) {
+    color: #1a3050;
+  }
+
+  .visit-donate {
+    width: 100%;
+    border-radius: 999px;
+    height: 48px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .shop-other {
+    padding: 8px 0 48px;
+  }
+
+  .shop-other-title {
+    margin: 0 0 20px;
+    text-align: center;
+    font-size: var(--type-section-title);
+    color: var(--color-steel-blue);
+    font-weight: 700;
+  }
+
+  .shop-other-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .shop-other-card {
+    position: relative;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    min-height: 160px;
+    box-shadow: 0 8px 20px rgba(18, 44, 83, 0.12);
+    transition:
+      transform 0.25s var(--motion-ease-out, ease),
+      box-shadow 0.25s ease;
+  }
+
+  .shop-other-card:hover,
+  .shop-other-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(18, 44, 83, 0.16);
+  }
+
+  .shop-other-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .shop-other-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, rgba(16, 34, 58, 0.88) 100%);
+  }
+
+  .shop-other-label {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    z-index: 1;
+    font-weight: 800;
+    font-size: var(--type-body);
+    line-height: 1.25;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  }
+
+  .shop-mid-cta {
+    background: var(--color-golden-yellow);
+    padding: 22px 0;
+  }
+
+  .shop-mid-cta-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .shop-mid-cta p {
+    margin: 0;
+    max-width: 560px;
+    color: #204579;
+    font-size: var(--type-body-large);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .shop-mid-cta-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .shop-mid-donate {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    height: 42px;
+    padding: 0 22px;
+    border-color: #2c5ea6;
+    color: #2c5ea6;
+    background: rgba(255, 255, 255, 0.95);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: var(--type-button-small);
+  }
+
+  .shop-mid-donate:hover,
+  .shop-mid-donate:focus-visible {
     background: #fff;
   }
 
-  .custom-html {
-    margin-top: 18px;
+  .shop-mid-phone {
+    color: #204579;
+    font-weight: 700;
+    font-size: var(--type-body-large);
+    text-decoration: none;
   }
 
-  @media (max-width: 900px) {
-    .detail-grid {
+  .shop-mid-phone:hover,
+  .shop-mid-phone:focus-visible {
+    text-decoration: underline;
+  }
+
+  .rich-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 1024px) {
+    .shop-layout {
       grid-template-columns: 1fr;
     }
 
-    .gallery-grid {
+    .visit-card {
+      position: static;
+    }
+
+    .shop-gallery-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 640px) {
-    .gallery-grid {
+    .shop-hero-inner {
+      padding-bottom: 32px;
+    }
+
+    .shop-gallery-grid {
       grid-template-columns: 1fr;
+    }
+
+    .shop-other-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .shop-mid-cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
     }
   }
 </style>

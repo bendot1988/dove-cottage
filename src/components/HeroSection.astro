@@ -27,10 +27,10 @@ const {
 <section class="hero-section" style={`background-image: url('${backgroundImage}')`}>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1>{title}</h1>
-    <p>{description}</p>
+    <h1 class="hero-animate">{title}</h1>
+    <p class="hero-animate">{description}</p>
 
-    <div class="hero-cta-row">
+    <div class="hero-cta-row hero-animate">
       {
         ctas.map((cta) => (
           <a href={cta.href} class={`btn btn-${cta.style} hero-pill`}>
@@ -43,6 +43,42 @@ const {
 </section>
 
 <style>
+  @keyframes hero-fade-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, var(--motion-distance-hero), 0);
+    }
+
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .hero-animate {
+    animation: hero-fade-up var(--motion-duration-hero) var(--motion-ease-out) both;
+  }
+
+  .hero-content h1.hero-animate {
+    animation-delay: 0.04s;
+  }
+
+  .hero-content p.hero-animate {
+    animation-delay: 0.16s;
+  }
+
+  .hero-cta-row.hero-animate {
+    animation-delay: 0.3s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-animate {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
   .hero-section {
     position: relative;
     min-height: 520px;

@@ -67,6 +67,14 @@
     "title": "Watch our Short Video to See the Difference We Make for Local Families",
     "youtubeId": "MigVQMHwS7M"
   },
+  "shopsSection": {
+    "eyebrow": "SUPPORTING OUR COMMUNITY",
+    "title": "Our Local Charity Shops",
+    "intro": "Every purchase from our charity shops and online stores support the work of our hospice in Stathern.",
+    "vintedUrl": "#",
+    "ebayUrl": "#",
+    "sunflowerImage": "/images/sunflower-brand.png"
+  },
   "reachSection": {
     "backgroundImage": "/images/reach-section-bg.png",
     "statNumber": "110",

@@ -18,7 +18,7 @@ address: "Canal Lane, Stathern, LE14 4EX"
 facebook_link: "https://facebook.com"
 instagram_link: "https://instagram.com"
 html_test: "<p><strong>Donations welcome:</strong> Please drop items during opening hours.</p>"
-draft: false
+draft: true
 ---
 
 Visit our Bingham shop to browse quality donated items and support hospice care in your local community.

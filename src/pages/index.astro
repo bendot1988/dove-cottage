@@ -5,6 +5,7 @@ import HeroSection from "../components/HeroSection.astro";
 import CareServicesSection from "../components/CareServicesSection.astro";
 import FeaturedNewsSection from "../components/FeaturedNewsSection.astro";
 import VideoFeatureSection from "../components/VideoFeatureSection.astro";
+import HomeShopsSection from "../components/HomeShopsSection.astro";
 import ReachSection from "../components/ReachSection.astro";
 import SupportCardsSection from "../components/SupportCardsSection.astro";
 import ImpactSection from "../components/ImpactSection.astro";
@@ -22,14 +23,29 @@ const featuredNews = (await getCollection("blog", ({ data }) => !data.draft))
     image: post.data.featuredImage ?? post.data.featured_image,
     slug: post.slug
   }));
+
+const homeShops = (await getCollection("shops", ({ data }) => !data.draft))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .map((s) => ({
+    slug: s.slug,
+    image: s.data.shop_main_image,
+    label: (s.data.hero_location ?? s.data.title).toUpperCase()
+  }));
 ---
 
 <BaseLayout title="Dove Cottage">
-  <HeroSection {...homepage.hero} />
-  <CareServicesSection {...homepage.careServices} />
-  <VideoFeatureSection {...homepage.videoFeature} />
-  <ReachSection {...homepage.reachSection} />
-  <SupportCardsSection {...homepage.supportSection} />
-  <ImpactSection {...homepage.impactSection} />
-  {featuredNews.length > 0 && <FeaturedNewsSection posts={featuredNews} />}
+  <div class="page-home motion-scope">
+    <HeroSection {...homepage.hero} />
+    <CareServicesSection {...homepage.careServices} />
+    <VideoFeatureSection {...homepage.videoFeature} />
+    <HomeShopsSection {...homepage.shopsSection} shops={homeShops} />
+    <ReachSection {...homepage.reachSection} />
+    <SupportCardsSection {...homepage.supportSection} />
+    <ImpactSection {...homepage.impactSection} />
+    {featuredNews.length > 0 && <FeaturedNewsSection posts={featuredNews} />}
+  </div>
+  <script>
+    import { initMotionScrollReveal } from "../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
