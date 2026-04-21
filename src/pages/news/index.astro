@@ -19,13 +19,15 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
         <div class="news-grid">
           {posts.map((post) => (
             <article class="news-card">
-              {post.data.featuredImage && (
+              {(post.data.featuredImage ?? post.data.featured_image) && (
                 <a href={`/news/${post.slug}/`} class="thumb-link">
-                  <img src={post.data.featuredImage} alt="" loading="lazy" />
+                  <img src={post.data.featuredImage ?? post.data.featured_image} alt="" loading="lazy" />
                 </a>
               )}
               <div class="news-card-body">
                 <p class="meta">
+                  <span class="category">{post.data.category}</span>
+                  <span>·</span>
                   <time datetime={post.data.publishDate.toISOString()}>
                     {post.data.publishDate.toLocaleDateString("en-GB", {
                       day: "numeric",
@@ -101,6 +103,15 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
     color: #61738d;
     font-size: var(--type-body-small);
     font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .category {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-steel-blue);
   }
 
   h2 {

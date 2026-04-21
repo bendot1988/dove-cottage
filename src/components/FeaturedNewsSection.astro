@@ -1,0 +1,227 @@
+---
+interface FeaturedPost {
+  title: string;
+  category: string;
+  excerpt: string;
+  image?: string;
+  slug: string;
+}
+
+interface Props {
+  posts: FeaturedPost[];
+}
+
+const { posts = [] } = Astro.props as Props;
+---
+
+<section class="featured-news">
+  <div class="container">
+    <h2>Featured News &amp; Events</h2>
+    <p class="section-subtitle">Latest updates, stories, and upcoming events from Dove Cottage.</p>
+
+    <div class="featured-grid">
+      {
+        posts.map((post) => (
+          <article class="featured-card">
+            <a href={`/news/${post.slug}/`} class="featured-image-link" aria-label={`Read ${post.title}`}>
+              <img src={post.image || "/images/hero-family-alt.png"} alt={post.title} loading="lazy" />
+            </a>
+            <div class="featured-content">
+              <p class="category">{post.category}</p>
+              <h3>
+                <a href={`/news/${post.slug}/`}>{post.title}</a>
+              </h3>
+              <p class="excerpt">{post.excerpt}</p>
+              <a href={`/news/${post.slug}/`} class="read-more">
+                <span class="read-more-text">Read More</span>
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="all-news-link">
+      <a href="/news/">View All News</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .featured-news {
+    background: var(--color-lavender);
+    padding: 20px 0 34px;
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  h2 {
+    margin: 0 0 18px;
+    font-size: var(--type-section-title);
+    color: var(--color-steel-blue);
+  }
+
+  .section-subtitle {
+    margin: -6px 0 18px;
+    color: #425772;
+    font-size: var(--type-body-large);
+    line-height: 1.5;
+    max-width: 760px;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .featured-card {
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(18, 44, 83, 0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    min-height: 100%;
+  }
+
+  .featured-card:hover,
+  .featured-card:focus-within {
+    transform: translateY(-4px);
+    border-color: #bfd0e7;
+    box-shadow: 0 14px 26px rgba(18, 44, 83, 0.14);
+  }
+
+  .featured-image-link {
+    display: block;
+    margin-top: auto;
+    overflow: hidden;
+  }
+
+  .featured-image-link img {
+    width: 100%;
+    min-height: 170px;
+    max-height: 170px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .featured-card:hover .featured-image-link img,
+  .featured-card:focus-within .featured-image-link img {
+    transform: scale(1.08);
+  }
+
+  .featured-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .category {
+    margin: 0 0 8px;
+    font-size: var(--type-body-small);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-steel-blue);
+    font-weight: 700;
+  }
+
+  .featured-content h3 {
+    margin: 0 0 8px;
+    font-size: var(--type-card-title);
+    color: #102a4e;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .featured-content h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .featured-content h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .excerpt {
+    margin: 0;
+    color: #425772;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .read-more {
+    margin-top: auto;
+    padding-top: 14px;
+    color: var(--color-steel-blue);
+    text-decoration: none;
+    font-size: var(--type-button);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .read-more-text {
+    position: relative;
+  }
+
+  .read-more-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--color-golden-yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .read-more:hover .read-more-text::after,
+  .read-more:focus-visible .read-more-text::after {
+    transform: scaleX(1);
+  }
+
+  .all-news-link {
+    margin: 14px 0 0;
+    text-align: right;
+  }
+
+  .all-news-link a {
+    color: var(--color-steel-blue);
+    text-decoration: none;
+    font-size: var(--type-button);
+    font-weight: 700;
+  }
+
+  .all-news-link a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 900px) {
+    .featured-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .featured-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

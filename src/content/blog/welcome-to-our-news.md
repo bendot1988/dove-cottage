@@ -1,5 +1,6 @@
 ---
 title: Welcome to Our News & Events
+category: News & Events
 excerpt: Keep up to date with the latest updates, upcoming events, and stories from Dove Cottage Day Hospice.
 publishDate: 2026-04-21
 author: Dove Cottage Day Hospice

@@ -4,10 +4,12 @@ const blog = defineCollection({
   type: "content",
   schema: z.object({
     title: z.string(),
+    category: z.string().default("News"),
     excerpt: z.string(),
     publishDate: z.coerce.date(),
     author: z.string().default("Dove Cottage Day Hospice"),
     featuredImage: z.string().optional(),
+    featured_image: z.string().optional(),
     draft: z.boolean().default(false)
   })
 });

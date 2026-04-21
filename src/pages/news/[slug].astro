@@ -18,6 +18,8 @@ const { Content } = await post.render();
   <article class="news-post">
     <div class="container">
       <p class="meta">
+        <span class="category">{post.data.category}</span>
+        <span>·</span>
         <time datetime={post.data.publishDate.toISOString()}>
           {post.data.publishDate.toLocaleDateString("en-GB", {
             day: "numeric",
@@ -29,7 +31,14 @@ const { Content } = await post.render();
         <span>{post.data.author}</span>
       </p>
       <h1>{post.data.title}</h1>
-      {post.data.featuredImage && <img class="featured" src={post.data.featuredImage} alt="" loading="eager" />}
+      {(post.data.featuredImage ?? post.data.featured_image) && (
+        <img
+          class="featured"
+          src={post.data.featuredImage ?? post.data.featured_image}
+          alt=""
+          loading="eager"
+        />
+      )}
       <div class="content">
         <Content />
       </div>
@@ -56,6 +65,13 @@ const { Content } = await post.render();
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .category {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-steel-blue);
+    font-weight: 700;
   }
 
   h1 {
