@@ -1,0 +1,102 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props as { post: CollectionEntry<"blog"> };
+const { Content } = await post.render();
+---
+
+<BaseLayout title={`${post.data.title} | Dove Cottage`}>
+  <article class="news-post">
+    <div class="container">
+      <p class="meta">
+        <time datetime={post.data.publishDate.toISOString()}>
+          {post.data.publishDate.toLocaleDateString("en-GB", {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+          })}
+        </time>
+        <span>·</span>
+        <span>{post.data.author}</span>
+      </p>
+      <h1>{post.data.title}</h1>
+      {post.data.featuredImage && <img class="featured" src={post.data.featuredImage} alt="" loading="eager" />}
+      <div class="content">
+        <Content />
+      </div>
+      <p class="back-link"><a href="/news/">← Back to News &amp; Events</a></p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .news-post {
+    background: var(--color-lavender);
+    padding: 56px 0 72px;
+  }
+
+  .container {
+    width: min(860px, 92%);
+    margin: 0 auto;
+  }
+
+  .meta {
+    margin: 0 0 10px;
+    color: #596d89;
+    font-size: var(--type-body-small);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  h1 {
+    margin: 0 0 18px;
+    font-size: var(--type-section-title);
+    color: #102a4e;
+  }
+
+  .featured {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid #dce5f2;
+    box-shadow: 0 8px 18px rgba(18, 44, 83, 0.08);
+    margin-bottom: 18px;
+  }
+
+  .content {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #dce5f2;
+    padding: 22px;
+    color: #304662;
+    line-height: 1.7;
+  }
+
+  .content :global(h2),
+  .content :global(h3) {
+    color: #12335f;
+  }
+
+  .back-link {
+    margin-top: 14px;
+  }
+
+  .back-link a {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+</style>

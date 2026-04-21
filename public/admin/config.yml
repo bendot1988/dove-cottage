@@ -122,3 +122,19 @@ collections:
                   - { label: "Button Label", name: "buttonLabel", widget: "string" }
                   - { label: "Button Link", name: "buttonLink", widget: "string" }
                   - { label: "Featured", name: "featured", widget: "boolean", required: false, default: false }
+  - name: "news"
+    label: "News & Events"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    preview_path: "news/{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Publish Date", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Author", name: "author", widget: "string", default: "Dove Cottage Day Hospice" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
