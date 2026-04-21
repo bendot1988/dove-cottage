@@ -1,6 +1,6 @@
 ---
-title: Bottesford Hospice Shop
-hero_location: Bottesford
+title: Bottesford
+hero_location: Bottesford Hospice Shop
 hero_tagline: Hospice Shop
 shop_info: >
   Our Bottesford shop sits on **Market Street**, in the heart of the village.
