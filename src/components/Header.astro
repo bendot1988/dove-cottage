@@ -13,8 +13,23 @@
             <span>01949 860303</span>
           </a>
         </div>
-        <a href="#" class="donate-btn">Donate</a>
+        <a href="#" class="btn btn-primary btn-shine donate-btn">Donate</a>
       </div>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open mobile menu"
+      >
+        <span class="menu-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+        <span>Menu</span>
+      </button>
     </div>
   </div>
 
@@ -26,7 +41,14 @@
         </li>
 
         <li class="nav-item has-dropdown">
-          <a class="nav-link with-arrow" href="#">About Us</a>
+          <a class="nav-link with-arrow" href="#">
+            <span>About Us</span>
+            <span class="dropdown-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" focusable="false">
+                <path d="M2.1 4.35L6 8.1l3.9-3.75" />
+              </svg>
+            </span>
+          </a>
           <div class="dropdown-panel mega-menu about-mega">
             <div class="mega-grid">
               <section class="mega-column">
@@ -59,7 +81,14 @@
         </li>
 
         <li class="nav-item has-dropdown">
-          <a class="nav-link with-arrow" href="#">Support Us</a>
+          <a class="nav-link with-arrow" href="#">
+            <span>Support Us</span>
+            <span class="dropdown-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" focusable="false">
+                <path d="M2.1 4.35L6 8.1l3.9-3.75" />
+              </svg>
+            </span>
+          </a>
           <div class="dropdown-panel mega-menu support-mega">
             <div class="mega-grid support-grid">
               <section class="mega-column">
@@ -87,9 +116,101 @@
       </ul>
     </div>
   </nav>
+
+  <div class="mobile-nav" id="mobile-menu" aria-hidden="true">
+    <button class="mobile-nav-backdrop" type="button" data-close-mobile-menu aria-label="Close menu"></button>
+    <aside class="mobile-nav-panel" role="dialog" aria-modal="true" aria-label="Mobile menu">
+      <div class="mobile-nav-head">
+        <strong>Menu</strong>
+        <button type="button" class="mobile-close" data-close-mobile-menu aria-label="Close mobile menu">✕</button>
+      </div>
+
+      <nav class="mobile-links" aria-label="Mobile navigation">
+        <a href="#" class="mobile-link">Home</a>
+
+        <details class="mobile-group">
+          <summary>About Us</summary>
+          <div class="mobile-group-content">
+            <a href="#" class="mobile-link">What We Offer</a>
+            <a href="#" class="mobile-link">Carer &amp; patient wellbeing sessions</a>
+            <a href="#" class="mobile-link">Dementia home-sitting</a>
+            <a href="#" class="mobile-link">Counselling</a>
+            <a href="#" class="mobile-link">Support groups</a>
+            <a href="#" class="mobile-link">Our Team</a>
+            <a href="#" class="mobile-link">Our Facilities</a>
+          </div>
+        </details>
+
+        <details class="mobile-group">
+          <summary>Support Us</summary>
+          <div class="mobile-group-content">
+            <a href="#" class="mobile-link">Make a donation</a>
+            <a href="#" class="mobile-link">Volunteer your time</a>
+            <a href="#" class="mobile-link">Leave a gift in your will</a>
+            <a href="#" class="mobile-link">Fundraise for us</a>
+            <a href="#" class="mobile-link">Visit our shops</a>
+            <a href="#" class="mobile-link">Corporate partnerships</a>
+          </div>
+        </details>
+
+        <a href="#" class="mobile-link">News &amp; Events</a>
+        <a href="#" class="mobile-link">Hire our facilities</a>
+        <a href="#" class="mobile-link">Contact Us</a>
+      </nav>
+
+      <div class="mobile-cta">
+        <a href="tel:01949860303" class="mobile-phone">☎ 01949 860303</a>
+        <a href="#" class="btn btn-primary btn-shine mobile-donate">Donate</a>
+        <a href="#" class="btn btn-secondary mobile-secondary-cta">Volunteer</a>
+      </div>
+    </aside>
+  </div>
 </header>
 
+<script is:inline>
+  (() => {
+    const header = document.querySelector(".site-header");
+    if (!header) return;
+
+    const toggle = header.querySelector(".menu-toggle");
+    const menu = header.querySelector(".mobile-nav");
+    const closeButtons = header.querySelectorAll("[data-close-mobile-menu]");
+
+    if (!toggle || !menu) return;
+
+    const setMenuOpen = (open) => {
+      header.classList.toggle("mobile-menu-open", open);
+      menu.setAttribute("aria-hidden", open ? "false" : "true");
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("mobile-menu-open", open);
+    };
+
+    toggle.addEventListener("click", () => {
+      const isOpen = header.classList.contains("mobile-menu-open");
+      setMenuOpen(!isOpen);
+    });
+
+    closeButtons.forEach((btn) => btn.addEventListener("click", () => setMenuOpen(false)));
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) {
+        setMenuOpen(false);
+      }
+    });
+  })();
+</script>
+
 <style>
+  :global(body.mobile-menu-open) {
+    overflow: hidden;
+  }
+
   .site-header {
     font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
     box-shadow: 0 2px 10px rgba(10, 35, 74, 0.12);
@@ -142,7 +263,7 @@
   }
 
   .phone-label {
-    font-size: 12px;
+    font-size: var(--type-micro);
     line-height: 1;
     font-weight: 600;
     letter-spacing: 0.01em;
@@ -156,9 +277,11 @@
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: clamp(16px, 2vw, 30px);
+    font-size: var(--type-card-title);
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(8, 26, 48, 0.35);
   }
 
   .phone-link:hover,
@@ -167,25 +290,43 @@
   }
 
   .phone-icon {
-    font-size: clamp(14px, 1.4vw, 22px);
+    font-size: var(--type-subtitle);
     line-height: 1;
+    opacity: 0.95;
   }
 
   .donate-btn {
-    color: #22344e;
-    background: var(--color-golden-yellow);
     border-radius: 999px;
-    text-decoration: none;
-    font-size: clamp(15px, 1.2vw, 20px);
-    font-weight: 700;
-    line-height: 1;
-    padding: clamp(8px, 0.8vw, 11px) clamp(18px, 1.8vw, 26px);
-    border: 1px solid #dfc304;
+    height: 42px;
+    padding: 0 20px;
   }
 
-  .donate-btn:hover,
-  .donate-btn:focus-visible {
-    background: #f3d306;
+  .menu-toggle {
+    display: none;
+    border: 1px solid rgba(255, 255, 255, 0.32);
+    background: rgba(22, 69, 122, 0.5);
+    color: #fff;
+    border-radius: 10px;
+    min-height: 40px;
+    padding: 8px 12px;
+    font: inherit;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .menu-toggle-icon {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .menu-toggle-icon span {
+    width: 16px;
+    height: 2px;
+    border-radius: 999px;
+    background: #fff;
   }
 
   .nav-row {
@@ -207,6 +348,9 @@
   .nav-item {
     position: relative;
     list-style: none;
+    /* Extends hover area so cursor can move into dropdown without closing. */
+    padding-bottom: 6px;
+    margin-bottom: -6px;
   }
 
   .site-header ul,
@@ -219,7 +363,7 @@
   .nav-link {
     color: #fff;
     text-decoration: none;
-    font-size: 20px;
+    font-size: var(--type-nav);
     font-weight: 600;
     display: inline-block;
     padding: 14px 0 12px;
@@ -227,12 +371,7 @@
     position: relative;
   }
 
-  .nav-link:hover,
-  .nav-link:focus-visible {
-    opacity: 0.92;
-  }
-
-  .nav-link.active::after {
+  .nav-link::after {
     content: "";
     position: absolute;
     left: 0;
@@ -240,13 +379,56 @@
     bottom: -1px;
     height: 3px;
     background: var(--color-golden-yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
   }
 
-  .with-arrow::after {
-    content: "▾";
-    margin-left: 7px;
-    font-size: 14px;
-    vertical-align: middle;
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    opacity: 0.92;
+  }
+
+  .nav-link:hover::after,
+  .nav-link:focus-visible::after,
+  .nav-link.active::after {
+    transform: scaleX(1);
+  }
+
+  .with-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dropdown-icon {
+    width: 10px;
+    height: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(0);
+    transition: transform 0.2s ease;
+    color: #fff;
+    opacity: 0.9;
+  }
+
+  .dropdown-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .dropdown-icon path {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .has-dropdown:hover .dropdown-icon,
+  .has-dropdown:focus-within .dropdown-icon {
+    transform: rotate(180deg);
   }
 
   .dropdown-panel {
@@ -255,7 +437,7 @@
     top: 100%;
     left: 0;
     transform: none;
-    margin-top: 4px;
+    margin-top: 0;
     background: #ffffff;
     color: #12243f;
     border: 1px solid #d9e4f2;
@@ -291,7 +473,7 @@
 
   .mega-title {
     margin: 0 0 8px;
-    font-size: 16px;
+    font-size: var(--type-body-small);
     font-weight: 700;
     color: #163766;
     letter-spacing: -0.01em;
@@ -303,7 +485,7 @@
 
   .mega-link {
     display: block;
-    font-size: 15px;
+    font-size: var(--type-body-small);
     font-weight: 500;
     line-height: 1.5;
     color: #12243f;
@@ -332,75 +514,182 @@
     width: min(420px, 90vw);
   }
 
-  @media (max-width: 980px) {
+  .mobile-nav {
+    display: none;
+  }
+
+  @media (max-width: 1100px) {
     .actions {
-      gap: 12px;
+      display: none;
     }
 
-    .donate-btn {
-      font-size: 15px;
-      padding: 8px 16px;
+    .menu-toggle {
+      display: inline-flex;
     }
 
     .nav-content {
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 4px 0;
+      display: none;
     }
 
-    .nav-link {
-      font-size: 16px;
-      padding: 10px 10px 8px;
+    .mobile-nav {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      pointer-events: none;
     }
 
-    .dropdown-panel {
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(680px, 94vw);
+    .mobile-nav-backdrop {
+      position: absolute;
+      inset: 0;
+      border: 0;
+      background: rgba(8, 22, 40, 0.55);
+      opacity: 0;
+      transition: opacity 0.2s ease;
     }
 
-    .about-mega,
-    .support-mega {
-      min-width: 0;
-      width: min(680px, 94vw);
+    .mobile-nav-panel {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(420px, 88vw);
+      height: 100%;
+      background: #fff;
+      box-shadow: -10px 0 28px rgba(6, 23, 43, 0.28);
+      transform: translateX(100%);
+      transition: transform 0.24s ease;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
-    .mega-grid {
-      grid-template-columns: 1fr 1fr;
+    .site-header.mobile-menu-open .mobile-nav {
+      display: block;
+      pointer-events: auto;
     }
 
-    .support-grid {
-      grid-template-columns: 1fr;
+    .site-header.mobile-menu-open .mobile-nav-backdrop {
+      opacity: 1;
     }
 
-    .mega-link {
-      white-space: normal;
+    .site-header.mobile-menu-open .mobile-nav-panel {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--color-steel-blue-1);
+      color: #fff;
+      padding: 14px 16px;
+      font-size: var(--type-body);
+    }
+
+    .mobile-close {
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .mobile-links {
+      padding: 10px 0;
+      border-bottom: 1px solid #e2eaf5;
+    }
+
+    .mobile-link,
+    .mobile-group > summary {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #12335f;
+      font-size: var(--type-body);
+      font-weight: 600;
+      border-bottom: 1px solid #edf2f9;
+    }
+
+    .mobile-group > summary {
+      cursor: pointer;
+      list-style: none;
+      position: relative;
+      padding-right: 36px;
+    }
+
+    .mobile-group > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .mobile-group > summary::after {
+      content: "▾";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #325b91;
+      font-size: 0.8rem;
+      transition: transform 0.2s ease;
+    }
+
+    .mobile-group[open] > summary::after {
+      transform: translateY(-50%) rotate(180deg);
+    }
+
+    .mobile-group-content .mobile-link {
+      padding-left: 28px;
+      font-weight: 500;
+      font-size: var(--type-body-small);
+      color: #2e4c72;
+    }
+
+    .mobile-cta {
+      padding: 14px 16px 20px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .mobile-phone {
+      text-decoration: none;
+      color: var(--color-steel-blue);
+      font-size: var(--type-subtitle);
+      font-weight: 700;
+      padding: 6px 0 2px;
+    }
+
+    .mobile-donate,
+    .mobile-secondary-cta {
+      border-radius: 999px;
+      width: 100%;
+    }
+
+    .mobile-donate {
+      color: #233a5a;
+    }
+
+    .mobile-secondary-cta {
+      color: #204a81;
+      border-color: #204a81;
     }
   }
 
   @media (max-width: 700px) {
-    .dropdown-panel {
-      position: static;
-      transform: none;
+    .mobile-nav-panel {
       width: 100%;
-      margin-top: 0;
-      border-radius: 0;
-      border-left: none;
-      border-right: none;
-      box-shadow: none;
-      padding: 12px;
-    }
-
-    .mega-grid {
-      grid-template-columns: 1fr;
+      max-width: 100%;
     }
   }
 
   @media (max-width: 680px) {
     .top-content {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .brand-logo {
+      width: clamp(74px, 18vw, 96px);
     }
 
     .actions {
@@ -409,7 +698,7 @@
     }
 
     .phone-icon {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     .phone-wrap {
@@ -417,7 +706,7 @@
     }
 
     .phone-link {
-      font-size: 20px;
+      font-size: 1.1rem;
     }
   }
 </style>

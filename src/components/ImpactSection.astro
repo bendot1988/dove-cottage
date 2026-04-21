@@ -1,0 +1,213 @@
+---
+interface ImpactCard {
+  icon: string;
+  amount: string;
+  title: string;
+  description: string;
+  buttonLabel: string;
+  buttonLink: string;
+  featured?: boolean;
+}
+
+interface Props {
+  title: string;
+  cards: ImpactCard[];
+}
+
+const {
+  title = "See the Impact Your Gift Will Have",
+  cards = [
+    {
+      icon: "/images/icon-meal.svg",
+      amount: "£15",
+      title: "A Home-Cooked Meal",
+      description:
+        "Pays for a guest's nutritious, three-course home-cooked lunch tailored to their individual dietary needs.",
+      buttonLabel: "Donate £15",
+      buttonLink: "#",
+      featured: false
+    },
+    {
+      icon: "/images/icon-handshare.svg",
+      amount: "£50",
+      title: "Dementia Support",
+      description: "Funds two hours of respite care for a family living with Dementia.",
+      buttonLabel: "Donate £50",
+      buttonLink: "#",
+      featured: true
+    },
+    {
+      icon: "/images/icon-nurse.svg",
+      amount: "£200",
+      title: "Nursing Care",
+      description: "Provides a full day of specialist palliative nursing care and social support for one guest.",
+      buttonLabel: "Donate £200",
+      buttonLink: "#",
+      featured: false
+    }
+  ]
+} = Astro.props as Props;
+---
+
+<section class="impact-section">
+  <div class="container">
+    <h2>{title}</h2>
+
+    <div class="impact-grid">
+      {
+        cards.map((card, index) => (
+          <article class={`impact-card ${card.featured ? "featured" : ""}`}>
+            {card.featured && <span class="popular-chip">MOST POPULAR</span>}
+            <img src={card.icon} alt="" class="card-icon" aria-hidden="true" />
+            <p class="amount">{card.amount}</p>
+            <span class="accent-line" aria-hidden="true"></span>
+            <h3>{card.title}</h3>
+            <p class="copy">{card.description}</p>
+            <a href={card.buttonLink} class="btn btn-primary btn-shine donate-btn">{card.buttonLabel}</a>
+            {index !== 1 && <img src="/images/sunflower-brand-small.png" alt="" class="card-flower" aria-hidden="true" />}
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .impact-section {
+    background: var(--color-lavender);
+    padding: 18px 0 70px;
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  h2 {
+    margin: 0 0 28px;
+    text-align: center;
+    color: #101f35;
+    font-size: var(--type-section-title);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
+  }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    align-items: stretch;
+  }
+
+  .impact-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(18, 41, 74, 0.07);
+    padding: 24px 24px 22px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    overflow: hidden;
+  }
+
+  .impact-card.featured {
+    border: 2px solid #3e7aaf;
+    background: rgba(255, 255, 255, 0.7);
+    overflow: visible;
+    padding-top: 30px;
+  }
+
+  .popular-chip {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    border-radius: 999px;
+    background: #2d6fb3;
+    color: #fff;
+    font-size: var(--type-micro);
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 6px 16px;
+    z-index: 2;
+    box-shadow: 0 4px 10px rgba(20, 52, 89, 0.22);
+  }
+
+  .card-icon {
+    width: 64px;
+    height: 64px;
+    margin: 4px auto 20px;
+    object-fit: contain;
+  }
+
+  .amount {
+    margin: 0 0 4px;
+    color: #2d6fb3;
+    font-size: clamp(34px, 3.4vw, 50px);
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .accent-line {
+    width: 40px;
+    height: 3px;
+    border-radius: 999px;
+    background: var(--color-golden-yellow);
+    margin: 10px auto 16px;
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    color: #101f35;
+    font-size: var(--type-card-title);
+    line-height: 1.3;
+    font-weight: 700;
+  }
+
+  .copy {
+    margin: 0 auto 20px;
+    color: #425672;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    max-width: 94%;
+    flex-grow: 1;
+  }
+
+  .donate-btn {
+    border-radius: 999px;
+    width: 100%;
+  }
+
+  .card-flower {
+    position: absolute;
+    width: 130px;
+    opacity: 0.18;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .impact-card:nth-child(1) .card-flower {
+    left: -36px;
+    top: -36px;
+  }
+
+  .impact-card:nth-child(3) .card-flower {
+    right: -36px;
+    top: -36px;
+  }
+
+  @media (max-width: 1100px) {
+    .impact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

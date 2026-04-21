@@ -58,7 +58,7 @@ const defaultCards = [
 ];
 
 const {
-  title = "Care and Comfort When You Need It Most",
+  title = "Care and Comfort Where You Need It Most",
   intro = "From specialist nursing to emotional support, we provide free, compassionate care for individuals and families within our local community.",
   cards = defaultCards
 } = Astro.props as Props;
@@ -79,7 +79,10 @@ const {
             <div class="card-content">
               <h3>{card.title}</h3>
               <p>{card.description}</p>
-              <a href={card.href} class="card-link">Find Out More <span aria-hidden="true">→</span></a>
+              <a href={card.href} class="card-link">
+                <span class="card-link-text">Find Out More</span>
+                <span aria-hidden="true">→</span>
+              </a>
             </div>
           </article>
         ))
@@ -106,7 +109,7 @@ const {
     font-size: var(--type-section-title);
     line-height: 1.2;
     letter-spacing: -0.02em;
-    font-weight: 400;
+    font-weight: 700;
   }
 
   .intro {
@@ -131,6 +134,8 @@ const {
     overflow: hidden;
     box-shadow: 0 6px 16px rgba(19, 47, 82, 0.08);
     min-height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .card-image {
@@ -149,7 +154,7 @@ const {
     min-height: 26px;
     border-radius: 999px;
     padding: 5px 14px;
-    font-size: 12px;
+    font-size: var(--type-micro);
     line-height: 1;
     font-weight: 700;
     color: var(--color-white);
@@ -173,15 +178,18 @@ const {
 
   .card-content {
     padding: 20px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   .card-content h3 {
     margin: 6px 0 10px;
-    font-size: var(--type-card-title);
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
     line-height: 1.28;
     letter-spacing: -0.01em;
     color: #152a47;
-    font-weight: 400;
+    font-weight: 700;
   }
 
   .card-content p {
@@ -190,25 +198,49 @@ const {
     color: #495d78;
     font-size: var(--type-body);
     line-height: 1.6;
+    flex: 1;
   }
 
   .card-link {
+    margin-top: auto;
+    padding-top: 16px;
+    color: var(--color-steel-blue);
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 16px;
-    color: var(--color-steel-blue);
     text-decoration: none;
-    font-size: 18px;
+    font-size: var(--type-button);
     font-weight: 700;
   }
 
   .card-link:hover,
   .card-link:focus-visible {
-    text-decoration: underline;
+    color: #153f73;
   }
 
-  @media (max-width: 1200px) {
+  .card-link-text {
+    position: relative;
+  }
+
+  .card-link-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--color-golden-yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .card-link:hover .card-link-text::after,
+  .card-link:focus-visible .card-link-text::after {
+    transform: scaleX(1);
+  }
+
+  @media (max-width: 980px) {
     .cards-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }

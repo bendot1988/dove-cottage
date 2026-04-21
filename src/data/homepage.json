@@ -7,22 +7,22 @@
       {
         "label": "I am a Patient",
         "href": "#",
-        "style": "blue"
+        "style": "secondary"
       },
       {
         "label": "I am a Carer",
         "href": "#",
-        "style": "white"
+        "style": "ghost"
       },
       {
         "label": "I am a Healthcare Professional",
         "href": "#",
-        "style": "gold"
+        "style": "primary"
       }
     ]
   },
   "careServices": {
-    "title": "Care and Comfort When You Need It Most",
+    "title": "Care and Comfort Where You Need It Most",
     "intro": "From specialist nursing to emotional support, we provide free, compassionate care for individuals and families within our local community.",
     "cards": [
       {
@@ -64,7 +64,103 @@
     ]
   },
   "videoFeature": {
-    "title": "Watch our short video to see the difference we make for local families",
+    "title": "Watch our Short Video to See the Difference We Make for Local Families",
     "youtubeId": "MigVQMHwS7M"
+  },
+  "reachSection": {
+    "backgroundImage": "/images/reach-section-bg.png",
+    "statNumber": "110",
+    "statLabel": "villages",
+    "statCaption": "ACROSS THE VALE OF BELVOIR",
+    "title": "Care that's within everyone's reach",
+    "description": "Our hospice lies in the heart of our rural community. Our fleet of wheelchair-accessible vehicles, supported by dedicated volunteer drivers, ensures that no matter where you live within our 10-mile catchment area, expert palliative care is always within reach.",
+    "sideCards": [
+      {
+        "icon": "🚐",
+        "title": "Wheelchair-Accessible Transport Available",
+        "description": "Available for all Day Hospice guests"
+      },
+      {
+        "icon": "📍",
+        "title": "10-Mile Catchment Area",
+        "description": "Leicestershire, Nottinghamshire & Lincolnshire"
+      }
+    ]
+  },
+  "supportSection": {
+    "title": "Help us Keep Our Doors Open",
+    "intro": "It costs over £705,000 each year to provide our specialist care free of charge to local families. We rely on the kindness of our local community to ensure no family faces life-limiting conditions alone.",
+    "backgroundFlowerLeft": "/images/sunflower-brand-small.png",
+    "backgroundFlowerRight": "/images/sunflower-brand.png",
+    "cards": [
+      {
+        "icon": "/images/icon-pound.svg",
+        "title": "Make a Donation",
+        "description": "Whether it is a one-off gift or a monthly contribution, your support directly funds our nursing care and family support.",
+        "buttonLabel": "Donate Now",
+        "buttonLink": "#",
+        "buttonVariant": "primary",
+        "featured": true
+      },
+      {
+        "icon": "/images/icon-heart.svg",
+        "title": "Volunteer",
+        "description": "Join the Dove family! We are always looking for friendly faces to help support our work.",
+        "buttonLabel": "Learn More",
+        "buttonLink": "#",
+        "buttonVariant": "secondary",
+        "featured": false
+      },
+      {
+        "icon": "/images/icon-medal.svg",
+        "title": "Fundraise For Us",
+        "description": "From coffee mornings to marathons, turn your passion into support for local families.",
+        "buttonLabel": "Get Involved",
+        "buttonLink": "#",
+        "buttonVariant": "primary",
+        "featured": false
+      },
+      {
+        "icon": "/images/icon-tree.svg",
+        "title": "Leave a Legacy",
+        "description": "A gift in your Will is a wonderful way to ensure that future generations receive the care they deserve.",
+        "buttonLabel": "Find Out More",
+        "buttonLink": "#",
+        "buttonVariant": "secondary",
+        "featured": false
+      }
+    ]
+  },
+  "impactSection": {
+    "title": "See the Impact Your Gift Will Have",
+    "cards": [
+      {
+        "icon": "/images/icon-meal.svg",
+        "amount": "£15",
+        "title": "A Home-Cooked Meal",
+        "description": "Pays for a guest's nutritious, three-course home-cooked lunch tailored to their individual dietary needs.",
+        "buttonLabel": "Donate £15",
+        "buttonLink": "#",
+        "featured": false
+      },
+      {
+        "icon": "/images/icon-handshare.svg",
+        "amount": "£50",
+        "title": "Dementia Support",
+        "description": "Funds two hours of respite care for a family living with Dementia.",
+        "buttonLabel": "Donate £50",
+        "buttonLink": "#",
+        "featured": true
+      },
+      {
+        "icon": "/images/icon-nurse.svg",
+        "amount": "£200",
+        "title": "Nursing Care",
+        "description": "Provides a full day of specialist palliative nursing care and social support for one guest.",
+        "buttonLabel": "Donate £200",
+        "buttonLink": "#",
+        "featured": false
+      }
+    ]
   }
 }

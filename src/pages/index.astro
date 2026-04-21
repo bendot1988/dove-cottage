@@ -3,6 +3,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import HeroSection from "../components/HeroSection.astro";
 import CareServicesSection from "../components/CareServicesSection.astro";
 import VideoFeatureSection from "../components/VideoFeatureSection.astro";
+import ReachSection from "../components/ReachSection.astro";
+import SupportCardsSection from "../components/SupportCardsSection.astro";
+import ImpactSection from "../components/ImpactSection.astro";
 import homepage from "../data/homepage.json";
 ---
 
@@ -10,4 +13,7 @@ import homepage from "../data/homepage.json";
   <HeroSection {...homepage.hero} />
   <CareServicesSection {...homepage.careServices} />
   <VideoFeatureSection {...homepage.videoFeature} />
+  <ReachSection {...homepage.reachSection} />
+  <SupportCardsSection {...homepage.supportSection} />
+  <ImpactSection {...homepage.impactSection} />
 </BaseLayout>

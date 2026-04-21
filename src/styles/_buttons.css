@@ -1,0 +1,112 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  transform-origin: center;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: #fedc06;
+  color: #22344e;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #f3d306;
+}
+
+.btn-secondary {
+  background: transparent;
+  border-color: #0d1b3e;
+  color: #0d1b3e;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  background: #0d1b3e;
+  color: #ffffff;
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  color: #5f6b85;
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  background: #eaf1fb;
+  color: #0d1b3e;
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  top: -140%;
+  left: -36%;
+  width: 42%;
+  height: 380%;
+  transform: rotate(24deg);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 45%,
+    rgba(255, 255, 255, 0.65) 52%,
+    rgba(255, 255, 255, 0.2) 60%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  animation: btn-shine-sweep 3.2s ease-in-out infinite;
+}
+
+.btn-shine > * {
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes btn-shine-sweep {
+  0% {
+    left: -46%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  35% {
+    left: 120%;
+    opacity: 0;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shine::before {
+    animation: none;
+  }
+}

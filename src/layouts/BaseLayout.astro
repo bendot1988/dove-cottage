@@ -1,12 +1,14 @@
 ---
 import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface Props {
   title?: string;
+  noindex?: boolean;
 }
 
-const { title = "Dove Cottage" } = Astro.props;
+const { title = "Dove Cottage", noindex = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -15,6 +17,8 @@ const { title = "Dove Cottage" } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {noindex && <meta name="googlebot" content="noindex, nofollow" />}
     <title>{title}</title>
   </head>
   <body>
@@ -22,5 +26,17 @@ const { title = "Dove Cottage" } = Astro.props;
     <main>
       <slot />
     </main>
+    <Footer />
+    <script is:inline>
+      (() => {
+        const hash = window.location.hash || "";
+        const tokenKeys = ["recovery_token=", "invite_token=", "confirmation_token="];
+        const hasIdentityToken = tokenKeys.some((key) => hash.includes(key));
+
+        if (hasIdentityToken && !window.location.pathname.startsWith("/admin")) {
+          window.location.replace(`/admin/${hash}`);
+        }
+      })();
+    </script>
   </body>
 </html>

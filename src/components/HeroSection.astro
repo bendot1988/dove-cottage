@@ -2,7 +2,7 @@
 interface CtaItem {
   label: string;
   href: string;
-  style: "blue" | "white" | "gold";
+  style: "primary" | "secondary" | "ghost";
 }
 
 interface Props {
@@ -17,9 +17,9 @@ const {
   description = "We provide free of charge palliative care and support for families across Leicestershire, Nottinghamshire & Lincolnshire.",
   backgroundImage = "/images/hero-supporting-journey.png",
   ctas = [
-    { label: "I am a Patient", href: "#", style: "blue" },
-    { label: "I am a Carer", href: "#", style: "white" },
-    { label: "I am a Healthcare Professional", href: "#", style: "gold" }
+    { label: "I am a Patient", href: "#", style: "secondary" },
+    { label: "I am a Carer", href: "#", style: "ghost" },
+    { label: "I am a Healthcare Professional", href: "#", style: "primary" }
   ]
 } = Astro.props as Props;
 ---
@@ -33,7 +33,7 @@ const {
     <div class="hero-cta-row">
       {
         ctas.map((cta) => (
-          <a href={cta.href} class={`hero-pill hero-pill-${cta.style}`}>
+          <a href={cta.href} class={`btn btn-${cta.style} hero-pill`}>
             {cta.label}
           </a>
         ))
@@ -86,7 +86,7 @@ const {
   .hero-content p {
     margin: 14px auto 28px;
     max-width: 700px;
-    font-size: clamp(0.95rem, 2vw, 18px);
+    font-size: var(--type-body-large);
     line-height: 1.6;
     font-weight: 500;
   }
@@ -99,17 +99,15 @@ const {
   }
 
   .hero-pill {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+    height: 44px;
     min-height: 44px;
-    border-radius: 999px;
-    padding: 11px 18px;
+    padding: 0 18px;
     font-size: 14px;
     font-weight: 700;
-    border: 1px solid transparent;
-    transition: background-color 0.16s ease, color 0.16s ease;
+    line-height: 1;
+    border-radius: 999px;
+    border-width: 1px;
+    border-style: solid;
   }
 
   .hero-pill::after {
@@ -118,37 +116,42 @@ const {
     font-size: 10px;
   }
 
-  .hero-pill-blue {
-    background: var(--color-steel-blue-1);
-    color: var(--color-white);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .hero-pill-blue:hover,
-  .hero-pill-blue:focus-visible {
-    background: #195b9f;
-  }
-
-  .hero-pill-white {
-    background: var(--color-white);
+  .hero-pill.btn-secondary {
     color: var(--color-teal);
-    border-color: #d2deef;
+    border-color: rgba(13, 27, 62, 0.55);
+    background: rgba(255, 255, 255, 0.94);
   }
 
-  .hero-pill-white:hover,
-  .hero-pill-white:focus-visible {
-    background: var(--color-ghost-white);
+  .hero-pill.btn-secondary:hover,
+  .hero-pill.btn-secondary:focus-visible {
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--color-teal);
+    border-color: rgba(13, 27, 62, 0.55);
   }
 
-  .hero-pill-gold {
+  .hero-pill.btn-primary {
+    color: #273146;
     background: var(--color-golden-yellow);
+    border-color: #e6cb1f;
+  }
+
+  .hero-pill.btn-primary:hover,
+  .hero-pill.btn-primary:focus-visible {
+    background: #f1d106;
     color: #273146;
     border-color: #e6cb1f;
   }
 
-  .hero-pill-gold:hover,
-  .hero-pill-gold:focus-visible {
-    background: #f1d106;
+  .hero-pill.btn-ghost {
+    color: #f3f7ff;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: var(--color-steel-blue-1);
+  }
+
+  .hero-pill.btn-ghost:hover,
+  .hero-pill.btn-ghost:focus-visible {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
   }
 
   @media (max-width: 700px) {

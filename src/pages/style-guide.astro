@@ -1,0 +1,252 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const colorTokens = [
+  { name: "golden-yellow", value: "#fedc06", cssVar: "--color-golden-yellow" },
+  { name: "lavender", value: "#ebeef5", cssVar: "--color-lavender" },
+  { name: "alice-blue", value: "#eaf1fb", cssVar: "--color-alice-blue" },
+  { name: "old-lace", value: "#fffbe6", cssVar: "--color-old-lace" },
+  { name: "ghost-white", value: "#f5f9ff", cssVar: "--color-ghost-white" },
+  { name: "white", value: "#ffffff", cssVar: "--color-white" },
+  { name: "teal", value: "#1d508d", cssVar: "--color-teal" },
+  { name: "steel-blue", value: "#2751a0", cssVar: "--color-steel-blue" },
+  { name: "steel-blue-1", value: "#1d65b2", cssVar: "--color-steel-blue-1" },
+  { name: "steel-blue-2", value: "#2c6eb4", cssVar: "--color-steel-blue-2" },
+  { name: "dark-orchid", value: "#6b3fa0", cssVar: "--color-dark-orchid" },
+  { name: "dark-slate-gray", value: "#2e7d4f", cssVar: "--color-dark-slate-gray" },
+  { name: "fire-brick", value: "#c05e1a", cssVar: "--color-fire-brick" }
+];
+
+const typeTokens = [
+  "--type-hero-title",
+  "--type-section-title",
+  "--type-card-title",
+  "--type-subtitle",
+  "--type-body-large",
+  "--type-body",
+  "--type-body-small",
+  "--type-micro",
+  "--type-nav",
+  "--type-button",
+  "--type-button-small"
+];
+---
+
+<BaseLayout title="Style Guide | Dove Cottage" noindex={true}>
+  <section class="style-guide">
+    <div class="container">
+      <header class="guide-header">
+        <h1>Dove Cottage Style Guide</h1>
+        <p>Reference for global tokens, typography scale, button styles, and spacing rhythm.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Brand Colors</h2>
+        <div class="swatches">
+          {
+            colorTokens.map((color) => (
+              <article class="swatch">
+                <div class="swatch-chip" style={`background:${color.value};`}></div>
+                <h3>{color.name}</h3>
+                <p>{color.value}</p>
+                <small>{color.cssVar}</small>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Typography Scale</h2>
+        <div class="type-list">
+          {
+            typeTokens.map((token) => (
+              <div class="type-row">
+                <span class="token">{token}</span>
+                <p style={`font-size:var(${token});`}>The quick brown fox jumps over the lazy dog.</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Buttons</h2>
+        <div class="button-row">
+          <button class="btn btn-primary" type="button">Primary Action</button>
+          <button class="btn btn-secondary" type="button">Secondary Action</button>
+          <button class="btn btn-ghost" type="button">Ghost Action</button>
+          <button class="btn btn-primary btn-shine" type="button">Donate CTA (Shine)</button>
+        </div>
+        <p class="button-note">
+          Use <code>.btn-shine</code> only on main donation CTAs to create a soft, repeating light
+          sweep that draws attention.
+        </p>
+      </section>
+
+      <section class="panel">
+        <h2>Spacing Rhythm</h2>
+        <div class="spacing-row">
+          <div class="space space-8">8</div>
+          <div class="space space-12">12</div>
+          <div class="space space-16">16</div>
+          <div class="space space-24">24</div>
+          <div class="space space-32">32</div>
+          <div class="space space-48">48</div>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .style-guide {
+    background: var(--color-lavender);
+    min-height: 100vh;
+    padding: 42px 0 70px;
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  .guide-header h1 {
+    margin: 0;
+    font-size: var(--type-section-title);
+    color: var(--color-steel-blue);
+  }
+
+  .guide-header p {
+    margin: 10px 0 0;
+    font-size: var(--type-body-large);
+    color: #334862;
+  }
+
+  .panel {
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 14px;
+    margin-top: 22px;
+    padding: 20px;
+  }
+
+  .panel h2 {
+    margin: 0 0 14px;
+    font-size: var(--type-card-title);
+    color: #10243d;
+  }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+    gap: 14px;
+  }
+
+  .swatch {
+    border: 1px solid #e5ebf5;
+    border-radius: 10px;
+    padding: 10px;
+    background: #fbfdff;
+  }
+
+  .swatch-chip {
+    height: 70px;
+    border-radius: 8px;
+    border: 1px solid rgba(15, 30, 48, 0.09);
+  }
+
+  .swatch h3 {
+    margin: 10px 0 4px;
+    font-size: var(--type-body);
+  }
+
+  .swatch p,
+  .swatch small {
+    margin: 0;
+    display: block;
+    color: #4a5e78;
+    font-size: var(--type-body-small);
+    line-height: 1.45;
+  }
+
+  .type-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .type-row {
+    border: 1px solid #e7edf7;
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+
+  .token {
+    display: block;
+    font-size: var(--type-micro);
+    color: #48617e;
+    margin-bottom: 6px;
+  }
+
+  .type-row p {
+    margin: 0;
+    color: #132746;
+    line-height: 1.35;
+    font-weight: 600;
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .button-row .btn {
+    border-radius: 999px;
+  }
+
+  .button-note {
+    margin: 12px 0 0;
+    color: #4a5e78;
+    font-size: var(--type-body-small);
+  }
+
+  .spacing-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .space {
+    width: 56px;
+    background: var(--color-steel-blue-1);
+    color: #fff;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    padding-bottom: 5px;
+    font-size: var(--type-micro);
+    font-weight: 700;
+  }
+
+  .space-8 {
+    height: 24px;
+  }
+  .space-12 {
+    height: 30px;
+  }
+  .space-16 {
+    height: 36px;
+  }
+  .space-24 {
+    height: 44px;
+  }
+  .space-32 {
+    height: 52px;
+  }
+  .space-48 {
+    height: 68px;
+  }
+</style>

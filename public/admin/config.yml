@@ -32,7 +32,7 @@ collections:
                   - label: "Style"
                     name: "style"
                     widget: "select"
-                    options: ["blue", "white", "gold"]
+                    options: ["primary", "secondary", "ghost"]
           - label: "Care Services"
             name: "careServices"
             widget: "object"
@@ -61,3 +61,64 @@ collections:
             fields:
               - { label: "Section Title", name: "title", widget: "string" }
               - { label: "YouTube Video ID", name: "youtubeId", widget: "string", hint: "For https://youtu.be/abc123 use abc123" }
+          - label: "Reach Section"
+            name: "reachSection"
+            widget: "object"
+            fields:
+              - { label: "Background Image", name: "backgroundImage", widget: "image" }
+              - { label: "Stat Number", name: "statNumber", widget: "string" }
+              - { label: "Stat Label", name: "statLabel", widget: "string" }
+              - { label: "Stat Caption", name: "statCaption", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - label: "Right Cards"
+                name: "sideCards"
+                widget: "list"
+                min: 2
+                max: 2
+                fields:
+                  - { label: "Icon (emoji)", name: "icon", widget: "string" }
+                  - { label: "Card Title", name: "title", widget: "string" }
+                  - { label: "Card Description", name: "description", widget: "string" }
+          - label: "Support Section"
+            name: "supportSection"
+            widget: "object"
+            fields:
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - { label: "Left Flower Image", name: "backgroundFlowerLeft", widget: "image" }
+              - { label: "Right Flower Image", name: "backgroundFlowerRight", widget: "image" }
+              - label: "Support Cards"
+                name: "cards"
+                widget: "list"
+                min: 4
+                max: 4
+                fields:
+                  - { label: "Icon", name: "icon", widget: "image" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Button Label", name: "buttonLabel", widget: "string" }
+                  - { label: "Button Link", name: "buttonLink", widget: "string" }
+                  - label: "Button Variant"
+                    name: "buttonVariant"
+                    widget: "select"
+                    options: ["primary", "secondary", "ghost"]
+                  - { label: "Show Most Needed Badge", name: "featured", widget: "boolean", required: false, default: false }
+          - label: "Impact Section"
+            name: "impactSection"
+            widget: "object"
+            fields:
+              - { label: "Section Title", name: "title", widget: "string" }
+              - label: "Impact Cards"
+                name: "cards"
+                widget: "list"
+                min: 3
+                max: 3
+                fields:
+                  - { label: "Icon", name: "icon", widget: "image" }
+                  - { label: "Amount", name: "amount", widget: "string" }
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Description", name: "description", widget: "text" }
+                  - { label: "Button Label", name: "buttonLabel", widget: "string" }
+                  - { label: "Button Link", name: "buttonLink", widget: "string" }
+                  - { label: "Featured", name: "featured", widget: "boolean", required: false, default: false }

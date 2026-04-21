@@ -1,0 +1,273 @@
+<footer class="site-footer">
+  <section class="footer-cta">
+    <div class="container footer-cta-inner">
+      <p>Every donation helps us provide palliative care and support to local families.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-secondary cta-button">Donate Now</a>
+        <a href="tel:01949860303" class="cta-phone">01949 860303</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="footer-main">
+    <img
+      src="/images/sunflower-brand-small.png"
+      alt=""
+      class="footer-sunflower"
+      aria-hidden="true"
+      loading="lazy"
+    />
+
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <h3>What We Offer</h3>
+        <a href="#">Day Care</a>
+        <a href="#">Wellbeing Sessions</a>
+        <a href="#">Social-sitting</a>
+        <a href="#">Bereavement &amp; Family Support</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Support Us</h3>
+        <a href="#">Make a Donation</a>
+        <a href="#">Volunteer Your Time</a>
+        <a href="#">Leave a Gift in Your Will</a>
+        <a href="#">Fundraise For Us</a>
+        <a href="#">Visit Our Shops</a>
+        <a href="#">Corporate partnerships</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Resources</h3>
+        <a href="#">Resource Hub</a>
+        <a href="#">Additional Support &amp; Information</a>
+        <a href="#">Hospice Image Gallery</a>
+        <a href="#">Hospice Videos</a>
+        <a href="#">Latest News</a>
+        <a href="#">Forthcoming Events</a>
+      </div>
+
+      <div class="newsletter-card">
+        <h3>Join Our Mailing List</h3>
+        <p>Get the latest news about our events and hospice community.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Email" aria-label="Email" />
+          <button type="submit" class="btn btn-primary">Join</button>
+        </form>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="X">x</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div class="reg-mark">FR</div>
+      <p>Dove Cottage Day Hospice | Canal Lane, Stathern, LE14 4EX</p>
+      <small>© 2026 Registered Charity No. 1167291</small>
+    </div>
+  </section>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 0;
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  .footer-cta {
+    background: var(--color-golden-yellow);
+    padding: 22px 0;
+  }
+
+  .footer-cta-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-cta p {
+    margin: 0;
+    color: #204579;
+    font-size: var(--type-body-large);
+    line-height: 1.35;
+    font-weight: 700;
+    max-width: 560px;
+  }
+
+  .cta-actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 18px;
+  }
+
+  .cta-button {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-radius: 999px;
+    height: 40px;
+    padding: 0 20px;
+    border-color: #2c5ea6;
+    color: #2c5ea6;
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .cta-phone {
+    color: #2a4f86;
+    text-decoration: none;
+    font-size: var(--type-body);
+    font-weight: 700;
+  }
+
+  .footer-main {
+    position: relative;
+    background: #2b58a3;
+    color: rgba(255, 255, 255, 0.92);
+    overflow: hidden;
+    padding: 44px 0 28px;
+  }
+
+  .footer-sunflower {
+    position: absolute;
+    right: -80px;
+    bottom: -110px;
+    width: clamp(220px, 24vw, 360px);
+    opacity: 0.16;
+    pointer-events: none;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr minmax(230px, 260px);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .footer-col h3,
+  .newsletter-card h3 {
+    margin: 0 0 10px;
+    font-size: var(--type-micro);
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-golden-yellow);
+  }
+
+  .footer-col a {
+    display: block;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-size: var(--type-body-small);
+    line-height: 1.45;
+    margin-bottom: 4px;
+  }
+
+  .newsletter-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .newsletter-card p {
+    margin: 0 0 10px;
+    font-size: var(--type-body-small);
+    line-height: 1.45;
+  }
+
+  .newsletter-form {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-form input {
+    min-height: 34px;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font: inherit;
+  }
+
+  .newsletter-form .btn {
+    height: 34px;
+    min-height: 34px;
+    padding: 0 14px;
+    border-radius: 999px;
+  }
+
+  .socials {
+    display: flex;
+    gap: 8px;
+  }
+
+  .socials a {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: #fff;
+    background: rgba(34, 64, 114, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    font-size: var(--type-micro);
+    font-weight: 700;
+  }
+
+  .footer-bottom {
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
+    text-align: center;
+  }
+
+  .reg-mark {
+    margin: 0 auto 8px;
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.78);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  .footer-bottom p {
+    margin: 0 0 4px;
+    font-size: var(--type-micro);
+  }
+
+  .footer-bottom small {
+    font-size: 0.6875rem;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 980px) {
+    .footer-cta-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
