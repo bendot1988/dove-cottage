@@ -1,5 +1,6 @@
 ---
 title: "Celebrating Sally: Over 20 years of compassionate care at Dove Cottage"
+category: Stories
 excerpt: After more than 20 years of dedicated service, Nurse Sally retired from
   Dove Cottage Day Hospice at the end of March 2026.
 publishDate: 2026-04-21
@@ -13,7 +14,7 @@ In this special interview, Sally reflects on her remarkable career as a nurse, s
 
 ## How Sally came to join Dove Cottage
 
-ally first came to Dove Cottage through a friend from her church who volunteered there. Encouraged to apply, she was told she would be a perfect fit, and it quickly became clear that this was exactly where she was meant to be.
+Sally first came to Dove Cottage through a friend from her church who volunteered there. Encouraged to apply, she was told she would be a perfect fit, and it quickly became clear that this was exactly where she was meant to be.
 
 ***“I remember feeling an immediate sense of calmness and warmth,” Sally recalls. “There was laughter coming from the guest areas. It did not feel clinical. It felt welcoming and full of life.”***
 
