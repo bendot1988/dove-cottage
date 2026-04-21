@@ -10,7 +10,8 @@
     "cms-proxy": "decap-server"
   },
   "dependencies": {
-    "astro": "^5.8.1"
+    "astro": "^5.8.1",
+    "marked": "^18.0.2"
   },
   "devDependencies": {
     "decap-server": "^3.7.0"
