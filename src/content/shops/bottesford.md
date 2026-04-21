@@ -8,13 +8,13 @@ shop_info: |
   We stock quality pre-loved clothing, toys, books, ornaments, and homeware — perfect for a browse, a bargain, and a chat with our volunteers.
 
   Every purchase helps fund hospice care for local families across Leicestershire, Nottinghamshire & Lincolnshire.
-shop_main_image: /images/shops/bottesford-hero.png
+shop_main_image: /images/uploads/bottesford-shop-module.png
 opening_hours: |
   **Monday – Saturday:** 9:00am – 4:00pm
 
   **Sunday:** Closed
 gallery:
-  - /images/shops/bottesford-hero.png
+  - /images/uploads/bottesford-shop-module.png
   - /images/hero-family-alt.png
   - /images/care-counselling.png
   - /images/hero-supporting-journey.png
