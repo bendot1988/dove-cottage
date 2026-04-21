@@ -175,18 +175,6 @@ const heroLine2 = shop.data.hero_location
         </section>
       )
     }
-
-    <section class="shop-mid-cta" aria-label="Support the hospice">
-      <div class="container shop-mid-cta-inner">
-        <p>
-          Every donation helps us provide palliative care and support to local families.
-        </p>
-        <div class="shop-mid-cta-actions">
-          <a href="#" class="btn btn-secondary shop-mid-donate">Donate now</a>
-          <a href="tel:01949860303" class="shop-mid-phone">01949 860303</a>
-        </div>
-      </div>
-    </section>
   </div>
 
   <script>
@@ -628,65 +616,6 @@ const heroLine2 = shop.data.hero_location
     text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
   }
 
-  .shop-mid-cta {
-    background: var(--color-golden-yellow);
-    padding: 22px 0;
-  }
-
-  .shop-mid-cta-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .shop-mid-cta p {
-    margin: 0;
-    max-width: 560px;
-    color: #204579;
-    font-size: var(--type-body-large);
-    font-weight: 700;
-    line-height: 1.35;
-  }
-
-  .shop-mid-cta-actions {
-    display: inline-flex;
-    align-items: center;
-    gap: 18px;
-  }
-
-  .shop-mid-donate {
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border-radius: 999px;
-    height: 42px;
-    padding: 0 22px;
-    border-color: #2c5ea6;
-    color: #2c5ea6;
-    background: rgba(255, 255, 255, 0.95);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: var(--type-button-small);
-  }
-
-  .shop-mid-donate:hover,
-  .shop-mid-donate:focus-visible {
-    background: #fff;
-  }
-
-  .shop-mid-phone {
-    color: #204579;
-    font-weight: 700;
-    font-size: var(--type-body-large);
-    text-decoration: none;
-  }
-
-  .shop-mid-phone:hover,
-  .shop-mid-phone:focus-visible {
-    text-decoration: underline;
-  }
-
   .rich-content :global(p:last-child) {
     margin-bottom: 0;
   }
@@ -716,11 +645,6 @@ const heroLine2 = shop.data.hero_location
 
     .shop-other-grid {
       grid-template-columns: 1fr;
-    }
-
-    .shop-mid-cta-inner {
-      flex-direction: column;
-      align-items: flex-start;
     }
   }
 </style>
