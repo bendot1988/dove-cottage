@@ -1,0 +1,63 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - name: "homepage-content"
+        label: "Homepage Content"
+        file: "src/data/homepage.json"
+        format: "json"
+        fields:
+          - label: "Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Background Image", name: "backgroundImage", widget: "image" }
+              - label: "Buttons"
+                name: "ctas"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+                  - label: "Style"
+                    name: "style"
+                    widget: "select"
+                    options: ["blue", "white", "gold"]
+          - label: "Care Services"
+            name: "careServices"
+            widget: "object"
+            fields:
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - label: "Cards"
+                name: "cards"
+                widget: "list"
+                min: 4
+                max: 4
+                fields:
+                  - { label: "Tag Text", name: "tag", widget: "string" }
+                  - label: "Tag Color"
+                    name: "tagClass"
+                    widget: "select"
+                    options: ["tag-blue", "tag-green", "tag-orange", "tag-purple"]
+                  - { label: "Card Title", name: "title", widget: "string" }
+                  - { label: "Card Description", name: "description", widget: "text" }
+                  - { label: "Card Image", name: "image", widget: "image" }
+                  - { label: "Image Position", name: "imagePosition", widget: "string", hint: "Example: center 44%" }
+                  - { label: "Card Link", name: "href", widget: "string" }
+          - label: "Video Feature"
+            name: "videoFeature"
+            widget: "object"
+            fields:
+              - { label: "Section Title", name: "title", widget: "string" }
+              - { label: "YouTube Video ID", name: "youtubeId", widget: "string", hint: "For https://youtu.be/abc123 use abc123" }

@@ -1,0 +1,178 @@
+---
+interface CtaItem {
+  label: string;
+  href: string;
+  style: "blue" | "white" | "gold";
+}
+
+interface Props {
+  title: string;
+  description: string;
+  backgroundImage: string;
+  ctas: CtaItem[];
+}
+
+const {
+  title = "Supporting You Through Every Step of Your Journey",
+  description = "We provide free of charge palliative care and support for families across Leicestershire, Nottinghamshire & Lincolnshire.",
+  backgroundImage = "/images/hero-supporting-journey.png",
+  ctas = [
+    { label: "I am a Patient", href: "#", style: "blue" },
+    { label: "I am a Carer", href: "#", style: "white" },
+    { label: "I am a Healthcare Professional", href: "#", style: "gold" }
+  ]
+} = Astro.props as Props;
+---
+
+<section class="hero-section" style={`background-image: url('${backgroundImage}')`}>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>{title}</h1>
+    <p>{description}</p>
+
+    <div class="hero-cta-row">
+      {
+        ctas.map((cta) => (
+          <a href={cta.href} class={`hero-pill hero-pill-${cta.style}`}>
+            {cta.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(16, 34, 58, 0.56) 0%,
+      rgba(16, 34, 58, 0.42) 38%,
+      rgba(16, 34, 58, 0.58) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    width: min(980px, 92%);
+    text-align: center;
+    color: var(--color-white);
+    padding: 56px 0;
+  }
+
+  .hero-content h1 {
+    margin: 0;
+    font-size: var(--type-hero-title);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+    max-width: 760px;
+    margin-inline: auto;
+  }
+
+  .hero-content p {
+    margin: 14px auto 28px;
+    max-width: 700px;
+    font-size: clamp(0.95rem, 2vw, 18px);
+    line-height: 1.6;
+    font-weight: 500;
+  }
+
+  .hero-cta-row {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .hero-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    min-height: 44px;
+    border-radius: 999px;
+    padding: 11px 18px;
+    font-size: 14px;
+    font-weight: 700;
+    border: 1px solid transparent;
+    transition: background-color 0.16s ease, color 0.16s ease;
+  }
+
+  .hero-pill::after {
+    content: "▾";
+    margin-left: 8px;
+    font-size: 10px;
+  }
+
+  .hero-pill-blue {
+    background: var(--color-steel-blue-1);
+    color: var(--color-white);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .hero-pill-blue:hover,
+  .hero-pill-blue:focus-visible {
+    background: #195b9f;
+  }
+
+  .hero-pill-white {
+    background: var(--color-white);
+    color: var(--color-teal);
+    border-color: #d2deef;
+  }
+
+  .hero-pill-white:hover,
+  .hero-pill-white:focus-visible {
+    background: var(--color-ghost-white);
+  }
+
+  .hero-pill-gold {
+    background: var(--color-golden-yellow);
+    color: #273146;
+    border-color: #e6cb1f;
+  }
+
+  .hero-pill-gold:hover,
+  .hero-pill-gold:focus-visible {
+    background: #f1d106;
+  }
+
+  @media (max-width: 700px) {
+    .hero-section {
+      min-height: 460px;
+    }
+
+    .hero-content {
+      padding: 44px 0;
+      text-align: left;
+    }
+
+    .hero-content h1,
+    .hero-content p {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    .hero-cta-row {
+      justify-content: flex-start;
+    }
+
+    .hero-pill {
+      width: 100%;
+    }
+  }
+</style>

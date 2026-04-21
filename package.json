@@ -1,0 +1,18 @@
+{
+  "name": "dove-cottage",
+  "private": true,
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "cms-proxy": "decap-server"
+  },
+  "dependencies": {
+    "astro": "^5.8.1"
+  },
+  "devDependencies": {
+    "decap-server": "^3.7.0"
+  }
+}

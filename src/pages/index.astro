@@ -1,0 +1,13 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HeroSection from "../components/HeroSection.astro";
+import CareServicesSection from "../components/CareServicesSection.astro";
+import VideoFeatureSection from "../components/VideoFeatureSection.astro";
+import homepage from "../data/homepage.json";
+---
+
+<BaseLayout title="Dove Cottage">
+  <HeroSection {...homepage.hero} />
+  <CareServicesSection {...homepage.careServices} />
+  <VideoFeatureSection {...homepage.videoFeature} />
+</BaseLayout>

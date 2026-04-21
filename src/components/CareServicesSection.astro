@@ -1,0 +1,230 @@
+---
+interface Card {
+  tag: string;
+  tagClass: "tag-blue" | "tag-green" | "tag-orange" | "tag-purple";
+  title: string;
+  description: string;
+  image: string;
+  imagePosition: string;
+  href: string;
+}
+
+interface Props {
+  title: string;
+  intro: string;
+  cards: Card[];
+}
+
+const defaultCards = [
+  {
+    tag: "Tue-Thu | 10am-3pm",
+    tagClass: "tag-blue",
+    title: "Day Care",
+    description:
+      "Expert nursing support and symptom management in a social 'home-from-home' environment.",
+    image: "/images/hero-supporting-journey.png",
+    imagePosition: "center 44%",
+    href: "#"
+  },
+  {
+    tag: "Mondays | 10am-1pm",
+    tagClass: "tag-green",
+    title: "Wellbeing Sessions",
+    description: "Holistic support for individuals and carers.",
+    image: "/images/hero-family-alt.png",
+    imagePosition: "center 48%",
+    href: "#"
+  },
+  {
+    tag: "Dementia Support",
+    tagClass: "tag-orange",
+    title: "Social-sitting",
+    description:
+      "Vital respite for unpaid carers. Our fully-trained volunteers provide companionship for your loved one at home.",
+    image: "/images/hero-family-alt.png",
+    imagePosition: "center 62%",
+    href: "#"
+  },
+  {
+    tag: "Counselling",
+    tagClass: "tag-purple",
+    title: "Counselling & emotional support",
+    description:
+      "Compassionate support for individuals, families and carers through every stage of your journey.",
+    image: "/images/care-counselling.png",
+    imagePosition: "center 38%",
+    href: "#"
+  }
+];
+
+const {
+  title = "Care and Comfort When You Need It Most",
+  intro = "From specialist nursing to emotional support, we provide free, compassionate care for individuals and families within our local community.",
+  cards = defaultCards
+} = Astro.props as Props;
+---
+
+<section class="care-services">
+  <div class="container care-wrap">
+    <h2>{title}</h2>
+    <p class="intro">{intro}</p>
+
+    <div class="cards-grid">
+      {
+        cards.map((card) => (
+          <article class="service-card">
+            <div class="card-image" style={`background-image:url('${card.image}');background-position:${card.imagePosition};`}>
+              <span class={`tag ${card.tagClass}`}>{card.tag}</span>
+            </div>
+            <div class="card-content">
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
+              <a href={card.href} class="card-link">Find Out More <span aria-hidden="true">→</span></a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .care-services {
+    background: var(--color-lavender);
+    padding: 58px 0 70px;
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  .care-wrap h2 {
+    margin: 0;
+    text-align: center;
+    color: var(--color-steel-blue);
+    font-size: var(--type-section-title);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+
+  .intro {
+    margin: 16px auto 30px;
+    max-width: 760px;
+    text-align: center;
+    color: #2f4260;
+    font-size: var(--type-body-large);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .service-card {
+    background: var(--color-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(19, 47, 82, 0.08);
+    min-height: 100%;
+  }
+
+  .card-image {
+    height: 138px;
+    background-size: cover;
+    position: relative;
+  }
+
+  .tag {
+    position: absolute;
+    left: 12px;
+    bottom: -12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 26px;
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--color-white);
+  }
+
+  .tag-blue {
+    background: #2d6fb3;
+  }
+
+  .tag-green {
+    background: var(--color-dark-slate-gray);
+  }
+
+  .tag-orange {
+    background: var(--color-fire-brick);
+  }
+
+  .tag-purple {
+    background: var(--color-dark-orchid);
+  }
+
+  .card-content {
+    padding: 20px 16px 18px;
+  }
+
+  .card-content h3 {
+    margin: 6px 0 10px;
+    font-size: var(--type-card-title);
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    color: #152a47;
+    font-weight: 400;
+  }
+
+  .card-content p {
+    margin: 0;
+    min-height: 104px;
+    color: #495d78;
+    font-size: var(--type-body);
+    line-height: 1.6;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    color: var(--color-steel-blue);
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .card-link:hover,
+  .card-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1200px) {
+    .cards-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 720px) {
+    .care-services {
+      padding: 44px 0 54px;
+    }
+
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card-content p {
+      min-height: 0;
+    }
+  }
+</style>

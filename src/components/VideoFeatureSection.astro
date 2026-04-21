@@ -1,0 +1,86 @@
+---
+interface Props {
+  title: string;
+  youtubeId: string;
+}
+
+const {
+  title = "Watch our short video to see the difference we make for local families",
+  youtubeId = "MigVQMHwS7M"
+} = Astro.props as Props;
+---
+
+<section class="video-feature">
+  <div class="container">
+    <h2>{title}</h2>
+
+    <div class="video-frame">
+      <div class="video-inner">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${youtubeId}?rel=0`}
+          title="Dove Cottage Day Hospice - 30 More Years"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .video-feature {
+    background: var(--color-lavender);
+    padding: 18px 0 70px;
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  .video-feature h2 {
+    margin: 0 auto 22px;
+    max-width: 680px;
+    text-align: center;
+    color: var(--color-steel-blue);
+    font-size: clamp(30px, 3vw, 44px);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+    font-weight: 400;
+  }
+
+  .video-frame {
+    border-radius: 14px;
+    padding: 10px;
+    background: linear-gradient(180deg, rgba(20, 43, 77, 0.14), rgba(20, 43, 77, 0.06));
+    box-shadow: 0 16px 34px rgba(21, 50, 91, 0.16);
+  }
+
+  .video-inner {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111;
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-inner iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  @media (max-width: 720px) {
+    .video-feature {
+      padding: 14px 0 52px;
+    }
+
+    .video-frame {
+      border-radius: 12px;
+      padding: 8px;
+    }
+  }
+</style>

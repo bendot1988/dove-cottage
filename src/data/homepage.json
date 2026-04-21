@@ -1,0 +1,70 @@
+{
+  "hero": {
+    "title": "Supporting You Through Every Step of Your Journey",
+    "description": "We provide free of charge palliative care and support for families across Leicestershire, Nottinghamshire & Lincolnshire.",
+    "backgroundImage": "/images/hero-supporting-journey.png",
+    "ctas": [
+      {
+        "label": "I am a Patient",
+        "href": "#",
+        "style": "blue"
+      },
+      {
+        "label": "I am a Carer",
+        "href": "#",
+        "style": "white"
+      },
+      {
+        "label": "I am a Healthcare Professional",
+        "href": "#",
+        "style": "gold"
+      }
+    ]
+  },
+  "careServices": {
+    "title": "Care and Comfort When You Need It Most",
+    "intro": "From specialist nursing to emotional support, we provide free, compassionate care for individuals and families within our local community.",
+    "cards": [
+      {
+        "tag": "Tue-Thu | 10am-3pm",
+        "tagClass": "tag-blue",
+        "title": "Day Care",
+        "description": "Expert nursing support and symptom management in a social 'home-from-home' environment.",
+        "image": "/images/hero-supporting-journey.png",
+        "imagePosition": "center 44%",
+        "href": "#"
+      },
+      {
+        "tag": "Mondays | 10am-1pm",
+        "tagClass": "tag-green",
+        "title": "Wellbeing Sessions",
+        "description": "Holistic support for individuals and carers.",
+        "image": "/images/hero-family-alt.png",
+        "imagePosition": "center 48%",
+        "href": "#"
+      },
+      {
+        "tag": "Dementia Support",
+        "tagClass": "tag-orange",
+        "title": "Social-sitting",
+        "description": "Vital respite for unpaid carers. Our fully-trained volunteers provide companionship for your loved one at home.",
+        "image": "/images/hero-family-alt.png",
+        "imagePosition": "center 62%",
+        "href": "#"
+      },
+      {
+        "tag": "Counselling",
+        "tagClass": "tag-purple",
+        "title": "Counselling & emotional support",
+        "description": "Compassionate support for individuals, families and carers through every stage of your journey.",
+        "image": "/images/care-counselling.png",
+        "imagePosition": "center 38%",
+        "href": "#"
+      }
+    ]
+  },
+  "videoFeature": {
+    "title": "Watch our short video to see the difference we make for local families",
+    "youtubeId": "MigVQMHwS7M"
+  }
+}

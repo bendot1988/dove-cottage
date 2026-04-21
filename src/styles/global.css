@@ -1,0 +1,44 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-golden-yellow: #fedc06;
+  --color-lavender: #ebeef5;
+  --color-alice-blue: #eaf1fb;
+  --color-old-lace: #fffbe6;
+  --color-ghost-white: #f5f9ff;
+  --color-white: #ffffff;
+  --color-teal: #1d508d;
+  --color-steel-blue: #2751a0;
+  --color-steel-blue-1: #1d65b2;
+  --color-steel-blue-2: #2c6eb4;
+  --color-dark-orchid: #6b3fa0;
+  --color-dark-slate-gray: #2e7d4f;
+  --color-fire-brick: #c05e1a;
+  --text-primary: #10233c;
+
+  /* Shared type scale */
+  --type-hero-title: clamp(2rem, 4.5vw, 53px);
+  --type-section-title: clamp(30px, 3vw, 46px);
+  --type-card-title: clamp(20px, 1.5vw, 26px);
+  --type-body-large: clamp(17px, 1.2vw, 20px);
+  --type-body: 16px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-white);
+  color: var(--text-primary);
+  font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  line-height: 1.5;
+}

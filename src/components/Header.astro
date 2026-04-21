@@ -1,0 +1,423 @@
+<header class="site-header">
+  <div class="top-row">
+    <div class="container top-content">
+      <a href="/" class="brand" aria-label="Dove Cottage website home">
+        <img src="/images/dove-logo-white.svg" alt="Dove Cottage Day Hospice" class="brand-logo" />
+      </a>
+
+      <div class="actions">
+        <div class="phone-wrap">
+          <span class="phone-label">Hospice</span>
+          <a href="tel:01949860303" class="phone-link" aria-label="Call Dove Cottage">
+            <span class="phone-icon">☎</span>
+            <span>01949 860303</span>
+          </a>
+        </div>
+        <a href="#" class="donate-btn">Donate</a>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav-row" aria-label="Main navigation">
+    <div class="container">
+      <ul class="nav-content">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+
+        <li class="nav-item has-dropdown">
+          <a class="nav-link with-arrow" href="#">About Us</a>
+          <div class="dropdown-panel mega-menu about-mega">
+            <div class="mega-grid">
+              <section class="mega-column">
+                <h3 class="mega-title">What We Offer</h3>
+                <a href="#" class="mega-link">Carer &amp; patient wellbeing sessions</a>
+                <a href="#" class="mega-link">Dementia home-sitting</a>
+              </section>
+
+              <section class="mega-column">
+                <h3 class="mega-title">Hospice Services</h3>
+                <a href="#" class="mega-link">Counselling</a>
+                <a href="#" class="mega-link">Nursing care &amp; medical advice</a>
+                <a href="#" class="mega-link">Wellbeing activities</a>
+                <a href="#" class="mega-link">Complementary therapies</a>
+                <a href="#" class="mega-link">Therapy Bathing</a>
+                <a href="#" class="mega-link">Spiritual &amp; Chaplaincy support</a>
+                <a href="#" class="mega-link">Transport</a>
+              </section>
+
+              <section class="mega-column">
+                <h3 class="mega-title">Counselling &amp; Support</h3>
+                <a href="#" class="mega-link">Counselling</a>
+                <a href="#" class="mega-link">Support groups</a>
+                <h3 class="mega-title secondary-title">About Dove Cottage</h3>
+                <a href="#" class="mega-link">Our Team</a>
+                <a href="#" class="mega-link">Our Facilities</a>
+              </section>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item has-dropdown">
+          <a class="nav-link with-arrow" href="#">Support Us</a>
+          <div class="dropdown-panel mega-menu support-mega">
+            <div class="mega-grid support-grid">
+              <section class="mega-column">
+                <h3 class="mega-title">Support Us</h3>
+                <a href="#" class="mega-link">Make a donation</a>
+                <a href="#" class="mega-link">Volunteer your time</a>
+                <a href="#" class="mega-link">Leave a gift in your will</a>
+                <a href="#" class="mega-link">Fundraise for us</a>
+                <a href="#" class="mega-link">Visit our shops</a>
+                <a href="#" class="mega-link">Corporate partnerships</a>
+              </section>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">News &amp; Events</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Hire our facilities</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+    box-shadow: 0 2px 10px rgba(10, 35, 74, 0.12);
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  .top-row {
+    background: var(--color-teal);
+    padding: 9px 0;
+  }
+
+  .top-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .brand {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    min-width: 120px;
+  }
+
+  .brand-logo {
+    width: clamp(72px, 9vw, 108px);
+    height: auto;
+    display: block;
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .phone-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 3px;
+  }
+
+  .phone-label {
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    opacity: 0.95;
+  }
+
+  .phone-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: clamp(16px, 2vw, 30px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+
+  .phone-link:hover,
+  .phone-link:focus-visible {
+    opacity: 0.9;
+  }
+
+  .phone-icon {
+    font-size: clamp(14px, 1.4vw, 22px);
+    line-height: 1;
+  }
+
+  .donate-btn {
+    color: #22344e;
+    background: var(--color-golden-yellow);
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: clamp(15px, 1.2vw, 20px);
+    font-weight: 700;
+    line-height: 1;
+    padding: clamp(8px, 0.8vw, 11px) clamp(18px, 1.8vw, 26px);
+    border: 1px solid #dfc304;
+  }
+
+  .donate-btn:hover,
+  .donate-btn:focus-visible {
+    background: #f3d306;
+  }
+
+  .nav-row {
+    background: var(--color-steel-blue-1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .nav-content {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 52px;
+    gap: 16px;
+  }
+
+  .nav-item {
+    position: relative;
+    list-style: none;
+  }
+
+  .site-header ul,
+  .site-header li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+    display: inline-block;
+    padding: 14px 0 12px;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    opacity: 0.92;
+  }
+
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 3px;
+    background: var(--color-golden-yellow);
+  }
+
+  .with-arrow::after {
+    content: "▾";
+    margin-left: 7px;
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  .dropdown-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: none;
+    margin-top: 4px;
+    background: #ffffff;
+    color: #12243f;
+    border: 1px solid #d9e4f2;
+    border-radius: 12px;
+    box-shadow: 0 18px 38px rgba(7, 29, 64, 0.16);
+    z-index: 20;
+    padding: 10px;
+  }
+
+  .has-dropdown:hover .dropdown-panel,
+  .has-dropdown:focus-within .dropdown-panel {
+    display: block;
+  }
+
+  .mega-menu {
+    width: min(940px, calc(100vw - 24px));
+    padding: 22px;
+  }
+
+  .mega-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .support-grid {
+    grid-template-columns: minmax(260px, 1fr);
+  }
+
+  .mega-column {
+    padding: 4px;
+  }
+
+  .mega-title {
+    margin: 0 0 8px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #163766;
+    letter-spacing: -0.01em;
+  }
+
+  .secondary-title {
+    margin-top: 14px;
+  }
+
+  .mega-link {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #12243f;
+    text-decoration: none;
+    padding: 9px 10px;
+    margin-bottom: 2px;
+    border-radius: 8px;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+  }
+
+  .mega-link:hover,
+  .mega-link:focus-visible {
+    background: var(--color-alice-blue);
+    color: #0f2f61;
+    outline: none;
+  }
+
+  .about-mega {
+    min-width: 760px;
+    max-width: calc(100vw - 24px);
+  }
+
+  .support-mega {
+    min-width: 340px;
+    width: min(420px, 90vw);
+  }
+
+  @media (max-width: 980px) {
+    .actions {
+      gap: 12px;
+    }
+
+    .donate-btn {
+      font-size: 15px;
+      padding: 8px 16px;
+    }
+
+    .nav-content {
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 4px 0;
+    }
+
+    .nav-link {
+      font-size: 16px;
+      padding: 10px 10px 8px;
+    }
+
+    .dropdown-panel {
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(680px, 94vw);
+    }
+
+    .about-mega,
+    .support-mega {
+      min-width: 0;
+      width: min(680px, 94vw);
+    }
+
+    .mega-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .support-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mega-link {
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .dropdown-panel {
+      position: static;
+      transform: none;
+      width: 100%;
+      margin-top: 0;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+      box-shadow: none;
+      padding: 12px;
+    }
+
+    .mega-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .top-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .actions {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .phone-icon {
+      font-size: 18px;
+    }
+
+    .phone-wrap {
+      align-items: flex-start;
+    }
+
+    .phone-link {
+      font-size: 20px;
+    }
+  }
+</style>
