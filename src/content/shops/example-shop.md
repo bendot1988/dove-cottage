@@ -6,14 +6,12 @@ shop_info: >-
 
 
   Every purchase helps Dove Cottage provide free specialist care.
-shop_main_image: /images/hero-family-alt.png
+shop_main_image: /images/uploads/bottesford-shop-module.png
 opening_hours: |-
   **Monday - Saturday:** 9:00am - 4:00pm
 
   **Sunday:** Closed
-gallery:
-  - /images/hero-family-alt.png
-  - /images/care-counselling.png
+gallery: []
 button_colour: "#2c6eb4"
 phone: 01949 844467
 address: Market Street, Bottesford, NG13 0BW
