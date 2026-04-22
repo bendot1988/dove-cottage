@@ -3,8 +3,9 @@ const path = Astro.url.pathname;
 const isHome = path === "/" || path === "";
 ---
 
-<header class="site-header">
-  <div class="top-row">
+<div class="header-wrap">
+  <header class="site-header">
+    <div class="top-row">
     <div class="container top-content">
       <a href="/" class="brand" aria-label="Dove Cottage website home">
         <img src="/images/dove-logo-white.svg" alt="Dove Cottage Day Hospice" class="brand-logo" />
@@ -37,6 +38,7 @@ const isHome = path === "/" || path === "";
       </button>
     </div>
   </div>
+  </header>
 
   <nav class="nav-row" aria-label="Main navigation">
     <div class="container">
@@ -194,28 +196,29 @@ const isHome = path === "/" || path === "";
       </div>
     </aside>
   </div>
-</header>
+</div>
 
 <script is:inline>
   (() => {
+    const headerWrap = document.querySelector(".header-wrap");
     const header = document.querySelector(".site-header");
-    if (!header) return;
+    if (!headerWrap || !header) return;
 
     const toggle = header.querySelector(".menu-toggle");
-    const menu = header.querySelector(".mobile-nav");
-    const closeButtons = header.querySelectorAll("[data-close-mobile-menu]");
+    const menu = headerWrap.querySelector(".mobile-nav");
+    const closeButtons = headerWrap.querySelectorAll("[data-close-mobile-menu]");
 
     if (!toggle || !menu) return;
 
     const setMenuOpen = (open) => {
-      header.classList.toggle("mobile-menu-open", open);
+      headerWrap.classList.toggle("mobile-menu-open", open);
       menu.setAttribute("aria-hidden", open ? "false" : "true");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
       document.body.classList.toggle("mobile-menu-open", open);
     };
 
     toggle.addEventListener("click", () => {
-      const isOpen = header.classList.contains("mobile-menu-open");
+      const isOpen = headerWrap.classList.contains("mobile-menu-open");
       setMenuOpen(!isOpen);
     });
 
@@ -233,11 +236,14 @@ const isHome = path === "/" || path === "";
       }
     });
 
-    const syncStickyBorder = () => {
-      header.classList.toggle("is-stuck", window.scrollY > 8);
-    };
-    window.addEventListener("scroll", syncStickyBorder, { passive: true });
-    syncStickyBorder();
+    const navRow = headerWrap.querySelector(".nav-row");
+    if (navRow) {
+      const syncStickyBorder = () => {
+        navRow.classList.toggle("is-stuck", window.scrollY > 8);
+      };
+      window.addEventListener("scroll", syncStickyBorder, { passive: true });
+      syncStickyBorder();
+    }
   })();
 </script>
 
@@ -247,35 +253,7 @@ const isHome = path === "/" || path === "";
   }
 
   .site-header {
-    position: sticky;
-    top: 0;
-    z-index: 200;
     font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
-    box-shadow: 0 2px 10px rgba(10, 35, 74, 0.12);
-  }
-
-  .site-header::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 4px;
-    background: var(--color-golden-yellow);
-    opacity: 0;
-    transition: opacity 0.22s ease;
-    pointer-events: none;
-    z-index: 5;
-  }
-
-  .site-header.is-stuck::before {
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .site-header::before {
-      transition: none;
-    }
   }
 
   .container {
@@ -286,6 +264,9 @@ const isHome = path === "/" || path === "";
   .top-row {
     background: var(--color-teal);
     padding: 9px 0;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 2px 10px rgba(10, 35, 74, 0.12);
   }
 
   .top-content {
@@ -394,6 +375,46 @@ const isHome = path === "/" || path === "";
   .nav-row {
     background: var(--color-steel-blue-1);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+  }
+
+  @media (min-width: 1101px) {
+    .nav-row {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 2px 10px rgba(10, 35, 74, 0.1);
+    }
+
+    .nav-row::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+      background: var(--color-golden-yellow);
+      opacity: 0;
+      transition: opacity 0.22s ease;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .nav-row.is-stuck::before {
+      opacity: 1;
+    }
+
+    .nav-row.is-stuck {
+      box-shadow: 0 4px 16px rgba(10, 35, 74, 0.14);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    @media (min-width: 1101px) {
+      .nav-row::before {
+        transition: none;
+      }
+    }
   }
 
   .nav-content {
@@ -624,16 +645,16 @@ const isHome = path === "/" || path === "";
       flex-direction: column;
     }
 
-    .site-header.mobile-menu-open .mobile-nav {
+    .header-wrap.mobile-menu-open .mobile-nav {
       display: block;
       pointer-events: auto;
     }
 
-    .site-header.mobile-menu-open .mobile-nav-backdrop {
+    .header-wrap.mobile-menu-open .mobile-nav-backdrop {
       opacity: 1;
     }
 
-    .site-header.mobile-menu-open .mobile-nav-panel {
+    .header-wrap.mobile-menu-open .mobile-nav-panel {
       transform: translateX(0);
     }
 

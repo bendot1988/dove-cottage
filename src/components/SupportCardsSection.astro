@@ -141,8 +141,9 @@ const {
 
   .container > p {
     margin: 12px auto 30px;
-    max-width: 790px;
+    max-width: 840px; /* was 790px — a touch wider to reduce orphaned last lines */
     text-align: center;
+    text-wrap: pretty;
     color: #364861;
     font-size: var(--type-body-large);
     line-height: 1.5;
