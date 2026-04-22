@@ -201,3 +201,91 @@ collections:
       - { label: "Html Test", name: "html_test", widget: "text", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
       - { label: "Body", name: "body", widget: "markdown", required: false }
+  - name: "contact"
+    label: "Contact us"
+    files:
+      - name: "contact"
+        label: "Contact page"
+        file: "src/data/contact.json"
+        format: "json"
+        fields:
+          - {
+              label: "Page title (browser tab)",
+              name: "pageTitle",
+              widget: "string",
+              default: "Contact us | Dove Cottage",
+            }
+          - {
+              label: "Hero image",
+              name: "heroImage",
+              widget: "image",
+              hint: "Full-width background behind the hero text. Upload or pick from media library.",
+            }
+          - { label: "Hero badge (uppercase pill)", name: "heroBadge", widget: "string" }
+          - {
+              label: "Hero title — first part (white)",
+              name: "heroTitleBefore",
+              widget: "string",
+              hint: "e.g. Get in touch with",
+            }
+          - {
+              label: "Hero title — highlight (yellow)",
+              name: "heroTitleHighlight",
+              widget: "string",
+              hint: "e.g. our team",
+            }
+          - { label: "Hero description", name: "heroDescription", widget: "text" }
+          - { label: "Trust bar — charity line", name: "trustCharityLine", widget: "string" }
+          - {
+              label: "Trust bar — phone (digits for links, no spaces)",
+              name: "trustPhone",
+              widget: "string",
+              hint: "01949860303 — used for tel: links across the page.",
+            }
+          - {
+              label: "Trust bar — phone display",
+              name: "trustPhoneDisplay",
+              widget: "string",
+              hint: "01949 860303 — how the number appears on screen.",
+            }
+          - { label: "Trust bar — Donate button label", name: "trustDonateLabel", widget: "string" }
+          - {
+              label: "Trust bar — Donate button URL",
+              name: "trustDonateUrl",
+              widget: "string",
+              default: "#",
+            }
+          - {
+              label: "Main — small label (all caps line)",
+              name: "mainEyebrow",
+              widget: "string",
+            }
+          - { label: "Main — heading", name: "mainHeading", widget: "string" }
+          - { label: "Main — intro paragraph", name: "mainLede", widget: "text" }
+          - { label: "Form — section title", name: "formSectionTitle", widget: "string" }
+          - {
+              label: "Form — note under title (markdown)",
+              name: "formNoteMarkdown",
+              widget: "markdown",
+              hint: "Supports **bold** and [phone links](tel:01949860303).",
+            }
+          - {
+              label: "Fillout form ID",
+              name: "filloutFormId",
+              widget: "string",
+              hint: "From Fillout embed code (e.g. xrJnnVS553us).",
+            }
+          - { label: "Sidebar — card title", name: "sidebarCardTitle", widget: "string" }
+          - { label: "Opening hours", name: "openingHours", widget: "string" }
+          - { label: "Address (line 1–2, shown before postcode)", name: "addressLine1", widget: "text" }
+          - { label: "Postcode", name: "addressPostcode", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Footer line (sidebar, charity no.)", name: "sideCharityFooter", widget: "string" }
+          - { label: "Map — card title", name: "mapCardTitle", widget: "string" }
+          - {
+              label: "Map — search (for embed & Google link)",
+              name: "mapSearchQuery",
+              widget: "string",
+              hint: "Full address; used to build the map and “Open in Google Maps”.",
+            }
+          - { label: "Map — link label", name: "mapLinkLabel", widget: "string" }

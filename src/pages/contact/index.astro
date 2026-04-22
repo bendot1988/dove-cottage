@@ -1,0 +1,552 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import contact from "../../data/contact.json";
+import { marked } from "marked";
+
+const c = contact;
+
+const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+
+const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(c.mapSearchQuery)}&output=embed`;
+const mapExternalHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapSearchQuery)}`;
+
+const formNoteHtml = marked.parse(c.formNoteMarkdown.trim(), { async: false }) as string;
+---
+
+<BaseLayout title={c.pageTitle}>
+  <div class="contact-page">
+    <section
+      class="contact-hero"
+      aria-label="Contact"
+      style={`background-image: url('${c.heroImage.replace(/'/g, "%27")}')`}
+    >
+      <div class="contact-hero-overlay" aria-hidden="true"></div>
+      <div class="container contact-hero-grid">
+        <div class="contact-hero-copy">
+          <p class="contact-badge">{c.heroBadge}</p>
+          <h1>
+            {c.heroTitleBefore} <span class="contact-hero-highlight">{c.heroTitleHighlight}</span>
+          </h1>
+          <p class="contact-hero-dek">
+            {c.heroDescription}
+          </p>
+        </div>
+        <div class="contact-hero-aside" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <div class="contact-trust" aria-label="Key details">
+      <div class="container contact-trust-inner">
+        <span class="contact-trust-charity">{c.trustCharityLine}</span>
+        <div class="contact-trust-actions">
+          <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
+          <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{c.trustDonateLabel}</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="contact-main" aria-labelledby="contact-heading">
+      <img
+        src="/images/sunflower-brand-small.png"
+        alt=""
+        class="contact-sunflower"
+        loading="lazy"
+        aria-hidden="true"
+      />
+      <div class="container contact-layout">
+        <div class="contact-primary">
+          <p class="eyebrow" id="contact-heading">{c.mainEyebrow}</p>
+          <h2>{c.mainHeading}</h2>
+          <p class="lede">
+            {c.mainLede}
+          </p>
+
+          <h3>{c.formSectionTitle}</h3>
+          <div class="form-note rich-form-note" set:html={formNoteHtml} />
+
+          <div class="fillout-card">
+            <div
+              class="fillout-embed"
+              data-fillout-id={c.filloutFormId}
+              data-fillout-embed-type="standard"
+              data-fillout-inherit-parameters
+              data-fillout-dynamic-resize
+            />
+          </div>
+        </div>
+
+        <aside class="contact-side" aria-label="Other ways to get in touch">
+          <div class="side-card">
+            <h2 class="side-card-title">{c.sidebarCardTitle}</h2>
+            <ul class="side-list">
+              <li>
+                <span class="side-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" />
+                  </svg>
+                </span>
+                <div>
+                  <span class="side-label">Opening hours</span>
+                  <p class="side-value">{c.openingHours}</p>
+                </div>
+              </li>
+              <li>
+                <span class="side-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </span>
+                <div>
+                  <span class="side-label">Address</span>
+                  <p class="side-value address-block">
+                    {(c.addressLine1 ?? "")
+                      .split("\n")
+                      .map((line) => line.trim())
+                      .filter(Boolean)
+                      .map((line) => (
+                        <>
+                          {line}
+                          <br />
+                        </>
+                      ))}
+                    <span class="side-postcode">{c.addressPostcode}</span>
+                  </p>
+                </div>
+              </li>
+              <li>
+                <span class="side-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </span>
+                <div>
+                  <span class="side-label">Email</span>
+                  <a class="side-value side-link" href={`mailto:${c.email}`}>{c.email}</a>
+                </div>
+              </li>
+              <li>
+                <span class="side-icon" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path
+                      d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                    />
+                  </svg>
+                </span>
+                <div>
+                  <span class="side-label">Phone</span>
+                  <a class="side-value side-link" href={telHref}>{c.trustPhoneDisplay}</a>
+                </div>
+              </li>
+            </ul>
+            <p class="side-charity">{c.sideCharityFooter}</p>
+          </div>
+
+          <div class="side-card side-card-map">
+            <h2 class="side-card-title">{c.mapCardTitle}</h2>
+            <div class="map-frame">
+              <iframe
+                src={mapEmbed}
+                title="Dove Cottage Day Hospice on the map"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen
+              />
+            </div>
+            <a class="map-external" href={mapExternalHref} target="_blank" rel="noopener noreferrer">
+              {c.mapLinkLabel}
+            </a>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+  <script is:inline src="https://server.fillout.com/embed/v1/"></script>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: min(1200px, 95%);
+    margin: 0 auto;
+  }
+
+  .contact-hero {
+    position: relative;
+    background-color: #102a4e;
+    background-size: cover;
+    background-position: center;
+    min-height: min(44vh, 440px);
+    color: #fff;
+    padding: 48px 0 40px;
+    text-align: left;
+  }
+
+  .contact-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, rgba(16, 34, 58, 0.86) 0%, rgba(16, 34, 58, 0.5) 48%, rgba(16, 34, 58, 0.75) 100%);
+    pointer-events: none;
+  }
+
+  /* Same two-column measure as .contact-layout so copy lines up with “We’d love to hear from you” + form */
+  .contact-hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 0 40px;
+    align-content: end;
+    min-height: min(32vh, 300px);
+    width: 100%;
+    text-align: left;
+  }
+
+  .contact-hero-aside {
+    min-height: 0;
+  }
+
+  .contact-hero-copy {
+    min-width: 0;
+  }
+
+  .contact-badge {
+    display: inline-block;
+    margin: 0 0 16px;
+    padding: 7px 16px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    border: 2px solid var(--color-golden-yellow);
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 2px rgba(10, 35, 74, 0.25);
+  }
+
+  .contact-hero h1 {
+    margin: 0 0 14px;
+    font-size: clamp(1.9rem, 4.2vw, 2.75rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+
+  .contact-hero-highlight {
+    color: var(--color-golden-yellow);
+  }
+
+  .contact-hero-dek {
+    margin: 0;
+    font-size: var(--type-body-large);
+    line-height: 1.5;
+    text-wrap: pretty;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .contact-trust {
+    background: #fff;
+    border-bottom: 1px solid #d9e3f0;
+  }
+
+  .contact-trust-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 24px;
+    padding: 12px 0;
+  }
+
+  .contact-trust-charity {
+    font-size: var(--type-body-small);
+    font-weight: 600;
+    color: #3a4e6a;
+  }
+
+  .contact-trust-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+  }
+
+  .contact-trust-phone {
+    color: var(--color-steel-blue);
+    font-size: var(--type-body);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .contact-trust-phone:hover,
+  .contact-trust-phone:focus-visible {
+    text-decoration: underline;
+  }
+
+  .contact-trust-donate {
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-size: var(--type-button-small);
+  }
+
+  .contact-main {
+    position: relative;
+    background: var(--color-lavender);
+    padding: 48px 0 72px;
+  }
+
+  .contact-sunflower {
+    position: absolute;
+    right: -70px;
+    bottom: -60px;
+    width: min(300px, 40vw);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 36px 40px;
+    align-items: start;
+  }
+
+  .eyebrow {
+    margin: 0 0 8px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-steel-blue-1);
+  }
+
+  .contact-primary h2 {
+    margin: 0 0 12px;
+    font-size: var(--type-section-title);
+    color: #0f2240;
+    line-height: 1.2;
+  }
+
+  .lede {
+    margin: 0 0 28px;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+    text-wrap: pretty;
+    color: #364861;
+    max-width: 640px;
+  }
+
+  .contact-primary h3 {
+    margin: 0 0 8px;
+    font-size: var(--type-card-title);
+    color: #102a4e;
+  }
+
+  .form-note,
+  :global(.rich-form-note) {
+    margin: 0 0 20px;
+    font-size: var(--type-body);
+    color: #3f5370;
+    line-height: 1.5;
+  }
+
+  :global(.rich-form-note p) {
+    margin: 0;
+  }
+
+  :global(.rich-form-note strong) {
+    color: #2a3c56;
+  }
+
+  :global(.rich-form-note a) {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  :global(.rich-form-note a:hover),
+  :global(.rich-form-note a:focus-visible) {
+    text-decoration: underline;
+  }
+
+  .inline-phone {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .fillout-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 16px;
+    padding: 6px 6px 10px;
+    box-shadow: 0 8px 22px rgba(18, 44, 83, 0.07);
+  }
+
+  .fillout-embed {
+    width: 100%;
+    min-height: 520px;
+  }
+
+  .side-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(18, 44, 83, 0.06);
+  }
+
+  .side-card-title {
+    margin: 0;
+    padding: 14px 18px;
+    font-size: var(--type-body);
+    font-weight: 800;
+    color: #fff;
+    background: var(--color-steel-blue-1);
+    line-height: 1.2;
+  }
+
+  .side-list {
+    list-style: none;
+    margin: 0;
+    padding: 12px 16px 4px;
+  }
+
+  .side-list li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  .side-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(29, 80, 141, 0.08);
+    color: var(--color-steel-blue-1);
+  }
+
+  .side-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .side-label {
+    display: block;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #5a6b85;
+    margin-bottom: 2px;
+  }
+
+  .side-value,
+  .address-block {
+    margin: 0;
+    font-size: var(--type-body-small);
+    line-height: 1.45;
+    color: #2a3c56;
+  }
+
+  .side-postcode {
+    font-weight: 600;
+  }
+
+  a.side-link {
+    color: var(--color-steel-blue);
+    font-weight: 600;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  a.side-link:hover,
+  a.side-link:focus-visible {
+    text-decoration: underline;
+  }
+
+  .side-charity {
+    margin: 0;
+    padding: 0 16px 16px;
+    font-size: var(--type-micro);
+    color: #6a7a92;
+  }
+
+  .side-card-map {
+    margin-top: 20px;
+  }
+
+  .map-frame {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 60%;
+    background: #e2eaf5;
+  }
+
+  .map-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .map-external {
+    display: block;
+    padding: 12px 16px 14px;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-steel-blue);
+    border-top: 1px solid #e8eff8;
+  }
+
+  .map-external:hover,
+  .map-external:focus-visible {
+    background: #f2f6fc;
+  }
+
+  @media (max-width: 1020px) {
+    .contact-hero-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-hero-aside {
+      display: none;
+    }
+
+    .contact-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .contact-side {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .contact-hero {
+      padding: 40px 0 36px;
+    }
+
+    .contact-trust-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
