@@ -219,20 +219,27 @@ collections:
               label: "Hero image",
               name: "heroImage",
               widget: "image",
-              hint: "Full-width background behind the hero text. Upload or pick from media library.",
+              hint: "Photo at the top of the contact hero card. Upload or pick from the media library.",
+            }
+          - {
+              label: "Hero image description (accessibility)",
+              name: "heroImageAlt",
+              widget: "string",
+              default: "People supported in our day hospice and community",
+              hint: "Short description for screen readers and SEO.",
             }
           - { label: "Hero badge (uppercase pill)", name: "heroBadge", widget: "string" }
           - {
-              label: "Hero title — first part (white)",
+              label: "Hero title — first part",
               name: "heroTitleBefore",
               widget: "string",
               hint: "e.g. Get in touch with",
             }
           - {
-              label: "Hero title — highlight (yellow)",
+              label: "Hero title — highlight",
               name: "heroTitleHighlight",
               widget: "string",
-              hint: "e.g. our team",
+              hint: "e.g. our team (shown in brand blue on the page)",
             }
           - { label: "Hero description", name: "heroDescription", widget: "text" }
           - { label: "Trust bar — charity line", name: "trustCharityLine", widget: "string" }

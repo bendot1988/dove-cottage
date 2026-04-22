@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { toTitleCase } from "../lib/titleCase";
 
 const colorTokens = [
+  { name: "text-primary", value: "#10233c", cssVar: "--text-primary", note: "Default body and headings" },
   { name: "golden-yellow", value: "#fedc06", cssVar: "--color-golden-yellow" },
   { name: "lavender", value: "#ebeef5", cssVar: "--color-lavender" },
   { name: "alice-blue", value: "#eaf1fb", cssVar: "--color-alice-blue" },
@@ -30,21 +32,36 @@ const typeTokens = [
   "--type-button",
   "--type-button-small"
 ];
+
+const radiusRows = [
+  { px: "6px", use: "Default `.btn` corners" },
+  { px: "8px", use: "Swatch chips, small UI" },
+  { px: "10px", use: "Inline samples, type rows" },
+  { px: "12px", use: "Motion demo, soft cards" },
+  { px: "14px", use: "Style guide panels" },
+  { px: "16px", use: "Homepage service cards" },
+  { px: "999px", use: "Pills, tags, primary CTAs, hero row buttons" }
+];
+
+const titleCaseExample = toTitleCase("we'd love to hear from you");
 ---
 
-<BaseLayout title="Style Guide | Dove Cottage" noindex={true}>
-  <section class="style-guide">
+<BaseLayout title="Style guide | Dove Cottage" noindex={true}>
+  <section class="style-guide" aria-label="Dove Cottage design system">
     <div class="container">
       <header class="guide-header">
-        <h1>Dove Cottage Style Guide</h1>
+        <p class="guide-eyebrow">Internal — not indexed</p>
+        <h1>Style guide</h1>
         <p>
-          Reference for global tokens, typography scale, button styles, spacing rhythm, and motion so
-          the same patterns can be reused across the site.
+          This page documents tokens and patterns aligned with the <strong>homepage</strong> so
+          new sections stay visually consistent. It is <strong>excluded from search</strong> via
+          <code>noindex, nofollow</code> in <code>BaseLayout</code> (<code>/style-guide/</code>).
         </p>
       </header>
 
-      <section class="panel">
-        <h2>Brand Colors</h2>
+      <section class="panel" aria-labelledby="sg-colors">
+        <h2 id="sg-colors">Brand colors</h2>
+        <p class="panel-lede">Defined in <code>src/styles/global.css</code> on <code>:root</code>. Prefer CSS variables, not one-off hex, except where a component bakes a specific value (e.g. hero buttons).</p>
         <div class="swatches">
           {
             colorTokens.map((color) => (
@@ -53,14 +70,138 @@ const typeTokens = [
                 <h3>{color.name}</h3>
                 <p>{color.value}</p>
                 <small>{color.cssVar}</small>
+                {"note" in color && color.note && <small class="swatch-note">{color.note}</small>}
               </article>
             ))
           }
         </div>
       </section>
 
+      <section class="panel" aria-labelledby="sg-titles">
+        <h2 id="sg-titles">Typography &amp; title hierarchy</h2>
+        <p class="panel-lede">
+          Font family sitewide: <strong>Montserrat</strong> (see <code>global.css</code>).
+          Homepage section titles and hero copy use the tokens below; long headings use
+          <strong>title case in content</strong> (major words capitalised, small words like “and”
+          lowercased in the middle), matching the homepage JSON style.
+        </p>
+
+        <h3 class="sg-subh">Level map</h3>
+        <ul class="sg-list">
+          <li>
+            <strong>Hero (H1)</strong> — <code>--type-hero-title</code>, weight 700, tight letter-spacing
+            (<code>-0.03em</code> in <code>HeroSection.astro</code>).
+          </li>
+          <li>
+            <strong>Page / section (H2)</strong> — <code>--type-section-title</code>, for primary section
+            titles on coloured or white bands.
+          </li>
+          <li>
+            <strong>Card / block (H3)</strong> — <code>--type-card-title</code> or the care-card clamp
+            in <code>CareServicesSection.astro</code>.
+          </li>
+          <li>
+            <strong>Eyebrow / kicker</strong> — <code>--type-micro</code>, <strong>uppercase</strong>, wide
+            letter-spacing (<code>0.1em</code>–<code>0.12em</code>), often steel-blue, as on the shops
+            section.
+          </li>
+        </ul>
+
+        <div class="sg-demo-hero" role="img" aria-label="Hero title sample">
+          <h2 class="sg-demo-hero-title">Supporting You Through Every Step of Your Journey</h2>
+          <p class="sg-demo-hero-body">
+            We provide free, compassionate care for local families. Body large on a dark overlay
+            uses <code>--type-body-large</code>.
+          </p>
+        </div>
+
+        <div class="sg-demo-section">
+          <p class="sg-demo-eyebrow">Supporting our community</p>
+          <h2 class="sg-demo-h2">Our Local Charity Shops</h2>
+          <p class="sg-demo-intro">
+            Intro and lede: <code>--type-body-large</code>, line-height ~1.55–1.6, colour around
+            <code>#364861</code> / <code>#495d78</code> for secondary text.
+          </p>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="sg-radius">
+        <h2 id="sg-radius">Border radius</h2>
+        <p class="panel-lede">
+          No single global token: components pick radii for purpose. Pills and tags use
+          <code>999px</code>; cards and panels cluster at <code>12–16px</code>.
+        </p>
+        <div class="radius-table" role="table" aria-label="Border radius uses">
+          <div class="radius-row radius-row-head" role="row">
+            <span role="columnheader">Radius</span>
+            <span role="columnheader">Typical use</span>
+          </div>
+          {radiusRows.map((r) => (
+            <div class="radius-row" role="row">
+              <code role="cell">{r.px}</code>
+              <span role="cell">{r.use}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="sg-surfaces">
+        <h2 id="sg-surfaces">Surfaces, borders &amp; depth</h2>
+        <p class="panel-lede">Common patterns from the homepage and inner pages.</p>
+        <ul class="sg-list">
+          <li>
+            <strong>Section background</strong> — <code>--color-lavender</code> for alternating bands;
+            white for contrast sections (e.g. shops).
+          </li>
+          <li>
+            <strong>Card border</strong> — <code>1px</code> solid e.g. <code>#d9e3f0</code>,
+            <code>#dce5f2</code>, or <code>#e5ebf5</code>.
+          </li>
+          <li>
+            <strong>Card shadow (service cards)</strong> —
+            <code>0 6px 16px rgba(19, 47, 82, 0.08)</code>.
+          </li>
+        </ul>
+        <div class="sg-surface-bar sg-surface-lavender">Lavender section</div>
+        <div class="sg-surface-bar sg-surface-white">White panel with border + shadow (see cards)</div>
+      </section>
+
+      <section class="panel" aria-labelledby="sg-layout">
+        <h2 id="sg-layout">Layout &amp; container</h2>
+        <p class="panel-lede">
+          Homepage sections use a centred container <code>width: min(1200px, 95%)</code> with
+          <code>margin: 0 auto</code>. Some inner pages (e.g. contact) add horizontal padding:
+          <code>clamp(1.125rem, 4.2vw, 1.5rem)</code> on the same max-width shell.
+        </p>
+        <p class="panel-lede">This guide uses the same <code>min(1200px, 95%)</code> pattern.</p>
+      </section>
+
+      <section class="panel" aria-labelledby="sg-tags">
+        <h2 id="sg-tags">Service tags (care cards)</h2>
+        <p class="panel-lede">Pill tags on the homepage care grid (<code>CareServicesSection.astro</code>).</p>
+        <div class="sg-tags">
+          <span class="sg-tag sg-tag-blue">Tue–Thu | 10am–3pm</span>
+          <span class="sg-tag sg-tag-green">Mondays | 10am–1pm</span>
+          <span class="sg-tag sg-tag-orange">Dementia Support</span>
+          <span class="sg-tag sg-tag-purple">Counselling</span>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="sg-titles-utility">
+        <h2 id="sg-titles-utility">Title case helper (optional)</h2>
+        <p class="panel-lede">
+          For a few pages, headings are normalised with <code>toTitleCase</code> in
+          <code>src/lib/titleCase.ts</code> (AP-style, small words mid-phrase). Use only for
+          <strong>short labels and headings</strong>, not for body copy.
+        </p>
+        <p class="sg-code-line">
+          <code>we'd love to hear from you</code> → <strong>{titleCaseExample}</strong>
+        </p>
+      </section>
+
       <section class="panel">
-        <h2>Typography Scale</h2>
+        <h2>Typography scale (tokens)</h2>
+        <p class="panel-lede">Sample line in each size.</p>
         <div class="type-list">
           {
             typeTokens.map((token) => (
@@ -82,13 +223,41 @@ const typeTokens = [
           <button class="btn btn-primary btn-shine" type="button">Donate CTA (Shine)</button>
         </div>
         <p class="button-note">
-          Use <code>.btn-shine</code> only on main donation CTAs to create a soft, repeating light
-          sweep that draws attention.
+          Base <code>.btn</code> uses <code>border-radius: 6px</code> in <code>src/styles/_buttons.css</code>.
+          Reserve <code>.btn-shine</code> for main donation-style CTAs.
+        </p>
+      </section>
+
+      <section class="panel" aria-labelledby="sg-card-link">
+        <h2 id="sg-card-link">Card link (“Find out more”)</h2>
+        <p class="panel-lede">
+          Homepage care cards (<code>CareServicesSection.astro</code>) use a text-style CTA: bold
+          <code>--color-steel-blue</code>, with a <strong>yellow bar</strong> on the label only
+          (<code>::after</code> on <code>.card-link-text</code>), and the
+          <strong>arrow</strong> outside that underline. The bar animates in on
+          <code>:hover</code> and <code>:focus-visible</code>.
+        </p>
+        <article class="sg-service-card">
+          <div class="sg-service-card__content">
+            <h3 class="sg-service-card__title">Day Care</h3>
+            <p class="sg-service-card__desc">
+              Expert nursing support in a home-from-home environment, matching real card copy length.
+            </p>
+            <a href="#sg-card-link" class="card-link">
+              <span class="card-link-text">Find Out More</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+        <p class="button-note">
+          Copy the same structure: <code>class="card-link"</code> on the
+          <code>&lt;a&gt;</code>, <code>class="card-link-text"</code> on the text span, then the
+          arrow in a second span so the yellow rule never sits under the arrow.
         </p>
       </section>
 
       <section class="panel">
-        <h2>Spacing Rhythm</h2>
+        <h2>Spacing rhythm (reference steps)</h2>
         <div class="spacing-row">
           <div class="space space-8">8</div>
           <div class="space space-12">12</div>
@@ -97,6 +266,7 @@ const typeTokens = [
           <div class="space space-32">32</div>
           <div class="space space-48">48</div>
         </div>
+        <p class="button-note">Use as a common scale, not hard tokens — pair with section padding (e.g. <code>clamp(3.75rem, 9vw, 6rem)</code> on homepage sections).</p>
       </section>
 
       <section class="panel motion-guide">
@@ -131,7 +301,7 @@ const typeTokens = [
           </div>
           <div class="motion-token-row" role="row">
             <code role="cell">--motion-duration-hero</code>
-            <span role="cell">Hero headline / body / CTA row (see <code>HeroSection.astro</code>)</span>
+            <span role="cell">Hero headline / body / CTA row (<code>HeroSection.astro</code>)</span>
           </div>
           <div class="motion-token-row" role="row">
             <code role="cell">--motion-duration-video</code>
@@ -237,16 +407,27 @@ const typeTokens = [
     margin: 0 auto;
   }
 
+  .guide-eyebrow {
+    margin: 0 0 8px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-steel-blue-1);
+  }
+
   .guide-header h1 {
     margin: 0;
     font-size: var(--type-section-title);
-    color: var(--color-steel-blue);
+    color: var(--text-primary, #10233c);
   }
 
   .guide-header p {
     margin: 10px 0 0;
     font-size: var(--type-body-large);
-    color: #334862;
+    color: #364861;
+    max-width: 72ch;
+    line-height: 1.55;
   }
 
   .panel {
@@ -254,12 +435,188 @@ const typeTokens = [
     border: 1px solid #dce5f2;
     border-radius: 14px;
     margin-top: 22px;
-    padding: 20px;
+    padding: 20px 22px 22px;
   }
 
   .panel h2 {
-    margin: 0 0 14px;
+    margin: 0 0 8px;
     font-size: var(--type-card-title);
+    color: var(--text-primary, #10233c);
+  }
+
+  .panel-lede {
+    margin: 0 0 16px;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    color: #3f5370;
+  }
+
+  .panel-lede:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .sg-subh {
+    margin: 20px 0 10px;
+    font-size: var(--type-subtitle);
+    color: #10243d;
+  }
+
+  .sg-list {
+    margin: 0 0 16px;
+    padding-left: 1.2rem;
+    color: #334862;
+    font-size: var(--type-body);
+    line-height: 1.6;
+  }
+
+  .sg-list li {
+    margin-bottom: 8px;
+  }
+
+  .sg-demo-hero {
+    border-radius: 12px;
+    padding: 28px 24px;
+    background: linear-gradient(105deg, rgba(16, 34, 58, 0.92) 0%, rgba(16, 34, 58, 0.75) 100%);
+    color: #fff;
+    margin-top: 16px;
+  }
+
+  .sg-demo-hero-title {
+    margin: 0;
+    font-size: var(--type-hero-title);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .sg-demo-hero-body {
+    margin: 12px 0 0;
+    font-size: var(--type-body-large);
+    line-height: 1.6;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .sg-demo-section {
+    margin-top: 20px;
+    padding: 20px 0 0;
+    border-top: 1px solid #e2e8f2;
+  }
+
+  .sg-demo-eyebrow {
+    margin: 0 0 6px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-steel-blue-1);
+  }
+
+  .sg-demo-h2 {
+    margin: 0 0 10px;
+    font-size: var(--type-section-title);
+    line-height: 1.2;
+    color: #0f2240;
+  }
+
+  .sg-demo-intro {
+    margin: 0;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+    color: #364861;
+  }
+
+  .radius-table {
+    border: 1px solid #e7edf7;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: var(--type-body-small);
+  }
+
+  .radius-row {
+    display: grid;
+    grid-template-columns: minmax(0, 0.4fr) minmax(0, 1.6fr);
+    gap: 10px;
+    padding: 10px 12px;
+    border-top: 1px solid #eef3fa;
+    align-items: start;
+  }
+
+  .radius-row:first-child {
+    border-top: none;
+  }
+
+  .radius-row-head {
+    background: #f5f8fd;
+    font-weight: 700;
+    color: #10243d;
+    font-size: var(--type-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .radius-row code {
+    font-size: 0.9rem;
+  }
+
+  .sg-surface-bar {
+    margin-top: 10px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    font-size: var(--type-body-small);
+    font-weight: 600;
+  }
+
+  .sg-surface-lavender {
+    background: var(--color-lavender);
+    color: #1e3a5f;
+  }
+
+  .sg-surface-white {
+    background: #fff;
+    color: #334862;
+    border: 1px solid #d9e3f0;
+    box-shadow: 0 6px 16px rgba(19, 47, 82, 0.08);
+  }
+
+  .sg-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .sg-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    border-radius: 999px;
+    padding: 5px 14px;
+    font-size: var(--type-micro);
+    line-height: 1;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .sg-tag-blue {
+    background: #2d6fb3;
+  }
+
+  .sg-tag-green {
+    background: var(--color-dark-slate-gray);
+  }
+
+  .sg-tag-orange {
+    background: var(--color-fire-brick);
+  }
+
+  .sg-tag-purple {
+    background: var(--color-dark-orchid);
+  }
+
+  .sg-code-line {
+    margin: 0;
+    font-size: var(--type-body);
     color: #10243d;
   }
 
@@ -294,6 +651,11 @@ const typeTokens = [
     color: #4a5e78;
     font-size: var(--type-body-small);
     line-height: 1.45;
+  }
+
+  .swatch-note {
+    margin-top: 4px;
+    color: #6a7a92;
   }
 
   .type-list {
@@ -335,6 +697,91 @@ const typeTokens = [
     margin: 12px 0 0;
     color: #4a5e78;
     font-size: var(--type-body-small);
+    line-height: 1.5;
+  }
+
+  .sg-service-card {
+    max-width: 380px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(19, 47, 82, 0.08);
+    border: 1px solid #e5ebf5;
+    margin-top: 4px;
+  }
+
+  .sg-service-card__content {
+    padding: 20px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    min-height: 160px;
+  }
+
+  .sg-service-card__title {
+    margin: 0 0 10px;
+    font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+    line-height: 1.28;
+    letter-spacing: -0.01em;
+    color: #152a47;
+    font-weight: 700;
+  }
+
+  .sg-service-card__desc {
+    margin: 0;
+    color: #495d78;
+    font-size: var(--type-body);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .card-link {
+    margin-top: auto;
+    padding-top: 16px;
+    color: var(--color-steel-blue);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    font-size: var(--type-button);
+    font-weight: 700;
+  }
+
+  .card-link:hover,
+  .card-link:focus-visible {
+    color: #153f73;
+  }
+
+  .card-link-text {
+    position: relative;
+  }
+
+  .card-link-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--color-golden-yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .card-link:hover .card-link-text::after,
+  .card-link:focus-visible .card-link-text::after {
+    transform: scaleX(1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-link-text::after {
+      transition: none;
+    }
+
+    .card-link .card-link-text::after,
+    .card-link:hover .card-link-text::after,
+    .card-link:focus-visible .card-link-text::after {
+      transform: scaleX(1);
+    }
   }
 
   .spacing-row {
@@ -395,6 +842,15 @@ const typeTokens = [
   }
 
   .motion-sub:first-of-type {
+    margin-top: 0;
+  }
+
+  .motion-guide .panel .motion-sub:first-of-type,
+  .motion-guide .motion-sub:first-of-type {
+    margin-top: 0;
+  }
+
+  .motion-guide > .motion-lead + .motion-sub {
     margin-top: 0;
   }
 

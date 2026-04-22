@@ -1,10 +1,26 @@
 ---
+import contact from "../data/contact.json";
+import { toTitleCase } from "../lib/titleCase";
+
 const path = Astro.url.pathname;
 const isHome = path === "/" || path === "";
+const utilTelHref = `tel:${contact.trustPhone}`;
+const donateLabel = toTitleCase(contact.trustDonateLabel);
+const utilCharity = toTitleCase(contact.trustCharityLine);
 ---
 
 <div class="header-wrap">
-  <header class="site-header">
+  <div class="header-top-stack">
+    <div class="header-util" role="region" aria-label="Charity and phone">
+      <div class="container header-util-inner">
+        <span class="header-util-charity">{utilCharity}</span>
+        <a href={utilTelHref} class="header-util-phone" aria-label="Call Dove Cottage">
+          <span class="header-util-phone-icon" aria-hidden="true">☎</span>
+          {contact.trustPhoneDisplay}
+        </a>
+      </div>
+    </div>
+    <header class="site-header">
     <div class="top-row">
     <div class="container top-content">
       <a href="/" class="brand" aria-label="Dove Cottage website home">
@@ -12,14 +28,7 @@ const isHome = path === "/" || path === "";
       </a>
 
       <div class="actions">
-        <div class="phone-wrap">
-          <span class="phone-label">Hospice</span>
-          <a href="tel:01949860303" class="phone-link" aria-label="Call Dove Cottage">
-            <span class="phone-icon">☎</span>
-            <span>01949 860303</span>
-          </a>
-        </div>
-        <a href="#" class="btn btn-primary btn-shine donate-btn">Donate</a>
+        <a href={contact.trustDonateUrl} class="btn btn-primary btn-shine donate-btn">{donateLabel}</a>
       </div>
 
       <button
@@ -39,8 +48,7 @@ const isHome = path === "/" || path === "";
     </div>
   </div>
   </header>
-
-  <div class="nav-row-shim" aria-hidden="true"></div>
+  </div>
 
   <nav class="nav-row" aria-label="Main navigation">
     <div class="container">
@@ -205,7 +213,7 @@ const isHome = path === "/" || path === "";
 
       <div class="mobile-cta">
         <a href="tel:01949860303" class="mobile-phone">☎ 01949 860303</a>
-        <a href="#" class="btn btn-primary btn-shine mobile-donate">Donate</a>
+        <a href={contact.trustDonateUrl} class="btn btn-primary btn-shine mobile-donate">{donateLabel}</a>
         <a href="#" class="btn btn-secondary mobile-secondary-cta">Volunteer</a>
       </div>
     </aside>
@@ -216,6 +224,7 @@ const isHome = path === "/" || path === "";
   (() => {
     const headerWrap = document.querySelector(".header-wrap");
     const header = document.querySelector(".site-header");
+    const headerTopStack = document.querySelector(".header-top-stack");
     if (!headerWrap || !header) return;
 
     const toggle = header.querySelector(".menu-toggle");
@@ -251,33 +260,32 @@ const isHome = path === "/" || path === "";
     });
 
     const navRow = headerWrap.querySelector(".nav-row");
-    const navShim = headerWrap.querySelector(".nav-row-shim");
     if (navRow) {
       const isDesktop = () => window.innerWidth > 1100;
 
-      const syncDesktopNav = () => {
-        if (!isDesktop()) {
-          navRow.style.removeProperty("top");
-          if (navShim) navShim.style.removeProperty("height");
+      const syncStuck = () => {
+        if (!isDesktop() || !headerTopStack) {
           navRow.classList.remove("is-stuck");
           return;
         }
-
-        const bottom = header.getBoundingClientRect().bottom;
-        navRow.style.setProperty("top", `${Math.max(0, bottom)}px`);
-        if (navShim) {
-          const h = Math.round(navRow.getBoundingClientRect().height) || 52;
-          navShim.style.setProperty("height", `${h}px`);
-        }
+        const bottom = headerTopStack.getBoundingClientRect().bottom;
         navRow.classList.toggle("is-stuck", bottom < 0.5);
       };
 
       const onScrollOrResize = () => {
-        requestAnimationFrame(syncDesktopNav);
+        requestAnimationFrame(syncStuck);
       };
 
       window.addEventListener("scroll", onScrollOrResize, { passive: true });
       window.addEventListener("resize", onScrollOrResize, { passive: true });
+      window.addEventListener(
+        "pageshow",
+        (e) => {
+          if (e.persisted) {
+            onScrollOrResize();
+          }
+        }
+      );
       if (document.fonts?.ready) {
         void document.fonts.ready.then(() => onScrollOrResize());
       } else {
@@ -294,6 +302,50 @@ const isHome = path === "/" || path === "";
 
   .site-header {
     font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
+  }
+
+  .header-top-stack {
+    position: relative;
+    z-index: 2;
+  }
+
+  .header-util {
+    background: #f7f9fd;
+    border-bottom: 1px solid #dde6f2;
+  }
+
+  .header-util-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+    min-height: 40px;
+    font-size: var(--type-micro, 0.8rem);
+    font-weight: 600;
+    color: #1e3a5f;
+  }
+
+  .header-util-charity {
+    letter-spacing: 0.02em;
+  }
+
+  .header-util-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .header-util-phone:hover,
+  .header-util-phone:focus-visible {
+    color: #0b2448;
+    text-decoration: underline;
+  }
+
+  .header-util-phone-icon {
+    opacity: 0.9;
   }
 
   .container {
@@ -412,10 +464,6 @@ const isHome = path === "/" || path === "";
     background: #fff;
   }
 
-  .nav-row-shim {
-    display: none;
-  }
-
   .nav-row {
     background: var(--color-steel-blue-1);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -423,18 +471,11 @@ const isHome = path === "/" || path === "";
   }
 
   @media (min-width: 1101px) {
-    /* Sticky in-flow can be blocked by overflow/stacking; fixed + top = header bottom is reliable. */
-    .nav-row-shim {
-      display: block;
-      width: 100%;
-      min-height: 52px;
-      flex: 0 0 auto;
-    }
-
+    /* In-flow + sticky: avoids JS "top" sync which could read 0px before layout and cover the header. */
     .nav-row {
-      position: fixed;
-      left: 0;
-      right: 0;
+      position: -webkit-sticky;
+      position: sticky;
+      top: 0;
       z-index: 200;
       box-shadow: 0 2px 10px rgba(10, 35, 74, 0.1);
     }
@@ -476,10 +517,11 @@ const isHome = path === "/" || path === "";
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    flex-wrap: wrap;
     align-items: center;
     min-height: 52px;
-    gap: 16px;
+    gap: 8px 22px;
   }
 
   .nav-item {
@@ -536,6 +578,31 @@ const isHome = path === "/" || path === "";
     display: inline-flex;
     align-items: center;
     gap: 6px;
+  }
+
+  @media (min-width: 1101px) {
+    .nav-content {
+      justify-content: stretch;
+      flex-wrap: nowrap;
+      gap: 0;
+      width: 100%;
+    }
+
+    .nav-item {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .nav-item .nav-link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
   }
 
   .dropdown-icon {
@@ -835,21 +902,11 @@ const isHome = path === "/" || path === "";
       width: clamp(74px, 18vw, 96px);
     }
 
-    .actions {
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .phone-icon {
-      font-size: 16px;
-    }
-
-    .phone-wrap {
-      align-items: flex-start;
-    }
-
-    .phone-link {
-      font-size: 1.1rem;
+    .header-util-inner {
+      flex-wrap: wrap;
+      min-height: 0;
+      padding-top: 8px;
+      padding-bottom: 8px;
     }
   }
 </style>
