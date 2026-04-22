@@ -60,6 +60,21 @@ body {
   line-height: 1.5;
 }
 
+/* Max width + shared horizontal gutters (header, hero, trust strip, main sections) */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.125rem, 4.2vw, 1.5rem);
+  padding-right: clamp(1.125rem, 4.2vw, 1.5rem);
+  box-sizing: border-box;
+}
+
+.container.container--narrow {
+  max-width: 860px;
+}
+
 /* --- Site motion: wrap page content in `.motion-scope` (and optional `.page-home`) — see /style-guide/ --- */
 @keyframes motion-fade-up {
   from {

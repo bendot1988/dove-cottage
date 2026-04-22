@@ -1,0 +1,69 @@
+{
+  "pageTitle": "Donate | Dove Cottage",
+  "heroImage": "/images/hero-supporting-journey.png",
+  "heroImageAlt": "People supported in our day hospice and community",
+  "allWaysToSupportLabel": "All ways to support",
+  "allWaysToSupportHref": "/",
+  "heroTitleBefore": "Make a",
+  "heroTitleHighlight": "donation",
+  "heroDescription": "Your gifts help us fund specialist palliative nurses, wellbeing activities, transport, and family support — so care stays free for everyone who needs us across Leicestershire, Nottinghamshire and Lincolnshire.",
+  "heroPrimaryCtaLabel": "Donate now",
+  "heroPrimaryCtaHref": "#give",
+  "heroSecondaryCtaLabel": "Other ways to support",
+  "heroSecondaryCtaHref": "/#support",
+  "aboutEyebrow": "About this opportunity",
+  "aboutHeading": "Your donation keeps care free",
+  "aboutParagraph1": "Every year it costs more than £705,000 to run our hospice services. We do not charge for most of the care we provide, so donations and gifts in wills are how we keep going.",
+  "aboutParagraph2": "Whether you give £5 or £500, your support means we can plan ahead, invest in our team, and say “yes” to families at the times that matter most.",
+  "impactHeading": "What your donation could help provide",
+  "impactLede": "These are examples of what your generosity can make possible — every gift helps us keep our services accessible.",
+  "impactCards": [
+    {
+      "title": "A home-cooked meal",
+      "description": "A gift of £15 could help provide a guest with a nourishing lunch and a friendly face at our day hospice.",
+      "ctaLabel": "Donate £15",
+      "ctaHref": "#"
+    },
+    {
+      "title": "Dementia support",
+      "description": "A gift of £50 could help fund companionship sessions and practical help for families living with dementia.",
+      "ctaLabel": "Donate £50",
+      "ctaHref": "#"
+    },
+    {
+      "title": "Nursing care",
+      "description": "A gift of £200 could help cover specialist nursing time in the community, when people need us most.",
+      "ctaLabel": "Donate £200",
+      "ctaHref": "#"
+    },
+    {
+      "title": "Memory Meadow",
+      "description": "Dedicate a flower for £40 to remember someone special and help care for others in their name.",
+      "ctaLabel": "Dedicate a flower £40",
+      "ctaHref": "#"
+    }
+  ],
+  "suggestedMethodsTitle": "Suggested methods",
+  "suggestedMethods": [
+    {
+      "icon": "web",
+      "kicker": "Donate online",
+      "body": "Use our secure form for a one-off or regular gift — every pound goes towards patient care and family support."
+    },
+    {
+      "icon": "repeat",
+      "kicker": "Give regularly",
+      "body": "Monthly gifts help us plan with confidence; you can change or stop at any time."
+    },
+    {
+      "icon": "phone",
+      "kicker": "Donate by phone",
+      "body": "Call us on 01949 860303 — we’re happy to help you set up a gift or answer questions."
+    },
+    {
+      "icon": "map",
+      "kicker": "Post or in person",
+      "body": "Dove Cottage Day Hospice, Canal Lane, Stathern, Melton Mowbray, LE14 4EX — cheques and cash welcome in person."
+    }
+  ]
+}

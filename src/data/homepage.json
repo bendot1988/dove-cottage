@@ -106,7 +106,7 @@
         "title": "Make a Donation",
         "description": "Whether it is a one-off gift or a monthly contribution, your support directly funds our nursing care and family support.",
         "buttonLabel": "Donate Now",
-        "buttonLink": "#",
+        "buttonLink": "/donate/",
         "buttonVariant": "primary",
         "featured": true
       },
@@ -148,7 +148,7 @@
         "title": "A Home-Cooked Meal",
         "description": "Pays for a guest's nutritious, three-course home-cooked lunch tailored to their individual dietary needs.",
         "buttonLabel": "Donate £15",
-        "buttonLink": "#",
+        "buttonLink": "/donate/",
         "featured": false
       },
       {
@@ -157,7 +157,7 @@
         "title": "Dementia Support",
         "description": "Funds two hours of respite care for a family living with Dementia.",
         "buttonLabel": "Donate £50",
-        "buttonLink": "#",
+        "buttonLink": "/donate/",
         "featured": true
       },
       {
@@ -166,7 +166,7 @@
         "title": "Nursing Care",
         "description": "Provides a full day of specialist palliative nursing care and social support for one guest.",
         "buttonLabel": "Donate £200",
-        "buttonLink": "#",
+        "buttonLink": "/donate/",
         "featured": false
       }
     ]

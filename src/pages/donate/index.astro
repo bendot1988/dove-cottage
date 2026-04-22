@@ -1,0 +1,580 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import donate from "../../data/donate.json";
+import contact from "../../data/contact.json";
+import { toTitleCase } from "../../lib/titleCase";
+
+const d = donate;
+const c = contact;
+
+const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+
+const layoutTitle = d.pageTitle
+  .split(/\s*\|\s*/)
+  .map((part) => toTitleCase(part.trim()))
+  .join(" | ");
+
+const h = {
+  allWays: toTitleCase(d.allWaysToSupportLabel),
+  heroTitleBefore: toTitleCase(d.heroTitleBefore),
+  heroTitleHighlight: toTitleCase(d.heroTitleHighlight),
+  heroPrimary: toTitleCase(d.heroPrimaryCtaLabel),
+  heroSecondary: toTitleCase(d.heroSecondaryCtaLabel),
+  trustDonate: toTitleCase(c.trustDonateLabel),
+  trustCharity: toTitleCase(c.trustCharityLine),
+  aboutEyebrow: toTitleCase(d.aboutEyebrow),
+  aboutHeading: toTitleCase(d.aboutHeading),
+  impactHeading: toTitleCase(d.impactHeading),
+  methodsTitle: toTitleCase(d.suggestedMethodsTitle)
+};
+
+const impactCards = d.impactCards.map((card) => ({
+  ...card,
+  title: toTitleCase(card.title),
+  ctaLabel: toTitleCase(card.ctaLabel)
+}));
+
+const methods = d.suggestedMethods.map((m) => ({
+  ...m,
+  kicker: m.kicker ? toTitleCase(m.kicker) : ""
+}));
+
+const sideLabel = toTitleCase("Ways to give");
+---
+
+<BaseLayout title={layoutTitle}>
+  <div class="donate-page">
+    <section class="donate-hero" aria-label="Donate">
+      <img
+        class="donate-hero-bg"
+        src={d.heroImage}
+        alt={d.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="donate-hero-overlay" aria-hidden="true"></div>
+      <div class="container donate-hero-inner">
+        <a class="donate-hero-back" href={d.allWaysToSupportHref}>
+          <span class="donate-hero-back-arrow" aria-hidden="true">←</span>
+          {h.allWays}
+        </a>
+        <h1>
+          {h.heroTitleBefore}{" "}
+          <span class="donate-hero-highlight">{h.heroTitleHighlight}</span>
+        </h1>
+        <p class="donate-hero-dek">
+          {d.heroDescription}
+        </p>
+        <div class="donate-hero-ctas">
+          <a class="btn btn-primary donate-hero-btn-pill" href={d.heroPrimaryCtaHref}>{h.heroPrimary}</a>
+          <a class="donate-hero-btn-secondary" href={d.heroSecondaryCtaHref}>
+            {h.heroSecondary}
+            <span class="donate-hero-gift" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                <rect x="3" y="8" width="18" height="4" rx="1" />
+                <path d="M12 8v13M8 4h.01M16 4h.01" />
+                <path d="M3 12s2-2 3.5-2S9 10 9 10s-1-2-3.5-2-3.5 2-3.5 2" />
+                <path d="M15 8s-1-2-3.5-2-3.5 2-3.5 2 1.5 0 3.5 0 3.5 0 3.5 0" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="donate-trust" aria-label="Key details">
+      <div class="container donate-trust-inner">
+        <span class="donate-trust-charity">{h.trustCharity}</span>
+        <div class="donate-trust-actions">
+          <a class="donate-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
+          <a href={c.trustDonateUrl} class="btn btn-primary btn-shine donate-trust-donate">{h.trustDonate}</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="donate-main" id="give" aria-labelledby="donate-about-heading">
+      <img
+        src="/images/sunflower-brand-small.png"
+        alt=""
+        class="donate-sunflower"
+        loading="lazy"
+        aria-hidden="true"
+      />
+      <div class="container donate-layout">
+        <div class="donate-primary">
+          <p class="eyebrow" id="donate-about-eyebrow">{h.aboutEyebrow}</p>
+          <h2 id="donate-about-heading">{h.aboutHeading}</h2>
+          <p class="lede about-lede">
+            {d.aboutParagraph1}
+          </p>
+          <p class="lede about-lede last">
+            {d.aboutParagraph2}
+          </p>
+
+          <h3 class="impact-section-title">{h.impactHeading}</h3>
+          <p class="impact-lede">
+            {d.impactLede}
+          </p>
+          <div class="donate-impact-grid" role="list">
+            {
+              impactCards.map((card) => (
+                <article class="donate-impact-card" role="listitem">
+                  <h4 class="donate-impact-card-title">{card.title}</h4>
+                  <p class="donate-impact-card-body">{card.description}</p>
+                  <a class="donate-impact-btn" href={card.ctaHref}>
+                    {card.ctaLabel}
+                  </a>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+
+        <aside class="donate-side" aria-label={sideLabel}>
+          <div class="side-card">
+            <h2 class="side-card-title">{h.methodsTitle}</h2>
+            <ul class="side-list">
+              {
+                methods.map((m) => (
+                  <li>
+                    <span class="side-icon" aria-hidden="true">
+                      {m.icon === "web" && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <rect width="20" height="14" x="2" y="5" rx="2" />
+                          <path d="M2 10h20" />
+                        </svg>
+                      )}
+                      {m.icon === "repeat" && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M17 1l4 4-4 4" />
+                          <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                          <path d="M7 23l-4-4 4-4" />
+                          <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                        </svg>
+                      )}
+                      {m.icon === "phone" && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                        </svg>
+                      )}
+                      {m.icon === "map" && (
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+                          <circle cx="12" cy="10" r="3" />
+                        </svg>
+                      )}
+                    </span>
+                    <div>
+                      {m.kicker && <span class="side-label">{m.kicker}</span>}
+                      <p class="side-value method-body">{m.body}</p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ul>
+            <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .donate-page {
+    position: relative;
+  }
+
+  .donate-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: min(52vh, 460px);
+    padding: clamp(2.5rem, 6vw, 3.5rem) 0 clamp(2rem, 5vw, 2.75rem);
+    color: #fff;
+    text-align: left;
+    overflow: hidden;
+  }
+
+  .donate-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  .donate-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(105deg, rgba(8, 22, 48, 0.9) 0%, rgba(8, 22, 48, 0.6) 45%, rgba(8, 22, 48, 0.4) 100%);
+  }
+
+  .donate-hero-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .donate-hero-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 1rem;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.92);
+    text-decoration: none;
+  }
+
+  .donate-hero-back:hover,
+  .donate-hero-back:focus-visible {
+    text-decoration: underline;
+    color: #fff;
+  }
+
+  .donate-hero-back-arrow {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .donate-hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: var(--type-hero-title);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+
+  .donate-hero-highlight {
+    color: var(--color-golden-yellow);
+  }
+
+  .donate-hero-dek {
+    margin: 0 0 1.25rem;
+    max-width: 42rem;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+    text-wrap: pretty;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .donate-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 14px;
+  }
+
+  .donate-hero .donate-hero-btn-pill {
+    border-radius: 999px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0 22px;
+    font-size: var(--type-button);
+    font-weight: 700;
+  }
+
+  .donate-hero-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px;
+    font-size: var(--type-button);
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 999px;
+  }
+
+  .donate-hero-btn-secondary:hover,
+  .donate-hero-btn-secondary:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .donate-hero-gift {
+    display: inline-flex;
+  }
+
+  .donate-hero-gift svg {
+    display: block;
+  }
+
+  .donate-trust {
+    background: #fff;
+    border-bottom: 1px solid #d9e3f0;
+  }
+
+  .donate-trust-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .donate-trust-charity {
+    font-size: var(--type-body-small);
+    font-weight: 600;
+    color: #3a4e6a;
+  }
+
+  .donate-trust-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 18px;
+  }
+
+  .donate-trust-phone {
+    color: var(--color-steel-blue);
+    font-size: var(--type-body);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .donate-trust-phone:hover,
+  .donate-trust-phone:focus-visible {
+    text-decoration: underline;
+  }
+
+  .donate-trust-donate {
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    font-size: var(--type-button-small);
+  }
+
+  .donate-main {
+    position: relative;
+    overflow-x: clip;
+    overflow-y: visible;
+    background: var(--color-lavender);
+    padding: 48px 0 72px;
+  }
+
+  .donate-sunflower {
+    position: absolute;
+    right: -70px;
+    bottom: -60px;
+    width: min(300px, 40vw);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .donate-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    gap: 36px 40px;
+    align-items: start;
+  }
+
+  .eyebrow {
+    margin: 0 0 8px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--color-steel-blue-1);
+  }
+
+  .donate-primary h2 {
+    margin: 0 0 12px;
+    font-size: var(--type-section-title);
+    color: #0f2240;
+    line-height: 1.2;
+  }
+
+  .lede {
+    margin: 0 0 18px;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+    text-wrap: pretty;
+    color: #364861;
+    max-width: 640px;
+  }
+
+  .lede.last {
+    margin-bottom: 32px;
+  }
+
+  .impact-section-title {
+    margin: 0 0 8px;
+    font-size: var(--type-section-title);
+    color: #0f2240;
+    line-height: 1.2;
+  }
+
+  .impact-lede {
+    margin: 0 0 18px;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    color: #3f5370;
+    max-width: 640px;
+  }
+
+  .donate-impact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 20px;
+  }
+
+  .donate-impact-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 18px 16px 16px;
+    background: #f6f7fb;
+    border: 1px solid #e1e6f0;
+    border-radius: 14px;
+    box-shadow: 0 4px 12px rgba(16, 38, 72, 0.05);
+  }
+
+  .donate-impact-card-title {
+    margin: 0 0 10px;
+    font-size: var(--type-card-title);
+    font-weight: 800;
+    color: #0f2240;
+    line-height: 1.25;
+  }
+
+  .donate-impact-card-body {
+    margin: 0 0 16px;
+    flex: 1;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    color: #3f4f68;
+  }
+
+  .donate-impact-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    min-height: 40px;
+    padding: 0 16px;
+    align-self: flex-start;
+    font-size: var(--type-button-small);
+    font-weight: 700;
+    text-decoration: none;
+    color: #fff;
+    background: var(--color-steel-blue-1);
+    border: none;
+    border-radius: 8px;
+  }
+
+  .donate-impact-btn:hover,
+  .donate-impact-btn:focus-visible {
+    background: #164f89;
+  }
+
+  .side-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(18, 44, 83, 0.06);
+  }
+
+  .side-card-title {
+    margin: 0;
+    padding: 14px 18px;
+    font-size: var(--type-body);
+    font-weight: 800;
+    color: #fff;
+    background: var(--color-steel-blue-1);
+    line-height: 1.2;
+  }
+
+  .side-list {
+    list-style: none;
+    margin: 0;
+    padding: 12px 16px 4px;
+  }
+
+  .side-list li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  .side-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(29, 80, 141, 0.08);
+    color: var(--color-steel-blue-1);
+  }
+
+  .side-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .side-label {
+    display: block;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #5a6b85;
+    margin-bottom: 4px;
+  }
+
+  .side-value,
+  .method-body {
+    margin: 0;
+    font-size: var(--type-body-small);
+    line-height: 1.45;
+    color: #2a3c56;
+  }
+
+  .side-charity {
+    margin: 0;
+    padding: 0 16px 16px;
+    font-size: var(--type-micro);
+    color: #6a7a92;
+  }
+
+  @media (max-width: 1020px) {
+    .donate-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .donate-side {
+      order: 2;
+    }
+
+    .donate-impact-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .donate-hero {
+      min-height: min(44vh, 400px);
+      padding: 36px 0 24px;
+    }
+
+    .donate-trust-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

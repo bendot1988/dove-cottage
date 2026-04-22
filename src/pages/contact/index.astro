@@ -209,16 +209,6 @@ const asideLabel = toTitleCase("Other ways to get in touch");
     position: relative;
   }
 
-  /* Same shell as other sections: max width + horizontal gutters (not just % width) */
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding-left: clamp(1.125rem, 4.2vw, 1.5rem);
-    padding-right: clamp(1.125rem, 4.2vw, 1.5rem);
-    box-sizing: border-box;
-  }
-
   .contact-hero {
     position: relative;
     isolation: isolate;
@@ -323,7 +313,8 @@ const asideLabel = toTitleCase("Other ways to get in touch");
     align-items: center;
     justify-content: space-between;
     gap: 14px 24px;
-    padding: 12px 0;
+    padding-top: 12px;
+    padding-bottom: 12px;
   }
 
   .contact-trust-charity {

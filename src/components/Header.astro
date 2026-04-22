@@ -4,6 +4,7 @@ import { toTitleCase } from "../lib/titleCase";
 
 const path = Astro.url.pathname;
 const isHome = path === "/" || path === "";
+const isDonatePage = path === "/donate" || path.startsWith("/donate/");
 const utilTelHref = `tel:${contact.trustPhone}`;
 const donateLabel = toTitleCase(contact.trustDonateLabel);
 const utilCharity = toTitleCase(contact.trustCharityLine);
@@ -104,7 +105,11 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
         </li>
 
         <li class="nav-item has-dropdown">
-          <a class="nav-link with-arrow" href="#">
+          <a
+            class:list={["nav-link", "with-arrow", { active: isDonatePage }]}
+            href="#"
+            aria-current={isDonatePage ? "page" : undefined}
+          >
             <span>Support Us</span>
             <span class="dropdown-icon" aria-hidden="true">
               <svg viewBox="0 0 12 12" focusable="false">
@@ -116,7 +121,7 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
             <div class="mega-grid support-grid">
               <section class="mega-column">
                 <h3 class="mega-title">Support Us</h3>
-                <a href="#" class="mega-link">Make a donation</a>
+                <a href="/donate/" class="mega-link">Make a donation</a>
                 <a href="#" class="mega-link">Volunteer your time</a>
                 <a href="#" class="mega-link">Leave a gift in your will</a>
                 <a href="#" class="mega-link">Fundraise for us</a>
@@ -185,7 +190,13 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
         <details class="mobile-group">
           <summary>Support Us</summary>
           <div class="mobile-group-content">
-            <a href="#" class="mobile-link">Make a donation</a>
+            <a
+              href="/donate/"
+              class:list={["mobile-link", { active: isDonatePage }]}
+              aria-current={isDonatePage ? "page" : undefined}
+            >
+              Make a donation
+            </a>
             <a href="#" class="mobile-link">Volunteer your time</a>
             <a href="#" class="mobile-link">Leave a gift in your will</a>
             <a href="#" class="mobile-link">Fundraise for us</a>
@@ -346,11 +357,6 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
 
   .header-util-phone-icon {
     opacity: 0.9;
-  }
-
-  .container {
-    width: min(1200px, 95%);
-    margin: 0 auto;
   }
 
   .top-row {

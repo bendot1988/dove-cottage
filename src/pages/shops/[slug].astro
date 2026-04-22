@@ -153,7 +153,7 @@ const heroLine2 = shop.data.hero_location
               <div class="visit-hours-body rich-content" set:html={marked.parse(shop.data.opening_hours)} />
             </li>
           </ul>
-          <a href="#" class="btn btn-primary btn-shine visit-donate">Donate to support our hospice</a>
+          <a href="/donate/" class="btn btn-primary btn-shine visit-donate">Donate to support our hospice</a>
         </aside>
       </div>
     </section>
@@ -205,18 +205,11 @@ const heroLine2 = shop.data.hero_location
 
   .shop-hero-inner {
     position: relative;
-    width: min(1200px, 94%);
-    margin: 0 auto;
     padding: 28px 0 40px;
     min-height: min(52vh, 560px);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-  }
-
-  .container {
-    width: min(1200px, 95%);
-    margin: 0 auto;
   }
 
   .shop-back {

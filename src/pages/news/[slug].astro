@@ -16,7 +16,7 @@ const { Content } = await post.render();
 
 <BaseLayout title={`${post.data.title} | Dove Cottage`}>
   <article class="news-post">
-    <div class="container">
+    <div class="container container--narrow">
       <p class="meta">
         <span class="category">{post.data.category}</span>
         <span>·</span>
@@ -51,11 +51,6 @@ const { Content } = await post.render();
   .news-post {
     background: var(--color-lavender);
     padding: 56px 0 72px;
-  }
-
-  .container {
-    width: min(860px, 92%);
-    margin: 0 auto;
   }
 
   .meta {
