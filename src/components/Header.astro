@@ -491,14 +491,20 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
     const navRow = headerWrap.querySelector(".nav-row");
     if (navRow) {
       const isDesktop = () => window.innerWidth > 1100;
+      const setNavStuck = (stuck) => {
+        navRow.classList.toggle("is-stuck", stuck);
+        headerWrap.classList.toggle("nav-row-stuck", stuck);
+      };
 
       const syncStuck = () => {
         if (!isDesktop() || !headerTopStack) {
-          navRow.classList.remove("is-stuck");
+          setNavStuck(false);
+          headerWrap.style.removeProperty("--stuck-nav-height");
           return;
         }
+        headerWrap.style.setProperty("--stuck-nav-height", `${navRow.offsetHeight}px`);
         const bottom = headerTopStack.getBoundingClientRect().bottom;
-        navRow.classList.toggle("is-stuck", bottom < 0.5);
+        setNavStuck(bottom < 0.5);
       };
 
       const onScrollOrResize = () => {
@@ -757,13 +763,22 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
   }
 
   @media (min-width: 1101px) {
-    /* In-flow + sticky: avoids JS "top" sync which could read 0px before layout and cover the header. */
     .nav-row {
-      position: -webkit-sticky;
-      position: sticky;
-      top: 0;
-      z-index: 200;
+      z-index: 40;
       box-shadow: 0 2px 10px rgba(10, 35, 74, 0.1);
+    }
+
+    .header-wrap.nav-row-stuck {
+      padding-bottom: var(--stuck-nav-height, 52px);
+    }
+
+    .nav-row.is-stuck {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 220;
+      box-shadow: 0 4px 16px rgba(10, 35, 74, 0.14);
     }
 
     .nav-row::before {
@@ -785,9 +800,6 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
       opacity: 1;
     }
 
-    .nav-row.is-stuck {
-      box-shadow: 0 4px 16px rgba(10, 35, 74, 0.14);
-    }
   }
 
   @media (prefers-reduced-motion: reduce) {
