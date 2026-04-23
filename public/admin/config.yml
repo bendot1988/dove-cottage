@@ -122,6 +122,43 @@ collections:
                   - { label: "Button Label", name: "buttonLabel", widget: "string" }
                   - { label: "Button Link", name: "buttonLink", widget: "string" }
                   - { label: "Featured", name: "featured", widget: "boolean", required: false, default: false }
+  - name: "subpage_reviews"
+    label: "Subpage review carousel"
+    files:
+      - name: "subpage_reviews"
+        label: "Subpage review carousel"
+        file: "src/data/subpage-reviews.json"
+        format: "json"
+        fields:
+          - {
+              label: "Rotation speed (milliseconds)",
+              name: "intervalMs",
+              widget: "number",
+              value_type: "int",
+              min: 1800,
+              default: 3200,
+              hint: "How long each quote stays visible before fading to the next one.",
+            }
+          - {
+              label: "Support button text",
+              name: "supportCtaLabel",
+              widget: "string",
+              default: "How you can support us",
+            }
+          - {
+              label: "Support button link",
+              name: "supportCtaHref",
+              widget: "string",
+              default: "#",
+              hint: "Set this to your future support page URL when ready.",
+            }
+          - label: "Reviews"
+            name: "reviews"
+            widget: "list"
+            min: 1
+            max: 8
+            fields:
+              - { label: "Caption", name: "text", widget: "string" }
   - name: "news"
     label: "News & Events"
     folder: "src/content/blog"

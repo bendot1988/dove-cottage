@@ -8,7 +8,6 @@ const isHome = path === "/" || path === "";
 const isDonatePage = path === "/donate" || path.startsWith("/donate/");
 const utilTelHref = `tel:${contact.trustPhone}`;
 const donateLabel = toTitleCase(contact.trustDonateLabel);
-const utilCharity = toTitleCase(contact.trustCharityLine);
 
 const filterLabelById = new Map(archive.filters.map((f) => [f.id, f.label]));
 const parseFilterKeys = (raw: string) =>
@@ -47,13 +46,13 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
 <div class="header-wrap">
   <div class="header-top-stack">
     <header class="site-header">
+    <a href={contact.trustDonateUrl} class="mobile-donate-strip btn-shine">Donate now</a>
     <div class="top-row" role="region" aria-label="Branding, charity details, and key actions">
     <div class="container top-content">
       <div class="brand-cluster">
         <a href="/" class="brand" aria-label="Dove Cottage website home">
           <img src="/images/dove-logo-white.svg" alt="Dove Cottage Day Hospice" class="brand-logo" />
         </a>
-        <p class="header-charity">{utilCharity}</p>
       </div>
 
       <div class="header-right">
@@ -76,7 +75,6 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
               <path d="m16 16 5 5"></path>
             </svg>
           </button>
-          <a href={contact.trustDonateUrl} class="btn btn-primary btn-shine donate-btn">{donateLabel}</a>
         </div>
 
         <button
@@ -557,24 +555,15 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
 
   .brand-cluster {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    gap: 2px;
+    gap: 0;
     min-width: 0;
   }
 
-  .header-charity {
-    margin: 0;
-    max-width: min(14rem, 36vw);
-    font-size: var(--type-micro);
-    line-height: 1.2;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.88);
-    text-shadow: 0 1px 1px rgba(8, 26, 48, 0.35);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .mobile-donate-strip {
+    display: none;
   }
 
   .top-row {
@@ -1255,6 +1244,10 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
       display: none;
     }
 
+    .header-phone {
+      display: none;
+    }
+
     .mobile-nav {
       position: fixed;
       inset: 0;
@@ -1417,6 +1410,61 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
   }
 
   @media (max-width: 680px) {
+    .mobile-donate-strip {
+      display: block;
+      width: 100%;
+      min-height: 26px;
+      padding: 5px 12px;
+      box-sizing: border-box;
+      background: var(--color-golden-yellow);
+      color: #22344e;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 0.7rem;
+      font-weight: 800;
+      line-height: 1.1;
+      text-align: center;
+      border-bottom: 1px solid rgba(16, 35, 60, 0.16);
+      border-radius: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .mobile-donate-strip.btn-shine::before {
+      top: 0;
+      left: -120%;
+      width: 120%;
+      height: 100%;
+      transform: none;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.22) 42%,
+        rgba(255, 255, 255, 0.62) 50%,
+        rgba(255, 255, 255, 0.22) 58%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: mobile-donate-strip-shine 2.4s ease-in-out infinite;
+    }
+
+    .mobile-donate-strip.btn-shine > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .mobile-donate-strip:hover,
+    .mobile-donate-strip:focus-visible {
+      color: #22344e;
+      text-decoration: none;
+      background: #f3d306;
+    }
+
+    .mobile-donate-strip:focus-visible {
+      outline: 2px solid #1d508d;
+      outline-offset: -2px;
+    }
+
     .top-content {
       flex-direction: row;
       align-items: center;
@@ -1428,14 +1476,30 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
       width: clamp(74px, 18vw, 96px);
     }
 
-    .header-phone {
-      font-size: var(--type-body-small);
+    .donate-btn {
+      display: none;
     }
 
-    .donate-btn {
-      height: 40px;
-      padding: 0 14px;
-      font-size: var(--type-button-small);
+    .mobile-donate {
+      display: none;
+    }
+  }
+
+  @keyframes mobile-donate-strip-shine {
+    0% {
+      left: -120%;
+      opacity: 0;
+    }
+    12% {
+      opacity: 1;
+    }
+    55% {
+      left: 100%;
+      opacity: 0;
+    }
+    100% {
+      left: 100%;
+      opacity: 0;
     }
   }
 </style>

@@ -1,0 +1,22 @@
+{
+  "intervalMs": 3200,
+  "supportCtaLabel": "How you can support us",
+  "supportCtaHref": "#",
+  "reviews": [
+    {
+      "text": "The support has been incredible for our whole family."
+    },
+    {
+      "text": "Warm, kind and reassuring from day one."
+    },
+    {
+      "text": "A calm, welcoming place when we needed help most."
+    },
+    {
+      "text": "Every visit has made a real difference to us."
+    },
+    {
+      "text": "Compassionate care and genuine understanding throughout."
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
+import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import p from "../../../data/dementia-home-sitting.json";
 import contact from "../../../data/contact.json";
 import { toTitleCase } from "../../../lib/titleCase";
@@ -14,8 +15,6 @@ const layoutTitle = p.pageTitle
   .join(" | ");
 
 const parentLabel = p.parentNavLabel;
-const trustDonate = toTitleCase(c.trustDonateLabel);
-const trustCharity = toTitleCase(c.trustCharityLine);
 const asideTitle = toTitleCase("Get in touch");
 const phoneLabel = toTitleCase("Phone");
 const formLabel = toTitleCase("Enquiry");
@@ -46,15 +45,7 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
     </section>
 
     <div class="motion-scope">
-      <div class="contact-trust" aria-label="Key details">
-        <div class="container contact-trust-inner">
-          <span class="contact-trust-charity">{trustCharity}</span>
-          <div class="contact-trust-actions">
-            <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
-            <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{trustDonate}</a>
-          </div>
-        </div>
-      </div>
+      <SubpageReviewCarousel />
 
       <section class="svc-main" aria-label={p.heroH1}>
         <img
