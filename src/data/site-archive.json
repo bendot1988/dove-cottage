@@ -1,0 +1,177 @@
+{
+  "pageTitle": "Explore our services and support | Dove Cottage",
+  "heroImage": "/images/hero-supporting-journey.png",
+  "heroImageAlt": "Smiling people in a calm, modern hospice day room",
+  "heroH1": "Explore our work",
+  "heroDescription": "Browse everything Dove Cottage has to offer — from clinical and emotional support to ways you can get involved. Use the topics below to show one area, or start with all.",
+  "filters": [
+    { "id": "all", "label": "All" },
+    { "id": "what-we-offer", "label": "What We Offer" },
+    { "id": "hospice-services", "label": "Hospice Services" },
+    { "id": "counselling-support", "label": "Counselling" },
+    { "id": "about", "label": "About" },
+    { "id": "support-us", "label": "Supporters" }
+  ],
+  "items": [
+    {
+      "title": "Carer & patient wellbeing sessions",
+      "excerpt": "Holistic support for individuals and carers: relaxed Monday sessions to connect, take part in wellbeing activities, and access nursing and carer support.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A calm, supportive place to talk and learn together",
+      "filterKeys": "what-we-offer",
+      "href": "/what-we-offer/carer-patient-wellbeing/"
+    },
+    {
+      "title": "Dementia home-sitting",
+      "excerpt": "Trained volunteers keep people company at home so carers can take a much-needed break with peace of mind.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A friendly volunteer visiting someone at home",
+      "filterKeys": "what-we-offer",
+      "href": "#"
+    },
+    {
+      "title": "Bereavement support",
+      "excerpt": "A listening ear, groups, and signposting for anyone affected by loss or preparing for a bereavement.",
+      "image": "/images/bereavement-featured.png",
+      "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
+      "filterKeys": "hospice-services",
+      "href": "/hospice-services/bereavement-support/"
+    },
+    {
+      "title": "Counselling",
+      "excerpt": "Confidential one-to-one sessions with qualified counsellors for patients, family members, and unpaid carers.",
+      "image": "/images/care-counselling.png",
+      "imageAlt": "A quiet, private conversation in a safe environment",
+      "filterKeys": "hospice-services,counselling-support",
+      "href": "/hospice-services/counselling/"
+    },
+    {
+      "title": "Nursing care & medical advice",
+      "excerpt": "Specialist input to help with symptoms, comfort, and questions about treatment alongside your clinical team.",
+      "image": "/images/hero-supporting-journey.png",
+      "imageAlt": "Nursing and medical care in a day hospice setting",
+      "filterKeys": "hospice-services",
+      "href": "#"
+    },
+    {
+      "title": "Wellbeing activities",
+      "excerpt": "Group sessions, creativity, and gentle activities that bring people together in a home-from-home atmosphere.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "People taking part in a group activity in the hospice",
+      "filterKeys": "hospice-services",
+      "href": "#"
+    },
+    {
+      "title": "Complementary therapies",
+      "excerpt": "Holistic support such as touch therapies and relaxation techniques to help with comfort and stress.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A peaceful therapy room",
+      "filterKeys": "hospice-services",
+      "href": "#"
+    },
+    {
+      "title": "Therapy Bathing",
+      "excerpt": "A dignified, soothing bathing service when everyday washing has become difficult at home.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A comfortable assisted bathing area",
+      "filterKeys": "hospice-services",
+      "href": "#"
+    },
+    {
+      "title": "Spiritual & Chaplaincy support",
+      "excerpt": "Space to talk about hope, meaning, and what matters to you, whatever your beliefs or background.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A quiet place for reflection",
+      "filterKeys": "hospice-services",
+      "href": "#"
+    },
+    {
+      "title": "Transport",
+      "excerpt": "Support getting to the hospice and related appointments where our volunteer drivers and vehicles can help.",
+      "image": "/images/reach-section-bg.png",
+      "imageAlt": "A volunteer-driven accessible vehicle in the countryside",
+      "filterKeys": "hospice-services",
+      "href": "#"
+    },
+    {
+      "title": "Support groups",
+      "excerpt": "Peer support with others who understand; groups are developing — register interest via our contact form.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A small support group in conversation",
+      "filterKeys": "hospice-services,counselling-support",
+      "href": "/hospice-services/support-groups/"
+    },
+    {
+      "title": "Our Team",
+      "excerpt": "Meet the people who make Dove Cottage a welcoming, expert place: nursing, support staff, and volunteers.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "The hospice care team",
+      "filterKeys": "about",
+      "href": "#"
+    },
+    {
+      "title": "Our Facilities",
+      "excerpt": "A short tour of our day hospice spaces, created to feel as warm and unhurried as home.",
+      "image": "/images/hero-supporting-journey.png",
+      "imageAlt": "A bright, comfortable day room at the hospice",
+      "filterKeys": "about",
+      "href": "#"
+    },
+    {
+      "title": "Hire our facilities",
+      "excerpt": "Book our community spaces for meetings, training, and events when not in use for patient care.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A flexible event space in the building",
+      "filterKeys": "about",
+      "href": "#"
+    },
+    {
+      "title": "Make a donation",
+      "excerpt": "Every gift helps us keep our doors open: one-off, regular, and in-memory giving in a few simple steps.",
+      "image": "/images/hero-supporting-journey.png",
+      "imageAlt": "People supported in our day hospice and community",
+      "filterKeys": "support-us",
+      "href": "/donate/"
+    },
+    {
+      "title": "Volunteer your time",
+      "excerpt": "From day hospice to driving, shops, and events — we always need more friendly faces in the team.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "Volunteers working together in support of the hospice",
+      "filterKeys": "support-us",
+      "href": "#"
+    },
+    {
+      "title": "Leave a gift in your will",
+      "excerpt": "A lasting way to back local care; we can help you find clear, practical information when you are ready.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A thoughtful, hopeful moment in nature",
+      "filterKeys": "support-us",
+      "href": "#"
+    },
+    {
+      "title": "Fundraise for us",
+      "excerpt": "Cakes, runs, and community fun — we are here to cheer you on and help your fundraiser succeed.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "Community fundraising event in high spirits",
+      "filterKeys": "support-us",
+      "href": "#"
+    },
+    {
+      "title": "Visit our shops",
+      "excerpt": "Bottesford and more: pre-loved treasures, bargains, and every pound supporting patient care at home.",
+      "image": "/images/reach-section-bg.png",
+      "imageAlt": "A welcoming charity shop front",
+      "filterKeys": "support-us",
+      "href": "/shops/"
+    },
+    {
+      "title": "Corporate partnerships",
+      "excerpt": "Work with us on volunteering, awareness, and fundraising that does good for your team and the Vale.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A partnership meeting in a local workplace",
+      "filterKeys": "support-us",
+      "href": "#"
+    }
+  ]
+}

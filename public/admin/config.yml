@@ -346,3 +346,287 @@ collections:
                 hint: "web=online, repeat=regular giving, phone, map=visit"
               - { label: "Label (e.g. Donate online)", name: "kicker", widget: "string", required: false }
               - { label: "Description", name: "body", widget: "text" }
+  - name: "bereavement"
+    label: "Bereavement support"
+    files:
+      - name: "bereavement"
+        label: "Bereavement support page"
+        file: "src/data/bereavement-support.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Bereavement Support | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image", hint: "Full-width image at the top of the page." }
+          - {
+              label: "Hero image description (accessibility)",
+              name: "heroImageAlt",
+              widget: "string",
+              hint: "Short description of the hero photo for screen readers and SEO.",
+            }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string" }
+          - { label: "Hero subtitle (under title)", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro — paragraph 2", name: "mainIntro2", widget: "text", required: false }
+          - { label: "Section — who is support for? (heading)", name: "whoHeading", widget: "string" }
+          - label: "Section — who is support for? (bullet list)"
+            name: "whoList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Callout quote (highlighted box)", name: "callout", widget: "text" }
+          - { label: "Section — anticipatory bereavement (heading)", name: "anticipatoryHeading", widget: "string" }
+          - { label: "Anticipatory — paragraph 1", name: "anticipatoryBody1", widget: "text" }
+          - { label: "Anticipatory — paragraph 2", name: "anticipatoryBody2", widget: "text" }
+          - { label: "Section — nurse (heading)", name: "nurseHeading", widget: "string" }
+          - { label: "Nurse — intro", name: "nurseIntro", widget: "text" }
+          - { label: "Nurse — list lead-in", name: "nurseListIntro", widget: "string" }
+          - label: "Nurse — bullet list"
+            name: "nurseList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Nurse — closing line", name: "nurseFoot", widget: "text" }
+          - { label: "Section — drop-in groups (heading)", name: "dropInHeading", widget: "string" }
+          - { label: "Drop-in — intro", name: "dropInIntro", widget: "text" }
+          - label: "Drop-in — groups (cards)"
+            name: "dropInGroups"
+            widget: "list"
+            min: 1
+            max: 4
+            fields:
+              - { label: "Group title", name: "title", widget: "string" }
+              - label: "Bullet points"
+                name: "bullets"
+                widget: "list"
+                min: 1
+                fields:
+                  - { label: "Point", name: "text", widget: "text" }
+          - { label: "Drop-in — footnote", name: "dropInFoot", widget: "text" }
+          - { label: "Section — counselling (heading)", name: "counsellingHeading", widget: "string" }
+          - { label: "Counselling — body", name: "counsellingBody", widget: "text" }
+          - { label: "Counselling — link text", name: "counsellingCta", widget: "string" }
+          - { label: "Counselling — link URL", name: "counsellingCtaHref", widget: "string" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+          - label: "In-page images (optional)"
+            name: "sectionImages"
+            widget: "object"
+            hint: "Three images between sections; leave blank in CMS by clearing fields if you use a single featured hero only."
+            fields:
+              - label: "After intro"
+                name: "afterIntro"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Image", name: "src", widget: "image" }
+                  - { label: "Description (accessibility)", name: "alt", widget: "string" }
+              - label: "After callout"
+                name: "afterCallout"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Image", name: "src", widget: "image" }
+                  - { label: "Description (accessibility)", name: "alt", widget: "string" }
+              - label: "Before support groups"
+                name: "beforeSupportGroups"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Image", name: "src", widget: "image" }
+                  - { label: "Description (accessibility)", name: "alt", widget: "string" }
+  - name: "counselling"
+    label: "Counselling"
+    files:
+      - name: "counselling"
+        label: "Counselling page"
+        file: "src/data/counselling.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Counselling | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - {
+              label: "Hero image description (accessibility)",
+              name: "heroImageAlt",
+              widget: "string",
+              hint: "Short description of the hero photo for screen readers and SEO.",
+            }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Counselling" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro — paragraph 2", name: "mainIntro2", widget: "text" }
+          - { label: "Section — emotional support (heading)", name: "emotionalHeading", widget: "string" }
+          - { label: "Emotional support — intro (before bullet list)", name: "emotionalIntro", widget: "text" }
+          - label: "Emotional support — bullet list"
+            name: "emotionalList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Section — practical guidance (heading)", name: "practicalHeading", widget: "string" }
+          - { label: "Practical guidance — body", name: "practicalBody", widget: "text" }
+          - { label: "Referral line — text before the contact form link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — link text (e.g. enquiry contact form)", name: "referralCta", widget: "string" }
+          - { label: "Referral line — link URL", name: "referralCtaHref", widget: "string" }
+          - { label: "Referral line — text after the link", name: "referralOutro", widget: "string" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+  - name: "support_groups"
+    label: "Support groups"
+    files:
+      - name: "support_groups"
+        label: "Support groups page"
+        file: "src/data/support-groups.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Support Groups | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - {
+              label: "Hero image description (accessibility)",
+              name: "heroImageAlt",
+              widget: "string",
+            }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Support groups" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro paragraph", name: "mainIntro1", widget: "text" }
+          - { label: "Groups section heading", name: "groupsHeading", widget: "string", default: "Drop-In Support Groups" }
+          - label: "Groups"
+            name: "groups"
+            widget: "list"
+            min: 1
+            max: 6
+            fields:
+              - { label: "Group title", name: "title", widget: "string" }
+              - label: "Bullet points"
+                name: "bullets"
+                widget: "list"
+                min: 1
+                fields:
+                  - { label: "Point", name: "text", widget: "text" }
+              - { label: "Further info link text", name: "ctaLabel", widget: "string", default: "Click here for further information" }
+              - { label: "Further info URL", name: "ctaHref", widget: "string", default: "/contact/" }
+          - { label: "Details footnote", name: "detailsFoot", widget: "text" }
+          - { label: "Register interest — line before link", name: "registerInterestIntro", widget: "string" }
+          - { label: "Register interest — link text", name: "registerInterestCta", widget: "string", default: "enquiry form" }
+          - { label: "Register interest — link URL", name: "registerInterestHref", widget: "string", default: "/contact/" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+  - name: "site_archive"
+    label: "Explore / site archive"
+    files:
+      - name: "site_archive"
+        label: "Explore page (all services & support)"
+        file: "src/data/site-archive.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string" }
+          - { label: "Hero image", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string" }
+          - { label: "Hero description", name: "heroDescription", widget: "text" }
+          - label: "Filter tabs (include “All” first, id: all)"
+            name: "filters"
+            widget: "list"
+            min: 1
+            label_singular: "tab"
+            fields:
+              - {
+                  label: "Filter id (slug, e.g. all, support-us, hospice-services)",
+                  name: "id",
+                  widget: "string",
+                }
+              - { label: "Label on button", name: "label", widget: "string" }
+          - label: "Cards (each appears under one or more topics)"
+            name: "items"
+            widget: "list"
+            min: 1
+            label_singular: "card"
+            fields:
+              - { label: "Title (on the image band)", name: "title", widget: "string" }
+              - { label: "Excerpt", name: "excerpt", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image description (accessibility)", name: "imageAlt", widget: "string" }
+              - {
+                  label: "Filter keys (comma-separated)",
+                  name: "filterKeys",
+                  widget: "string",
+                  hint: "e.g. hospice-services or hospice-services,counselling-support. Must match a filter id from the list above (except all).",
+                }
+              - {
+                  label: "Link URL (use # for “Coming soon”)",
+                  name: "href",
+                  widget: "string",
+                  default: "#",
+                }
+  - name: "carer_patient_wellbeing"
+    label: "Carer & patient wellbeing"
+    files:
+      - name: "carer_patient_wellbeing"
+        label: "Carer & patient wellbeing sessions"
+        file: "src/data/carer-patient-wellbeing.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string" }
+          - { label: "Hero image", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "What We Offer" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string" }
+          - { label: "Hero subtitle", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro — paragraph 2", name: "mainIntro2", widget: "text" }
+          - { label: "Intro — paragraph 3", name: "mainIntro3", widget: "text" }
+          - { label: "Section — elements (heading above cards)", name: "elementsHeading", widget: "string" }
+          - { label: "Elements — lead-in line", name: "elementsIntro", widget: "text" }
+          - label: "Element blocks (Social, Relaxation, etc.)"
+            name: "elementBlocks"
+            widget: "list"
+            min: 1
+            max: 6
+            fields:
+              - { label: "Block title (H2)", name: "title", widget: "string" }
+              - { label: "Intro paragraph (before list)", name: "intro", widget: "text" }
+              - label: "Bullet list"
+                name: "bullets"
+                widget: "list"
+                min: 1
+                fields:
+                  - { label: "Point", name: "text", widget: "text" }
+          - { label: "Not medical care — closing paragraph", name: "notMedicalBody", widget: "text" }
+          - { label: "Session times & referral — paragraph", name: "sessionTimesBody", widget: "text" }
+          - { label: "Related services — card heading", name: "relatedHeading", widget: "string" }
+          - { label: "Related services — intro", name: "relatedIntro", widget: "text" }
+          - label: "Related service links (use # if page not live)"
+            name: "relatedLinks"
+            widget: "list"
+            min: 1
+            max: 10
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "href", widget: "string" }
+          - { label: "Referral line — before link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — link text", name: "referralCta", widget: "string" }
+          - { label: "Referral line — link URL", name: "referralCtaHref", widget: "string" }
+          - { label: "Referral line — after link", name: "referralOutro", widget: "string" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+          - label: "In-page image 1 (e.g. after intro)"
+            name: "sectionImage1"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Image", name: "src", widget: "image" }
+              - { label: "Description (accessibility)", name: "alt", widget: "string" }
+          - label: "In-page image 2 (e.g. after element blocks)"
+            name: "sectionImage2"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Image", name: "src", widget: "image" }
+              - { label: "Description (accessibility)", name: "alt", widget: "string" }

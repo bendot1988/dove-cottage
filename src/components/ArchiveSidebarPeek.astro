@@ -1,0 +1,256 @@
+---
+/**
+ * Stacked list (max 4) of cards from `site-archive.json` for the active topic filter.
+ * Renders only when at least one other item exists after excluding the current page.
+ */
+import archive from "../data/site-archive.json";
+
+interface Props {
+  /** e.g. `what-we-offer`, `support-us`, `hospice-services` */
+  filterId: string;
+  /** Path to drop from the list (defaults to the current page URL) */
+  excludePath?: string;
+  max?: number;
+}
+
+const { filterId, max = 4 } = Astro.props;
+const currentPath = Astro.url.pathname;
+const excludePath = Astro.props.excludePath ?? currentPath;
+
+function normPath(p: string): string {
+  if (!p || p === "/") {
+    return "/";
+  }
+  return p !== "/" && p.endsWith("/") ? p.replace(/\/+$/, "") : p;
+}
+
+function parseKeys(raw: string): string[] {
+  return raw
+    .split(/[,]+/)
+    .map((k) => k.trim())
+    .filter(Boolean);
+}
+
+const sectionLabel = archive.filters.find((f) => f.id === filterId)?.label ?? "Related";
+const ex = normPath(excludePath);
+
+const picked = archive.items
+  .filter((item) => parseKeys(item.filterKeys).includes(filterId))
+  .filter((item) => {
+    if (!item.href || item.href === "#") {
+      return true;
+    }
+    return normPath(item.href) !== ex;
+  })
+  .slice(0, max);
+
+const hasCards = picked.length > 0;
+const exploreHref = filterId && filterId !== "all" ? `/explore/?topic=${filterId}` : "/explore/";
+---
+
+{
+  hasCards && (
+    <div class="archive-peek" aria-label={`More in ${sectionLabel}`}>
+      <h3 class="archive-peek__title">{sectionLabel}</h3>
+      <div class="archive-peek__grid" role="list">
+        {picked.map((item) => {
+          const live = Boolean(item.href && item.href !== "#" && item.href.trim().length);
+          return (
+            <div class="archive-peek__cell" role="listitem">
+              {live ? (
+                <a class="archive-peek__card" href={item.href}>
+                  <div class="archive-peek__visual">
+                    <img
+                      class="archive-peek__img"
+                      src={item.image}
+                      alt=""
+                      width="400"
+                      height="225"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div class="archive-peek__shade" aria-hidden="true" />
+                    <p class="archive-peek__card-title">
+                      <span class="archive-peek__title-text">{item.title}</span>
+                    </p>
+                  </div>
+                </a>
+              ) : (
+                <div class="archive-peek__card archive-peek__card--soon">
+                  <div class="archive-peek__visual">
+                    <img
+                      class="archive-peek__img"
+                      src={item.image}
+                      alt=""
+                      width="400"
+                      height="225"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div class="archive-peek__shade" aria-hidden="true" />
+                    <p class="archive-peek__card-title">
+                      <span class="archive-peek__title-text">{item.title}</span>
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+      <a class="archive-peek__all" href={exploreHref}>
+        View all in {sectionLabel}
+        <span aria-hidden="true"> →</span>
+      </a>
+    </div>
+)}
+
+<style>
+  .archive-peek {
+    margin-top: 16px;
+    padding: 0;
+  }
+
+  .archive-peek__title {
+    margin: 0;
+    padding: 12px 16px;
+    font-size: var(--type-body);
+    font-weight: 800;
+    line-height: 1.2;
+    color: #fff;
+    background: var(--color-steel-blue-1);
+    border-radius: 12px 12px 0 0;
+  }
+
+  .archive-peek__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 12px 12px 14px;
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 6px 16px rgba(18, 44, 83, 0.06);
+  }
+
+  .archive-peek__cell {
+    min-width: 0;
+  }
+
+  .archive-peek__card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e0e6f0;
+    background: #f6f7fb;
+    transition:
+      box-shadow 0.2s var(--motion-ease-out),
+      border-color 0.2s var(--motion-ease-out),
+      transform 0.2s var(--motion-ease-out);
+  }
+
+  a.archive-peek__card:hover,
+  a.archive-peek__card:focus-visible {
+    box-shadow: 0 4px 12px rgba(16, 38, 72, 0.12);
+    border-color: #c4d0e3;
+    transform: translateY(-1px);
+  }
+
+  a.archive-peek__card:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+  }
+
+  .archive-peek__card--soon {
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .archive-peek__visual {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .archive-peek__img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .archive-peek__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(5, 18, 40, 0.5) 55%, rgba(5, 18, 40, 0.85) 100%);
+  }
+
+  .archive-peek__card-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 14px 16px 16px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #fff;
+    text-align: left;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .archive-peek__title-text {
+    color: inherit;
+    padding-bottom: 5px;
+  }
+
+  /* Underline only spans the text; draws in on hover (links only) */
+  a.archive-peek__card .archive-peek__title-text {
+    background-image: linear-gradient(var(--color-golden-yellow), var(--color-golden-yellow));
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0% 2px;
+    transition: background-size 0.3s var(--motion-ease-out);
+  }
+
+  a.archive-peek__card:hover .archive-peek__title-text,
+  a.archive-peek__card:focus-visible .archive-peek__title-text {
+    background-size: 100% 2px;
+  }
+
+  .archive-peek__all {
+    display: block;
+    margin-top: 12px;
+    font-size: var(--type-body-small);
+    font-weight: 800;
+    color: var(--color-steel-blue-1);
+    text-decoration: none;
+  }
+
+  .archive-peek__all:hover,
+  .archive-peek__all:focus-visible {
+    text-decoration: underline;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a.archive-peek__card {
+      transition: none;
+    }
+    a.archive-peek__card:hover,
+    a.archive-peek__card:focus-visible {
+      transform: none;
+    }
+    a.archive-peek__card .archive-peek__title-text {
+      transition: none;
+    }
+  }
+</style>

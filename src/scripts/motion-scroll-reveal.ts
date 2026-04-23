@@ -10,7 +10,9 @@ export function initMotionScrollReveal(rootSelector = ".motion-scope"): void {
     return;
   }
 
-  const sections = root.querySelectorAll("section:not(.hero-section)");
+  const sections = root.querySelectorAll(
+    "section:not(.hero-section):not(.contact-hero):not(.donate-hero):not(.shop-hero):not(.hospice-svc-hero):not(.archive-hero)"
+  );
   sections.forEach((el) => {
     el.classList.add("reveal-on-scroll");
   });

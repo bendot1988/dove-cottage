@@ -16,7 +16,9 @@ const { Content } = await post.render();
 
 <BaseLayout title={`${post.data.title} | Dove Cottage`}>
   <article class="news-post">
-    <div class="container container--narrow">
+    <div class="motion-scope">
+      <section class="news-article-inner" aria-label="Article">
+        <div class="container container--narrow">
       <p class="meta">
         <span class="category">{post.data.category}</span>
         <span>·</span>
@@ -43,8 +45,14 @@ const { Content } = await post.render();
         <Content />
       </div>
       <p class="back-link"><a href="/news/">← Back to News &amp; Events</a></p>
+        </div>
+      </section>
     </div>
   </article>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
 
 <style>

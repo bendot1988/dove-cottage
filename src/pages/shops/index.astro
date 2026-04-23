@@ -9,6 +9,7 @@ const shops = (await getCollection("shops", ({ data }) => !data.draft)).sort((a,
 ---
 
 <BaseLayout title="Our Shops | Dove Cottage">
+  <div class="motion-scope">
   <section class="shops-listing">
     <div class="container">
       <h1>Our Shops</h1>
@@ -20,7 +21,7 @@ const shops = (await getCollection("shops", ({ data }) => !data.draft)).sort((a,
       {shops.length === 0 ? (
         <p>No shop entries published yet.</p>
       ) : (
-        <div class="shops-grid">
+        <div class="shops-grid cards-grid">
           {shops.map((shop) => (
             <article class="shop-card">
               <a href={`/shops/${shop.slug}/`} class="image-link">
@@ -42,6 +43,11 @@ const shops = (await getCollection("shops", ({ data }) => !data.draft)).sort((a,
       )}
     </div>
   </section>
+  </div>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
 
 <style>

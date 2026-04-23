@@ -1,0 +1,73 @@
+{
+  "pageTitle": "Bereavement Support | Dove Cottage",
+  "heroImage": "/images/bereavement-featured.png",
+  "heroImageAlt": "A vivid rainbow arcing over a misty green countryside, with a bare tree to the left and open fields, symbolising hope after a storm",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/",
+  "heroH1": "Bereavement Support",
+  "heroShortDescription": "Bereavement Support for individuals and extended family members",
+  "mainIntro1": "We offer compassionate support for individuals and families experiencing bereavement or anticipatory bereavement — including those affected by loss, serious illness, or caring for someone with palliative needs. Whether you are already known to our hospice or are contacting us for the first time, we are here to listen, support, and guide you.",
+  "mainIntro2": "Support is available face-to-face or remotely.",
+  "whoHeading": "Who is our support for?",
+  "whoList": [
+    { "text": "Individuals experiencing anticipatory bereavement, including those caring for or supporting someone with a palliative or life-limiting illness" },
+    { "text": "People who have been recently bereaved or bereaved some time ago" },
+    { "text": "Family members, carers, and loved ones" },
+    { "text": "Patients and carers already known to our hospice" },
+    { "text": "Anyone making an enquiry for the first time" }
+  ],
+  "callout": "There is no “right” time to seek support. Whether your loss has already happened or is something you are living with and preparing for, we are here to support you.",
+  "anticipatoryHeading": "Understanding Anticipatory Bereavement",
+  "anticipatoryBody1": "Anticipatory bereavement is the grief and emotional distress that can be experienced before a death, when someone is living with or caring for a person with a life-limiting or palliative condition.",
+  "anticipatoryBody2": "These feelings may include sadness, anxiety, exhaustion, fear, or a sense of loss for the future that was hoped for. Anticipatory bereavement is a normal and valid experience, and support can be helpful at any stage — not just after someone has died.",
+  "nurseHeading": "Bereavement Support Nurse",
+  "nurseIntro": "You can access informal bereavement support from our trained Palliative Care and Bereavement Support Nurse.",
+  "nurseListIntro": "This support offers:",
+  "nurseList": [
+    { "text": "A compassionate and non-judgmental listening ear" },
+    { "text": "Emotional support and understanding" },
+    { "text": "Practical advice around coping with grief" },
+    { "text": "Signposting to helpful services and resources" }
+  ],
+  "nurseFoot": "Support is available face-to-face at the hospice or remotely (by phone or video).",
+  "dropInHeading": "Drop-In Support Groups",
+  "dropInIntro": "We are currently in the process of setting up the following support groups:",
+  "dropInGroups": [
+    {
+      "title": "Bereavement Support Group",
+      "bullets": [
+        { "text": "Open to anyone who is bereaved, at any stage" },
+        { "text": "A relaxed, supportive space to share experiences or simply listen" },
+        { "text": "No referral or booking required" }
+      ]
+    },
+    {
+      "title": "Men in Sheds Group",
+      "bullets": [
+        { "text": "For men who are bereaved, supporting or caring for someone with a palliative condition, or living with a palliative condition themselves" },
+        { "text": "An informal group offering connection and peer support" }
+      ]
+    }
+  ],
+  "dropInFoot": "Dates and times will be confirmed soon. Please complete the enquiry form to register your interest.",
+  "counsellingHeading": "Counselling Service",
+  "counsellingBody": "For some people, more structured support may be helpful. Our counselling service is available through referral from our Bereavement Support Nurse.",
+  "counsellingCta": "For more details about our counselling service click here.",
+  "counsellingCtaHref": "/contact/",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Register interest for support groups, or ask about bereavement support.",
+  "sectionImages": {
+    "afterIntro": {
+      "src": "/images/hero-family-alt.png",
+      "alt": "Two people together in a calm, supportive environment"
+    },
+    "afterCallout": {
+      "src": "/images/care-counselling.png",
+      "alt": "A quiet, caring conversation with a member of our team"
+    },
+    "beforeSupportGroups": {
+      "src": "/images/reach-section-bg.png",
+      "alt": "Our hospice and the rural community we serve across the Vale of Belvoir"
+    }
+  }
+}

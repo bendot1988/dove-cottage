@@ -1,3 +1,9 @@
+---
+import contact from "../data/contact.json";
+
+const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.mapSearchQuery)}`;
+---
+
 <footer class="site-footer">
   <section class="footer-cta">
     <div class="container footer-cta-inner">
@@ -87,7 +93,13 @@
           </a>
         </li>
         <li class="footer-contact-item-wrap">
-          <p class="footer-contact-item footer-contact-item--static">
+          <a
+            href={footerMapHref}
+            class="footer-contact-item"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Visit us — open address in Google Maps"
+          >
             <span class="footer-contact-icon" aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
@@ -100,7 +112,7 @@
                 >Canal Lane, Stathern, <wbr />Melton Mowbray, LE14 4EX</span
               >
             </span>
-          </p>
+          </a>
         </li>
       </ul>
     </div>
@@ -331,10 +343,6 @@
     color: rgba(255, 255, 255, 0.92);
     margin: 0;
     line-height: 1.4;
-  }
-
-  .footer-contact-item--static {
-    margin: 0;
   }
 
   a.footer-contact-item:hover,

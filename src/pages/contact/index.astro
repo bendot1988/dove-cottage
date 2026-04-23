@@ -59,7 +59,7 @@ const asideLabel = toTitleCase("Other ways to get in touch");
       <div class="container contact-hero-inner">
         <div class="contact-hero-grid">
           <div class="contact-hero-copy">
-            <p class="contact-badge">{h.heroBadge}</p>
+            <p class="interior-hero-eyebrow">{h.heroBadge}</p>
             <h1>
               {h.heroTitleBefore}{" "}
               <span class="contact-hero-highlight">{h.heroTitleHighlight}</span>
@@ -73,17 +73,18 @@ const asideLabel = toTitleCase("Other ways to get in touch");
       </div>
     </section>
 
-    <div class="contact-trust" aria-label="Key details">
-      <div class="container contact-trust-inner">
-        <span class="contact-trust-charity">{h.trustCharity}</span>
-        <div class="contact-trust-actions">
-          <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
-          <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{h.trustDonate}</a>
+    <div class="motion-scope">
+      <div class="contact-trust" aria-label="Key details">
+        <div class="container contact-trust-inner">
+          <span class="contact-trust-charity">{h.trustCharity}</span>
+          <div class="contact-trust-actions">
+            <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
+            <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{h.trustDonate}</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <section class="contact-main" aria-labelledby="contact-heading">
+      <section class="contact-main" aria-labelledby="contact-heading">
       <img
         src="/images/sunflower-brand-small.png"
         alt=""
@@ -200,8 +201,13 @@ const asideLabel = toTitleCase("Other ways to get in touch");
         </aside>
       </div>
     </section>
+    </div>
   </div>
   <script is:inline src="https://server.fillout.com/embed/v1/"></script>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
 
 <style>
@@ -263,20 +269,6 @@ const asideLabel = toTitleCase("Other ways to get in touch");
 
   .contact-hero-copy {
     min-width: 0;
-  }
-
-  .contact-hero .contact-badge {
-    display: inline-block;
-    margin: 0 0 12px;
-    padding: 6px 14px;
-    font-size: var(--type-micro);
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    color: rgba(255, 255, 255, 0.95);
-    border: 2px solid var(--color-golden-yellow);
-    border-radius: 4px;
-    background: transparent;
-    box-shadow: none;
   }
 
   .contact-hero h1 {

@@ -8,6 +8,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
 ---
 
 <BaseLayout title="News & Events | Dove Cottage">
+  <div class="motion-scope">
   <section class="news-listing">
     <div class="container">
       <h1>News &amp; Events</h1>
@@ -16,7 +17,7 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
       {posts.length === 0 ? (
         <p>No news posts have been published yet.</p>
       ) : (
-        <div class="news-grid">
+        <div class="news-grid cards-grid">
           {posts.map((post) => (
             <article class="news-card">
               {(post.data.featuredImage ?? post.data.featured_image) && (
@@ -48,6 +49,11 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
       )}
     </div>
   </section>
+  </div>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
 
 <style>

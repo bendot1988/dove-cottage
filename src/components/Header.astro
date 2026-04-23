@@ -12,40 +12,40 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
 
 <div class="header-wrap">
   <div class="header-top-stack">
-    <div class="header-util" role="region" aria-label="Charity and phone">
-      <div class="container header-util-inner">
-        <span class="header-util-charity">{utilCharity}</span>
-        <a href={utilTelHref} class="header-util-phone" aria-label="Call Dove Cottage">
-          <span class="header-util-phone-icon" aria-hidden="true">☎</span>
-          {contact.trustPhoneDisplay}
-        </a>
-      </div>
-    </div>
     <header class="site-header">
-    <div class="top-row">
+    <div class="top-row" role="region" aria-label="Branding, charity details, and key actions">
     <div class="container top-content">
-      <a href="/" class="brand" aria-label="Dove Cottage website home">
-        <img src="/images/dove-logo-white.svg" alt="Dove Cottage Day Hospice" class="brand-logo" />
-      </a>
-
-      <div class="actions">
-        <a href={contact.trustDonateUrl} class="btn btn-primary btn-shine donate-btn">{donateLabel}</a>
+      <div class="brand-cluster">
+        <a href="/" class="brand" aria-label="Dove Cottage website home">
+          <img src="/images/dove-logo-white.svg" alt="Dove Cottage Day Hospice" class="brand-logo" />
+        </a>
+        <p class="header-charity">{utilCharity}</p>
       </div>
 
-      <button
-        class="menu-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="mobile-menu"
-        aria-label="Open mobile menu"
-      >
-        <span class="menu-toggle-icon" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
-        </span>
-        <span>Menu</span>
-      </button>
+      <div class="header-right">
+        <div class="actions">
+          <a href={utilTelHref} class="header-phone" aria-label="Call Dove Cottage">
+            <span class="header-phone-icon" aria-hidden="true">☎</span>
+            {contact.trustPhoneDisplay}
+          </a>
+          <a href={contact.trustDonateUrl} class="btn btn-primary btn-shine donate-btn">{donateLabel}</a>
+        </div>
+
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+          aria-label="Open mobile menu"
+        >
+          <span class="menu-toggle-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span>Menu</span>
+        </button>
+      </div>
     </div>
   </div>
   </header>
@@ -74,16 +74,18 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
             </span>
           </a>
           <div class="dropdown-panel mega-menu about-mega">
+            <a href="/explore/" class="mega-explore-cta">Explore all services &amp; support</a>
             <div class="mega-grid">
               <section class="mega-column">
                 <h3 class="mega-title">What We Offer</h3>
-                <a href="#" class="mega-link">Carer &amp; patient wellbeing sessions</a>
+                <a href="/what-we-offer/carer-patient-wellbeing/" class="mega-link">Carer &amp; patient wellbeing sessions</a>
                 <a href="#" class="mega-link">Dementia home-sitting</a>
               </section>
 
               <section class="mega-column">
                 <h3 class="mega-title">Hospice Services</h3>
-                <a href="#" class="mega-link">Counselling</a>
+                <a href="/hospice-services/bereavement-support/" class="mega-link">Bereavement support</a>
+                <a href="/hospice-services/counselling/" class="mega-link">Counselling</a>
                 <a href="#" class="mega-link">Nursing care &amp; medical advice</a>
                 <a href="#" class="mega-link">Wellbeing activities</a>
                 <a href="#" class="mega-link">Complementary therapies</a>
@@ -94,7 +96,7 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
 
               <section class="mega-column">
                 <h3 class="mega-title">Counselling &amp; Support</h3>
-                <a href="#" class="mega-link">Counselling</a>
+                <a href="/hospice-services/counselling/" class="mega-link">Counselling</a>
                 <a href="#" class="mega-link">Support groups</a>
                 <h3 class="mega-title secondary-title">About Dove Cottage</h3>
                 <a href="#" class="mega-link">Our Team</a>
@@ -121,6 +123,7 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
             <div class="mega-grid support-grid">
               <section class="mega-column">
                 <h3 class="mega-title">Support Us</h3>
+                <a href="/explore/?topic=support-us" class="mega-link">See all ways to support us</a>
                 <a href="/donate/" class="mega-link">Make a donation</a>
                 <a href="#" class="mega-link">Volunteer your time</a>
                 <a href="#" class="mega-link">Leave a gift in your will</a>
@@ -177,10 +180,12 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
         <details class="mobile-group">
           <summary>About Us</summary>
           <div class="mobile-group-content">
+            <a href="/explore/" class="mobile-link">Explore all services &amp; support</a>
             <a href="#" class="mobile-link">What We Offer</a>
-            <a href="#" class="mobile-link">Carer &amp; patient wellbeing sessions</a>
+            <a href="/what-we-offer/carer-patient-wellbeing/" class="mobile-link">Carer &amp; patient wellbeing sessions</a>
             <a href="#" class="mobile-link">Dementia home-sitting</a>
-            <a href="#" class="mobile-link">Counselling</a>
+            <a href="/hospice-services/counselling/" class="mobile-link">Counselling</a>
+            <a href="/hospice-services/bereavement-support/" class="mobile-link">Bereavement support</a>
             <a href="#" class="mobile-link">Support groups</a>
             <a href="#" class="mobile-link">Our Team</a>
             <a href="#" class="mobile-link">Our Facilities</a>
@@ -190,6 +195,7 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
         <details class="mobile-group">
           <summary>Support Us</summary>
           <div class="mobile-group-content">
+            <a href="/explore/?topic=support-us" class="mobile-link">See all ways to support us</a>
             <a
               href="/donate/"
               class:list={["mobile-link", { active: isDonatePage }]}
@@ -320,43 +326,26 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
     z-index: 2;
   }
 
-  .header-util {
-    background: #f7f9fd;
-    border-bottom: 1px solid #dde6f2;
-  }
-
-  .header-util-inner {
+  .brand-cluster {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px 20px;
-    min-height: 40px;
-    font-size: var(--type-micro, 0.8rem);
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .header-charity {
+    margin: 0;
+    max-width: min(14rem, 36vw);
+    font-size: var(--type-micro);
+    line-height: 1.2;
     font-weight: 600;
-    color: #1e3a5f;
-  }
-
-  .header-util-charity {
-    letter-spacing: 0.02em;
-  }
-
-  .header-util-phone {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: inherit;
-    text-decoration: none;
+    color: rgba(255, 255, 255, 0.88);
+    text-shadow: 0 1px 1px rgba(8, 26, 48, 0.35);
     white-space: nowrap;
-  }
-
-  .header-util-phone:hover,
-  .header-util-phone:focus-visible {
-    color: #0b2448;
-    text-decoration: underline;
-  }
-
-  .header-util-phone-icon {
-    opacity: 0.9;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .top-row {
@@ -371,7 +360,14 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
+    gap: 16px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 10px 12px;
   }
 
   .brand {
@@ -391,9 +387,35 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
   .actions {
     display: flex;
     align-items: center;
-    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px 14px;
     color: #fff;
     font-weight: 700;
+  }
+
+  .header-phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: var(--type-body);
+    line-height: 1;
+    text-shadow: 0 1px 2px rgba(8, 26, 48, 0.35);
+  }
+
+  .header-phone:hover,
+  .header-phone:focus-visible {
+    text-decoration: underline;
+    color: #fff;
+  }
+
+  .header-phone-icon {
+    font-size: var(--type-subtitle);
+    line-height: 1;
+    opacity: 0.95;
   }
 
   .phone-wrap {
@@ -667,6 +689,27 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
     padding: 22px;
   }
 
+  .mega-explore-cta {
+    display: block;
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    font-size: var(--type-body);
+    font-weight: 800;
+    color: var(--color-steel-blue-1);
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid #c4d2eb;
+    background: var(--color-alice-blue);
+    letter-spacing: 0.01em;
+  }
+
+  .mega-explore-cta:hover,
+  .mega-explore-cta:focus-visible {
+    background: #dce8fa;
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 1px;
+  }
+
   .mega-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -694,7 +737,9 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
   }
 
   .mega-link {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 7px;
     font-size: var(--type-body-small);
     font-weight: 500;
     line-height: 1.5;
@@ -707,11 +752,27 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
     letter-spacing: 0.01em;
   }
 
+  .mega-link::before {
+    content: "›";
+    flex: 0 0 0.7em;
+    width: 0.7em;
+    text-align: center;
+    color: var(--color-golden-yellow);
+    font-weight: 800;
+    font-size: 1.05em;
+    line-height: 1;
+  }
+
   .mega-link:hover,
   .mega-link:focus-visible {
     background: var(--color-alice-blue);
     color: #0f2f61;
     outline: none;
+  }
+
+  .mega-link:hover::before,
+  .mega-link:focus-visible::before {
+    color: var(--color-steel-blue-1);
   }
 
   .about-mega {
@@ -729,10 +790,6 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
   }
 
   @media (max-width: 1100px) {
-    .actions {
-      display: none;
-    }
-
     .menu-toggle {
       display: inline-flex;
     }
@@ -901,18 +958,21 @@ const utilCharity = toTitleCase(contact.trustCharityLine);
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px 10px;
     }
 
     .brand-logo {
       width: clamp(74px, 18vw, 96px);
     }
 
-    .header-util-inner {
-      flex-wrap: wrap;
-      min-height: 0;
-      padding-top: 8px;
-      padding-bottom: 8px;
+    .header-phone {
+      font-size: var(--type-body-small);
+    }
+
+    .donate-btn {
+      height: 40px;
+      padding: 0 14px;
+      font-size: var(--type-button-small);
     }
   }
 </style>

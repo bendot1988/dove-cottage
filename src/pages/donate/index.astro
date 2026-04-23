@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArchiveSidebarPeek from "../../components/ArchiveSidebarPeek.astro";
 import donate from "../../data/donate.json";
 import contact from "../../data/contact.json";
 import { toTitleCase } from "../../lib/titleCase";
@@ -56,8 +57,8 @@ const sideLabel = toTitleCase("Ways to give");
       />
       <div class="donate-hero-overlay" aria-hidden="true"></div>
       <div class="container donate-hero-inner">
-        <a class="donate-hero-back" href={d.allWaysToSupportHref}>
-          <span class="donate-hero-back-arrow" aria-hidden="true">←</span>
+        <a class="interior-hero-eyebrow donate-hero-back" href={d.allWaysToSupportHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
           {h.allWays}
         </a>
         <h1>
@@ -84,17 +85,18 @@ const sideLabel = toTitleCase("Ways to give");
       </div>
     </section>
 
-    <div class="donate-trust" aria-label="Key details">
-      <div class="container donate-trust-inner">
-        <span class="donate-trust-charity">{h.trustCharity}</span>
-        <div class="donate-trust-actions">
-          <a class="donate-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
-          <a href={c.trustDonateUrl} class="btn btn-primary btn-shine donate-trust-donate">{h.trustDonate}</a>
+    <div class="motion-scope">
+      <div class="donate-trust" aria-label="Key details">
+        <div class="container donate-trust-inner">
+          <span class="donate-trust-charity">{h.trustCharity}</span>
+          <div class="donate-trust-actions">
+            <a class="donate-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
+            <a href={c.trustDonateUrl} class="btn btn-primary btn-shine donate-trust-donate">{h.trustDonate}</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <section class="donate-main" id="give" aria-labelledby="donate-about-heading">
+      <section class="donate-main" id="give" aria-labelledby="donate-about-heading">
       <img
         src="/images/sunflower-brand-small.png"
         alt=""
@@ -117,7 +119,7 @@ const sideLabel = toTitleCase("Ways to give");
           <p class="impact-lede">
             {d.impactLede}
           </p>
-          <div class="donate-impact-grid" role="list">
+          <div class="donate-impact-grid impact-grid" role="list">
             {
               impactCards.map((card) => (
                 <article class="donate-impact-card" role="listitem">
@@ -176,10 +178,16 @@ const sideLabel = toTitleCase("Ways to give");
             </ul>
             <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
           </div>
+          <ArchiveSidebarPeek filterId="support-us" excludePath="/donate" />
         </aside>
       </div>
     </section>
+    </div>
   </div>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
 
 <style>
@@ -219,30 +227,6 @@ const sideLabel = toTitleCase("Ways to give");
   .donate-hero-inner {
     position: relative;
     z-index: 2;
-  }
-
-  .donate-hero-back {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 0 1rem;
-    font-size: var(--type-micro);
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.92);
-    text-decoration: none;
-  }
-
-  .donate-hero-back:hover,
-  .donate-hero-back:focus-visible {
-    text-decoration: underline;
-    color: #fff;
-  }
-
-  .donate-hero-back-arrow {
-    font-size: 1rem;
-    letter-spacing: 0;
   }
 
   .donate-hero h1 {
@@ -440,6 +424,19 @@ const sideLabel = toTitleCase("Ways to give");
     border: 1px solid #e1e6f0;
     border-radius: 14px;
     box-shadow: 0 4px 12px rgba(16, 38, 72, 0.05);
+    transition:
+      background-color 0.22s var(--motion-ease-out),
+      box-shadow 0.22s var(--motion-ease-out),
+      border-color 0.22s var(--motion-ease-out),
+      transform 0.22s var(--motion-ease-out);
+  }
+
+  .donate-impact-card:hover,
+  .donate-impact-card:focus-within {
+    background: #fff;
+    border-color: #d0d8e8;
+    box-shadow: 0 12px 28px rgba(16, 38, 72, 0.12);
+    transform: translateY(-2px);
   }
 
   .donate-impact-card-title {
@@ -575,6 +572,17 @@ const sideLabel = toTitleCase("Ways to give");
     .donate-trust-inner {
       flex-direction: column;
       align-items: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .donate-impact-card {
+      transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    .donate-impact-card:hover,
+    .donate-impact-card:focus-within {
+      transform: none;
     }
   }
 </style>

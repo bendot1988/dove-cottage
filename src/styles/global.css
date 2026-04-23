@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 @import "./_buttons.css";
+@import "./_hospice-service-page.css";
 
 *,
 *::before,
@@ -73,6 +74,49 @@ body {
 
 .container.container--narrow {
   max-width: 860px;
+}
+
+/* Interior page heroes (Contact, Donate): top kicker — same shell for static label or back link */
+.interior-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-sizing: border-box;
+  margin: 0 0 12px;
+  padding: 6px 14px;
+  max-width: 100%;
+  font-size: var(--type-micro);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.95);
+  border: 2px solid var(--color-golden-yellow);
+  border-radius: 999px;
+  background: transparent;
+  line-height: 1.3;
+}
+
+a.interior-hero-eyebrow {
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  transition: background 0.18s var(--motion-ease-out);
+}
+
+a.interior-hero-eyebrow:hover,
+a.interior-hero-eyebrow:focus-visible {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+a.interior-hero-eyebrow:focus-visible {
+  outline: 2px solid var(--color-golden-yellow);
+  outline-offset: 2px;
+}
+
+.interior-hero-eyebrow__arrow {
+  flex-shrink: 0;
+  font-size: 1rem;
+  letter-spacing: 0;
+  line-height: 1;
 }
 
 /* --- Site motion: wrap page content in `.motion-scope` (and optional `.page-home`) — see /style-guide/ --- */

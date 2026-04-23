@@ -1,0 +1,221 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
+import p from "../../../data/carer-patient-wellbeing.json";
+import contact from "../../../data/contact.json";
+import { toTitleCase } from "../../../lib/titleCase";
+
+const c = contact;
+const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+
+const layoutTitle = p.pageTitle
+  .split(/\s*\|\s*/)
+  .map((part) => toTitleCase(part.trim()))
+  .join(" | ");
+
+const parentLabel = p.parentNavLabel;
+const trustDonate = toTitleCase(c.trustDonateLabel);
+const trustCharity = toTitleCase(c.trustCharityLine);
+const asideTitle = toTitleCase("Get in touch");
+const phoneLabel = toTitleCase("Phone");
+const formLabel = toTitleCase("Enquiry");
+
+const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
+const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3].filter((block) => block?.trim().length);
+const isLive = (h: string) => Boolean(h && h !== "#" && h.trim().length);
+---
+
+<BaseLayout title={layoutTitle}>
+  <div class="svc-page">
+    <section class="hospice-svc-hero" aria-label={p.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={p.heroImage}
+        alt={p.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {parentLabel}
+        </a>
+        <h1>{p.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <div class="motion-scope">
+      <div class="contact-trust" aria-label="Key details">
+        <div class="container contact-trust-inner">
+          <span class="contact-trust-charity">{trustCharity}</span>
+          <div class="contact-trust-actions">
+            <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
+            <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{trustDonate}</a>
+          </div>
+        </div>
+      </div>
+
+      <section class="svc-main" aria-label={p.heroH1}>
+        <img
+          src="/images/sunflower-brand-small.png"
+          alt=""
+          class="svc-sunflower"
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <div class="container svc-layout">
+          <div class="svc-primary">
+            {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
+
+            {
+              p.sectionImage1?.src && (
+                <figure class="svc-figure">
+                  <img
+                    class="svc-figure__img"
+                    src={p.sectionImage1.src}
+                    alt={p.sectionImage1.alt}
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              )
+            }
+
+            <h2 class="svc-section-h2" id="elements-heading">
+              {p.elementsHeading}
+            </h2>
+            <p class="svc-lede svc-lede--after-h2">{p.elementsIntro}</p>
+
+            {
+              p.elementBlocks.map((block, i) => (
+                <div class="svc-card" role="group" aria-labelledby={`wellbeing-block-${i}`}>
+                  <h3 class="svc-card__title" id={`wellbeing-block-${i}`}>
+                    {block.title}
+                  </h3>
+                  <p class="svc-body">{block.intro}</p>
+                  <ul class="svc-list">
+                    {block.bullets.map((row) => (
+                      <li>{line(row)}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            }
+
+            {
+              p.sectionImage2?.src && (
+                <figure class="svc-figure">
+                  <img
+                    class="svc-figure__img"
+                    src={p.sectionImage2.src}
+                    alt={p.sectionImage2.alt}
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              )
+            }
+
+            <p class="svc-body">{p.notMedicalBody}</p>
+            <p class="svc-body">{p.sessionTimesBody}</p>
+
+            <div class="svc-card" role="region" aria-labelledby="related-day-heading">
+              <h2 class="svc-card__title" id="related-day-heading">
+                {p.relatedHeading}
+              </h2>
+              <p class="svc-body">{p.relatedIntro}</p>
+              <ul class="svc-list svc-list--linkstack">
+                {p.relatedLinks.map((row) => (
+                  <li>
+                    {isLive(row.href) ? (
+                      <a class="svc-inline-link" href={row.href}>
+                        {row.label}
+                      </a>
+                    ) : (
+                      <span class="svc-pending">
+                        {row.label}
+                        <span class="svc-pending-hint">(page coming soon)</span>
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <p class="svc-body">
+              {p.referralIntro}{" "}
+              <a class="svc-inline-link" href={p.referralCtaHref}>
+                {p.referralCta}
+              </a>{" "}
+              {p.referralOutro}
+            </p>
+          </div>
+
+          <aside class="svc-side" aria-label={asideTitle}>
+            <div class="side-card">
+              <h2 class="side-card-title">{asideTitle}</h2>
+              <ul class="side-list">
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{phoneLabel}</span>
+                    <a class="side-value side-link" href={telHref}>{c.trustPhoneDisplay}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{formLabel}</span>
+                    <a class="side-value side-link" href="/contact/">
+                      {p.sideFormLinkText}
+                    </a>
+                    <p class="svc-side-hint">{p.sideFormHint}</p>
+                  </div>
+                </li>
+              </ul>
+              <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
+            </div>
+            <ArchiveSidebarPeek filterId="what-we-offer" excludePath="/what-we-offer/carer-patient-wellbeing" />
+          </aside>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+    import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
+</BaseLayout>
+
+<style>
+  :global(.svc-list--linkstack li) {
+    margin-bottom: 10px;
+  }
+
+  :global(.svc-pending) {
+    color: #2f3f5a;
+    font-weight: 600;
+  }
+
+  :global(.svc-pending-hint) {
+    font-weight: 500;
+    color: #6a7a92;
+  }
+</style>
