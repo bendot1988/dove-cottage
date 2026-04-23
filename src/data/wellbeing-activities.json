@@ -1,0 +1,31 @@
+{
+  "pageTitle": "Wellbeing Activities | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "People enjoying social wellbeing activities together at Dove Cottage",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/",
+  "heroH1": "Wellbeing Activities",
+  "heroShortDescription": "A varied range of activities arranged throughout the day, with the freedom to join as many or as few as you choose.",
+  "mainIntro1": "A varied range of activities are arranged throughout the day and patients are welcome to get involved in as many or as few as they choose.",
+  "mainIntro2": "We endeavour to offer a range of activities to meet different interests and welcome suggestions for new additions.",
+  "activitiesHeading": "Some examples of our current activities include",
+  "activitiesList": [
+    { "text": "Art therapy and crafts" },
+    { "text": "Gardening" },
+    { "text": "Music performances" },
+    { "text": "Seated yoga" },
+    { "text": "Mindfulness and relaxation" },
+    { "text": "Talks & demonstrations from external organisations" },
+    { "text": "Board games" },
+    { "text": "Quizzes" },
+    { "text": "Bingo" },
+    { "text": "Pets as Therapy" }
+  ],
+  "facilitiesBody": "Our purpose-built building offers large rooms where individuals can join together with others to enjoy activities and refreshments, as well as smaller, quieter and private spaces for reflection or relaxation if preferred.",
+  "referralIntro": "To make a referral to our hospice please complete the",
+  "referralCta": "enquiry contact form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and someone will get in touch with you to discuss in more detail.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Enquire about wellbeing activities or make a referral."
+}
