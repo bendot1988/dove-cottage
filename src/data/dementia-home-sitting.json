@@ -1,0 +1,104 @@
+{
+  "pageTitle": "Dementia home-sitting | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "A supportive home visit conversation in a calm living room",
+  "parentNavLabel": "What We Offer",
+  "parentNavHref": "/explore/?topic=what-we-offer",
+  "heroH1": "Dementia Home-Sitting",
+  "heroShortDescription": "Supporting you at home, when you need it most.",
+  "mainIntro1": "Caring for someone with dementia can be rewarding, but it can also be tiring and emotionally demanding. You do not have to manage alone.",
+  "mainIntro2": "Our Dementia Home Visiting Service offers friendly, supportive visits at home for people living with dementia, giving unpaid carers time to rest, attend appointments, or take a short break with peace of mind.",
+  "serviceHeading": "What is the Dementia Home Visiting Service?",
+  "serviceIntro": "The Dementia Home Visiting Service provides safe, friendly social visits for people living with dementia who live at home. Visits are provided by trained volunteers and are focused on companionship and meaningful engagement.",
+  "serviceOfferHeading": "During a visit, volunteers can offer:",
+  "serviceOfferList": [
+    {
+      "text": "Conversation and friendly companionship"
+    },
+    {
+      "text": "Meaningful activities such as reminiscence, music, reading or conversation"
+    },
+    {
+      "text": "A calm and reassuring presence"
+    }
+  ],
+  "serviceOutro": "These visits give carers the opportunity to step away for a short time, knowing their loved one is safe and supported.",
+  "whoHeading": "Who is the service for?",
+  "whoList": [
+    {
+      "text": "People living with dementia"
+    },
+    {
+      "text": "Who live at home with an unpaid carer (family member or friend)"
+    },
+    {
+      "text": "Where the carer would benefit from some respite or personal time"
+    }
+  ],
+  "helpHeading": "How can this service help?",
+  "helpCards": [
+    {
+      "title": "For the individual living with dementia",
+      "bullets": [
+        {
+          "text": "Reduces loneliness and isolation"
+        },
+        {
+          "text": "Offers meaningful social interaction"
+        },
+        {
+          "text": "Helps build trust, familiarity and routine"
+        }
+      ]
+    },
+    {
+      "title": "For carers",
+      "bullets": [
+        {
+          "text": "Time to rest and focus on your own wellbeing"
+        },
+        {
+          "text": "Opportunity to attend appointments or run errands"
+        },
+        {
+          "text": "Peace of mind knowing your loved one is not alone"
+        }
+      ]
+    }
+  ],
+  "importantHeading": "Important to know",
+  "importantList": [
+    {
+      "text": "Visits are social and supportive only"
+    },
+    {
+      "text": "Volunteers do not provide personal care or administer medication"
+    },
+    {
+      "text": "All volunteers are trained, supported and DBS checked"
+    }
+  ],
+  "importantOutro": "We understand that inviting someone into your home is a big step. Visits are planned carefully, risk assessed, and supported by our Clinical Lead and team.",
+  "flexHeading": "Flexible and person-centred support",
+  "flexIntro": "We work with you to:",
+  "flexList": [
+    {
+      "text": "Agree visit times and frequency that suit you"
+    },
+    {
+      "text": "Understand routines, preferences and interests"
+    },
+    {
+      "text": "Ensure the service fits around your needs"
+    }
+  ],
+  "referralsHeading": "Referrals and enquiries",
+  "referralsBody1": "The Dementia Home Visiting Service is open to self-referrals and professional referrals. Carers, family members, or healthcare professionals are welcome to enquire.",
+  "referralsBody2": "If you are unsure whether this service is right for you, please get in touch. We are always happy to talk things through and offer guidance.",
+  "referralIntro": "Please complete the",
+  "referralCta": "enquiry contact form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and someone will get in touch with you to discuss in more detail.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Enquire about dementia home-sitting or submit a referral."
+}

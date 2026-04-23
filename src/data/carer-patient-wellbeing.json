@@ -4,10 +4,10 @@
   "heroImageAlt": "People sitting together in a bright, welcoming day hospice room",
   "parentNavLabel": "What We Offer",
   "parentNavHref": "/explore/?topic=what-we-offer",
-  "heroH1": "Carer & patient wellbeing sessions",
+  "heroH1": "Carer & Patient Wellbeing Sessions",
   "heroShortDescription": "Holistic support for individuals and carers",
   "mainIntro1": "Our carer and patient support groups are open to individuals and carers living with palliative conditions. Unlike our hospice daycare provision, these sessions are for carers to accompany their loved one to the hospice and benefit themselves from some of the wellbeing activities and therapies on offer, whilst making connections with other families in similar situations.",
-  "mainIntro2": "Our palliative nursing team will be on hand to offer nursing support and advice if required, and our carer’s champion will be there to provide any additional support and signposting to other relevant services that might be useful to you. A light lunch is also provided.",
+  "mainIntro2": "Our palliative nursing team will be on hand to offer nursing support and advice if required, and our carer\u2019s champion will be there to provide any additional support and signposting to other relevant services that might be useful to you. A light lunch is also provided.",
   "mainIntro3": "Sessions are designed to be relaxed and flexible, with each person encouraged to take part in a way that feels right for them. Some people come for companionship and a change of scene, while others value the opportunity to try activities that support confidence, independence, and emotional wellbeing.",
   "elementsHeading": "Elements of our wellbeing sessions",
   "elementsIntro": "The following areas can be included as part of our wellbeing sessions:",
@@ -16,45 +16,87 @@
       "title": "Social connection",
       "intro": "Our team and volunteers help create a friendly, supportive environment where guests can meet others who may understand some of what they are going through. This can include:",
       "bullets": [
-        { "text": "Time to talk over refreshments" },
-        { "text": "Gentle group activities" },
-        { "text": "Creative or seasonal activities" },
-        { "text": "Opportunities to share experiences" },
-        { "text": "Support to reduce isolation" }
+        {
+          "text": "Time to talk over refreshments"
+        },
+        {
+          "text": "Gentle group activities"
+        },
+        {
+          "text": "Creative or seasonal activities"
+        },
+        {
+          "text": "Opportunities to share experiences"
+        },
+        {
+          "text": "Support to reduce isolation"
+        }
       ]
     },
     {
       "title": "Relaxation",
       "intro": "Where appropriate, sessions may include activities that support relaxation and comfort. These can vary depending on availability and individual needs, but may include:",
       "bullets": [
-        { "text": "Relaxation techniques" },
-        { "text": "Group meditation sessions" },
-        { "text": "Complementary therapy treatments" }
+        {
+          "text": "Relaxation techniques"
+        },
+        {
+          "text": "Group meditation sessions"
+        },
+        {
+          "text": "Complementary therapy treatments"
+        }
       ]
     },
     {
       "title": "Emotional wellbeing, advocacy, signposting and support",
       "intro": "Our team can offer emotional support and help guests understand what other services may be available to them. We can also signpost to further support for family members and carers where needed. Areas we can support with include (but are not limited to) the following:",
       "bullets": [
-        { "text": "Holistic person-centred assessment" },
-        { "text": "Advocacy, signposting & referrals" },
-        { "text": "Advanced care planning" },
-        { "text": "Anticipatory bereavement support" },
-        { "text": "Symptom control & pain management" },
-        { "text": "Family and carer support and signposting" },
-        { "text": "Emotional support" }
+        {
+          "text": "Holistic person-centred assessment"
+        },
+        {
+          "text": "Advocacy, signposting & referrals"
+        },
+        {
+          "text": "Advanced care planning"
+        },
+        {
+          "text": "Anticipatory bereavement support"
+        },
+        {
+          "text": "Symptom control & pain management"
+        },
+        {
+          "text": "Family and carer support and signposting"
+        },
+        {
+          "text": "Emotional support"
+        }
       ]
     }
   ],
   "notMedicalBody": "Wellbeing sessions are not a replacement for medical care, but they can sit alongside clinical support to help people feel less alone, more informed, and more connected to their local community.",
-  "sessionTimesBody": "These sessions currently take place from 10am–1pm on a Monday, with access via the hospice referral process and subject to eligibility.",
+  "sessionTimesBody": "These sessions currently take place from 10am\u20131pm on a Monday, with access via the hospice referral process and subject to eligibility.",
   "relatedHeading": "Additional day services",
   "relatedIntro": "You can also have access to our full range of additional day services, which are listed below (click a heading to view the page).",
   "relatedLinks": [
-    { "label": "Counselling", "href": "/hospice-services/counselling/" },
-    { "label": "Complementary therapies", "href": "#" },
-    { "label": "Therapy Bathing", "href": "#" },
-    { "label": "Spiritual & Chaplaincy support", "href": "#" }
+    {
+      "label": "Counselling",
+      "href": "/hospice-services/counselling/"
+    },
+    {
+      "label": "Complementary therapies",
+      "href": "#"
+    },
+    {
+      "label": "Therapy Bathing",
+      "href": "#"
+    },
+    {
+      "label": "Spiritual & Chaplaincy support",
+      "href": "#"
+    }
   ],
   "referralIntro": "To find out more, please complete the",
   "referralCta": "enquiry form",

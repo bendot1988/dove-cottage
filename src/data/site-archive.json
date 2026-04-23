@@ -2,15 +2,33 @@
   "pageTitle": "Explore our services and support | Dove Cottage",
   "heroImage": "/images/hero-supporting-journey.png",
   "heroImageAlt": "Smiling people in a calm, modern hospice day room",
-  "heroH1": "Explore our work",
-  "heroDescription": "Browse everything Dove Cottage has to offer — from clinical and emotional support to ways you can get involved. Use the topics below to show one area, or start with all.",
+  "heroH1": "Explore Our Work",
+  "heroDescription": "Browse everything Dove Cottage has to offer \u2014 from clinical and emotional support to ways you can get involved. Use the topics below to show one area, or start with all.",
   "filters": [
-    { "id": "all", "label": "All" },
-    { "id": "what-we-offer", "label": "What We Offer" },
-    { "id": "hospice-services", "label": "Hospice Services" },
-    { "id": "counselling-support", "label": "Counselling" },
-    { "id": "about", "label": "About" },
-    { "id": "support-us", "label": "Supporters" }
+    {
+      "id": "all",
+      "label": "All"
+    },
+    {
+      "id": "what-we-offer",
+      "label": "What We Offer"
+    },
+    {
+      "id": "hospice-services",
+      "label": "Hospice Services"
+    },
+    {
+      "id": "counselling-support",
+      "label": "Counselling & Support"
+    },
+    {
+      "id": "about",
+      "label": "About Us"
+    },
+    {
+      "id": "support-us",
+      "label": "Supporters"
+    }
   ],
   "items": [
     {
@@ -27,7 +45,7 @@
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A friendly volunteer visiting someone at home",
       "filterKeys": "what-we-offer",
-      "href": "#"
+      "href": "/what-we-offer/dementia-home-sitting/"
     },
     {
       "title": "Bereavement support",
@@ -42,7 +60,7 @@
       "excerpt": "Confidential one-to-one sessions with qualified counsellors for patients, family members, and unpaid carers.",
       "image": "/images/care-counselling.png",
       "imageAlt": "A quiet, private conversation in a safe environment",
-      "filterKeys": "hospice-services,counselling-support",
+      "filterKeys": "counselling-support",
       "href": "/hospice-services/counselling/"
     },
     {
@@ -95,7 +113,7 @@
     },
     {
       "title": "Support groups",
-      "excerpt": "Peer support with others who understand; groups are developing — register interest via our contact form.",
+      "excerpt": "Peer support with others who understand; groups are developing \u2014 register interest via our contact form.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A small support group in conversation",
       "filterKeys": "hospice-services,counselling-support",
@@ -135,7 +153,7 @@
     },
     {
       "title": "Volunteer your time",
-      "excerpt": "From day hospice to driving, shops, and events — we always need more friendly faces in the team.",
+      "excerpt": "From day hospice to driving, shops, and events \u2014 we always need more friendly faces in the team.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "Volunteers working together in support of the hospice",
       "filterKeys": "support-us",
@@ -151,7 +169,7 @@
     },
     {
       "title": "Fundraise for us",
-      "excerpt": "Cakes, runs, and community fun — we are here to cheer you on and help your fundraiser succeed.",
+      "excerpt": "Cakes, runs, and community fun \u2014 we are here to cheer you on and help your fundraiser succeed.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "Community fundraising event in high spirits",
       "filterKeys": "support-us",

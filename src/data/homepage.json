@@ -46,11 +46,11 @@
       {
         "tag": "Dementia Support",
         "tagClass": "tag-orange",
-        "title": "Social-sitting",
+        "title": "Dementia home-sitting",
         "description": "Vital respite for unpaid carers. Our fully-trained volunteers provide companionship for your loved one at home.",
         "image": "/images/hero-family-alt.png",
         "imagePosition": "center 62%",
-        "href": "#"
+        "href": "/what-we-offer/dementia-home-sitting/"
       },
       {
         "tag": "Counselling",

@@ -490,8 +490,8 @@ collections:
               name: "heroImageAlt",
               widget: "string",
             }
-          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
-          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Counselling & Support" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/explore/?topic=counselling-support" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Support groups" }
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
           - { label: "Intro paragraph", name: "mainIntro1", widget: "text" }
@@ -630,3 +630,76 @@ collections:
             fields:
               - { label: "Image", name: "src", widget: "image" }
               - { label: "Description (accessibility)", name: "alt", widget: "string" }
+  - name: "dementia_home_sitting"
+    label: "Dementia home-sitting"
+    files:
+      - name: "dementia_home_sitting"
+        label: "Dementia home-sitting page"
+        file: "src/data/dementia-home-sitting.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Dementia home-sitting | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "What We Offer" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/explore/?topic=what-we-offer" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Dementia home-sitting" }
+          - { label: "Hero subtitle", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro — paragraph 2", name: "mainIntro2", widget: "text" }
+          - { label: "Service — heading", name: "serviceHeading", widget: "string" }
+          - { label: "Service — intro", name: "serviceIntro", widget: "text" }
+          - { label: "Service — list lead-in", name: "serviceOfferHeading", widget: "string" }
+          - label: "Service — offer list"
+            name: "serviceOfferList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Service — closing paragraph", name: "serviceOutro", widget: "text" }
+          - { label: "Who is this for? — heading", name: "whoHeading", widget: "string" }
+          - label: "Who is this for? — bullet list"
+            name: "whoList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "How this helps — heading", name: "helpHeading", widget: "string" }
+          - label: "How this helps — cards"
+            name: "helpCards"
+            widget: "list"
+            min: 1
+            max: 4
+            fields:
+              - { label: "Card title", name: "title", widget: "string" }
+              - label: "Bullet list"
+                name: "bullets"
+                widget: "list"
+                min: 1
+                fields:
+                  - { label: "Point", name: "text", widget: "text" }
+          - { label: "Important to know — heading", name: "importantHeading", widget: "string" }
+          - label: "Important to know — bullet list"
+            name: "importantList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Important to know — closing paragraph", name: "importantOutro", widget: "text" }
+          - { label: "Flexible support — heading", name: "flexHeading", widget: "string" }
+          - { label: "Flexible support — intro", name: "flexIntro", widget: "string" }
+          - label: "Flexible support — bullet list"
+            name: "flexList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Referrals & enquiries — heading", name: "referralsHeading", widget: "string" }
+          - { label: "Referrals — paragraph 1", name: "referralsBody1", widget: "text" }
+          - { label: "Referrals — paragraph 2", name: "referralsBody2", widget: "text" }
+          - { label: "Referral line — before link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — link text", name: "referralCta", widget: "string", default: "enquiry contact form" }
+          - { label: "Referral line — link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
+          - { label: "Referral line — after link", name: "referralOutro", widget: "string" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
