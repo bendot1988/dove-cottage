@@ -772,6 +772,41 @@ collections:
           - { label: "Referral line — text after the link", name: "referralOutro", widget: "string" }
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+      - name: "complementary_therapies"
+        label: "Complementary therapies page"
+        file: "src/data/complementary-therapies.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Complementary Therapies | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Complementary Therapies" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text", default: "Relax and recharge." }
+          - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro — paragraph 2", name: "mainIntro2", widget: "text", required: false }
+          - { label: "Benefits section heading", name: "benefitsHeading", widget: "string" }
+          - label: "Benefits list"
+            name: "benefitsList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Treatments section heading", name: "treatmentsHeading", widget: "string", default: "Treatments we offer" }
+          - { label: "Treatments intro", name: "treatmentsIntro", widget: "text" }
+          - label: "Treatments list"
+            name: "treatmentsList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Treatment", name: "text", widget: "string" }
+          - { label: "Referral line — text before the contact form link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — link text", name: "referralCta", widget: "string", default: "enquiry contact form" }
+          - { label: "Referral line — link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
+          - { label: "Referral line — text after the link", name: "referralOutro", widget: "string" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
   - name: "what_we_offer_pages"
     label: "What we offer"
     files:

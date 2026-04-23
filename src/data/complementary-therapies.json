@@ -1,0 +1,36 @@
+{
+  "pageTitle": "Complementary Therapies | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "A calm wellbeing treatment environment at Dove Cottage",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/",
+  "heroH1": "Complementary Therapies",
+  "heroShortDescription": "Relax and recharge.",
+  "mainIntro1": "Our aim is to offer you an opportunity to relax and indulge in some self-care during your time here at Dove Cottage.",
+  "mainIntro2": "These therapies are not offered as a replacement to the medical treatments you are already undergoing, but to complement them and support you as you navigate this stage of your life.",
+  "benefitsHeading": "Complementary therapy treatments have been proven to provide the following benefits",
+  "benefitsList": [
+    { "text": "Reduce feelings of worry or stress" },
+    { "text": "Promote relaxation" },
+    { "text": "Improve quality of sleep and help regulate sleep patterns" },
+    { "text": "Reduce fatigue" },
+    { "text": "Help with pain management" },
+    { "text": "Release Oxytocin (the happy/love hormone)" },
+    { "text": "Reduce production of Cortisol (the stress hormone)" }
+  ],
+  "treatmentsHeading": "Treatments we offer",
+  "treatmentsIntro": "Our fully-qualified complementary therapists offer a range of treatments that can be received safely alongside your current medical care, including:",
+  "treatmentsList": [
+    { "text": "Facials" },
+    { "text": "Massage" },
+    { "text": "Reflexology" },
+    { "text": "Reiki" },
+    { "text": "Guided relaxation & visualisation" }
+  ],
+  "referralIntro": "For more information or to book a session, please complete the",
+  "referralCta": "enquiry contact form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and someone will get in touch with you to discuss in more detail.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Enquire about complementary therapies or book a session."
+}
