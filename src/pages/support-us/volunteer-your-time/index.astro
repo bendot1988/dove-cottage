@@ -1,0 +1,265 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
+import p from "../../../data/volunteer-your-time.json";
+import contact from "../../../data/contact.json";
+import { toTitleCase } from "../../../lib/titleCase";
+
+type ImpactIcon = "team" | "time" | "training" | "impact";
+
+const iconPaths: Record<ImpactIcon, string> = {
+  team: "M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M8.5 7a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm9.5 14v-2a4 4 0 0 0-3-3.88M17 3.13a4 4 0 0 1 0 7.75",
+  time: "M12 7v5l3 3M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0Z",
+  training: "m22 10-10-5L2 10l10 5 10-5ZM6 12v5c3 2 9 2 12 0v-5",
+  impact: "m20.8 8.3a5.2 5.2 0 0 0-7.4 0L12 9.7l-1.4-1.4a5.2 5.2 0 1 0-7.4 7.4l1.4 1.4L12 24l7.4-6.9 1.4-1.4a5.2 5.2 0 0 0 0-7.4Z"
+};
+
+const c = contact;
+const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+const asideTitle = toTitleCase("Get in touch");
+const phoneLabel = toTitleCase("Phone");
+const formLabel = toTitleCase("Enquiry");
+---
+
+<BaseLayout title={p.pageTitle}>
+  <div class="svc-page volunteer-page">
+    <section class="hospice-svc-hero" aria-label={p.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={p.heroImage}
+        alt={p.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {toTitleCase(p.parentNavLabel)}
+        </a>
+        <h1>{p.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <section class="volunteer-impact-strip" aria-label="Volunteer benefits">
+      <div class="container">
+        <div class="volunteer-impact-grid">
+          {p.impactItems.map((item) => (
+            <article class="volunteer-impact-item">
+              <span class="volunteer-impact-icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d={iconPaths[item.icon as ImpactIcon] ?? iconPaths.team} />
+                </svg>
+              </span>
+              <div class="volunteer-impact-copy">
+                <p class="volunteer-impact-label">{toTitleCase(item.label)}</p>
+                <p class="volunteer-impact-value">{item.value}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <div class="motion-scope">
+      <section class="svc-main" aria-label={p.heroH1}>
+        <img
+          src="/images/sunflower-brand-small.png"
+          alt=""
+          class="svc-sunflower"
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <div class="container svc-layout">
+          <div class="svc-primary">
+            <h2 class="svc-section-h2">{p.introHeading}</h2>
+            <p class="svc-lede">{p.introParagraph1}</p>
+            <p class="svc-lede">{p.introParagraph2}</p>
+            {
+              p.sectionImage?.src && (
+                <figure class="svc-figure">
+                  <img
+                    class="svc-figure__img"
+                    src={p.sectionImage.src}
+                    alt={p.sectionImage.alt}
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              )
+            }
+
+            <h2 class="svc-section-h2">{p.waysHeading}</h2>
+            <p class="svc-lede svc-lede--after-h2">{p.waysIntro}</p>
+
+            <div class="volunteer-role-grid">
+              {p.roles.map((role) => (
+                <article class="svc-card">
+                  <h3 class="svc-card__subtitle">{role.title}</h3>
+                  <p class="svc-body">{role.description}</p>
+                  <p class="svc-body">
+                    <a class="svc-inline-link" href={role.ctaHref}>
+                      {role.ctaLabel}
+                    </a>
+                  </p>
+                </article>
+              ))}
+            </div>
+
+            <h2 class="svc-section-h2">{p.expectHeading}</h2>
+            <p class="svc-lede">{p.expectParagraph1}</p>
+            <p class="svc-lede">{p.expectParagraph2}</p>
+            <p class="svc-lede">{p.expectParagraph3}</p>
+          </div>
+
+          <aside class="svc-side" aria-label={asideTitle}>
+            <div class="side-card">
+              <h2 class="side-card-title">{asideTitle}</h2>
+              <ul class="side-list">
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{phoneLabel}</span>
+                    <a class="side-value side-link" href={telHref}>{c.trustPhoneDisplay}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{formLabel}</span>
+                    <a class="side-value side-link" href="/contact/">
+                      {p.sideFormLinkText}
+                    </a>
+                    <p class="svc-side-hint">{p.sideFormHint}</p>
+                  </div>
+                </li>
+              </ul>
+              <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
+            </div>
+
+            <ArchiveSidebarPeek filterId="support-us" excludePath="/support-us/volunteer-your-time" />
+          </aside>
+        </div>
+      </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
+  initMotionScrollReveal();
+</script>
+
+<style>
+  .volunteer-impact-strip {
+    background: #fff;
+    border-bottom: 1px solid #d9e3f0;
+  }
+
+  .volunteer-impact-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+  }
+
+  .volunteer-impact-item {
+    padding: 14px 14px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-right: 1px solid #e5ebf5;
+  }
+
+  .volunteer-impact-item:last-child {
+    border-right: none;
+  }
+
+  .volunteer-impact-icon {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #edf4fb;
+    color: #2f5d93;
+  }
+
+  .volunteer-impact-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .volunteer-impact-copy p {
+    margin: 0;
+  }
+
+  .volunteer-impact-label {
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #7a8798;
+  }
+
+  .volunteer-impact-value {
+    margin-top: 2px;
+    font-size: var(--type-subtitle);
+    font-weight: 700;
+    color: #1a2f4a;
+    line-height: 1.25;
+  }
+
+  .volunteer-page .svc-primary .svc-section-h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .volunteer-role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 20px;
+    margin-bottom: 1.1rem;
+  }
+
+  @media (max-width: 980px) {
+    .volunteer-impact-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .volunteer-impact-item:nth-child(2n) {
+      border-right: none;
+    }
+
+    .volunteer-impact-item:nth-child(-n + 2) {
+      border-bottom: 1px solid #e5ebf5;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .volunteer-role-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .volunteer-impact-item {
+      padding: 12px 10px;
+    }
+  }
+</style>

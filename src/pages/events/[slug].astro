@@ -1,0 +1,155 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const events = await getCollection("events", ({ data }) => !data.draft);
+  return events.map((event) => ({
+    params: { slug: event.slug },
+    props: { event }
+  }));
+}
+
+const { event } = Astro.props as { event: CollectionEntry<"events"> };
+const { Content } = await event.render();
+
+const eventStart = new Date(event.data.eventDate);
+const eventEnd = event.data.eventEndDate ? new Date(event.data.eventEndDate) : undefined;
+const comparisonDate = eventEnd ?? eventStart;
+const now = new Date();
+const isPastEvent = comparisonDate.getTime() < now.getTime();
+
+const formatDate = (value: Date) =>
+  value.toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+---
+
+<BaseLayout title={`${event.data.title} | Dove Cottage`}>
+  <article class="event-post">
+    <section class="event-article-inner">
+      <div class="container container--narrow">
+        <p class="meta">
+          <span class="category">{event.data.category}</span>
+          <span>·</span>
+          <time datetime={eventStart.toISOString()}>{formatDate(eventStart)}</time>
+          {eventEnd && (
+            <>
+              <span>to</span>
+              <time datetime={eventEnd.toISOString()}>{formatDate(eventEnd)}</time>
+            </>
+          )}
+          <span>·</span>
+          <span>{event.data.location}</span>
+        </p>
+        {isPastEvent && <p class="past-flag">Past event</p>}
+        <h1 class:list={{ "is-past": isPastEvent }}>{event.data.title}</h1>
+
+        {(event.data.featuredImage ?? event.data.featured_image) && (
+          <img
+            class="featured"
+            src={event.data.featuredImage ?? event.data.featured_image}
+            alt=""
+            loading="eager"
+          />
+        )}
+
+        <div class="content">
+          <Content />
+          {event.data.bookingUrl && !isPastEvent && (
+            <p class="event-booking">
+              <a href={event.data.bookingUrl} target="_blank" rel="noopener noreferrer">
+                Book event tickets
+              </a>
+            </p>
+          )}
+        </div>
+        <p class="back-link"><a href="/news/">← Back to News &amp; Events</a></p>
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .event-post {
+    background: var(--color-lavender);
+    padding: 56px 0 72px;
+  }
+
+  .meta {
+    margin: 0 0 10px;
+    color: #596d89;
+    font-size: var(--type-body-small);
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .category {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-steel-blue);
+    font-weight: 700;
+  }
+
+  .past-flag {
+    margin: 0 0 8px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    color: #8e5b3e;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  h1 {
+    margin: 0 0 18px;
+    font-size: var(--type-section-title);
+    color: #102a4e;
+  }
+
+  h1.is-past {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(142, 91, 62, 0.42);
+  }
+
+  .featured {
+    width: 100%;
+    border-radius: 14px;
+    border: 1px solid #dce5f2;
+    box-shadow: 0 8px 18px rgba(18, 44, 83, 0.08);
+    margin-bottom: 18px;
+  }
+
+  .content {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #dce5f2;
+    padding: 22px;
+    color: #304662;
+    line-height: 1.7;
+  }
+
+  .event-booking a {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+  }
+
+  .back-link {
+    margin-top: 14px;
+  }
+
+  .back-link a {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .back-link a:hover {
+    text-decoration: underline;
+  }
+</style>

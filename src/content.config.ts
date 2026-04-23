@@ -14,6 +14,22 @@ const blog = defineCollection({
   })
 });
 
+const events = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    excerpt: z.string(),
+    eventDate: z.coerce.date(),
+    eventEndDate: z.coerce.date().optional(),
+    location: z.string(),
+    category: z.string().default("Event"),
+    featuredImage: z.string().optional(),
+    featured_image: z.string().optional(),
+    bookingUrl: z.string().optional(),
+    draft: z.boolean().default(false)
+  })
+});
+
 const shops = defineCollection({
   type: "content",
   schema: z.object({
@@ -41,4 +57,4 @@ const shops = defineCollection({
   })
 });
 
-export const collections = { blog, shops };
+export const collections = { blog, events, shops };

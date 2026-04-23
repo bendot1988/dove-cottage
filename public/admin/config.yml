@@ -160,7 +160,7 @@ collections:
             fields:
               - { label: "Caption", name: "text", widget: "string" }
   - name: "news"
-    label: "News & Events"
+    label: "News"
     folder: "src/content/blog"
     create: true
     slug: "{{slug}}"
@@ -174,6 +174,25 @@ collections:
       - { label: "Publish Date", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Author", name: "author", widget: "string", default: "Dove Cottage Day Hospice" }
       - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+  - name: "events"
+    label: "Events"
+    folder: "src/content/events"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    preview_path: "events/{{slug}}"
+    fields:
+      - { label: "Event title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "string", default: "Event" }
+      - { label: "Short summary", name: "excerpt", widget: "text" }
+      - { label: "Event date", name: "eventDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Event end date (optional)", name: "eventEndDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Event location", name: "location", widget: "string" }
+      - { label: "Featured image", name: "featuredImage", widget: "image", required: false }
+      - { label: "Booking link (optional)", name: "bookingUrl", widget: "string", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
       - { label: "Body", name: "body", widget: "markdown" }
   - name: "shops"
@@ -554,6 +573,101 @@ collections:
           - { label: "Register interest — link URL", name: "registerInterestHref", widget: "string", default: "/contact/" }
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+  - name: "support_us_overview"
+    label: "Support us overview"
+    files:
+      - name: "support_us_overview"
+        label: "See all ways to support us"
+        file: "src/data/support-us-overview.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "See All Ways to Support Us | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Support Us" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/explore/?topic=support-us" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "See All Ways to Support Us" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "Section eyebrow", name: "introEyebrow", widget: "string", default: "How Can You Help?" }
+          - { label: "Section heading", name: "introHeading", widget: "string", default: "Make an impact" }
+          - label: "Support cards"
+            name: "cards"
+            widget: "list"
+            min: 1
+            max: 12
+            fields:
+              - { label: "Card title", name: "title", widget: "string" }
+              - { label: "Card description", name: "excerpt", widget: "text" }
+              - { label: "Card image", name: "image", widget: "image" }
+              - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
+              - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line", name: "stat", widget: "string" }
+              - { label: "CTA label", name: "ctaLabel", widget: "string" }
+              - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
+  - name: "volunteer_your_time"
+    label: "Volunteer your time"
+    files:
+      - name: "volunteer_your_time"
+        label: "Volunteer your time page"
+        file: "src/data/volunteer-your-time.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Volunteer Your Time | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Support Us" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/support-us/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Volunteer Your Time" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - label: "Impact strip items (below hero)"
+            name: "impactItems"
+            widget: "list"
+            min: 4
+            max: 4
+            fields:
+              - label: "Icon"
+                name: "icon"
+                widget: "select"
+                options: ["team", "time", "training", "impact"]
+              - { label: "Label (small caps)", name: "label", widget: "string" }
+              - { label: "Value (main line)", name: "value", widget: "string" }
+          - { label: "Intro heading", name: "introHeading", widget: "string" }
+          - { label: "Intro paragraph 1", name: "introParagraph1", widget: "text" }
+          - { label: "Intro paragraph 2", name: "introParagraph2", widget: "text" }
+          - label: "In-page image (below intro)"
+            name: "sectionImage"
+            widget: "object"
+            required: false
+            fields:
+              - { label: "Image", name: "src", widget: "image" }
+              - { label: "Description (accessibility)", name: "alt", widget: "string" }
+          - { label: "Ways section heading", name: "waysHeading", widget: "string" }
+          - { label: "Ways section intro", name: "waysIntro", widget: "text" }
+          - label: "Volunteer role cards"
+            name: "roles"
+            widget: "list"
+            min: 1
+            max: 8
+            fields:
+              - { label: "Role title", name: "title", widget: "string" }
+              - { label: "Role description", name: "description", widget: "text" }
+              - { label: "Link label", name: "ctaLabel", widget: "string" }
+              - { label: "Link URL", name: "ctaHref", widget: "string", default: "/contact/" }
+          - { label: "Expect section heading", name: "expectHeading", widget: "string" }
+          - { label: "Expect paragraph 1", name: "expectParagraph1", widget: "text" }
+          - { label: "Expect paragraph 2", name: "expectParagraph2", widget: "text" }
+          - { label: "Expect paragraph 3", name: "expectParagraph3", widget: "text" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+          - { label: "Sidebar — related links heading", name: "sideSupportTitle", widget: "string" }
+          - label: "Sidebar — related links"
+            name: "sideSupportLinks"
+            widget: "list"
+            min: 1
+            max: 8
+            fields:
+              - { label: "Link label", name: "label", widget: "string" }
+              - { label: "Link URL", name: "href", widget: "string" }
   - name: "site_archive"
     label: "Explore / site archive"
     files:

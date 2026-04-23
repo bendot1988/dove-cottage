@@ -1,0 +1,87 @@
+{
+  "pageTitle": "Volunteer Your Time | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "Volunteers and guests together in a welcoming hospice setting",
+  "parentNavLabel": "Support Us",
+  "parentNavHref": "/support-us/",
+  "heroH1": "Volunteer Your Time",
+  "heroShortDescription": "Give your time in a way that fits your life and help us create a warm, welcoming environment for local families.",
+  "impactItems": [
+    {
+      "icon": "team",
+      "label": "Team",
+      "value": "Free hospice care"
+    },
+    {
+      "icon": "time",
+      "label": "Time",
+      "value": "Flexible roles"
+    },
+    {
+      "icon": "training",
+      "label": "Training",
+      "value": "Full support given"
+    },
+    {
+      "icon": "impact",
+      "label": "Impact",
+      "value": "Care made possible"
+    }
+  ],
+  "introHeading": "Your time makes a real difference",
+  "introParagraph1": "Dove Cottage volunteers play a vital role in the smooth running of the hospice. Around 120 people give their time, expertise, and commitment to support our work, helping us create a warm, welcoming environment for guests, families, carers, visitors, and supporters.",
+  "introParagraph2": "The time given by volunteers saves the hospice around £250,000 each year. More importantly, it helps make Dove Cottage feel personal, friendly, and connected to the local community.",
+  "sectionImage": {
+    "src": "/images/uploads/volunteer-gazebo.png",
+    "alt": "Dove Cottage volunteer gazebo and information stand at a community event"
+  },
+  "waysHeading": "Ways you could help",
+  "waysIntro": "There are different ways to volunteer, depending on your interests, availability, and experience. Full training is given, and we will talk with you about the role that feels right.",
+  "roles": [
+    {
+      "title": "Hospice support",
+      "description": "Help create a friendly, welcoming environment for guests by supporting day-to-day activities, refreshments, companionship, or practical tasks around the hospice.",
+      "ctaLabel": "Ask about hospice roles",
+      "ctaHref": "/contact/"
+    },
+    {
+      "title": "Volunteer driving",
+      "description": "Support guests by helping them travel safely to and from Dove Cottage. Mileage expenses are paid for hospice drivers.",
+      "ctaLabel": "Ask about driving",
+      "ctaHref": "/contact/"
+    },
+    {
+      "title": "Shop volunteering",
+      "description": "Join one of our friendly charity shop teams and help with serving customers, sorting donations, preparing stock, and keeping the shops welcoming.",
+      "ctaLabel": "Ask about shop roles",
+      "ctaHref": "/contact/"
+    },
+    {
+      "title": "Fundraising and events",
+      "description": "Help with community events, fundraising activities, collections, or behind-the-scenes support that keeps Dove Cottage visible and active locally.",
+      "ctaLabel": "Ask about events",
+      "ctaHref": "/contact/"
+    }
+  ],
+  "expectHeading": "What to expect as a volunteer",
+  "expectParagraph1": "You do not need to have volunteered with a hospice before. We will talk with you about your interests, availability, and any experience you would like to bring, then help you find a suitable role.",
+  "expectParagraph2": "Some volunteers like to help at the same time each week, while others prefer to support us occasionally when a need arises. We have days and hours to suit different circumstances.",
+  "expectParagraph3": "Full training is provided, and you will be supported by the Dove Cottage team throughout your time with us.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Ask about current volunteer roles and next steps.",
+  "sideSupportTitle": "Related support links",
+  "sideSupportLinks": [
+    {
+      "label": "See all ways to support us",
+      "href": "/support-us/"
+    },
+    {
+      "label": "Make a donation",
+      "href": "/donate/"
+    },
+    {
+      "label": "Visit our shops",
+      "href": "/shops/"
+    }
+  ]
+}

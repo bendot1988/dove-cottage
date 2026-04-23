@@ -5,6 +5,67 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
 );
+
+const events = (await getCollection("events", ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime()
+);
+
+const now = new Date();
+const isPastEvent = (startDate: Date, endDate?: Date) => {
+  const checkDate = endDate ?? startDate;
+  return checkDate.getTime() < now.getTime();
+};
+
+const formatEventDate = (startDate: Date, endDate?: Date) => {
+  const base = startDate.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+  if (!endDate) return base;
+  const end = endDate.toLocaleDateString("en-GB", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+  return `${base} - ${end}`;
+};
+
+const feedItems = [
+  ...posts.map((post) => ({
+    type: "news" as const,
+    key: `news-${post.slug}`,
+    title: post.data.title,
+    excerpt: post.data.excerpt,
+    href: `/news/${post.slug}/`,
+    image: post.data.featuredImage ?? post.data.featured_image,
+    category: post.data.category,
+    date: post.data.publishDate,
+    dateLabel: post.data.publishDate.toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    }),
+    location: "",
+    past: false
+  })),
+  ...events.map((event) => {
+    const past = isPastEvent(event.data.eventDate, event.data.eventEndDate);
+    return {
+      type: "event" as const,
+      key: `event-${event.slug}`,
+      title: event.data.title,
+      excerpt: event.data.excerpt,
+      href: `/events/${event.slug}/`,
+      image: event.data.featuredImage ?? event.data.featured_image,
+      category: event.data.category,
+      date: event.data.eventDate,
+      dateLabel: formatEventDate(event.data.eventDate, event.data.eventEndDate),
+      location: event.data.location,
+      past
+    };
+  })
+].sort((a, b) => b.date.getTime() - a.date.getTime());
 ---
 
 <BaseLayout title="News & Events | Dove Cottage">
@@ -12,36 +73,55 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   <section class="news-listing">
     <div class="container">
       <h1>News &amp; Events</h1>
-      <p class="intro">Latest updates, announcements, and events from Dove Cottage Day Hospice.</p>
+      <p class="intro">Latest updates and upcoming events from Dove Cottage Day Hospice.</p>
 
-      {posts.length === 0 ? (
-        <p>No news posts have been published yet.</p>
+      <div class="feed-filter" role="group" aria-label="Filter news and events">
+        <button type="button" class="feed-filter__btn is-active" data-feed-filter="all" aria-pressed="true">
+          News &amp; Events
+        </button>
+        <button type="button" class="feed-filter__btn" data-feed-filter="news" aria-pressed="false">
+          News
+        </button>
+        <button type="button" class="feed-filter__btn" data-feed-filter="event" aria-pressed="false">
+          Events
+        </button>
+      </div>
+
+      {feedItems.length === 0 ? (
+        <p class="stream-empty">No news or events have been published yet.</p>
       ) : (
-        <div class="news-grid cards-grid">
-          {posts.map((post) => (
-            <article class="news-card">
-              {(post.data.featuredImage ?? post.data.featured_image) && (
-                <a href={`/news/${post.slug}/`} class="thumb-link">
-                  <img src={post.data.featuredImage ?? post.data.featured_image} alt="" loading="lazy" />
+        <div class="feed-grid cards-grid" data-feed-grid>
+          {feedItems.map((item) => (
+            <article class:list={["news-card", { "event-card": item.type === "event", "event-card--past": item.past }]} data-feed-type={item.type}>
+              {item.image && (
+                <a href={item.href} class="thumb-link">
+                  <img src={item.image} alt="" loading="lazy" />
                 </a>
               )}
               <div class="news-card-body">
                 <p class="meta">
-                  <span class="category">{post.data.category}</span>
+                  <span class="category">{item.type === "event" ? "Event" : item.category}</span>
                   <span>·</span>
-                  <time datetime={post.data.publishDate.toISOString()}>
-                    {post.data.publishDate.toLocaleDateString("en-GB", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric"
-                    })}
-                  </time>
+                  {item.type === "event" ? <span>{item.location}</span> : <time datetime={item.date.toISOString()}>{item.dateLabel}</time>}
                 </p>
-                <h2>
-                  <a href={`/news/${post.slug}/`}>{post.data.title}</a>
-                </h2>
-                <p>{post.data.excerpt}</p>
-                <a href={`/news/${post.slug}/`} class="read-more">Read more →</a>
+                {item.type === "event" && (
+                  <>
+                    <p class="event-date">
+                      <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
+                    </p>
+                    {item.past && <p class="event-status">Past event</p>}
+                  </>
+                )}
+                <h3 class:list={{ "is-past": item.past }}>
+                  <a href={item.href}>{item.title}</a>
+                </h3>
+                <p class="excerpt">{item.excerpt}</p>
+                <a href={item.href} class="read-more">
+                  <span class="read-more-text">
+                    {item.type === "event" ? (item.past ? "View details" : "View event") : "Read more"}
+                  </span>
+                  <span aria-hidden="true">→</span>
+                </a>
               </div>
             </article>
           ))}
@@ -53,6 +133,31 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
   <script>
     import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
     initMotionScrollReveal();
+
+    const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-feed-filter]"));
+    const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-feed-type]"));
+
+    if (filterButtons.length && cards.length) {
+      const applyFilter = (filter: string) => {
+        filterButtons.forEach((btn) => {
+          const active = btn.dataset.feedFilter === filter;
+          btn.classList.toggle("is-active", active);
+          btn.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+
+        cards.forEach((card) => {
+          const type = card.dataset.feedType;
+          const show = filter === "all" || type === filter;
+          card.hidden = !show;
+        });
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          applyFilter(button.dataset.feedFilter ?? "all");
+        });
+      });
+    }
   </script>
 </BaseLayout>
 
@@ -74,29 +179,95 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
     font-size: var(--type-body-large);
   }
 
-  .news-grid {
+  .feed-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
   }
 
+  .stream-empty {
+    margin: 0;
+    color: #4e627e;
+    font-size: var(--type-body);
+  }
+
+  .feed-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 16px;
+  }
+
+  .feed-filter__btn {
+    border: 1px solid #c2d1e8;
+    background: #fff;
+    color: #1a3558;
+    border-radius: 999px;
+    padding: 0.45rem 0.75rem;
+    font: inherit;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+    cursor: pointer;
+    transition:
+      background 0.18s var(--motion-ease-out),
+      color 0.18s var(--motion-ease-out),
+      border-color 0.18s var(--motion-ease-out);
+  }
+
+  .feed-filter__btn.is-active,
+  .feed-filter__btn[aria-pressed="true"] {
+    background: var(--color-steel-blue-1);
+    border-color: var(--color-steel-blue-1);
+    color: #fff;
+  }
+
   .news-card {
     background: #fff;
+    border: 1px solid #dce5f2;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid #dde6f4;
     box-shadow: 0 8px 18px rgba(18, 44, 83, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .news-card:hover,
+  .news-card:focus-within {
+    transform: translateY(-4px);
+    border-color: #bfd0e7;
+    box-shadow: 0 14px 26px rgba(18, 44, 83, 0.14);
+  }
+
+  .thumb-link {
+    display: block;
+    margin-top: auto;
+    overflow: hidden;
   }
 
   .thumb-link img {
     width: 100%;
-    height: 180px;
+    min-height: 170px;
+    max-height: 170px;
     object-fit: cover;
     display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .news-card:hover .thumb-link img,
+  .news-card:focus-within .thumb-link img {
+    transform: scale(1.08);
   }
 
   .news-card-body {
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   .meta {
@@ -113,50 +284,114 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--color-steel-blue);
+    font-weight: 700;
   }
 
-  h2 {
+  h3 {
     margin: 0 0 8px;
     font-size: var(--type-card-title);
     line-height: 1.3;
   }
 
-  h2 a {
+  h3 a {
     color: #102a4e;
     text-decoration: none;
   }
 
-  h2 a:hover {
+  h3 a:hover {
     text-decoration: underline;
   }
 
-  .news-card-body p {
-    margin: 0 0 12px;
-    color: #3f5370;
+  .event-date {
+    margin: 0 0 8px;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+    color: #193c66;
+  }
+
+  .event-status {
+    margin: 0 0 6px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #8e5b3e;
+  }
+
+  .event-card--past {
+    opacity: 0.92;
+    border-color: #e2d8cf;
+  }
+
+  .event-card--past .event-date {
+    color: #7d6b5d;
+  }
+
+  .event-card h3.is-past a {
+    text-decoration: line-through;
+    text-decoration-thickness: 2px;
+    text-decoration-color: rgba(142, 91, 62, 0.42);
+  }
+
+  .excerpt {
+    margin: 0;
+    color: #425772;
     font-size: var(--type-body);
     line-height: 1.55;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .read-more {
+    margin-top: auto;
+    padding-top: 14px;
     color: var(--color-steel-blue);
     text-decoration: none;
     font-weight: 700;
     font-size: var(--type-button);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
   }
 
-  .read-more:hover {
-    text-decoration: underline;
+  .read-more-text {
+    position: relative;
+  }
+
+  .read-more-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--color-golden-yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .read-more:hover .read-more-text::after,
+  .read-more:focus-visible .read-more-text::after {
+    transform: scaleX(1);
   }
 
   @media (max-width: 980px) {
-    .news-grid {
+    .feed-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
   @media (max-width: 680px) {
-    .news-grid {
+    .feed-grid {
       grid-template-columns: 1fr;
+    }
+
+    .news-listing {
+      padding: 44px 0 60px;
     }
   }
 </style>

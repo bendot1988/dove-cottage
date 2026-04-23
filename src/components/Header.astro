@@ -75,6 +75,7 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
               <path d="m16 16 5 5"></path>
             </svg>
           </button>
+          <a href={contact.trustDonateUrl} class="btn btn-primary btn-shine donate-btn">{donateLabel}</a>
         </div>
 
         <button
@@ -169,9 +170,9 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
             <div class="mega-grid support-grid">
               <section class="mega-column">
                 <h3 class="mega-title">Support Us</h3>
-                <a href="/explore/?topic=support-us" class="mega-link">See all ways to support us</a>
+                <a href="/support-us/" class="mega-link">See all ways to support us</a>
                 <a href="/donate/" class="mega-link">Make a donation</a>
-                <a href="#" class="mega-link">Volunteer your time</a>
+                <a href="/support-us/volunteer-your-time/" class="mega-link">Volunteer your time</a>
                 <a href="#" class="mega-link">Leave a gift in your will</a>
                 <a href="#" class="mega-link">Fundraise for us</a>
                 <a href="/shops/" class="mega-link">Visit our shops</a>
@@ -269,7 +270,7 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
         <details class="mobile-group">
           <summary>Support Us</summary>
           <div class="mobile-group-content">
-            <a href="/explore/?topic=support-us" class="mobile-link">See all ways to support us</a>
+            <a href="/support-us/" class="mobile-link">See all ways to support us</a>
             <a
               href="/donate/"
               class:list={["mobile-link", { active: isDonatePage }]}
@@ -277,7 +278,7 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
             >
               Make a donation
             </a>
-            <a href="#" class="mobile-link">Volunteer your time</a>
+            <a href="/support-us/volunteer-your-time/" class="mobile-link">Volunteer your time</a>
             <a href="#" class="mobile-link">Leave a gift in your will</a>
             <a href="#" class="mobile-link">Fundraise for us</a>
             <a href="/shops/" class="mobile-link">Visit our shops</a>

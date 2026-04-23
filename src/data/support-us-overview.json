@@ -1,0 +1,73 @@
+{
+  "pageTitle": "See All Ways to Support Us | Dove Cottage",
+  "heroImage": "/images/hero-supporting-journey.png",
+  "heroImageAlt": "Supporters and carers in a welcoming hospice setting",
+  "parentNavLabel": "Support Us",
+  "parentNavHref": "/explore/?topic=support-us",
+  "heroH1": "See All Ways to Support Us",
+  "heroShortDescription": "Whether you give your money, your time, or your voice, every contribution helps us provide free and compassionate care for local families.",
+  "introEyebrow": "How Can You Help?",
+  "introHeading": "Make an impact",
+  "cards": [
+    {
+      "title": "Make a donation",
+      "excerpt": "Every gift helps us keep our doors open: one-off, regular, and in-memory giving in a few simple steps.",
+      "image": "/images/hero-supporting-journey.png",
+      "imageAlt": "People supported in our day hospice and community",
+      "badge": "Most popular",
+      "stat": "Every gift helps local families",
+      "ctaLabel": "Donate now",
+      "href": "/donate/"
+    },
+    {
+      "title": "Volunteer your time",
+      "excerpt": "From day hospice to driving, shops, and events - we always need more friendly faces in the team.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "Volunteers working together in support of the hospice",
+      "badge": "Volunteer",
+      "stat": "Give your time to make a difference",
+      "ctaLabel": "Become a volunteer",
+      "href": "/support-us/volunteer-your-time/"
+    },
+    {
+      "title": "Leave a gift in your will",
+      "excerpt": "A lasting way to back local care; we can help you find clear, practical information when you are ready.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A thoughtful, hopeful moment in nature",
+      "badge": "Legacy giving",
+      "stat": "A future gift with lasting impact",
+      "ctaLabel": "Find out about legacies",
+      "href": "#"
+    },
+    {
+      "title": "Fundraise for us",
+      "excerpt": "Cakes, runs, and community fun - we are here to cheer you on and help your fundraiser succeed.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "Community fundraising event in high spirits",
+      "badge": "Fundraising",
+      "stat": "Any challenge, big or small, counts",
+      "ctaLabel": "Start fundraising",
+      "href": "#"
+    },
+    {
+      "title": "Visit our shops",
+      "excerpt": "Bottesford and more: pre-loved treasures, bargains, and every pound supporting patient care at home.",
+      "image": "/images/reach-section-bg.png",
+      "imageAlt": "A welcoming charity shop front",
+      "badge": "Shops",
+      "stat": "Shop pre-loved and support local care",
+      "ctaLabel": "Find your nearest shop",
+      "href": "/shops/"
+    },
+    {
+      "title": "Corporate partnerships",
+      "excerpt": "Work with us on volunteering, awareness, and fundraising that does good for your team and the Vale.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A partnership meeting in a local workplace",
+      "badge": "Businesses",
+      "stat": "New ways to support all year round",
+      "ctaLabel": "Talk to our team",
+      "href": "#"
+    }
+  ]
+}

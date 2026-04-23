@@ -127,22 +127,44 @@ const {
     background: var(--color-white);
     border-radius: 16px;
     overflow: hidden;
+    position: relative;
+    border: 1px solid #dce5f2;
     box-shadow: 0 6px 16px rgba(19, 47, 82, 0.08);
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .service-card:hover,
+  .service-card:focus-within {
+    transform: translateY(-4px);
+    border-color: #bfd0e7;
+    box-shadow: 0 14px 26px rgba(18, 44, 83, 0.14);
   }
 
   .card-image {
     height: 138px;
-    background-size: cover;
     position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: transform 0.35s ease;
+  }
+
+  .service-card:hover .card-image,
+  .service-card:focus-within .card-image {
+    transform: scale(1.05);
   }
 
   .tag {
     position: absolute;
     left: 12px;
     bottom: -12px;
+    z-index: 10;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -176,6 +198,8 @@ const {
     display: flex;
     flex-direction: column;
     flex: 1;
+    position: relative;
+    z-index: 1;
   }
 
   .card-content h3 {
@@ -252,6 +276,22 @@ const {
 
     .card-content p {
       min-height: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-card {
+      transition: none;
+    }
+
+    .service-card:hover,
+    .service-card:focus-within {
+      transform: none;
+    }
+
+    .service-card:hover .card-image,
+    .service-card:focus-within .card-image {
+      transform: none;
     }
   }
 </style>
