@@ -1,0 +1,48 @@
+{
+  "pageTitle": "Nursing Care and Medical Advice | Dove Cottage",
+  "heroImage": "/images/hero-supporting-journey.png",
+  "heroImageAlt": "Specialist nursing support being provided in a calm day hospice environment",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/",
+  "heroH1": "Nursing Care and Medical Advice",
+  "heroShortDescription": "Expert nursing support and symptom management in a social home-from-home environment.",
+  "mainIntro1": "Our care is person-centred, with each individual offered a personalised care plan based on their specific requirements and goals.",
+  "mainIntro2": "Elements of this plan can include, but are not limited to, the following areas:",
+  "nursingHeading": "Nursing care",
+  "nursingIntro": "Our palliative nursing team are on hand to support with any of the following:",
+  "nursingList": [
+    { "text": "Administration of medication" },
+    { "text": "Oxygen therapy" },
+    { "text": "Toileting & personal care" },
+    { "text": "Eating & drinking, including enteral feeding" },
+    { "text": "Moving & handling" },
+    { "text": "Wound care" },
+    { "text": "Other nursing needs you may have that will be discussed with you with one of our nurses." }
+  ],
+  "medicalHeading": "Medical advice",
+  "medicalBody": "Individuals remain under the care of their GP during their time with us, however our fully trained nurses can offer medical advice and support with any symptoms or concerns you may be experiencing.",
+  "advocacyHeading": "Advocacy, signposting & support",
+  "advocacyIntro": "Our nursing team are here to offer support for you and your loved ones at any stage in your palliative journey. We will work with you to create a plan of care based on your individual needs which may include some of the following:",
+  "advocacyList": [
+    { "text": "Holistic person-centred assessment" },
+    { "text": "Advocacy, signposting & referrals" },
+    { "text": "Advanced care planning" },
+    { "text": "Anticipatory bereavement support" },
+    { "text": "Symptom control & pain management" },
+    { "text": "Family and carer support and signposting" },
+    { "text": "Emotional support" }
+  ],
+  "additionalHeading": "Additional day services",
+  "additionalIntro": "As a day patient here at Dove you also have access to the full range of our additional day services which are listed below:",
+  "additionalServices": [
+    { "label": "Wellbeing Sessions", "href": "/what-we-offer/carer-patient-wellbeing/" },
+    { "label": "Social-sitting", "href": "/what-we-offer/dementia-home-sitting/" },
+    { "label": "Counselling & emotional support", "href": "/hospice-services/counselling/" }
+  ],
+  "referralIntro": "To make a referral to our hospice please complete the",
+  "referralCta": "enquiry contact form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and someone will get in touch with you to discuss in more detail.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Enquire about nursing care and medical advice or make a referral."
+}
