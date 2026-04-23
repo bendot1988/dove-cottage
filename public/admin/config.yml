@@ -258,7 +258,7 @@ collections:
       - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
       - { label: "Body", name: "body", widget: "markdown", required: false }
   - name: "contact"
-    label: "Contact us"
+    label: "Pages / Contact us"
     files:
       - name: "contact"
         label: "Contact page"
@@ -353,7 +353,7 @@ collections:
             }
           - { label: "Map — link label", name: "mapLinkLabel", widget: "string" }
   - name: "donate"
-    label: "Donate"
+    label: "Pages / Donate"
     files:
       - name: "donate"
         label: "Donate page"
@@ -403,7 +403,7 @@ collections:
               - { label: "Label (e.g. Donate online)", name: "kicker", widget: "string", required: false }
               - { label: "Description", name: "body", widget: "text" }
   - name: "bereavement"
-    label: "Bereavement support"
+    label: "Hospice services / Bereavement support"
     files:
       - name: "bereavement"
         label: "Bereavement support page"
@@ -494,7 +494,7 @@ collections:
                   - { label: "Image", name: "src", widget: "image" }
                   - { label: "Description (accessibility)", name: "alt", widget: "string" }
   - name: "counselling"
-    label: "Counselling"
+    label: "Hospice services / Counselling"
     files:
       - name: "counselling"
         label: "Counselling page"
@@ -532,7 +532,7 @@ collections:
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
   - name: "support_groups"
-    label: "Support groups"
+    label: "Hospice services / Support groups"
     files:
       - name: "support_groups"
         label: "Support groups page"
@@ -574,7 +574,7 @@ collections:
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
   - name: "wellbeing_activities"
-    label: "Wellbeing activities"
+    label: "Hospice services / Wellbeing activities"
     files:
       - name: "wellbeing_activities"
         label: "Wellbeing activities page"
@@ -605,7 +605,7 @@ collections:
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
   - name: "support_us_overview"
-    label: "Support us overview"
+    label: "Pages / Support us overview"
     files:
       - name: "support_us_overview"
         label: "See all ways to support us"
@@ -636,7 +636,7 @@ collections:
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
   - name: "volunteer_your_time"
-    label: "Volunteer your time"
+    label: "Pages / Volunteer your time"
     files:
       - name: "volunteer_your_time"
         label: "Volunteer your time page"
@@ -700,7 +700,7 @@ collections:
               - { label: "Link label", name: "label", widget: "string" }
               - { label: "Link URL", name: "href", widget: "string" }
   - name: "site_archive"
-    label: "Explore / site archive"
+    label: "Pages / Explore / site archive"
     files:
       - name: "site_archive"
         label: "Explore page (all services & support)"
@@ -747,7 +747,7 @@ collections:
                   default: "#",
                 }
   - name: "carer_patient_wellbeing"
-    label: "Carer & patient wellbeing"
+    label: "What we offer / Carer & patient wellbeing"
     files:
       - name: "carer_patient_wellbeing"
         label: "Carer & patient wellbeing sessions"
@@ -813,7 +813,7 @@ collections:
               - { label: "Image", name: "src", widget: "image" }
               - { label: "Description (accessibility)", name: "alt", widget: "string" }
   - name: "dementia_home_sitting"
-    label: "Dementia home-sitting"
+    label: "What we offer / Dementia home-sitting"
     files:
       - name: "dementia_home_sitting"
         label: "Dementia home-sitting page"
