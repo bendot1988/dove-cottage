@@ -70,10 +70,30 @@ const feedItems = [
 
 <BaseLayout title="News & Events | Dove Cottage">
   <div class="motion-scope">
+  <section class="news-hero" aria-label="News and events">
+    <img
+      class="news-hero-bg"
+      src="/images/hero-supporting-journey.png"
+      alt="People supported in our day hospice and community"
+      width="1920"
+      height="720"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="news-hero-overlay" aria-hidden="true"></div>
+    <div class="container news-hero-inner">
+      <p class="interior-hero-eyebrow">News &amp; Events</p>
+      <h1>
+        Latest <span class="news-hero-highlight">news &amp; events</span>
+      </h1>
+      <p class="news-hero-dek">Stories, updates and upcoming events from Dove Cottage Day Hospice.</p>
+    </div>
+  </section>
+
   <section class="news-listing">
     <div class="container">
-      <h1>News &amp; Events</h1>
-      <p class="intro">Latest updates and upcoming events from Dove Cottage Day Hospice.</p>
+      <h2>Latest updates</h2>
+      <p class="intro">Use the filters below to browse news stories and events.</p>
 
       <div class="feed-filter" role="group" aria-label="Filter news and events">
         <button type="button" class="feed-filter__btn is-active" data-feed-filter="all" aria-pressed="true">
@@ -134,27 +154,28 @@ const feedItems = [
     import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
     initMotionScrollReveal();
 
-    const filterButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-feed-filter]"));
-    const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-feed-type]"));
+    const filterButtons = Array.from(document.querySelectorAll("[data-feed-filter]"));
+    const cards = Array.from(document.querySelectorAll("[data-feed-type]"));
+
+    const applyFilter = (filter) => {
+      filterButtons.forEach((btn) => {
+        const active = btn.dataset.feedFilter === filter;
+        btn.classList.toggle("is-active", active);
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+
+      cards.forEach((card) => {
+        const type = card.dataset.feedType;
+        const show = filter === "all" || type === filter;
+        card.hidden = !show;
+      });
+    };
 
     if (filterButtons.length && cards.length) {
-      const applyFilter = (filter: string) => {
-        filterButtons.forEach((btn) => {
-          const active = btn.dataset.feedFilter === filter;
-          btn.classList.toggle("is-active", active);
-          btn.setAttribute("aria-pressed", active ? "true" : "false");
-        });
-
-        cards.forEach((card) => {
-          const type = card.dataset.feedType;
-          const show = filter === "all" || type === filter;
-          card.hidden = !show;
-        });
-      };
-
+      applyFilter("all");
       filterButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          applyFilter(button.dataset.feedFilter ?? "all");
+          applyFilter(button.dataset.feedFilter || "all");
         });
       });
     }
@@ -162,21 +183,80 @@ const feedItems = [
 </BaseLayout>
 
 <style>
-  .news-listing {
-    background: var(--color-lavender);
-    padding: 56px 0 72px;
+  .news-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: min(48vh, 400px);
+    padding: clamp(2.5rem, 6vw, 3.5rem) 0 clamp(2rem, 5vw, 2.75rem);
+    color: #fff;
+    overflow: hidden;
   }
 
-  h1 {
+  .news-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  .news-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(105deg, rgba(8, 22, 48, 0.88) 0%, rgba(8, 22, 48, 0.62) 42%, rgba(8, 22, 48, 0.35) 100%);
+  }
+
+  .news-hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+  }
+
+  .news-hero h1 {
+    margin: 0 0 0.75rem;
+    font-size: var(--type-hero-title);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+
+  .news-hero-highlight {
+    color: var(--color-golden-yellow);
+  }
+
+  .news-hero-dek {
+    margin: 0;
+    max-width: 40rem;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+    text-wrap: pretty;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .news-listing {
+    background: var(--color-lavender);
+    padding: 48px 0 72px;
+  }
+
+  .news-listing h2 {
     margin: 0;
     font-size: var(--type-section-title);
-    color: var(--color-steel-blue);
+    color: #0f2240;
+    text-align: center;
   }
 
   .intro {
-    margin: 12px 0 26px;
-    color: #3b4f6c;
+    margin: 12px auto 26px;
+    color: #364861;
     font-size: var(--type-body-large);
+    max-width: 760px;
+    text-align: center;
   }
 
   .feed-grid {
@@ -194,8 +274,9 @@ const feedItems = [
   .feed-filter {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 8px;
-    margin: 0 0 16px;
+    margin: 0 0 18px;
   }
 
   .feed-filter__btn {
