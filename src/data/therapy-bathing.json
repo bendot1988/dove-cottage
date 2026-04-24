@@ -1,0 +1,24 @@
+{
+  "pageTitle": "Therapy Bathing | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "A calm assisted bathing room at Dove Cottage",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/hospice-services/",
+  "heroH1": "Therapy Bathing",
+  "heroShortDescription": "Relaxation...with added bubbles!",
+  "mainIntro1": "We have a large, height-adjustable bath on site and are pleased to offer an assisted bathing service for anyone who is unable to access a bath in the comfort of their own home.",
+  "mainIntro2": "Our healthcare assistants are on hand to help individuals in and out safely, with the assistance of an electric hoist if required.",
+  "activitiesHeading": "Our therapy bathing service includes",
+  "activitiesList": [
+    { "text": "A large, height-adjustable bath in our hospice building" },
+    { "text": "Support from healthcare assistants to help you in and out safely" },
+    { "text": "Use of an electric hoist where needed" }
+  ],
+  "facilitiesBody": "Sessions are designed to help you feel comfortable, safe and relaxed during bathing.",
+  "referralIntro": "For more information about our bathing service please complete the",
+  "referralCta": "enquiry form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and a member of our team will be in touch with more information.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Enquire about therapy bathing."
+}
