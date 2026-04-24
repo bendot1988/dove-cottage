@@ -2,7 +2,7 @@
   "pageTitle": "Explore our services and support | Dove Cottage",
   "heroImage": "/images/hero-supporting-journey.png",
   "heroImageAlt": "Smiling people in a calm, modern hospice day room",
-  "heroH1": "Explore Our Work",
+  "heroH1": "Services & Support",
   "heroDescription": "Browse everything Dove Cottage has to offer \u2014 from clinical and emotional support to ways you can get involved. Use the topics below to show one area, or start with all.",
   "filters": [
     {
@@ -10,24 +10,20 @@
       "label": "All"
     },
     {
-      "id": "what-we-offer",
-      "label": "What We Offer"
-    },
-    {
       "id": "hospice-services",
       "label": "Hospice Services"
     },
     {
+      "id": "carer-patient-wellbeing",
+      "label": "Carer & Patient Wellbeing"
+    },
+    {
+      "id": "dementia-home-sitting",
+      "label": "Dementia Home-Sitting"
+    },
+    {
       "id": "counselling-support",
-      "label": "Counselling"
-    },
-    {
-      "id": "about",
-      "label": "About Us"
-    },
-    {
-      "id": "support-us",
-      "label": "Support us"
+      "label": "Counselling & Support"
     }
   ],
   "items": [
@@ -36,7 +32,7 @@
       "excerpt": "Holistic support for individuals and carers: relaxed Monday sessions to connect, take part in wellbeing activities, and access nursing and carer support.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A calm, supportive place to talk and learn together",
-      "filterKeys": "what-we-offer",
+      "filterKeys": "carer-patient-wellbeing",
       "href": "/what-we-offer/carer-patient-wellbeing/"
     },
     {
@@ -44,7 +40,7 @@
       "excerpt": "Trained volunteers keep people company at home so carers can take a much-needed break with peace of mind.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A friendly volunteer visiting someone at home",
-      "filterKeys": "what-we-offer",
+      "filterKeys": "dementia-home-sitting",
       "href": "/what-we-offer/dementia-home-sitting/"
     },
     {
