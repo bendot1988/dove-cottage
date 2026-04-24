@@ -3,36 +3,44 @@
   "heroImage": "/images/hero-family-alt.png",
   "heroImageAlt": "People sitting together in a supportive group setting",
   "parentNavLabel": "Counselling & Support",
-  "parentNavHref": "/hospice-services/",
+  "parentNavHref": "/hospice-services/counselling-support/",
   "heroH1": "Support Groups",
-  "heroShortDescription": "Ensuring Carers Receive The Support They Deserve.",
-  "mainIntro1": "Being a carer for a loved one is tough. We get it. Putting someone else's needs before your own has become your everyday, and sometimes it might feel like you've forgotten who you were before. But that's why we're here - to support as many carers as possible and help them enjoy some time of their own.",
-  "groupsHeading": "Support Groups",
-  "groups": [
+  "heroShortDescription": "Find The Group That's Right For You.",
+  "mainIntro1": "Explore our support groups below and choose the one that best fits your situation.",
+  "cards": [
     {
-      "title": "Carer Support Group",
-      "bullets": [
-        {
-          "text": "Open to anyone who is supporting or caring for someone with a palliative condition, or living with a palliative condition themselves"
-        },
-        {
-          "text": "An informal group offering connection and peer support"
-        },
-        {
-          "text": "Signposting to other support if required"
-        },
-        {
-          "text": "Making connections with others in similar situations"
-        }
-      ],
-      "ctaLabel": "Click Here For Further Information",
-      "ctaHref": "/contact/"
+      "title": "Men's Shed",
+      "excerpt": "A welcoming place for men to connect through shared experiences, conversation, and support.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "Men in a welcoming group setting",
+      "badge": "Group support",
+      "stat": "Weekly group",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/mens-shed/"
+    },
+    {
+      "title": "Bereavement Support",
+      "excerpt": "A safe, friendly and relaxed bereavement drop-in group led by fully-trained volunteers.",
+      "image": "/images/bereavement-featured.png",
+      "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
+      "badge": "Drop-in support",
+      "stat": "Launching soon",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/bereavement-support-group/"
+    },
+    {
+      "title": "Carer Support",
+      "excerpt": "Connection, peer support and signposting for carers and people affected by palliative conditions.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "People in a welcoming group conversation",
+      "badge": "Carer support",
+      "stat": "Register interest",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/carer-support/"
     }
   ],
-  "detailsFoot": "More details of dates and times will be confirmed soon.",
-  "registerInterestIntro": "Please complete this enquiry form to register your interest.",
-  "registerInterestCta": "enquiry form",
-  "registerInterestHref": "/contact/",
-  "sideFormLinkText": "Use our contact form",
-  "sideFormHint": "Register your interest in the carer support group."
+  "referralIntro": "To enquire about any of our services please complete the",
+  "referralCta": "enquiry form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and a member of our team will be in touch."
 }

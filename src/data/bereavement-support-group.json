@@ -1,0 +1,31 @@
+{
+  "pageTitle": "Bereavement Support Group | Dove Cottage",
+  "heroImage": "/images/bereavement-featured.png",
+  "heroImageAlt": "A calm landscape representing comfort and reflection",
+  "parentNavLabel": "Counselling & Support",
+  "parentNavHref": "/hospice-services/counselling-support/",
+  "heroH1": "Bereavement Support Group",
+  "heroShortDescription": "It's Good To Talk.",
+  "mainIntro1": "Our bereavement support group is accessible by any individual within our community that has been affected by a bereavement.",
+  "mainIntro2": "The group is led by fully-trained volunteers and offers a safe, friendly and relaxed space to connect with others who find themselves in similar situations.",
+  "mainIntro3": "The free drop-in sessions will take place in our hospice building with tea, coffee and biscuits available.",
+  "groupHeading": "Bereavement Support Group",
+  "groupBullets": [
+    {
+      "text": "Open to anyone who is bereaved, at any stage"
+    },
+    {
+      "text": "A relaxed, supportive space to share experiences or simply listen"
+    },
+    {
+      "text": "No referral or booking required"
+    }
+  ],
+  "detailsFoot": "This is a brand new service that will launch soon. Dates and times of the groups will be listed below as soon as they are confirmed.",
+  "registerInterestIntro": "To register your interest, please complete the",
+  "registerInterestCta": "enquiry form",
+  "registerInterestHref": "/contact/",
+  "registerInterestOutro": "and one of our team will be in touch as soon as we have more details.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Register your interest in the bereavement support group."
+}

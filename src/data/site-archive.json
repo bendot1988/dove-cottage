@@ -52,8 +52,16 @@
       "excerpt": "A listening ear, groups, and signposting for anyone affected by loss or preparing for a bereavement.",
       "image": "/images/bereavement-featured.png",
       "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
-      "filterKeys": "hospice-services,counselling-support",
+      "filterKeys": "hospice-services",
       "href": "/hospice-services/bereavement-support/"
+    },
+    {
+      "title": "Bereavement support group",
+      "excerpt": "A safe, friendly and relaxed bereavement drop-in group led by fully-trained volunteers.",
+      "image": "/images/bereavement-featured.png",
+      "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
+      "filterKeys": "counselling-support",
+      "href": "/hospice-services/bereavement-support-group/"
     },
     {
       "title": "Counselling",
@@ -118,6 +126,14 @@
       "imageAlt": "A small support group in conversation",
       "filterKeys": "hospice-services,counselling-support",
       "href": "/hospice-services/support-groups/"
+    },
+    {
+      "title": "Carer support group",
+      "excerpt": "Connection, peer support and signposting for carers and people affected by palliative conditions.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "People in a welcoming group conversation",
+      "filterKeys": "counselling-support",
+      "href": "/hospice-services/carer-support/"
     },
     {
       "title": "Men's Shed",

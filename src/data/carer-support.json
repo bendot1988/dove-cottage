@@ -1,0 +1,39 @@
+{
+  "pageTitle": "Carer Support Group | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "People in a welcoming support group setting",
+  "parentNavLabel": "Support Groups",
+  "parentNavHref": "/hospice-services/support-groups/",
+  "heroH1": "Carer Support Group",
+  "heroShortDescription": "Ensuring Carers Receive The Support They Deserve.",
+  "mainIntro1": "Being a carer for a loved one is tough. We get it. Putting someone else's needs before your own has become your everyday, and sometimes it might feel like you've forgotten who you were before.",
+  "mainIntro2": "But that's why we're here - to support as many carers as possible and help them enjoy some time of their own.",
+  "whoHeading": "Who Is It For?",
+  "whoList": [
+    {
+      "text": "Anyone supporting or caring for someone with a palliative condition"
+    },
+    {
+      "text": "Anyone living with a palliative condition themselves"
+    }
+  ],
+  "helpHeading": "How Can It Help?",
+  "helpList": [
+    {
+      "text": "An informal group offering connection and peer support"
+    },
+    {
+      "text": "Signposting to other support if required"
+    },
+    {
+      "text": "Making connections with others in similar situations"
+    }
+  ],
+  "detailsFoot": "More details of dates and times will be confirmed soon.",
+  "registerInterestIntro": "Please complete this",
+  "registerInterestCta": "enquiry form",
+  "registerInterestHref": "/contact/",
+  "registerInterestOutro": "to register your interest.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Register your interest in the carer support group."
+}

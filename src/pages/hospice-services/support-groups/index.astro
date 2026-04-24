@@ -1,151 +1,273 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
-import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import p from "../../../data/support-groups.json";
-import contact from "../../../data/contact.json";
-import { toTitleCase } from "../../../lib/titleCase";
-
-const c = contact;
-const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+type SupportCard = {
+  title: string;
+  excerpt: string;
+  image: string;
+  imageAlt: string;
+  badge: string;
+  stat: string;
+  ctaLabel: string;
+  href: string;
+};
 
 const layoutTitle = p.pageTitle
   .split(/\s*\|\s*/)
-  .map((part) => toTitleCase(part.trim()))
+  .map((part) => part.trim())
   .join(" | ");
-
-const parentLabel = p.parentNavLabel;
-const asideTitle = toTitleCase("Get in touch");
-const phoneLabel = toTitleCase("Phone");
-const formLabel = toTitleCase("Enquiry");
-const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
+const cards = p.cards.map((item: SupportCard) => ({
+  item,
+  live: Boolean(item.href && item.href !== "#" && item.href.trim().length)
+}));
 ---
 
 <BaseLayout title={layoutTitle}>
-  <div class="svc-page support-groups-page">
-    <section class="hospice-svc-hero" aria-label={p.heroH1}>
-      <img
-        class="hospice-svc-hero-bg"
-        src={p.heroImage}
-        alt={p.heroImageAlt}
-        width="1920"
-        height="720"
-        loading="eager"
-        fetchpriority="high"
-      />
-      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
-      <div class="container hospice-svc-hero-inner">
-        <a class="interior-hero-eyebrow" href={p.parentNavHref}>
-          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
-          {parentLabel}
-        </a>
-        <h1>{p.heroH1}</h1>
-        <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
-      </div>
-    </section>
-
-    <div class="motion-scope">
-      <SubpageReviewCarousel />
-
-      <section class="svc-main" aria-label={p.heroH1}>
-        <img
-          src="/images/sunflower-brand-small.png"
-          alt=""
-          class="svc-sunflower"
-          loading="lazy"
-          aria-hidden="true"
-        />
-        <div class="container svc-layout">
-          <div class="svc-primary">
-            <p class="svc-lede">{p.mainIntro1}</p>
-
-            <h2 class="svc-section-h2">{p.groupsHeading}</h2>
-            <div class="svc-group-grid">
-              {
-                p.groups.map((g) => (
-                  <div class="svc-card svc-card--tight" role="group" aria-label={g.title}>
-                    <h3 class="svc-card__subtitle">{g.title}</h3>
-                    <ul class="svc-list">
-                      {g.bullets.map((row) => (
-                        <li>{line(row)}</li>
-                      ))}
-                    </ul>
-                    <p class="svc-body">
-                      <a class="svc-inline-link" href={g.ctaHref}>
-                        {g.ctaLabel}
-                      </a>
-                    </p>
-                  </div>
-                ))
-              }
-            </div>
-
-            <p class="svc-footnote">{p.detailsFoot}</p>
-            <p class="svc-body">
-              {p.registerInterestIntro}{" "}
-              <a class="svc-inline-link" href={p.registerInterestHref}>
-                {p.registerInterestCta}
-              </a>
-              .
-            </p>
-          </div>
-
-          <aside class="svc-side" aria-label={asideTitle}>
-            <div class="side-card">
-              <h2 class="side-card-title">{asideTitle}</h2>
-              <ul class="side-list">
-                <li>
-                  <span class="side-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                    </svg>
-                  </span>
-                  <div>
-                    <span class="side-label">{phoneLabel}</span>
-                    <a class="side-value side-link" href={telHref}>{c.trustPhoneDisplay}</a>
-                  </div>
-                </li>
-                <li>
-                  <span class="side-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                      <rect width="20" height="16" x="2" y="4" rx="2" />
-                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                    </svg>
-                  </span>
-                  <div>
-                    <span class="side-label">{formLabel}</span>
-                    <a class="side-value side-link" href="/contact/">
-                      {p.sideFormLinkText}
-                    </a>
-                    <p class="svc-side-hint">{p.sideFormHint}</p>
-                  </div>
-                </li>
-              </ul>
-              <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
-            </div>
-            <ArchiveSidebarPeek filterId="counselling-support" excludePath="/hospice-services/support-groups" />
-          </aside>
-        </div>
-      </section>
+  <section class="hospice-svc-hero" aria-label={p.heroH1}>
+    <img class="hospice-svc-hero-bg" src={p.heroImage} alt={p.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
+    <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+    <div class="container hospice-svc-hero-inner">
+      <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+        <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+        {p.parentNavLabel}
+      </a>
+      <h1>{p.heroH1}</h1>
+      <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
     </div>
-  </div>
-  <script>
-    import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
-    initMotionScrollReveal();
-  </script>
+  </section>
+
+  <section class="support-overview" aria-labelledby="support-groups-title">
+    <div class="container">
+      <div class="support-overview__prose">
+        <h2 id="support-groups-title">Support Groups</h2>
+        <p>{p.mainIntro1}</p>
+      </div>
+
+      <div class="support-overview__grid support-overview__grid--three">
+        {
+          cards.map(({ item, live }) =>
+            live ? (
+              <a class="support-card support-card--link" href={item.href} aria-label={`${item.ctaLabel}: ${item.title}`}>
+                <div class="support-card__media">
+                  <img src={item.image} alt={item.imageAlt} width="1200" height="675" loading="lazy" decoding="async" />
+                  <span class="support-card__badge">{item.badge}</span>
+                </div>
+                <div class="support-card__body">
+                  <p class="support-card__stat">{item.stat}</p>
+                  <h3>{item.title}</h3>
+                  <p class="support-card__excerpt">{item.excerpt}</p>
+                  <span class="support-card__cta">
+                    {item.ctaLabel} <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <article class="support-card">
+                <div class="support-card__media">
+                  <img src={item.image} alt={item.imageAlt} width="1200" height="675" loading="lazy" decoding="async" />
+                  <span class="support-card__badge">{item.badge}</span>
+                </div>
+                <div class="support-card__body">
+                  <p class="support-card__stat">{item.stat}</p>
+                  <h3>{item.title}</h3>
+                  <p class="support-card__excerpt">{item.excerpt}</p>
+                  <span class="support-card__coming-soon">Coming soon</span>
+                </div>
+              </article>
+            )
+          )
+        }
+      </div>
+
+      <div class="support-overview__referral">
+        <p>
+          {p.referralIntro}{" "}
+          <a class="support-overview__referral-link" href={p.referralCtaHref}>{p.referralCta}</a>{" "}
+          {p.referralOutro}
+        </p>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-  .support-groups-page .svc-primary > .svc-lede:first-of-type {
-    margin-bottom: 1.8rem;
+  .support-overview {
+    background: #f5f8fd;
+    padding: clamp(2rem, 5vw, 3rem) 0 clamp(3rem, 7vw, 4.5rem);
   }
 
-  .support-groups-page .svc-section-h2 {
-    margin-top: 0;
-    margin-bottom: 1rem;
+  .support-overview__prose {
+    max-width: 44rem;
+    margin: 0 auto 1.5rem;
+    text-align: center;
   }
 
-  .support-groups-page .svc-group-grid {
-    margin-bottom: 1.2rem;
+  .support-overview__prose h2 {
+    margin: 0 0 0.8rem;
+    font-size: var(--type-section-title);
+    color: #132949;
+  }
+
+  .support-overview__prose p {
+    margin: 0;
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: #2f4260;
+  }
+
+  .support-overview__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .support-overview__grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .support-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(19, 47, 82, 0.08);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform 0.2s var(--motion-ease-out),
+      box-shadow 0.2s var(--motion-ease-out);
+  }
+
+  .support-card--link:hover,
+  .support-card--link:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(16, 38, 72, 0.13);
+  }
+
+  .support-card--link:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+  }
+
+  .support-card__media {
+    position: relative;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+  }
+
+  .support-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .support-card__badge {
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 0.62rem;
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(10, 32, 62, 0.86);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .support-card__body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    min-height: 178px;
+  }
+
+  .support-card__stat {
+    margin: 0 0 8px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: var(--type-micro);
+    line-height: 1.3;
+    font-weight: 700;
+    color: #365a89;
+    background: #eef3fa;
+  }
+
+  .support-card h3 {
+    margin: 0 0 8px;
+    font-size: var(--type-card-title);
+    line-height: 1.28;
+    color: #10233f;
+  }
+
+  .support-card__excerpt {
+    margin: 0;
+    font-size: var(--type-body-small);
+    line-height: 1.55;
+    color: #42556f;
+  }
+
+  .support-card__cta,
+  .support-card__coming-soon {
+    margin-top: auto;
+    padding-top: 12px;
+    font-size: var(--type-body-small);
+    font-weight: 800;
+    color: var(--color-steel-blue-1);
+  }
+
+  .support-card__coming-soon {
+    color: #6b7c95;
+  }
+
+  .support-overview__referral {
+    max-width: 46rem;
+    margin: clamp(2rem, 5vw, 2.4rem) auto 0;
+    padding-top: 1.4rem;
+    border-top: 1px solid #dce5f2;
+    text-align: center;
+  }
+
+  .support-overview__referral p {
+    margin: 0;
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: #2f4260;
+  }
+
+  .support-overview__referral-link {
+    color: var(--color-steel-blue-1);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .support-overview__referral-link:hover,
+  .support-overview__referral-link:focus-visible {
+    color: #153f73;
+  }
+
+  .support-overview__referral-link:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 1100px) {
+    .support-overview__grid--three {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 900px) {
+    .support-overview__grid,
+    .support-overview__grid--three {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
