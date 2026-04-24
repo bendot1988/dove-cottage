@@ -127,8 +127,10 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
             <div class="mega-grid">
               <section class="mega-column">
                 <h3 class="mega-title">What We Offer</h3>
-                <a href="/what-we-offer/carer-patient-wellbeing/" class="mega-link">Carer &amp; Patient Wellbeing Sessions</a>
-                <a href="/what-we-offer/dementia-home-sitting/" class="mega-link">Dementia Home-Sitting</a>
+                <a href="/hospice-services/" class="mega-link mega-link--pillar">Hospice Services</a>
+                <a href="/what-we-offer/carer-patient-wellbeing/" class="mega-link mega-link--pillar">Care &amp; Well-Being Sessions</a>
+                <a href="/what-we-offer/dementia-home-sitting/" class="mega-link mega-link--pillar">Dementia Home-Sitting</a>
+                <a href="/hospice-services/counselling-support/" class="mega-link mega-link--pillar">Counselling &amp; Support</a>
               </section>
 
               <section class="mega-column">
@@ -1010,6 +1012,20 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
   .mega-link:hover::before,
   .mega-link:focus-visible::before {
     color: var(--color-steel-blue-1);
+  }
+
+  .mega-link--pillar {
+    font-weight: 800;
+    color: #10335e;
+    background: rgba(234, 241, 251, 0.55);
+    border: 1px solid rgba(29, 101, 178, 0.16);
+  }
+
+  .mega-link--pillar:hover,
+  .mega-link--pillar:focus-visible {
+    background: #eaf1fb;
+    border-color: rgba(29, 101, 178, 0.28);
+    color: #0d2f57;
   }
 
   .about-mega {
