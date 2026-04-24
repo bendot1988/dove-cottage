@@ -55,17 +55,23 @@ const { posts = [] } = Astro.props as Props;
   }
 
   h2 {
-    margin: 0 0 18px;
+    margin: 0;
     font-size: var(--type-section-title);
-    color: var(--color-steel-blue);
+    text-align: center;
+    color: #0f2240;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
 
   .section-subtitle {
-    margin: -6px 0 18px;
-    color: #425772;
+    margin: 12px auto 30px;
+    color: #364861;
+    text-align: center;
     font-size: var(--type-body-large);
     line-height: 1.5;
-    max-width: 760px;
+    max-width: 840px;
+    text-wrap: pretty;
   }
 
   .featured-grid {

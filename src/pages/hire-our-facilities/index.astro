@@ -1,0 +1,131 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SubpageReviewCarousel from "../../components/SubpageReviewCarousel.astro";
+import p from "../../data/hire-our-facilities.json";
+import contact from "../../data/contact.json";
+import { toTitleCase } from "../../lib/titleCase";
+
+const c = contact;
+const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+
+const layoutTitle = p.pageTitle
+  .split(/\s*\|\s*/)
+  .map((part) => toTitleCase(part.trim()))
+  .join(" | ");
+
+const asideTitle = toTitleCase("Get in touch");
+const phoneLabel = toTitleCase("Phone");
+const formLabel = toTitleCase("Enquiry");
+const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
+const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim().length);
+---
+
+<BaseLayout title={layoutTitle}>
+  <div class="svc-page">
+    <section class="hospice-svc-hero" aria-label={p.heroH1}>
+      <img class="hospice-svc-hero-bg" src={p.heroImage} alt={p.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {p.parentNavLabel}
+        </a>
+        <h1>{p.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <div class="motion-scope">
+      <SubpageReviewCarousel />
+      <section class="svc-main" aria-label={p.heroH1}>
+        <img src="/images/sunflower-brand-small.png" alt="" class="svc-sunflower" loading="lazy" aria-hidden="true" />
+        <div class="container svc-layout">
+          <div class="svc-primary">
+            {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
+
+            <div class="svc-card" role="group" aria-labelledby="spaces-heading">
+              <h2 class="svc-card__title" id="spaces-heading">{p.spacesHeading}</h2>
+              <ul class="svc-list">
+                {p.spacesList.map((row) => (
+                  <li>{line(row)}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="svc-card" role="group" aria-labelledby="features-heading">
+              <h2 class="svc-card__title" id="features-heading">{p.featuresHeading}</h2>
+              <ul class="svc-list">
+                {p.featuresList.map((row) => (
+                  <li>{line(row)}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="svc-card">
+              <h2 class="svc-card__title">{p.formHeading}</h2>
+              <p class="svc-body">{p.formIntro}</p>
+              <div class="form-embed-card">
+                <div class="beacon-form" data-account="dovecottagedayhospice" data-form="5cada45e"></div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="svc-side" aria-label={asideTitle}>
+            <div class="side-card">
+              <h2 class="side-card-title">{asideTitle}</h2>
+              <ul class="side-list">
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{phoneLabel}</span>
+                    <a class="side-value side-link" href={telHref}>{c.trustPhoneDisplay}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{formLabel}</span>
+                    <a class="side-value side-link" href="/contact/">{p.sideFormLinkText}</a>
+                    <p class="svc-side-hint">{p.sideFormHint}</p>
+                  </div>
+                </li>
+              </ul>
+              <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script is:inline>
+    !function(e,t){if(!e.getElementById(t)){var c=e.createElement("script");c.id=t,c.src="https://static.beaconproducts.co.uk/js-sdk/production/beaconcrm.min.js",e.getElementsByTagName("head")[0].appendChild(c)}}(document,"beacon-js-sdk");
+  </script>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
+</BaseLayout>
+
+<style>
+  .form-embed-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 8px 22px rgba(18, 44, 83, 0.07);
+  }
+
+  :global(.beacon-form) {
+    width: 100%;
+    min-height: 560px;
+  }
+</style>

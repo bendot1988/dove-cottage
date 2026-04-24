@@ -1,0 +1,29 @@
+{
+  "pageTitle": "Hire Our Facilities | Dove Cottage",
+  "heroImage": "/images/hero-supporting-journey.png",
+  "heroImageAlt": "A bright, flexible room set up for a community session",
+  "parentNavLabel": "About Us",
+  "parentNavHref": "/",
+  "heroH1": "Hire Our Facilities",
+  "heroShortDescription": "Flexible, welcoming spaces for your community events.",
+  "mainIntro1": "Our building offers calm, accessible spaces that can be hired for meetings, workshops, support sessions, training days and community events.",
+  "mainIntro2": "When rooms are not in use for hospice services, we make them available to local groups and organisations who share our community-focused values.",
+  "spacesHeading": "Our spaces are suitable for",
+  "spacesList": [
+    { "text": "Team meetings and planning sessions" },
+    { "text": "Training, seminars and presentations" },
+    { "text": "Support groups and wellbeing activities" },
+    { "text": "Small community events and private bookings" }
+  ],
+  "featuresHeading": "What you can expect",
+  "featuresList": [
+    { "text": "A friendly welcome from our team" },
+    { "text": "Comfortable, clean and professional spaces" },
+    { "text": "Accessible facilities and nearby parking" },
+    { "text": "Flexible hire options subject to availability" }
+  ],
+  "formHeading": "Facility Hire Enquiry",
+  "formIntro": "Complete the form below and we will contact you with availability, pricing and next steps.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "General enquiries about facility hire."
+}
