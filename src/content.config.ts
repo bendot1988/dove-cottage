@@ -30,6 +30,20 @@ const events = defineCollection({
   })
 });
 
+const newsletters = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    issueDate: z.coerce.date(),
+    /** Public URL to the PDF, e.g. /newsletters/issue-name.pdf */
+    file: z.string(),
+    /** Button label, e.g. Download PDF */
+    fileLabel: z.string().default("Download PDF"),
+    excerpt: z.string().optional(),
+    draft: z.boolean().default(false)
+  })
+});
+
 const shops = defineCollection({
   type: "content",
   schema: z.object({
@@ -57,4 +71,4 @@ const shops = defineCollection({
   })
 });
 
-export const collections = { blog, events, shops };
+export const collections = { blog, events, newsletters, shops };

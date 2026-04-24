@@ -195,6 +195,52 @@ collections:
       - { label: "Booking link (optional)", name: "bookingUrl", widget: "string", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
       - { label: "Body", name: "body", widget: "markdown" }
+  - name: "newsletters"
+    label: "Newsletters"
+    folder: "src/content/newsletters"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    format: "frontmatter"
+    preview_path: "newsletter/"
+    media_folder: "public/newsletters"
+    public_folder: "/newsletters"
+    fields:
+      - { label: "Title (shown on archive)", name: "title", widget: "string" }
+      - {
+          label: "Issue date",
+          name: "issueDate",
+          widget: "datetime",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+        }
+      - {
+          label: "PDF file",
+          name: "file",
+          widget: "file",
+          hint: "Upload the newsletter PDF. Files are stored in public/newsletters.",
+        }
+      - {
+          label: "Download button label",
+          name: "fileLabel",
+          widget: "string",
+          required: false,
+          default: "Download PDF",
+        }
+      - {
+          label: "Short summary (optional)",
+          name: "excerpt",
+          widget: "text",
+          required: false,
+        }
+      - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
+      - {
+          label: "Editor notes (optional, not shown on site)",
+          name: "body",
+          widget: "markdown",
+          required: false,
+          hint: "Optional internal notes; the public archive uses title, date, summary, and PDF only.",
+        }
   - name: "shops"
     label: "Shops"
     folder: "src/content/shops"

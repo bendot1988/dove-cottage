@@ -63,6 +63,31 @@
   "galleryBody": "A gallery of our facilities and gardens will be added soon.",
   "formHeading": "Facility Hire Enquiry",
   "formIntro": "To make an enquiry regarding booking our facilities please complete the enquiry form.",
-  "sideFormLinkText": "Use our contact form",
-  "sideFormHint": "General enquiries about facility hire."
+  "sideFormLinkText": "Use our form",
+  "sideFormHint": "General enquiries about facility hire.",
+  "sidebarPeekTitle": "More from Dove Cottage",
+  "sidebarPeekViewAllHref": "/explore/",
+  "sidebarPeekViewAllLabel": "Browse services & support",
+  "sidebarPeekCards": [
+    {
+      "title": "Contact",
+      "href": "/contact/",
+      "image": "/images/hero-family-alt.png"
+    },
+    {
+      "title": "News & Events",
+      "href": "/news/",
+      "image": "/images/hero-supporting-journey.png"
+    },
+    {
+      "title": "Donate",
+      "href": "/donate/",
+      "image": "/images/care-counselling.png"
+    },
+    {
+      "title": "Support us",
+      "href": "/support-us/",
+      "image": "/images/reach-section-bg.png"
+    }
+  ]
 }

@@ -6,6 +6,12 @@ import { toTitleCase } from "../lib/titleCase";
 const path = Astro.url.pathname;
 const isHome = path === "/" || path === "";
 const isDonatePage = path === "/donate" || path.startsWith("/donate/");
+const isNewsEventsSection =
+  path === "/news" ||
+  path.startsWith("/news/") ||
+  path.startsWith("/events/") ||
+  path === "/newsletter" ||
+  path.startsWith("/newsletter/");
 const utilTelHref = `tel:${contact.trustPhone}`;
 const donateLabel = toTitleCase(contact.trustDonateLabel);
 
@@ -24,6 +30,7 @@ const baseSearchEntries = [
   { title: "Donate", href: "/donate/", section: "Support Us" },
   { title: "Contact Us", href: "/contact/", section: "Main" },
   { title: "News & Events", href: "/news/", section: "News" },
+  { title: "Newsletter archive", href: "/newsletter/", section: "News" },
   { title: "Our Shops", href: "/shops/", section: "Support Us" }
 ];
 
@@ -187,14 +194,28 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
           </div>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item has-dropdown">
           <a
-            class:list={["nav-link", { active: path.startsWith("/news") }]}
-            href="/news/"
-            aria-current={path.startsWith("/news") ? "page" : undefined}
+            class:list={["nav-link", "with-arrow", { active: isNewsEventsSection }]}
+            href="#"
+            aria-current={isNewsEventsSection ? "page" : undefined}
           >
-            News &amp; Events
+            <span>News &amp; Events</span>
+            <span class="dropdown-icon" aria-hidden="true">
+              <svg viewBox="0 0 12 12" focusable="false">
+                <path d="M2.1 4.35L6 8.1l3.9-3.75" />
+              </svg>
+            </span>
           </a>
+          <div class="dropdown-panel mega-menu support-mega news-events-mega">
+            <div class="mega-grid support-grid">
+              <section class="mega-column">
+                <a href="/news/?feed=news" class="mega-link">News</a>
+                <a href="/news/?feed=event" class="mega-link">Events</a>
+                <a href="/newsletter/" class="mega-link">Newsletter</a>
+              </section>
+            </div>
+          </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/hire-our-facilities/">Hire our facilities</a>
@@ -297,13 +318,20 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
           </div>
         </details>
 
-        <a
-          href="/news/"
-          class:list={["mobile-link", { active: path.startsWith("/news") }]}
-          aria-current={path.startsWith("/news") ? "page" : undefined}
-        >
-          News &amp; Events
-        </a>
+        <details class="mobile-group">
+          <summary>News &amp; Events</summary>
+          <div class="mobile-group-content">
+            <a href="/news/?feed=news" class="mobile-link">News</a>
+            <a href="/news/?feed=event" class="mobile-link">Events</a>
+            <a
+              href="/newsletter/"
+              class:list={["mobile-link", { active: path === "/newsletter" || path.startsWith("/newsletter/") }]}
+              aria-current={path === "/newsletter" || path.startsWith("/newsletter/") ? "page" : undefined}
+            >
+              Newsletter
+            </a>
+          </div>
+        </details>
         <a href="/hire-our-facilities/" class="mobile-link">Hire our facilities</a>
         <a
           href="/contact/"

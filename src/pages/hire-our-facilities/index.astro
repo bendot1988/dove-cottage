@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArchiveSidebarPeek from "../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../components/SubpageReviewCarousel.astro";
 import p from "../../data/hire-our-facilities.json";
 import contact from "../../data/contact.json";
@@ -71,7 +72,7 @@ const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3, p.mainIntro4].fil
               <p class="svc-body">{p.galleryBody}</p>
             </div>
 
-            <div class="svc-card">
+            <div class="svc-card" id="facility-hire-enquiry-form">
               <h2 class="svc-card__title">{p.formHeading}</h2>
               <p class="svc-body">{p.formIntro}</p>
               <div class="form-embed-card">
@@ -104,13 +105,29 @@ const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3, p.mainIntro4].fil
                   </span>
                   <div>
                     <span class="side-label">{formLabel}</span>
-                    <a class="side-value side-link" href="/contact/">{p.sideFormLinkText}</a>
+                    <a
+                      class="side-form-scroll-btn"
+                      href="#facility-hire-enquiry-form"
+                      aria-label="Scroll to the facility hire enquiry form on this page"
+                    >
+                      <span>{p.sideFormLinkText}</span>
+                      <svg class="side-form-scroll-btn__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 5v14" />
+                        <path d="m19 12-7 7-7-7" />
+                      </svg>
+                    </a>
                     <p class="svc-side-hint">{p.sideFormHint}</p>
                   </div>
                 </li>
               </ul>
               <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
             </div>
+            <ArchiveSidebarPeek
+              staticCards={p.sidebarPeekCards}
+              staticTitle={p.sidebarPeekTitle}
+              staticViewAllHref={p.sidebarPeekViewAllHref}
+              staticViewAllLabel={p.sidebarPeekViewAllLabel}
+            />
           </aside>
         </div>
       </section>
@@ -126,9 +143,54 @@ const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3, p.mainIntro4].fil
 </BaseLayout>
 
 <style>
+  #facility-hire-enquiry-form {
+    scroll-margin-top: 5.5rem;
+  }
+
   .svc-body--strong {
     font-weight: 700;
     color: #203857;
+  }
+
+  .side-form-scroll-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid #204a81;
+    background: #fff;
+    color: #204a81;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+    text-decoration: none;
+    line-height: 1.2;
+    transition:
+      background 0.18s ease,
+      color 0.18s ease,
+      border-color 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .side-form-scroll-btn:hover,
+  .side-form-scroll-btn:focus-visible {
+    background: #f2f6fc;
+    border-color: var(--color-steel-blue-1);
+    color: var(--color-steel-blue-1);
+    box-shadow: 0 2px 8px rgba(29, 101, 178, 0.12);
+  }
+
+  .side-form-scroll-btn:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+  }
+
+  .side-form-scroll-btn__arrow {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
   }
 
   .form-embed-card {

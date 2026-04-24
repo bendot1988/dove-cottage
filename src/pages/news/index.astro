@@ -172,7 +172,11 @@ const feedItems = [
     };
 
     if (filterButtons.length && cards.length) {
-      applyFilter("all");
+      const params = new URLSearchParams(window.location.search);
+      const feed = params.get("feed");
+      const initial = feed === "news" || feed === "event" ? feed : "all";
+      applyFilter(initial);
+
       filterButtons.forEach((button) => {
         button.addEventListener("click", () => {
           applyFilter(button.dataset.feedFilter || "all");
@@ -315,6 +319,10 @@ const feedItems = [
       transform 0.25s ease,
       box-shadow 0.25s ease,
       border-color 0.25s ease;
+  }
+
+  .news-card[hidden] {
+    display: none;
   }
 
   .news-card:hover,

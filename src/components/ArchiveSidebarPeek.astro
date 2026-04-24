@@ -1,19 +1,33 @@
 ---
 /**
- * Stacked list (max 4) of cards from `site-archive.json` for the active topic filter.
- * Renders only when at least one other item exists after excluding the current page.
+ * Stacked list (max 4) of image cards: either from `site-archive.json` for a topic filter,
+ * or a fixed list passed via `staticCards` (same layout as hospice service sidebars).
  */
 import archive from "../data/site-archive.json";
 
+interface StaticCard {
+  title: string;
+  href: string;
+  image: string;
+}
+
 interface Props {
-  /** e.g. `what-we-offer`, `support-us`, `hospice-services` */
-  filterId: string;
+  /** e.g. `what-we-offer`, `support-us`, `hospice-services` — ignored when `staticCards` is set */
+  filterId?: string;
   /** Path to drop from the list (defaults to the current page URL) */
   excludePath?: string;
   max?: number;
+  /** When provided, renders these links instead of the archive filter */
+  staticCards?: StaticCard[];
+  /** Heading bar title when using `staticCards` */
+  staticTitle?: string;
+  /** Optional footer link when using `staticCards` */
+  staticViewAllHref?: string;
+  staticViewAllLabel?: string;
 }
 
-const { filterId, max = 4 } = Astro.props;
+const { max = 4, staticCards, staticTitle, staticViewAllHref, staticViewAllLabel } = Astro.props;
+const filterId = Astro.props.filterId ?? "";
 const currentPath = Astro.url.pathname;
 const excludePath = Astro.props.excludePath ?? currentPath;
 
@@ -31,21 +45,45 @@ function parseKeys(raw: string): string[] {
     .filter(Boolean);
 }
 
-const sectionLabel = archive.filters.find((f) => f.id === filterId)?.label ?? "Related";
-const ex = normPath(excludePath);
+const isStatic = Array.isArray(staticCards) && staticCards.length > 0;
 
-const picked = archive.items
-  .filter((item) => parseKeys(item.filterKeys).includes(filterId))
-  .filter((item) => {
-    if (!item.href || item.href === "#") {
-      return true;
-    }
-    return normPath(item.href) !== ex;
-  })
-  .slice(0, max);
+type PickedItem = {
+  title: string;
+  image: string;
+  href?: string;
+};
 
-const hasCards = picked.length > 0;
-const exploreHref = filterId && filterId !== "all" ? `/explore/?topic=${filterId}` : "/explore/";
+let sectionLabel: string;
+let picked: PickedItem[];
+let hasCards: boolean;
+let footerHref: string | null;
+let footerLabel: string | null;
+
+if (isStatic) {
+  sectionLabel = staticTitle ?? "Explore";
+  picked = staticCards!.slice(0, max).map((c) => ({ title: c.title, href: c.href, image: c.image }));
+  hasCards = picked.length > 0;
+  footerHref = staticViewAllHref?.trim() ? staticViewAllHref : null;
+  footerLabel = staticViewAllLabel?.trim() ? staticViewAllLabel : null;
+} else {
+  sectionLabel = archive.filters.find((f) => f.id === filterId)?.label ?? "Related";
+  const ex = normPath(excludePath);
+
+  picked = archive.items
+    .filter((item) => parseKeys(item.filterKeys).includes(filterId))
+    .filter((item) => {
+      if (!item.href || item.href === "#") {
+        return true;
+      }
+      return normPath(item.href) !== ex;
+    })
+    .slice(0, max)
+    .map((item) => ({ title: item.title, image: item.image, href: item.href }));
+
+  hasCards = picked.length > 0;
+  footerHref = filterId && filterId !== "all" ? `/explore/?topic=${filterId}` : "/explore/";
+  footerLabel = `View all in ${sectionLabel}`;
+}
 ---
 
 {
@@ -98,10 +136,12 @@ const exploreHref = filterId && filterId !== "all" ? `/explore/?topic=${filterId
           );
         })}
       </div>
-      <a class="archive-peek__all" href={exploreHref}>
-        View all in {sectionLabel}
-        <span aria-hidden="true"> →</span>
-      </a>
+      {footerHref && footerLabel && (
+        <a class="archive-peek__all" href={footerHref}>
+          {footerLabel}
+          <span aria-hidden="true"> →</span>
+        </a>
+      )}
     </div>
 )}
 
