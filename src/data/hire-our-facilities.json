@@ -4,26 +4,65 @@
   "heroImageAlt": "A bright, flexible room set up for a community session",
   "parentNavLabel": "About Us",
   "parentNavHref": "/",
-  "heroH1": "Hire Our Facilities",
-  "heroShortDescription": "Flexible, welcoming spaces for your community events.",
-  "mainIntro1": "Our building offers calm, accessible spaces that can be hired for meetings, workshops, support sessions, training days and community events.",
-  "mainIntro2": "When rooms are not in use for hospice services, we make them available to local groups and organisations who share our community-focused values.",
-  "spacesHeading": "Our spaces are suitable for",
-  "spacesList": [
-    { "text": "Team meetings and planning sessions" },
-    { "text": "Training, seminars and presentations" },
-    { "text": "Support groups and wellbeing activities" },
-    { "text": "Small community events and private bookings" }
+  "heroH1": "Hire our facilities",
+  "heroShortDescription": "Welcoming spaces available for hire",
+  "mainIntro1": "Our building offers calm and accessible spaces available for hire by external organisations and individuals.",
+  "mainIntro2": "Located within the beautiful rural Vale of Belvoir, our rooms are ideal for meetings, training sessions, wellbeing activities, creative groups and special appointments that benefit from privacy and tranquillity.",
+  "mainIntro3": "With extensive free parking on site, tea and coffee making facilities and free Wifi access, our hospice building offers the perfect alternative to traditional corporate rooms for hire.",
+  "mainIntro4": "By choosing to hire our facilities, you are also supporting the vital work of our hospice, with all income reinvested into patient care and family support.",
+  "sections": [
+    {
+      "heading": "Meeting & Training Space",
+      "subheading": "Inspiring spaces for focused thinking and collaboration",
+      "body": "Our hexagonal-shaped light and airy meeting room provides a refreshing alternative to traditional corporate venues. Designed to encourage calm, clarity and connection, it is perfect for:",
+      "bullets": [
+        { "text": "Team meetings and away days" },
+        { "text": "Training sessions and workshops" },
+        { "text": "Strategic planning or reflective discussions" }
+      ],
+      "closing": "Users can enjoy a quiet, confidential environment surrounded by nature, helping conversations flow and ideas flourish."
+    },
+    {
+      "heading": "Extensive Tranquil Gardens",
+      "subheading": "A peaceful outdoor setting for reflection, creativity and connection",
+      "body": "Our beautifully maintained hospice gardens offer a rare sense of calm and space. The garden area is ideal for:",
+      "bullets": [
+        { "text": "Small gatherings or reflective events" },
+        { "text": "Birthday celebrations" },
+        { "text": "Creative or mindfulness sessions" },
+        { "text": "Photography or quiet outdoor activities" }
+      ],
+      "closing": "The gardens provide a serene backdrop, allowing guests to pause, breathe and reconnect in nature."
+    },
+    {
+      "heading": "Hairdressing Salon",
+      "subheading": "A professional, fully equipped salon",
+      "body": "Our on-site hairdressing salon is available for use by independent stylists and organisations seeking a peaceful, well-appointed space. It offers:",
+      "bullets": [
+        { "text": "A calm, private environment" },
+        { "text": "Professional facilities" },
+        { "text": "Easy access and a welcoming atmosphere" }
+      ],
+      "closing": "Perfect for client appointments where comfort and discretion are paramount."
+    },
+    {
+      "heading": "Complementary Therapy & Beauty Suite",
+      "subheading": "A restorative space for wellbeing professionals",
+      "body": "Our complementary therapy and beauty suite provides a soothing, thoughtfully designed environment suitable for:",
+      "bullets": [
+        { "text": "Massage and holistic therapies" },
+        { "text": "Beauty treatments" },
+        { "text": "One-to-one wellbeing sessions" }
+      ],
+      "closing": "The space promotes relaxation and trust, making it ideal for practitioners who value a calm, supportive setting for their clients."
+    }
   ],
-  "featuresHeading": "What you can expect",
-  "featuresList": [
-    { "text": "A friendly welcome from our team" },
-    { "text": "Comfortable, clean and professional spaces" },
-    { "text": "Accessible facilities and nearby parking" },
-    { "text": "Flexible hire options subject to availability" }
-  ],
+  "impactHeading": "A Meaningful Choice of Venue",
+  "impactBody": "Hiring our facilities offers more than just a space — it is a chance to make a positive impact. Every booking helps support hospice care and the families who rely on us.",
+  "galleryHeading": "Photo Gallery",
+  "galleryBody": "A gallery of our facilities and gardens will be added soon.",
   "formHeading": "Facility Hire Enquiry",
-  "formIntro": "Complete the form below and we will contact you with availability, pricing and next steps.",
+  "formIntro": "To make an enquiry regarding booking our facilities please complete the enquiry form.",
   "sideFormLinkText": "Use our contact form",
   "sideFormHint": "General enquiries about facility hire."
 }

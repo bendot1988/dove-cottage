@@ -17,7 +17,7 @@ const asideTitle = toTitleCase("Get in touch");
 const phoneLabel = toTitleCase("Phone");
 const formLabel = toTitleCase("Enquiry");
 const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
-const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim().length);
+const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3, p.mainIntro4].filter((block) => block?.trim().length);
 ---
 
 <BaseLayout title={layoutTitle}>
@@ -43,22 +43,32 @@ const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim()
           <div class="svc-primary">
             {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
 
-            <div class="svc-card" role="group" aria-labelledby="spaces-heading">
-              <h2 class="svc-card__title" id="spaces-heading">{p.spacesHeading}</h2>
-              <ul class="svc-list">
-                {p.spacesList.map((row) => (
-                  <li>{line(row)}</li>
-                ))}
-              </ul>
+            {
+              p.sections.map((section) => (
+                <div class="svc-card" role="group" aria-label={section.heading}>
+                  <h2 class="svc-card__title">{section.heading}</h2>
+                  {section.subheading && <p class="svc-body svc-body--strong">{section.subheading}</p>}
+                  {section.body && <p class="svc-body">{section.body}</p>}
+                  {section.bullets?.length > 0 && (
+                    <ul class="svc-list">
+                      {section.bullets.map((row) => (
+                        <li>{line(row)}</li>
+                      ))}
+                    </ul>
+                  )}
+                  {section.closing && <p class="svc-body">{section.closing}</p>}
+                </div>
+              ))
+            }
+
+            <div class="svc-card" role="group" aria-label={p.impactHeading}>
+              <h2 class="svc-card__title">{p.impactHeading}</h2>
+              <p class="svc-body">{p.impactBody}</p>
             </div>
 
-            <div class="svc-card" role="group" aria-labelledby="features-heading">
-              <h2 class="svc-card__title" id="features-heading">{p.featuresHeading}</h2>
-              <ul class="svc-list">
-                {p.featuresList.map((row) => (
-                  <li>{line(row)}</li>
-                ))}
-              </ul>
+            <div class="svc-card" role="group" aria-label={p.galleryHeading}>
+              <h2 class="svc-card__title">{p.galleryHeading}</h2>
+              <p class="svc-body">{p.galleryBody}</p>
             </div>
 
             <div class="svc-card">
@@ -116,6 +126,11 @@ const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim()
 </BaseLayout>
 
 <style>
+  .svc-body--strong {
+    font-weight: 700;
+    color: #203857;
+  }
+
   .form-embed-card {
     background: #fff;
     border: 1px solid #d9e3f0;
