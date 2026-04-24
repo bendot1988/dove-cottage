@@ -1,0 +1,37 @@
+{
+  "pageTitle": "Men's Shed | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "A welcoming group space for men to connect and talk",
+  "parentNavLabel": "Counselling & Support",
+  "parentNavHref": "/hospice-services/counselling-support/",
+  "heroH1": "Men's Shed",
+  "heroShortDescription": "A welcoming place for men to connect with others who understand.",
+  "whatHeading": "What Is A Men's Shed?",
+  "whatBody": "A Men's Shed is a physical space where a group of men can meet, organise and take part in social activities, and talk to others in a similar situation. At Dove Cottage Day Hospice, the Men's Shed extends the services we offer. Historically, hospices have struggled to reach men who are caring for, or living with, a life-limiting illness, or who may find themselves alone for the first time in their lives.",
+  "whoHeading": "Who Is It For?",
+  "whoList": [
+    { "text": "Living with a life-limiting illness" },
+    { "text": "Caring for someone living with a life-limiting illness" },
+    { "text": "Bereaved" },
+    { "text": "Anticipating bereavement" }
+  ],
+  "helpHeading": "How Can The Men's Shed Help?",
+  "helpBody": "Regular attendance at the Men's Shed can help promote the mental and physical wellbeing of men, while supporting them to find and enjoy meaningful relationships and connections.",
+  "benefitsHeading": "What Are The Benefits?",
+  "benefitsList": [
+    { "text": "Accessing a safe space to talk with others experiencing similar situations" },
+    { "text": "Reducing social isolation through companionship and camaraderie" },
+    { "text": "Engaging in new interests and hobbies" },
+    { "text": "Accessing support and advice" }
+  ],
+  "attendanceBody": "Although the group will run weekly, there is no expectation to attend every week - members are welcome to come when it suits them.",
+  "locationBody": "Our Men's Shed will take place in our hospice building, with the opportunity to use the extensive hospice garden area.",
+  "quoteText": "\"It's something I can look forward to on a weekly basis and I know that I'm in a situation where we are all in the same boat.\"",
+  "quoteAttribution": "An attendee at a Marie Curie Men's Shed",
+  "referralIntro": "Dates and times will be announced as soon as they are confirmed. To register your interest and be the first to hear, please complete the",
+  "referralCta": "enquiry form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": ".",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Register your interest in the Men's Shed group."
+}

@@ -5,50 +5,27 @@
   "parentNavLabel": "Counselling & Support",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Support Groups",
-  "heroShortDescription": "Informal drop-in groups to help more of our community access support as and when they need it.",
-  "mainIntro1": "We are currently in the process of setting up informal drop-in style groups, enabling more members of our community to access support as and when they feel the need.",
-  "groupsHeading": "Drop-In Support Groups",
+  "heroShortDescription": "Ensuring Carers Receive The Support They Deserve.",
+  "mainIntro1": "Being a carer for a loved one is tough. We get it. Putting someone else's needs before your own has become your everyday, and sometimes it might feel like you've forgotten who you were before. But that's why we're here - to support as many carers as possible and help them enjoy some time of their own.",
+  "groupsHeading": "Support Groups",
   "groups": [
     {
       "title": "Carer Support Group",
       "bullets": [
         {
-          "text": "For anyone who is supporting or caring for someone with a palliative condition, or living with a palliative condition themselves"
+          "text": "Open to anyone who is supporting or caring for someone with a palliative condition, or living with a palliative condition themselves"
         },
         {
           "text": "An informal group offering connection and peer support"
-        }
-      ],
-      "ctaLabel": "Click here for further information",
-      "ctaHref": "/contact/"
-    },
-    {
-      "title": "Bereavement Support Group",
-      "bullets": [
-        {
-          "text": "Open to anyone who is bereaved, at any stage"
         },
         {
-          "text": "A relaxed, supportive space to share experiences or simply listen"
+          "text": "Signposting to other support if required"
         },
         {
-          "text": "No referral or booking required"
+          "text": "Making connections with others in similar situations"
         }
       ],
-      "ctaLabel": "Click here for further information",
-      "ctaHref": "/contact/"
-    },
-    {
-      "title": "Men in Sheds Group",
-      "bullets": [
-        {
-          "text": "For men who are bereaved, supporting or caring for someone with a palliative condition, or living with a palliative condition themselves"
-        },
-        {
-          "text": "An informal group offering connection and peer support"
-        }
-      ],
-      "ctaLabel": "Click here for further information",
+      "ctaLabel": "Click Here For Further Information",
       "ctaHref": "/contact/"
     }
   ],
@@ -57,5 +34,5 @@
   "registerInterestCta": "enquiry form",
   "registerInterestHref": "/contact/",
   "sideFormLinkText": "Use our contact form",
-  "sideFormHint": "Register your interest in support groups."
+  "sideFormHint": "Register your interest in the carer support group."
 }

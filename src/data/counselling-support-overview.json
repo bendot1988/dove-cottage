@@ -1,0 +1,60 @@
+{
+  "pageTitle": "Counselling & Support | Dove Cottage",
+  "heroImage": "/images/care-counselling.png",
+  "heroImageAlt": "Compassionate counselling and emotional support",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/hospice-services/",
+  "heroH1": "Counselling & Support",
+  "heroShortDescription": "Compassionate Support for Everyone.",
+  "introEyebrow": "Counselling & support",
+  "introHeading": "Compassionate Support for Everyone",
+  "mainIntro1": "Our counselling and emotional support sessions are available to any individual, carer or family member that has been affected by a palliative condition.",
+  "mainIntro2": "Our qualified counsellors are on hand to listen to anyone who feels they might benefit from a safe, confidential space to talk. Conversations are welcome around any aspect of life (whether related to the diagnosis or not), helping individuals feel heard and making sure they do not have to face a difficult time alone.",
+  "mainIntro3": "To find out more about the support we can offer, click on the links below:",
+  "cards": [
+    {
+      "title": "Counselling",
+      "excerpt": "Confidential one-to-one sessions with qualified counsellors for patients, family members, and unpaid carers.",
+      "image": "/images/care-counselling.png",
+      "imageAlt": "A quiet, private conversation in a safe environment",
+      "badge": "Emotional support",
+      "stat": "By appointment",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/counselling/"
+    },
+    {
+      "title": "Bereavement support",
+      "excerpt": "A listening ear, groups, and signposting for anyone affected by loss or preparing for a bereavement.",
+      "image": "/images/bereavement-featured.png",
+      "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
+      "badge": "Support",
+      "stat": "For families & carers",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/bereavement-support/"
+    },
+    {
+      "title": "Support Groups",
+      "excerpt": "Carer support groups offering connection, peer support, and signposting when needed.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "People in a welcoming group conversation",
+      "badge": "Group support",
+      "stat": "Register interest",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/support-groups/"
+    },
+    {
+      "title": "Men's Shed",
+      "excerpt": "A welcoming place for men to connect through shared experiences, conversation, and support.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "Men in a welcoming group setting",
+      "badge": "Group support",
+      "stat": "Weekly group",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/mens-shed/"
+    }
+  ],
+  "referralIntro": "To enquire about any of our services please complete the",
+  "referralCta": "enquiry form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and a member of our team will be in touch."
+}

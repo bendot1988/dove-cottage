@@ -6,8 +6,8 @@
   "parentNavHref": "/explore/?topic=hospice-services",
   "heroH1": "Hospice Services",
   "heroShortDescription": "Services tailored to your individual needs.",
-  "introEyebrow": "Day hospice",
-  "introHeading": "Care in our building",
+  "introEyebrow": "Day Hospice",
+  "introHeading": "Care In Our Building",
   "introKeyFacts": [
     { "label": "Open", "value": "Tuesday, Wednesday & Thursday" },
     { "label": "Times", "value": "10am – 3pm" },
@@ -99,7 +99,7 @@
       "href": "#"
     }
   ],
-  "additionalHeading": "Support beyond the hospice building",
+  "additionalHeading": "Support Beyond The Hospice Building",
   "additionalIntro": "In addition to our core hospice-based services, we also offer support as follows:",
   "additionalCards": [
     {
@@ -120,7 +120,7 @@
       "badge": "Explore",
       "stat": "Services & groups",
       "ctaLabel": "Browse support",
-      "href": "/explore/?topic=counselling-support"
+      "href": "/hospice-services/counselling-support/"
     },
     {
       "title": "Dementia home-sitting",

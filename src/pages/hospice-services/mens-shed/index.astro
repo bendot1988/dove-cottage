@@ -1,0 +1,311 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
+import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
+import p from "../../../data/mens-shed.json";
+import contact from "../../../data/contact.json";
+import { toTitleCase } from "../../../lib/titleCase";
+
+const c = contact;
+const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+
+const layoutTitle = p.pageTitle
+  .split(/\s*\|\s*/)
+  .map((part) => toTitleCase(part.trim()))
+  .join(" | ");
+
+const parentLabel = p.parentNavLabel;
+const asideTitle = toTitleCase("Get in touch");
+const phoneLabel = toTitleCase("Phone");
+const formLabel = toTitleCase("Enquiry");
+const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
+---
+
+<BaseLayout title={layoutTitle}>
+  <div class="svc-page mens-shed-page">
+    <section class="hospice-svc-hero" aria-label={p.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={p.heroImage}
+        alt={p.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {parentLabel}
+        </a>
+        <h1>{p.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <div class="motion-scope">
+      <SubpageReviewCarousel />
+
+      <section class="svc-main" aria-label={p.heroH1}>
+        <img
+          src="/images/sunflower-brand-small.png"
+          alt=""
+          class="svc-sunflower"
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <div class="container svc-layout">
+          <div class="svc-primary">
+            <h2 class="svc-section-h2">{p.whatHeading}</h2>
+            <p class="svc-lede">{p.whatBody}</p>
+
+            <div class="svc-card" role="group" aria-labelledby="who-heading">
+              <h3 class="svc-card__title" id="who-heading">
+                {p.whoHeading}
+              </h3>
+              <ul class="svc-list">
+                {p.whoList.map((row) => (
+                  <li>{line(row)}</li>
+                ))}
+              </ul>
+            </div>
+
+            <h2 class="svc-section-h2">{p.helpHeading}</h2>
+            <p class="svc-body">{p.helpBody}</p>
+
+            <div class="svc-card" role="group" aria-labelledby="benefits-heading">
+              <h3 class="svc-card__title" id="benefits-heading">
+                {p.benefitsHeading}
+              </h3>
+              <ul class="svc-list">
+                {p.benefitsList.map((row) => (
+                  <li>{line(row)}</li>
+                ))}
+              </ul>
+            </div>
+
+            <p class="svc-body">{p.attendanceBody}</p>
+            <p class="svc-body">{p.locationBody}</p>
+
+            <blockquote class="mens-shed-quote">
+              <p>{p.quoteText}</p>
+              <cite>{p.quoteAttribution}</cite>
+            </blockquote>
+
+            <div class="mens-shed-form-card" role="group" aria-labelledby="mens-shed-form-heading">
+              <h2 class="svc-section-h2 mens-shed-form-heading" id="mens-shed-form-heading">Register Your Interest</h2>
+              <p class="svc-body mens-shed-form-intro">
+                Dates and times will be announced as soon as they are confirmed. Please complete this form to
+                register your interest in the Men's Shed group.
+              </p>
+
+              <form class="mens-shed-form" method="post" action="#">
+                <div class="mens-shed-form-grid">
+                  <label>
+                    Full Name
+                    <input type="text" name="fullName" autocomplete="name" required />
+                  </label>
+                  <label>
+                    Email Address
+                    <input type="email" name="email" autocomplete="email" required />
+                  </label>
+                  <label>
+                    Phone Number
+                    <input type="tel" name="phone" autocomplete="tel" />
+                  </label>
+                  <label>
+                    I Am
+                    <select name="role" required>
+                      <option value="" selected disabled>Select one</option>
+                      <option value="living-with-illness">Living with a life-limiting illness</option>
+                      <option value="carer">Caring for someone with a life-limiting illness</option>
+                      <option value="bereaved">Bereaved</option>
+                      <option value="anticipating-bereavement">Anticipating bereavement</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </label>
+                </div>
+
+                <label>
+                  Tell Us A Little More (Optional)
+                  <textarea
+                    name="message"
+                    rows="4"
+                    placeholder="Share anything helpful about your interest in the group."
+                  ></textarea>
+                </label>
+
+                <label class="mens-shed-form-consent">
+                  <input type="checkbox" name="consentContact" required />
+                  <span>I consent to being contacted about Men's Shed updates.</span>
+                </label>
+
+                <button type="submit" class="btn btn-primary mens-shed-form-submit">Send Enquiry</button>
+              </form>
+            </div>
+          </div>
+
+          <aside class="svc-side" aria-label={asideTitle}>
+            <div class="side-card">
+              <h2 class="side-card-title">{asideTitle}</h2>
+              <ul class="side-list">
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{phoneLabel}</span>
+                    <a class="side-value side-link" href={telHref}>{c.trustPhoneDisplay}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{formLabel}</span>
+                    <a class="side-value side-link" href="/contact/">
+                      {p.sideFormLinkText}
+                    </a>
+                    <p class="svc-side-hint">{p.sideFormHint}</p>
+                  </div>
+                </li>
+              </ul>
+              <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
+            </div>
+            <ArchiveSidebarPeek filterId="counselling-support" excludePath="/hospice-services/mens-shed" />
+          </aside>
+        </div>
+      </section>
+    </div>
+  </div>
+  <script>
+    import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
+</BaseLayout>
+
+<style>
+  .mens-shed-page .svc-section-h2:first-of-type {
+    margin-top: 0;
+  }
+
+  .mens-shed-quote {
+    margin: 1.15rem 0 1.2rem;
+    padding: 0.95rem 1rem;
+    border-left: 4px solid rgba(29, 101, 178, 0.4);
+    background: #f6f9fe;
+    color: #29415f;
+    border-radius: 10px;
+  }
+
+  .mens-shed-quote p {
+    margin: 0 0 0.5rem;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .mens-shed-quote cite {
+    display: block;
+    font-size: var(--type-body-small);
+    font-style: normal;
+    font-weight: 700;
+    color: #385677;
+  }
+
+  .mens-shed-form-card {
+    margin-top: 1.2rem;
+    padding: 1.1rem 1rem 1rem;
+    border: 1px solid #dce5f2;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 5px 16px rgba(19, 47, 82, 0.06);
+  }
+
+  .mens-shed-form-heading {
+    margin: 0 0 0.45rem;
+  }
+
+  .mens-shed-form-intro {
+    margin-bottom: 0.95rem;
+  }
+
+  .mens-shed-form {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .mens-shed-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem 0.85rem;
+  }
+
+  .mens-shed-form label {
+    display: grid;
+    gap: 0.32rem;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+    color: #26476d;
+  }
+
+  .mens-shed-form input,
+  .mens-shed-form select,
+  .mens-shed-form textarea {
+    width: 100%;
+    border: 1px solid #cfdcec;
+    border-radius: 8px;
+    padding: 0.58rem 0.7rem;
+    font: inherit;
+    font-weight: 500;
+    color: #1d314e;
+    background: #fff;
+  }
+
+  .mens-shed-form textarea {
+    resize: vertical;
+    min-height: 96px;
+  }
+
+  .mens-shed-form input:focus-visible,
+  .mens-shed-form select:focus-visible,
+  .mens-shed-form textarea:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 1px;
+    border-color: #b8cce8;
+  }
+
+  .mens-shed-form-consent {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 0.55rem;
+    font-weight: 600;
+    font-size: var(--type-body-small);
+    color: #375473;
+  }
+
+  .mens-shed-form-consent input {
+    width: 16px;
+    height: 16px;
+    margin-top: 0.1rem;
+    padding: 0;
+  }
+
+  .mens-shed-form-submit {
+    justify-self: start;
+    border-radius: 999px;
+    padding-inline: 1.2rem;
+  }
+
+  @media (max-width: 760px) {
+    .mens-shed-form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

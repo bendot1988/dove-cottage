@@ -488,6 +488,41 @@ collections:
           - { label: "Referral — enquiry link text", name: "referralCta", widget: "string", default: "enquiry form" }
           - { label: "Referral — enquiry link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
           - { label: "Referral — text after enquiry link", name: "referralOutro", widget: "string" }
+      - name: "counselling_support_overview"
+        label: "Counselling & support (overview)"
+        file: "src/data/counselling-support-overview.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Counselling & Support | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Counselling & Support" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "Section eyebrow", name: "introEyebrow", widget: "string", default: "Counselling & support" }
+          - { label: "Section heading", name: "introHeading", widget: "string", default: "Compassionate support for everyone" }
+          - { label: "Intro paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro paragraph 2", name: "mainIntro2", widget: "text", required: false }
+          - { label: "Intro paragraph 3", name: "mainIntro3", widget: "text", required: false }
+          - label: "Support cards"
+            name: "cards"
+            widget: "list"
+            min: 1
+            max: 8
+            fields:
+              - { label: "Card title", name: "title", widget: "string" }
+              - { label: "Card description", name: "excerpt", widget: "text" }
+              - { label: "Card image", name: "image", widget: "image" }
+              - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
+              - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line", name: "stat", widget: "string" }
+              - { label: "CTA label", name: "ctaLabel", widget: "string" }
+              - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
+          - { label: "Referral line — text before the enquiry link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — enquiry link text", name: "referralCta", widget: "string", default: "enquiry form" }
+          - { label: "Referral line — enquiry link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
+          - { label: "Referral line — text after the enquiry link", name: "referralOutro", widget: "string" }
       - name: "volunteer_your_time"
         label: "Volunteer your time page"
         file: "src/data/volunteer-your-time.json"
@@ -756,6 +791,46 @@ collections:
           - { label: "Register interest — line before link", name: "registerInterestIntro", widget: "string" }
           - { label: "Register interest — link text", name: "registerInterestCta", widget: "string", default: "enquiry form" }
           - { label: "Register interest — link URL", name: "registerInterestHref", widget: "string", default: "/contact/" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+      - name: "mens_shed"
+        label: "Men's Shed page"
+        file: "src/data/mens-shed.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Men's Shed | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Counselling & Support" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/counselling-support/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Men's Shed" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "What is section heading", name: "whatHeading", widget: "string" }
+          - { label: "What is section body", name: "whatBody", widget: "text" }
+          - { label: "Who is it for heading", name: "whoHeading", widget: "string" }
+          - label: "Who is it for list"
+            name: "whoList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "string" }
+          - { label: "How can it help heading", name: "helpHeading", widget: "string" }
+          - { label: "How can it help body", name: "helpBody", widget: "text" }
+          - { label: "Benefits heading", name: "benefitsHeading", widget: "string" }
+          - label: "Benefits list"
+            name: "benefitsList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "string" }
+          - { label: "Attendance paragraph", name: "attendanceBody", widget: "text" }
+          - { label: "Location paragraph", name: "locationBody", widget: "text" }
+          - { label: "Quote text", name: "quoteText", widget: "text" }
+          - { label: "Quote attribution", name: "quoteAttribution", widget: "string" }
+          - { label: "Referral line — text before link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — link text", name: "referralCta", widget: "string", default: "enquiry form" }
+          - { label: "Referral line — link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
+          - { label: "Referral line — text after link", name: "referralOutro", widget: "string", required: false }
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
       - name: "wellbeing_activities"
