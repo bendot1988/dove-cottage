@@ -95,8 +95,13 @@ const links = [
   .quick-fab__toggle:focus-visible {
     transform: translateY(-4px) scale(1.04);
     box-shadow: 0 16px 28px rgba(16, 35, 60, 0.28);
-    background: #ffe64d;
+    background: #ffd400;
     border-color: rgba(16, 35, 60, 0.35);
+  }
+
+  .quick-fab__toggle:active {
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 10px 20px rgba(16, 35, 60, 0.24);
   }
 
   .quick-fab__toggle:focus-visible {
@@ -114,6 +119,11 @@ const links = [
   .quick-fab__toggle:hover .quick-fab__heart,
   .quick-fab__toggle:focus-visible .quick-fab__heart {
     transform: translateY(-1px) scale(1.14);
+    color: #0b2443;
+  }
+
+  .quick-fab__toggle:hover .quick-fab__heart {
+    animation: quick-fab-heart-pulse 0.55s var(--motion-ease-out) both;
   }
 
   .quick-fab__menu {
@@ -162,11 +172,15 @@ const links = [
 
   .quick-fab__menu a:hover,
   .quick-fab__menu a:focus-visible {
-    background: #fff;
+    background: #fff9cc;
     color: #0f2e54;
-    border-color: #c6d8f2;
+    border-color: #e0c84c;
     transform: translateY(-3px) scale(1.02);
     box-shadow: 0 14px 26px rgba(16, 35, 60, 0.23);
+  }
+
+  .quick-fab__menu a:active {
+    transform: translateY(-1px) scale(1.01);
   }
 
   .quick-fab__menu a:focus-visible {
@@ -201,6 +215,18 @@ const links = [
     .quick-fab__heart,
     .quick-fab__menu a {
       transition: none;
+    }
+  }
+
+  @keyframes quick-fab-heart-pulse {
+    0% {
+      transform: translateY(-1px) scale(1);
+    }
+    55% {
+      transform: translateY(-1px) scale(1.2);
+    }
+    100% {
+      transform: translateY(-1px) scale(1.14);
     }
   }
   @media (max-width: 640px) {
