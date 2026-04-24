@@ -427,6 +427,67 @@ collections:
               - { label: "Stat line", name: "stat", widget: "string" }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
+      - name: "hospice_services_overview"
+        label: "See all hospice services (overview)"
+        file: "src/data/hospice-services-overview.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Hospice Services | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/explore/?topic=hospice-services" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Hospice Services" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "Section eyebrow", name: "introEyebrow", widget: "string", default: "Day hospice" }
+          - { label: "Section heading", name: "introHeading", widget: "string", default: "Care in our building" }
+          - label: "Day hospice key facts (text strip under heading)"
+            name: "introKeyFacts"
+            widget: "list"
+            required: false
+            min: 0
+            max: 6
+            fields:
+              - { label: "Label (small caps)", name: "label", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
+          - { label: "Intro paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro paragraph 2", name: "mainIntro2", widget: "text", required: false }
+          - { label: "Intro paragraph 3 (before service cards)", name: "mainIntro3", widget: "text", required: false }
+          - label: "In-building service cards"
+            name: "buildingCards"
+            widget: "list"
+            min: 1
+            max: 16
+            fields:
+              - { label: "Card title", name: "title", widget: "string" }
+              - { label: "Card description", name: "excerpt", widget: "text" }
+              - { label: "Card image", name: "image", widget: "image" }
+              - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
+              - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line", name: "stat", widget: "string" }
+              - { label: "CTA label", name: "ctaLabel", widget: "string" }
+              - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
+          - { label: "Additional section heading", name: "additionalHeading", widget: "string" }
+          - { label: "Additional section intro", name: "additionalIntro", widget: "text" }
+          - label: "Additional support cards"
+            name: "additionalCards"
+            widget: "list"
+            min: 1
+            max: 8
+            fields:
+              - { label: "Card title", name: "title", widget: "string" }
+              - { label: "Card description", name: "excerpt", widget: "text" }
+              - { label: "Card image", name: "image", widget: "image" }
+              - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
+              - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line", name: "stat", widget: "string" }
+              - { label: "CTA label", name: "ctaLabel", widget: "string" }
+              - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
+          - { label: "Referral — paragraph 1", name: "referralIntro", widget: "text" }
+          - { label: "Referral — line before enquiry link", name: "referralMid", widget: "string" }
+          - { label: "Referral — enquiry link text", name: "referralCta", widget: "string", default: "enquiry form" }
+          - { label: "Referral — enquiry link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
+          - { label: "Referral — text after enquiry link", name: "referralOutro", widget: "string" }
       - name: "volunteer_your_time"
         label: "Volunteer your time page"
         file: "src/data/volunteer-your-time.json"
@@ -549,7 +610,7 @@ collections:
               hint: "Short description of the hero photo for screen readers and SEO.",
             }
           - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
-          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string" }
           - { label: "Hero subtitle (under title)", name: "heroShortDescription", widget: "text" }
           - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
@@ -637,7 +698,7 @@ collections:
               hint: "Short description of the hero photo for screen readers and SEO.",
             }
           - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
-          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Counselling" }
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
           - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
@@ -671,7 +732,7 @@ collections:
               widget: "string",
             }
           - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Counselling & Support" }
-          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/explore/?topic=counselling-support" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Support groups" }
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
           - { label: "Intro paragraph", name: "mainIntro1", widget: "text" }
@@ -706,7 +767,7 @@ collections:
           - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
           - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
           - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
-          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Wellbeing Activities" }
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
           - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
@@ -734,7 +795,7 @@ collections:
           - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
           - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
           - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
-          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Nursing Care and Medical Advice" }
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
           - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
@@ -781,7 +842,7 @@ collections:
           - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
           - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
           - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
-          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Complementary Therapies" }
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text", default: "Relax and recharge." }
           - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }

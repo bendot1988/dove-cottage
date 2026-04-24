@@ -1,0 +1,141 @@
+{
+  "pageTitle": "Hospice Services | Dove Cottage",
+  "heroImage": "/images/hero-supporting-journey.png",
+  "heroImageAlt": "People receiving care in the Dove Cottage day hospice",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/explore/?topic=hospice-services",
+  "heroH1": "Hospice Services",
+  "heroShortDescription": "Services tailored to your individual needs.",
+  "introEyebrow": "Day hospice",
+  "introHeading": "Care in our building",
+  "introKeyFacts": [
+    { "label": "Open", "value": "Tuesday, Wednesday & Thursday" },
+    { "label": "Times", "value": "10am – 3pm" },
+    { "label": "Cost", "value": "Free of charge" },
+    { "label": "Lunch", "value": "Three-course meal included" }
+  ],
+  "mainIntro1": "We offer each person the chance to attend one day a week, on the same weekday each time — steady, familiar support in a friendly, home-from-home setting.",
+  "mainIntro2": "If you do not want to attend for a full day, we offer the flexibility of a regular morning or afternoon or to access all of our care and support on an ad-hoc basis.",
+  "mainIntro3": "Click on the links below to discover more about our individual services that take place within our hospice building.",
+  "buildingCards": [
+    {
+      "title": "Nursing care & medical advice",
+      "excerpt": "Expert nursing support and symptom management in a social home-from-home environment.",
+      "image": "/images/hero-supporting-journey.png",
+      "imageAlt": "Nursing and medical care in a day hospice setting",
+      "badge": "Clinical care",
+      "stat": "Tue-Thu · 10am-3pm",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/nursing-care-medical-advice/"
+    },
+    {
+      "title": "Wellbeing activities",
+      "excerpt": "Group sessions, creativity, and gentle activities that bring people together.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "People taking part in a group activity in the hospice",
+      "badge": "Activities",
+      "stat": "In the day hospice",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/wellbeing-activities/"
+    },
+    {
+      "title": "Counselling",
+      "excerpt": "Confidential one-to-one sessions with qualified counsellors for patients, family members, and unpaid carers.",
+      "image": "/images/care-counselling.png",
+      "imageAlt": "A quiet, private conversation in a safe environment",
+      "badge": "Emotional support",
+      "stat": "By appointment",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/counselling/"
+    },
+    {
+      "title": "Bereavement support",
+      "excerpt": "A listening ear, groups, and signposting for anyone affected by loss or preparing for a bereavement.",
+      "image": "/images/bereavement-featured.png",
+      "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
+      "badge": "Support",
+      "stat": "For families & carers",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/bereavement-support/"
+    },
+    {
+      "title": "Complementary therapies",
+      "excerpt": "Holistic support such as touch therapies and relaxation techniques to help with comfort and stress.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A peaceful therapy room",
+      "badge": "Wellbeing",
+      "stat": "Alongside medical care",
+      "ctaLabel": "Find out more",
+      "href": "/hospice-services/complementary-therapies/"
+    },
+    {
+      "title": "Therapy bathing",
+      "excerpt": "A dignified, soothing bathing service when everyday washing has become difficult at home.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A comfortable assisted bathing area",
+      "badge": "Coming soon",
+      "stat": "Specialist bathing suite",
+      "ctaLabel": "Find out more",
+      "href": "#"
+    },
+    {
+      "title": "Spiritual & chaplaincy support",
+      "excerpt": "Space to talk about hope, meaning, and what matters to you, whatever your beliefs or background.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A quiet place for reflection",
+      "badge": "Coming soon",
+      "stat": "For everyone",
+      "ctaLabel": "Find out more",
+      "href": "#"
+    },
+    {
+      "title": "Transport",
+      "excerpt": "Support getting to the hospice and related appointments where our volunteer drivers and vehicles can help.",
+      "image": "/images/reach-section-bg.png",
+      "imageAlt": "A volunteer-driven accessible vehicle in the countryside",
+      "badge": "Coming soon",
+      "stat": "Where we can help",
+      "ctaLabel": "Find out more",
+      "href": "#"
+    }
+  ],
+  "additionalHeading": "Support beyond the hospice building",
+  "additionalIntro": "In addition to our core hospice-based services, we also offer support as follows:",
+  "additionalCards": [
+    {
+      "title": "Patient & carer wellbeing sessions",
+      "excerpt": "Holistic support for individuals and carers: relaxed Monday sessions to connect and access nursing and carer support.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A calm, supportive place to talk and learn together",
+      "badge": "What we offer",
+      "stat": "Mondays · 10am-1pm",
+      "ctaLabel": "Find out more",
+      "href": "/what-we-offer/carer-patient-wellbeing/"
+    },
+    {
+      "title": "Counselling & support",
+      "excerpt": "Counselling, support groups, and more — browse everything in this area of our work.",
+      "image": "/images/care-counselling.png",
+      "imageAlt": "Support and counselling in the community",
+      "badge": "Explore",
+      "stat": "Services & groups",
+      "ctaLabel": "Browse support",
+      "href": "/explore/?topic=counselling-support"
+    },
+    {
+      "title": "Dementia home-sitting",
+      "excerpt": "Trained volunteers keep people company at home so carers can take a much-needed break with peace of mind.",
+      "image": "/images/hero-family-alt.png",
+      "imageAlt": "A friendly volunteer visiting someone at home",
+      "badge": "What we offer",
+      "stat": "At home",
+      "ctaLabel": "Find out more",
+      "href": "/what-we-offer/dementia-home-sitting/"
+    }
+  ],
+  "referralIntro": "Access to all of our services is via our referral process which can be initiated by either the patient themselves, a carer or a healthcare professional.",
+  "referralMid": "Please complete the",
+  "referralCta": "enquiry form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and a member of our team will be in touch with more information."
+}

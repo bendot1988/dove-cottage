@@ -1,0 +1,460 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import data from "../../data/hospice-services-overview.json";
+
+type OverviewCard = {
+  title: string;
+  excerpt: string;
+  image: string;
+  imageAlt: string;
+  badge: string;
+  stat: string;
+  ctaLabel: string;
+  href: string;
+};
+
+type IntroKeyFact = { label: string; value: string };
+
+type OverviewData = typeof data & {
+  introKeyFacts?: IntroKeyFact[];
+};
+
+const overview = data as OverviewData;
+
+const renderCards = (items: OverviewCard[]) =>
+  items.map((item) => {
+    const live = Boolean(item.href && item.href !== "#" && item.href.trim().length);
+    return { item, live };
+  });
+
+const building = renderCards(overview.buildingCards);
+const additional = renderCards(overview.additionalCards);
+
+const introParas = [overview.mainIntro1, overview.mainIntro2, overview.mainIntro3].filter((p) => p?.trim().length);
+
+const introKeyFacts = (overview.introKeyFacts ?? []).filter((row) => row?.label?.trim() && row?.value?.trim());
+---
+
+<BaseLayout title={overview.pageTitle}>
+  <section class="hospice-svc-hero" aria-label={overview.heroH1}>
+    <img
+      class="hospice-svc-hero-bg"
+      src={overview.heroImage}
+      alt={overview.heroImageAlt}
+      width="1920"
+      height="720"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+    <div class="container hospice-svc-hero-inner">
+      <a class="interior-hero-eyebrow" href={overview.parentNavHref}>
+        <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+        {overview.parentNavLabel}
+      </a>
+      <h1>{overview.heroH1}</h1>
+      <p class="hospice-svc-hero-dek">{overview.heroShortDescription}</p>
+    </div>
+  </section>
+
+  <section class="support-overview hospice-services-overview" aria-labelledby="hospice-overview-title">
+    <div class="container">
+      <header class="support-overview__intro">
+        <p class="support-overview__eyebrow">{overview.introEyebrow}</p>
+        <h2 id="hospice-overview-title">{overview.introHeading}</h2>
+      </header>
+
+      {
+        introKeyFacts.length > 0 && (
+          <dl class="hospice-keyfacts-strip" aria-label="Day hospice key details">
+            {introKeyFacts.map((row) => (
+              <div class="hospice-keyfacts-strip__cell">
+                <dt>{row.label}</dt>
+                <dd>{row.value}</dd>
+              </div>
+            ))}
+          </dl>
+        )
+      }
+
+      <div class="hospice-services-overview__prose">
+        {introParas.map((para) => (
+          <p>{para}</p>
+        ))}
+      </div>
+
+      <div class="support-overview__grid">
+        {
+          building.map(({ item, live }) =>
+            live ? (
+              <a class="support-card support-card--link" href={item.href} aria-label={`${item.ctaLabel}: ${item.title}`}>
+                <div class="support-card__media">
+                  <img src={item.image} alt={item.imageAlt} width="1200" height="675" loading="lazy" decoding="async" />
+                  <span class="support-card__badge">{item.badge}</span>
+                </div>
+                <div class="support-card__body">
+                  <p class="support-card__stat">{item.stat}</p>
+                  <h3>{item.title}</h3>
+                  <p class="support-card__excerpt">{item.excerpt}</p>
+                  <span class="support-card__cta">
+                    {item.ctaLabel} <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <article class="support-card">
+                <div class="support-card__media">
+                  <img src={item.image} alt={item.imageAlt} width="1200" height="675" loading="lazy" decoding="async" />
+                  <span class="support-card__badge">{item.badge}</span>
+                </div>
+                <div class="support-card__body">
+                  <p class="support-card__stat">{item.stat}</p>
+                  <h3>{item.title}</h3>
+                  <p class="support-card__excerpt">{item.excerpt}</p>
+                  <span class="support-card__coming-soon">Coming soon</span>
+                </div>
+              </article>
+            )
+          )
+        }
+      </div>
+
+      <header class="hospice-services-overview__subhead">
+        <h2>{overview.additionalHeading}</h2>
+        <p>{overview.additionalIntro}</p>
+      </header>
+
+      <div class="support-overview__grid">
+        {
+          additional.map(({ item, live }) =>
+            live ? (
+              <a class="support-card support-card--link" href={item.href} aria-label={`${item.ctaLabel}: ${item.title}`}>
+                <div class="support-card__media">
+                  <img src={item.image} alt={item.imageAlt} width="1200" height="675" loading="lazy" decoding="async" />
+                  <span class="support-card__badge">{item.badge}</span>
+                </div>
+                <div class="support-card__body">
+                  <p class="support-card__stat">{item.stat}</p>
+                  <h3>{item.title}</h3>
+                  <p class="support-card__excerpt">{item.excerpt}</p>
+                  <span class="support-card__cta">
+                    {item.ctaLabel} <span aria-hidden="true">→</span>
+                  </span>
+                </div>
+              </a>
+            ) : (
+              <article class="support-card">
+                <div class="support-card__media">
+                  <img src={item.image} alt={item.imageAlt} width="1200" height="675" loading="lazy" decoding="async" />
+                  <span class="support-card__badge">{item.badge}</span>
+                </div>
+                <div class="support-card__body">
+                  <p class="support-card__stat">{item.stat}</p>
+                  <h3>{item.title}</h3>
+                  <p class="support-card__excerpt">{item.excerpt}</p>
+                  <span class="support-card__coming-soon">Coming soon</span>
+                </div>
+              </article>
+            )
+          )
+        }
+      </div>
+
+      <div class="hospice-services-overview__referral">
+        <p>{overview.referralIntro}</p>
+        <p>
+          {overview.referralMid}{" "}
+          <a class="hospice-services-overview__referral-link" href={overview.referralCtaHref}>{overview.referralCta}</a>{" "}
+          {overview.referralOutro}
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .support-overview {
+    background: #f5f8fd;
+    padding: clamp(2rem, 5vw, 3rem) 0 clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .support-overview__intro {
+    text-align: center;
+    margin-bottom: 1.3rem;
+  }
+
+  .support-overview__eyebrow {
+    margin: 0 0 0.35rem;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #2f5c92;
+  }
+
+  .support-overview__intro h2 {
+    margin: 0;
+    font-size: var(--type-section-title);
+    color: #132949;
+  }
+
+  .hospice-keyfacts-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    max-width: 56rem;
+    margin: 0 auto 1.5rem;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(19, 47, 82, 0.06);
+  }
+
+  .hospice-keyfacts-strip__cell {
+    padding: 14px 12px 16px;
+    text-align: center;
+    border-right: 1px solid #e8eef7;
+  }
+
+  .hospice-keyfacts-strip__cell:last-child {
+    border-right: none;
+  }
+
+  .hospice-keyfacts-strip dt {
+    margin: 0;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #7a8798;
+  }
+
+  .hospice-keyfacts-strip dd {
+    margin: 6px 0 0;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #1a2f4a;
+  }
+
+  .support-overview__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .support-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 6px 16px rgba(19, 47, 82, 0.08);
+    text-decoration: none;
+    color: inherit;
+    transition:
+      transform 0.2s var(--motion-ease-out),
+      box-shadow 0.2s var(--motion-ease-out);
+  }
+
+  .support-card--link:hover,
+  .support-card--link:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(16, 38, 72, 0.13);
+  }
+
+  .support-card--link:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+  }
+
+  .support-card__media {
+    position: relative;
+    aspect-ratio: 16 / 7;
+    overflow: hidden;
+  }
+
+  .support-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .support-card__badge {
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    display: inline-block;
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 0.62rem;
+    line-height: 1.25;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(10, 32, 62, 0.86);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .support-card__body {
+    padding: 12px 14px 14px;
+    display: flex;
+    flex-direction: column;
+    min-height: 178px;
+  }
+
+  .support-card__stat {
+    margin: 0 0 8px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-size: var(--type-micro);
+    line-height: 1.3;
+    font-weight: 700;
+    color: #365a89;
+    background: #eef3fa;
+  }
+
+  .support-card h3 {
+    margin: 0 0 8px;
+    font-size: var(--type-card-title);
+    line-height: 1.28;
+    color: #10233f;
+  }
+
+  .support-card__excerpt {
+    margin: 0;
+    font-size: var(--type-body-small);
+    line-height: 1.55;
+    color: #42556f;
+  }
+
+  .support-card__cta,
+  .support-card__coming-soon {
+    margin-top: auto;
+    padding-top: 12px;
+    font-size: var(--type-body-small);
+    font-weight: 800;
+    color: var(--color-steel-blue-1);
+  }
+
+  .support-card__coming-soon {
+    color: #6b7c95;
+  }
+
+  @media (max-width: 900px) {
+    .support-overview__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hospice-keyfacts-strip {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hospice-keyfacts-strip__cell:nth-child(2n) {
+      border-right: none;
+    }
+
+    .hospice-keyfacts-strip__cell:nth-child(-n + 2) {
+      border-bottom: 1px solid #e8eef7;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .support-overview__intro {
+      margin-bottom: 1.1rem;
+    }
+
+    .hospice-keyfacts-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .hospice-keyfacts-strip__cell {
+      border-right: none;
+      border-bottom: 1px solid #e8eef7;
+    }
+
+    .hospice-keyfacts-strip__cell:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .hospice-services-overview__prose {
+    max-width: 42rem;
+    margin: 0 auto 1.75rem;
+    text-align: center;
+  }
+
+  .hospice-services-overview__prose p {
+    margin: 0 0 0.9rem;
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: #2f4260;
+    text-wrap: pretty;
+  }
+
+  .hospice-services-overview__prose p:last-child {
+    margin-bottom: 0;
+  }
+
+  .hospice-services-overview__subhead {
+    text-align: center;
+    margin: clamp(2rem, 5vw, 2.75rem) 0 1.25rem;
+    padding-top: clamp(1.25rem, 3vw, 1.75rem);
+    border-top: 1px solid #dce5f2;
+  }
+
+  .hospice-services-overview__subhead h2 {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    color: #132949;
+  }
+
+  .hospice-services-overview__subhead p {
+    margin: 0 auto;
+    max-width: 42rem;
+    font-size: var(--type-body);
+    line-height: 1.6;
+    color: #42556f;
+  }
+
+  .hospice-services-overview__referral {
+    max-width: 46rem;
+    margin: clamp(2rem, 5vw, 2.5rem) auto 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid #dce5f2;
+    text-align: center;
+  }
+
+  .hospice-services-overview__referral p {
+    margin: 0 0 0.85rem;
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: #2f4260;
+  }
+
+  .hospice-services-overview__referral p:last-child {
+    margin-bottom: 0;
+  }
+
+  .hospice-services-overview__referral-link {
+    color: var(--color-steel-blue-1);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .hospice-services-overview__referral-link:hover,
+  .hospice-services-overview__referral-link:focus-visible {
+    color: #153f73;
+  }
+
+  .hospice-services-overview__referral-link:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+  }
+</style>

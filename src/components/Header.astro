@@ -19,6 +19,7 @@ const parseFilterKeys = (raw: string) =>
 const baseSearchEntries = [
   { title: "Home", href: "/", section: "Main" },
   { title: "Explore Our Work", href: "/explore/", section: "Main" },
+  { title: "Hospice Services overview", href: "/hospice-services/", section: "Hospice Services" },
   { title: "Donate", href: "/donate/", section: "Support Us" },
   { title: "Contact Us", href: "/contact/", section: "Main" },
   { title: "News & Events", href: "/news/", section: "News" },
@@ -131,6 +132,7 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
 
               <section class="mega-column">
                 <h3 class="mega-title">Hospice Services</h3>
+                <a href="/hospice-services/" class="mega-link">See all hospice services</a>
                 <a href="/hospice-services/bereavement-support/" class="mega-link">Bereavement support</a>
                 <a href="/hospice-services/counselling/" class="mega-link">Counselling</a>
                 <a href="/hospice-services/nursing-care-medical-advice/" class="mega-link">Nursing care &amp; medical advice</a>
@@ -256,6 +258,7 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
           <summary>About Us</summary>
           <div class="mobile-group-content">
             <a href="/explore/" class="mobile-link">Explore all services &amp; support</a>
+            <a href="/hospice-services/" class="mobile-link">See all hospice services</a>
             <a href="#" class="mobile-link">What We Offer</a>
             <a href="/what-we-offer/carer-patient-wellbeing/" class="mobile-link">Carer &amp; patient wellbeing sessions</a>
             <a href="/what-we-offer/dementia-home-sitting/" class="mobile-link">Dementia home-sitting</a>
