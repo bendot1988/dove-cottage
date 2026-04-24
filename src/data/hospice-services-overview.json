@@ -9,12 +9,24 @@
   "introEyebrow": "Day Hospice",
   "introHeading": "Care In Our Building",
   "introKeyFacts": [
-    { "label": "Open", "value": "Tuesday, Wednesday & Thursday" },
-    { "label": "Times", "value": "10am – 3pm" },
-    { "label": "Cost", "value": "Free of charge" },
-    { "label": "Lunch", "value": "Three-course meal included" }
+    {
+      "label": "Open",
+      "value": "Tuesday, Wednesday & Thursday"
+    },
+    {
+      "label": "Times",
+      "value": "10am \u2013 3pm"
+    },
+    {
+      "label": "Cost",
+      "value": "Free of charge"
+    },
+    {
+      "label": "Lunch",
+      "value": "Three-course meal included"
+    }
   ],
-  "mainIntro1": "We offer each person the chance to attend one day a week, on the same weekday each time — steady, familiar support in a friendly, home-from-home setting.",
+  "mainIntro1": "We offer each person the chance to attend one day a week, on the same weekday each time \u2014 steady, familiar support in a friendly, home-from-home setting.",
   "mainIntro2": "If you do not want to attend for a full day, we offer the flexibility of a regular morning or afternoon or to access all of our care and support on an ad-hoc basis.",
   "mainIntro3": "Click on the links below to discover more about our individual services that take place within our hospice building.",
   "buildingCards": [
@@ -24,7 +36,7 @@
       "image": "/images/hero-supporting-journey.png",
       "imageAlt": "Nursing and medical care in a day hospice setting",
       "badge": "Clinical care",
-      "stat": "Tue-Thu · 10am-3pm",
+      "stat": "Tue-Thu \u00b7 10am-3pm",
       "ctaLabel": "Find out more",
       "href": "/hospice-services/nursing-care-medical-advice/"
     },
@@ -93,10 +105,10 @@
       "excerpt": "Support getting to the hospice and related appointments where our volunteer drivers and vehicles can help.",
       "image": "/images/reach-section-bg.png",
       "imageAlt": "A volunteer-driven accessible vehicle in the countryside",
-      "badge": "Coming soon",
-      "stat": "Where we can help",
+      "badge": "Transport",
+      "stat": "Subject to availability",
       "ctaLabel": "Find out more",
-      "href": "#"
+      "href": "/hospice-services/transport/"
     }
   ],
   "additionalHeading": "Support Beyond The Hospice Building",
@@ -108,13 +120,13 @@
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A calm, supportive place to talk and learn together",
       "badge": "What we offer",
-      "stat": "Mondays · 10am-1pm",
+      "stat": "Mondays \u00b7 10am-1pm",
       "ctaLabel": "Find out more",
       "href": "/what-we-offer/carer-patient-wellbeing/"
     },
     {
       "title": "Counselling & support",
-      "excerpt": "Counselling, support groups, and more — browse everything in this area of our work.",
+      "excerpt": "Counselling, support groups, and more \u2014 browse everything in this area of our work.",
       "image": "/images/care-counselling.png",
       "imageAlt": "Support and counselling in the community",
       "badge": "Explore",
