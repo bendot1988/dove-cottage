@@ -1,0 +1,23 @@
+{
+  "pageTitle": "Spiritual & Chaplaincy Support | Dove Cottage",
+  "heroImage": "/images/hero-family-alt.png",
+  "heroImageAlt": "A calm and welcoming space for spiritual support",
+  "parentNavLabel": "Hospice Services",
+  "parentNavHref": "/hospice-services/",
+  "heroH1": "Spiritual & Chaplaincy Support",
+  "heroShortDescription": "A calm space for reflection.",
+  "mainIntro1": "Our hospice welcomes patients and families of all faiths and beliefs. As part of our holistic person-centred approach, we offer spiritual and chaplaincy support as and when individuals request it.",
+  "mainIntro2": "Our volunteer chaplaincy team hold monthly communion services for those who choose to participate, and we source alternative faith support for individuals on request.",
+  "supportHeading": "Spiritual & Chaplaincy Support",
+  "supportList": [
+    { "text": "Open to patients and families of all faiths and beliefs" },
+    { "text": "Monthly communion services led by our volunteer chaplaincy team" },
+    { "text": "Alternative faith support sourced on request" }
+  ],
+  "referralIntro": "For more information or to enquire about our spiritual support services please complete the",
+  "referralCta": "enquiry form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and a member of our team will be in touch.",
+  "sideFormLinkText": "Use our contact form",
+  "sideFormHint": "Enquire about spiritual and chaplaincy support."
+}

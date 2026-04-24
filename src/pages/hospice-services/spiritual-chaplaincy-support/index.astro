@@ -2,7 +2,7 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
-import p from "../../../data/mens-shed.json";
+import p from "../../../data/spiritual-chaplaincy-support.json";
 import contact from "../../../data/contact.json";
 import { toTitleCase } from "../../../lib/titleCase";
 
@@ -19,10 +19,11 @@ const asideTitle = toTitleCase("Get in touch");
 const phoneLabel = toTitleCase("Phone");
 const formLabel = toTitleCase("Enquiry");
 const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
+const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim().length);
 ---
 
 <BaseLayout title={layoutTitle}>
-  <div class="svc-page mens-shed-page">
+  <div class="svc-page">
     <section class="hospice-svc-hero" aria-label={p.heroH1}>
       <img
         class="hospice-svc-hero-bg"
@@ -57,42 +58,26 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
         />
         <div class="container svc-layout">
           <div class="svc-primary">
-            <h2 class="svc-section-h2">{p.whatHeading}</h2>
-            <p class="svc-lede">{p.whatBody}</p>
+            {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
 
-            <div class="svc-card" role="group" aria-labelledby="who-heading">
-              <h3 class="svc-card__title" id="who-heading">
-                {p.whoHeading}
-              </h3>
+            <div class="svc-card" role="group" aria-labelledby="support-heading">
+              <h2 class="svc-card__title" id="support-heading">
+                {p.supportHeading}
+              </h2>
               <ul class="svc-list">
-                {p.whoList.map((row) => (
+                {p.supportList.map((row) => (
                   <li>{line(row)}</li>
                 ))}
               </ul>
             </div>
 
-            <h2 class="svc-section-h2">{p.helpHeading}</h2>
-            <p class="svc-body">{p.helpBody}</p>
-
-            <div class="svc-card" role="group" aria-labelledby="benefits-heading">
-              <h3 class="svc-card__title" id="benefits-heading">
-                {p.benefitsHeading}
-              </h3>
-              <ul class="svc-list">
-                {p.benefitsList.map((row) => (
-                  <li>{line(row)}</li>
-                ))}
-              </ul>
-            </div>
-
-            <p class="svc-body">{p.attendanceBody}</p>
-            <p class="svc-body">{p.locationBody}</p>
-
-            <blockquote class="mens-shed-quote">
-              <p>{p.quoteText}</p>
-              <cite>{p.quoteAttribution}</cite>
-            </blockquote>
-
+            <p class="svc-body">
+              {p.referralIntro}{" "}
+              <a class="svc-inline-link" href={p.referralCtaHref}>
+                {p.referralCta}
+              </a>{" "}
+              {p.referralOutro}
+            </p>
           </div>
 
           <aside class="svc-side" aria-label={asideTitle}>
@@ -128,7 +113,7 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
               </ul>
               <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
             </div>
-            <ArchiveSidebarPeek filterId="counselling-support" excludePath="/hospice-services/mens-shed" />
+            <ArchiveSidebarPeek filterId="hospice-services" excludePath="/hospice-services/spiritual-chaplaincy-support" />
           </aside>
         </div>
       </section>
@@ -139,33 +124,3 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
     initMotionScrollReveal();
   </script>
 </BaseLayout>
-
-<style>
-  .mens-shed-page .svc-section-h2:first-of-type {
-    margin-top: 0;
-  }
-
-  .mens-shed-quote {
-    margin: 1.15rem 0 1.2rem;
-    padding: 0.95rem 1rem;
-    border-left: 4px solid rgba(29, 101, 178, 0.4);
-    background: #f6f9fe;
-    color: #29415f;
-    border-radius: 10px;
-  }
-
-  .mens-shed-quote p {
-    margin: 0 0 0.5rem;
-    font-style: italic;
-    line-height: 1.6;
-  }
-
-  .mens-shed-quote cite {
-    display: block;
-    font-size: var(--type-body-small);
-    font-style: normal;
-    font-weight: 700;
-    color: #385677;
-  }
-
-</style>

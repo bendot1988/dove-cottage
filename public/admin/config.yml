@@ -1002,6 +1002,33 @@ collections:
           - { label: "Referral line — text after the link", name: "referralOutro", widget: "string" }
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+      - name: "spiritual_chaplaincy_support"
+        label: "Spiritual & chaplaincy support page"
+        file: "src/data/spiritual-chaplaincy-support.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Spiritual & Chaplaincy Support | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Spiritual & Chaplaincy Support" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text", default: "A calm space for reflection." }
+          - { label: "Intro — paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro — paragraph 2", name: "mainIntro2", widget: "text", required: false }
+          - { label: "Support section heading", name: "supportHeading", widget: "string", default: "Spiritual & Chaplaincy Support" }
+          - label: "Support points"
+            name: "supportList"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Point", name: "text", widget: "text" }
+          - { label: "Referral line — text before the contact form link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — link text", name: "referralCta", widget: "string", default: "enquiry form" }
+          - { label: "Referral line — link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
+          - { label: "Referral line — text after the link", name: "referralOutro", widget: "string" }
+          - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
+          - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
   - name: "what_we_offer_pages"
     label: "What we offer"
     files:
