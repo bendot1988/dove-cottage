@@ -1,0 +1,441 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import p from "../../../data/resource-hub.json";
+
+type ResourceRow = {
+  title: string;
+  organisation: string;
+  url: string;
+  linkLabel: string;
+};
+
+const layoutTitle = p.pageTitle
+  .split(/\s*\|\s*/)
+  .map((part) => part.trim())
+  .join(" | ");
+
+const resources = (p.resources ?? []) as ResourceRow[];
+const introParas = [p.mainIntro1, p.mainIntro2, p.mainIntro3, p.mainIntro4].filter((row) => row?.trim().length);
+
+const isExternal = (href: string) => /^https?:\/\//i.test(href);
+const isPdf = (href: string) => /\.pdf($|[?#])/i.test(href);
+
+const resourceKind = (href: string) => {
+  if (isPdf(href)) return { label: "Leaflet (PDF)", tone: "pdf" } as const;
+  if (isExternal(href)) return { label: "External resource", tone: "external" } as const;
+  return { label: "Article", tone: "article" } as const;
+};
+---
+
+<BaseLayout title={layoutTitle}>
+  <section class="hospice-svc-hero" aria-label={p.heroH1}>
+    <img class="hospice-svc-hero-bg" src={p.heroImage} alt={p.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
+    <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+    <div class="container hospice-svc-hero-inner">
+      <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+        <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+        {p.parentNavLabel}
+      </a>
+      <h1>{p.heroH1}</h1>
+      <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
+    </div>
+  </section>
+
+  <section class="resource-hub" aria-labelledby="resource-hub-title">
+    <div class="container">
+      <header class="resource-hub__intro">
+        <h2 id="resource-hub-title">{p.introHeading}</h2>
+        {
+          introParas.map((para, idx) => (
+            <p class:list={{ "resource-hub__note": idx === introParas.length - 1 }}>{para}</p>
+          ))
+        }
+      </header>
+
+      <ul class="resource-grid" aria-label="Resource links">
+        {resources.map((item) => {
+          const kind = resourceKind(item.url);
+          const external = isExternal(item.url);
+          const downloadable = isPdf(item.url) && !external;
+          return (
+            <li class="resource-grid__item">
+              <a
+                class:list={["rcard", `rcard--${kind.tone}`]}
+                href={item.url}
+                target={external ? "_blank" : undefined}
+                rel={external ? "noopener noreferrer" : undefined}
+                download={downloadable ? true : undefined}
+                aria-label={`${item.title} — ${item.organisation}. ${item.linkLabel}${external ? " (opens in a new window)" : downloadable ? " (PDF download)" : ""}`}
+              >
+                <span class="rcard__inner">
+                  <span class="rcard__top">
+                    <span class="rcard__pill" aria-hidden="true">
+                      <span class="rcard__pill-dot" />
+                      {kind.label}
+                    </span>
+                    {external && (
+                      <span class="rcard__corner" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M7 17 17 7" />
+                          <path d="M9 7h8v8" />
+                        </svg>
+                      </span>
+                    )}
+                    {downloadable && (
+                      <span class="rcard__corner" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 4v11" />
+                          <path d="m6 13 6 6 6-6" />
+                          <path d="M5 21h14" />
+                        </svg>
+                      </span>
+                    )}
+                  </span>
+
+                  <span class="rcard__body">
+                    <span class="rcard__title">{item.title}</span>
+                    <span class="rcard__org">
+                      <span class="rcard__org-by">by</span>{" "}
+                      <span class="rcard__org-name">{item.organisation}</span>
+                    </span>
+                  </span>
+
+                  <span class="rcard__cta">
+                    <span class="rcard__cta-text">{item.linkLabel}</span>
+                    <span class="rcard__cta-arrow" aria-hidden="true">→</span>
+                  </span>
+                </span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+
+      <div class="resource-hub__referral">
+        <p>
+          {p.referralIntro}{" "}
+          <a class="resource-hub__referral-link" href={p.referralCtaHref}>{p.referralCta}</a>{" "}
+          {p.referralOutro}
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .resource-hub {
+    background: #f5f8fd;
+    padding: clamp(2rem, 5vw, 3rem) 0 clamp(3rem, 7vw, 4.5rem);
+  }
+
+  .resource-hub__intro {
+    max-width: 48rem;
+    margin: 0 auto 1.5rem;
+    text-align: center;
+  }
+
+  .resource-hub__intro h2 {
+    margin: 0 0 0.8rem;
+    font-size: var(--type-section-title);
+    color: #132949;
+    text-wrap: balance;
+  }
+
+  .resource-hub__intro p {
+    margin: 0 0 0.75rem;
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: #2f4260;
+    max-width: 52rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-wrap: pretty;
+  }
+
+  .resource-hub__intro p:last-child {
+    margin-bottom: 0;
+  }
+
+  .resource-hub__note {
+    margin-top: 1rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid #dce5f2;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.72);
+    font-size: var(--type-body-small);
+    line-height: 1.55;
+    color: #5a6b85;
+    font-style: italic;
+  }
+
+  /* Grid */
+  .resource-grid {
+    list-style: none;
+    margin: clamp(1.5rem, 4vw, 2.25rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2vw, 1.4rem);
+  }
+
+  .resource-grid__item {
+    display: flex;
+  }
+
+  /* Card */
+  .rcard {
+    --rcard-tone: #1f5f9d;
+    --rcard-tone-soft: #e8f0fa;
+    position: relative;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #d6e1f0;
+    box-shadow: 0 4px 14px rgba(19, 47, 82, 0.06);
+    overflow: hidden;
+    transition:
+      transform 0.28s var(--motion-ease-out),
+      box-shadow 0.28s var(--motion-ease-out),
+      border-color 0.28s var(--motion-ease-out);
+  }
+
+  .rcard--external {
+    --rcard-tone: #1f5f9d;
+    --rcard-tone-soft: #e8f0fa;
+  }
+
+  .rcard--pdf {
+    --rcard-tone: #b65a17;
+    --rcard-tone-soft: #fbeede;
+  }
+
+  .rcard--article {
+    --rcard-tone: #2a6b4d;
+    --rcard-tone-soft: #e6f1ea;
+  }
+
+  .rcard::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, var(--rcard-tone) 0%, var(--rcard-tone) 60%, var(--color-golden-yellow) 100%);
+  }
+
+  .rcard:hover,
+  .rcard:focus-visible {
+    transform: translateY(-4px);
+    border-color: #b9cde6;
+    box-shadow: 0 18px 32px rgba(19, 47, 82, 0.16);
+    outline: none;
+  }
+
+  .rcard:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 3px;
+  }
+
+  .rcard__inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: clamp(1.1rem, 2.4vw, 1.45rem) clamp(1.1rem, 2.4vw, 1.45rem) 0;
+  }
+
+  /* Top: pill + corner icon */
+  .rcard__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .rcard__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.32rem 0.65rem;
+    border-radius: 999px;
+    background: var(--rcard-tone-soft);
+    color: var(--rcard-tone);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .rcard__pill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--rcard-tone);
+  }
+
+  .rcard__corner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    color: var(--rcard-tone);
+    background: var(--rcard-tone-soft);
+    flex-shrink: 0;
+    transition: transform 0.25s var(--motion-ease-out);
+  }
+
+  .rcard__corner svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .rcard:hover .rcard__corner {
+    transform: scale(1.06);
+  }
+
+  /* Body: title + attribution */
+  .rcard__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    flex-grow: 1;
+  }
+
+  .rcard__title {
+    font-family: inherit;
+    font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+    font-weight: 800;
+    line-height: 1.25;
+    color: #10233f;
+    text-wrap: balance;
+  }
+
+  .rcard__org {
+    font-size: var(--type-body-small);
+    line-height: 1.5;
+    color: #4a5d7a;
+  }
+
+  .rcard__org-by {
+    color: #6a7a93;
+    font-weight: 500;
+  }
+
+  .rcard__org-name {
+    color: #2c3e5d;
+    font-weight: 700;
+  }
+
+  /* CTA footer */
+  .rcard__cta {
+    margin: 1.1rem -1px -1px;
+    padding: 0.85rem clamp(1.1rem, 2.4vw, 1.45rem);
+    background: #f4f7fc;
+    border-top: 1px solid #e1e9f5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    color: var(--rcard-tone);
+    font-size: var(--type-body-small);
+    font-weight: 800;
+    line-height: 1.4;
+    transition:
+      background 0.25s var(--motion-ease-out),
+      color 0.25s var(--motion-ease-out);
+  }
+
+  .rcard__cta-text {
+    background-image: linear-gradient(var(--color-golden-yellow), var(--color-golden-yellow));
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0% 2px;
+    transition: background-size 0.35s var(--motion-ease-out);
+  }
+
+  .rcard__cta-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    transition: transform 0.25s var(--motion-ease-out);
+  }
+
+  .rcard:hover .rcard__cta {
+    background: #ecf2fb;
+  }
+
+  .rcard:hover .rcard__cta-text,
+  .rcard:focus-visible .rcard__cta-text {
+    background-size: 100% 2px;
+  }
+
+  .rcard:hover .rcard__cta-arrow,
+  .rcard:focus-visible .rcard__cta-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Referral block */
+  .resource-hub__referral {
+    max-width: 46rem;
+    margin: clamp(2rem, 5vw, 2.4rem) auto 0;
+    padding-top: 1.4rem;
+    border-top: 1px solid #dce5f2;
+    text-align: center;
+  }
+
+  .resource-hub__referral p {
+    margin: 0;
+    font-size: var(--type-body);
+    line-height: 1.65;
+    color: #2f4260;
+  }
+
+  .resource-hub__referral-link {
+    color: var(--color-steel-blue-1);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .resource-hub__referral-link:hover,
+  .resource-hub__referral-link:focus-visible {
+    color: #153f73;
+  }
+
+  .resource-hub__referral-link:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 1100px) {
+    .resource-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .resource-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rcard,
+    .rcard__corner,
+    .rcard__cta,
+    .rcard__cta-text,
+    .rcard__cta-arrow {
+      transition: none;
+    }
+    .rcard:hover,
+    .rcard:focus-visible {
+      transform: none;
+    }
+  }
+</style>

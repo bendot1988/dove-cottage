@@ -1,0 +1,38 @@
+{
+  "pageTitle": "Resource Hub | Dove Cottage",
+  "heroImage": "/images/care-counselling.png",
+  "heroImageAlt": "Helpful resources for counselling and bereavement support",
+  "parentNavLabel": "Counselling & Support",
+  "parentNavHref": "/hospice-services/counselling-support/",
+  "heroH1": "Resource Hub",
+  "heroShortDescription": "Helpful links and downloadable leaflets for additional support.",
+  "introHeading": "Counselling & Support Resources",
+  "mainIntro1": "Whilst our hospice is independently run, we are a subsidiary charity of LOROS Hospice and work closely with their staff to support families in the Leicestershire area.",
+  "mainIntro2": "We also communicate closely with national charities through the likes of Macmillan Nurses and Admiral Nurses to provide our patients and families with a wide variety of relevant and useful resources.",
+  "mainIntro3": "We have listed below some links to information that we feel might be useful to the families that we support.",
+  "mainIntro4": "(Please note that by clicking on these links you will be taken to an external web page via a new browser window. To return to Dove Cottage, simply close the window.)",
+  "resources": [
+    {
+      "title": "Help with benefits",
+      "organisation": "Macmillan Cancer UK",
+      "url": "https://www.macmillan.org.uk/cancer-information-and-support/impacts-of-cancer/benefits-and-financial-support",
+      "linkLabel": "Finding the right benefits and help leaflet"
+    },
+    {
+      "title": "Supporting children & teenagers through grief",
+      "organisation": "Dementia UK",
+      "url": "https://www.dementiauk.org/information-and-support/looking-after-yourself-as-a-carer/grief-bereavement-and-loss/how-you-can-support-children-and-teenagers/",
+      "linkLabel": "Open Dementia UK guidance"
+    },
+    {
+      "title": "Coping with losing a partner",
+      "organisation": "Men’s Shed",
+      "url": "/resources/Coping-with-Losing-a-Partner6.pdf",
+      "linkLabel": "Download leaflet (PDF)"
+    }
+  ],
+  "referralIntro": "To enquire about any of our services please complete the",
+  "referralCta": "enquiry form",
+  "referralCtaHref": "/contact/",
+  "referralOutro": "and a member of our team will be in touch."
+}

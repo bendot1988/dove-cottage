@@ -851,6 +851,34 @@ collections:
           - { label: "Referral line — text after the link", name: "referralOutro", widget: "string" }
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
+      - name: "resource_hub"
+        label: "Resource hub page"
+        file: "src/data/resource-hub.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Resource Hub | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Counselling & Support" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/counselling-support/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Resource Hub" }
+          - { label: "Hero subtitle", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro heading", name: "introHeading", widget: "string" }
+          - { label: "Intro paragraph 1", name: "mainIntro1", widget: "text" }
+          - { label: "Intro paragraph 2", name: "mainIntro2", widget: "text" }
+          - label: "Resources"
+            name: "resources"
+            widget: "list"
+            min: 1
+            fields:
+              - { label: "Resource / leaflet title", name: "title", widget: "string" }
+              - { label: "Organisation", name: "organisation", widget: "string" }
+              - { label: "Link URL", name: "url", widget: "string", hint: "External URL or local file like /resources/file.pdf" }
+              - { label: "Link label", name: "linkLabel", widget: "string", default: "Open resource" }
+          - { label: "Referral line — text before link", name: "referralIntro", widget: "string" }
+          - { label: "Referral line — link text", name: "referralCta", widget: "string", default: "enquiry form" }
+          - { label: "Referral line — link URL", name: "referralCtaHref", widget: "string", default: "/contact/" }
+          - { label: "Referral line — text after link", name: "referralOutro", widget: "string" }
       - name: "support_groups"
         label: "Support groups page"
         file: "src/data/support-groups.json"
