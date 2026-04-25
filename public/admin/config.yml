@@ -645,6 +645,31 @@ collections:
           - { label: "Expect paragraph 1", name: "expectParagraph1", widget: "text" }
           - { label: "Expect paragraph 2", name: "expectParagraph2", widget: "text" }
           - { label: "Expect paragraph 3", name: "expectParagraph3", widget: "text" }
+          - {
+              label: "Volunteer enquiry — section heading",
+              name: "volunteerFormHeading",
+              widget: "string",
+              default: "Volunteer enquiry form",
+            }
+          - {
+              label: "Volunteer enquiry — intro (above Beacon form)",
+              name: "volunteerFormIntro",
+              widget: "text",
+              required: false,
+            }
+          - {
+              label: "Beacon account slug",
+              name: "beaconAccount",
+              widget: "string",
+              default: "dovecottagedayhospice",
+            }
+          - {
+              label: "Beacon volunteer enquiry form ID",
+              name: "beaconVolunteerFormId",
+              widget: "string",
+              required: false,
+              hint: "data-form value from Beacon embed (leave empty to hide the form).",
+            }
           - { label: "Sidebar — form link text", name: "sideFormLinkText", widget: "string" }
           - { label: "Sidebar — form hint", name: "sideFormHint", widget: "text" }
           - { label: "Sidebar — related links heading", name: "sideSupportTitle", widget: "string" }
