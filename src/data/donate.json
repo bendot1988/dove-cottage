@@ -1,5 +1,9 @@
 {
   "pageTitle": "Donate | Dove Cottage",
+  "donateFormSectionTitle": "Give online",
+  "donateFormIntro": "Use our secure form for a one-off or regular gift. Every pound helps us keep compassionate care free for local families.",
+  "beaconAccount": "dovecottagedayhospice",
+  "beaconDonateFormId": "0b96c552",
   "heroImage": "/images/hero-supporting-journey.png",
   "heroImageAlt": "People supported in our day hospice and community",
   "allWaysToSupportLabel": "All ways to support",
@@ -8,7 +12,7 @@
   "heroTitleHighlight": "donation",
   "heroDescription": "Your gifts help us fund specialist palliative nurses, wellbeing activities, transport, and family support — so care stays free for everyone who needs us across Leicestershire, Nottinghamshire and Lincolnshire.",
   "heroPrimaryCtaLabel": "Donate now",
-  "heroPrimaryCtaHref": "#give",
+  "heroPrimaryCtaHref": "#give-form",
   "heroSecondaryCtaLabel": "Other ways to support",
   "heroSecondaryCtaHref": "/#support",
   "aboutEyebrow": "About this opportunity",
@@ -22,25 +26,25 @@
       "title": "A home-cooked meal",
       "description": "A gift of £15 could help provide a guest with a nourishing lunch and a friendly face at our day hospice.",
       "ctaLabel": "Donate £15",
-      "ctaHref": "#"
+      "ctaHref": "#give-form"
     },
     {
       "title": "Dementia support",
       "description": "A gift of £50 could help fund companionship sessions and practical help for families living with dementia.",
       "ctaLabel": "Donate £50",
-      "ctaHref": "#"
+      "ctaHref": "#give-form"
     },
     {
       "title": "Nursing care",
       "description": "A gift of £200 could help cover specialist nursing time in the community, when people need us most.",
       "ctaLabel": "Donate £200",
-      "ctaHref": "#"
+      "ctaHref": "#give-form"
     },
     {
       "title": "Memory Meadow",
       "description": "Dedicate a flower for £40 to remember someone special and help care for others in their name.",
       "ctaLabel": "Dedicate a flower £40",
-      "ctaHref": "#"
+      "ctaHref": "#give-form"
     }
   ],
   "suggestedMethodsTitle": "Suggested methods",

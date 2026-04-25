@@ -1,0 +1,307 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
+);
+const events = (await getCollection("events", ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime()
+);
+const shops = (await getCollection("shops", ({ data }) => !data.draft)).sort((a, b) =>
+  a.data.title.localeCompare(b.data.title)
+);
+
+const sections: { heading: string; links: { label: string; href: string }[] }[] = [
+  {
+    heading: "Main",
+    links: [
+      { label: "Home", href: "/" },
+      { label: "Explore services & support", href: "/explore/" },
+      { label: "Contact", href: "/contact/" },
+      { label: "Hire our facilities", href: "/hire-our-facilities/" }
+    ]
+  },
+  {
+    heading: "News & events",
+    links: [
+      { label: "News & events hub", href: "/news/" },
+      { label: "Newsletter archive", href: "/newsletter/" }
+    ]
+  },
+  {
+    heading: "Support us",
+    links: [
+      { label: "Support us overview", href: "/support-us/" },
+      { label: "Donate", href: "/donate/" },
+      { label: "Volunteer your time", href: "/support-us/volunteer-your-time/" },
+      { label: "Our shops", href: "/shops/" }
+    ]
+  },
+  {
+    heading: "Hospice services",
+    links: [
+      { label: "Hospice services overview", href: "/hospice-services/" },
+      { label: "Counselling & support overview", href: "/hospice-services/counselling-support/" },
+      { label: "Bereavement support", href: "/hospice-services/bereavement-support/" },
+      { label: "Bereavement support group", href: "/hospice-services/bereavement-support-group/" },
+      { label: "Carer support", href: "/hospice-services/carer-support/" },
+      { label: "Complementary therapies", href: "/hospice-services/complementary-therapies/" },
+      { label: "Counselling", href: "/hospice-services/counselling/" },
+      { label: "Men's Shed", href: "/hospice-services/mens-shed/" },
+      { label: "Nursing care & medical advice", href: "/hospice-services/nursing-care-medical-advice/" },
+      { label: "Spiritual & chaplaincy support", href: "/hospice-services/spiritual-chaplaincy-support/" },
+      { label: "Support groups", href: "/hospice-services/support-groups/" },
+      { label: "Therapy bathing", href: "/hospice-services/therapy-bathing/" },
+      { label: "Transport", href: "/hospice-services/transport/" },
+      { label: "Wellbeing activities", href: "/hospice-services/wellbeing-activities/" }
+    ]
+  },
+  {
+    heading: "What we offer",
+    links: [
+      { label: "Carer & patient wellbeing", href: "/what-we-offer/carer-patient-wellbeing/" },
+      { label: "Dementia home-sitting", href: "/what-we-offer/dementia-home-sitting/" }
+    ]
+  },
+  {
+    heading: "Thank you & tools",
+    links: [
+      { label: "Thank you", href: "/thank-you/" },
+      { label: "Donation thank you", href: "/donation-thank-you/" },
+      { label: "Style guide", href: "/style-guide/" }
+    ]
+  }
+];
+---
+
+<BaseLayout title="Site map | Dove Cottage">
+  <div class="motion-scope">
+    <section class="smap-hero" aria-label="Site map">
+      <img
+        class="smap-hero-bg"
+        src="/images/hero-supporting-journey.png"
+        alt=""
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="smap-hero-overlay" aria-hidden="true"></div>
+      <div class="container smap-hero-inner">
+        <a class="interior-hero-eyebrow" href="/">
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          Home
+        </a>
+        <h1>Site <span class="smap-hero-highlight">map</span></h1>
+        <p class="smap-hero-dek">Every page on this website in one place.</p>
+      </div>
+    </section>
+
+    <section class="smap-body" aria-label="All pages">
+      <div class="container">
+        <div class="smap-grid">
+          {
+            sections.map((sec) => (
+              <div class="smap-card">
+                <h2 class="smap-card-title">{sec.heading}</h2>
+                <ul class="smap-list">
+                  {sec.links.map((link) => (
+                    <li>
+                      <a href={link.href}>{link.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+
+          <div class="smap-card">
+            <h2 class="smap-card-title">News stories</h2>
+            {posts.length === 0 ? (
+              <p class="smap-empty">No stories yet.</p>
+            ) : (
+              <ul class="smap-list">
+                {posts.map((p) => (
+                  <li>
+                    <a href={`/news/${p.slug}/`}>{p.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div class="smap-card">
+            <h2 class="smap-card-title">Events</h2>
+            {events.length === 0 ? (
+              <p class="smap-empty">No events yet.</p>
+            ) : (
+              <ul class="smap-list">
+                {events.map((e) => (
+                  <li>
+                    <a href={`/events/${e.slug}/`}>{e.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div class="smap-card">
+            <h2 class="smap-card-title">Shop locations</h2>
+            {shops.length === 0 ? (
+              <p class="smap-empty">No shops yet.</p>
+            ) : (
+              <ul class="smap-list">
+                {shops.map((s) => (
+                  <li>
+                    <a href={`/shops/${s.slug}/`}>{s.data.title}</a>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
+</BaseLayout>
+
+<style>
+  .smap-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: min(42vh, 360px);
+    padding: clamp(2.5rem, 6vw, 3.25rem) 0 clamp(2rem, 5vw, 2.5rem);
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .smap-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  .smap-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(105deg, rgba(8, 22, 48, 0.88) 0%, rgba(8, 22, 48, 0.62) 42%, rgba(8, 22, 48, 0.35) 100%);
+  }
+
+  .smap-hero-inner {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+  }
+
+  .smap-hero h1 {
+    margin: 0.5rem 0 0.65rem;
+    font-size: var(--type-hero-title);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+
+  .smap-hero-highlight {
+    color: var(--color-golden-yellow);
+  }
+
+  .smap-hero-dek {
+    margin: 0;
+    max-width: 36rem;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .smap-body {
+    padding: clamp(2rem, 5vw, 3rem) 0 clamp(3rem, 8vw, 4.5rem);
+    background: var(--color-alice-blue, #f4f7fc);
+  }
+
+  .smap-grid {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .smap-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .smap-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .smap-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 14px;
+    padding: 1.25rem 1.35rem 1.4rem;
+    box-shadow: 0 6px 18px rgba(18, 44, 83, 0.06);
+    min-width: 0;
+  }
+
+  .smap-card-title {
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-steel-blue-1, #1d508d);
+    font-size: var(--type-body);
+    font-weight: 800;
+    color: #0f2240;
+    letter-spacing: -0.02em;
+  }
+
+  .smap-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .smap-list li {
+    margin: 0 0 0.4rem;
+  }
+
+  .smap-list a {
+    font-size: var(--type-body-small);
+    line-height: 1.45;
+    color: var(--color-steel-blue-1, #1d508d);
+    font-weight: 600;
+    text-decoration: none;
+    word-break: break-word;
+  }
+
+  .smap-list a:hover,
+  .smap-list a:focus-visible {
+    text-decoration: underline;
+  }
+
+  .smap-list a:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .smap-empty {
+    margin: 0;
+    font-size: var(--type-body-small);
+    color: #5a6b85;
+    font-style: italic;
+  }
+</style>

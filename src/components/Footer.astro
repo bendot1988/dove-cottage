@@ -50,6 +50,7 @@ const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeU
         <a href="#">Hospice Image Gallery</a>
         <a href="#">Hospice Videos</a>
         <a href="/news/">Latest News</a>
+        <a href="/sitemap/">Site map</a>
         <a href="#">Forthcoming Events</a>
       </div>
 
@@ -170,6 +171,12 @@ const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeU
       </div>
       <p>Dove Cottage Day Hospice</p>
       <small>© 2026 Registered Charity No. 1167291</small>
+      <p class="footer-site-meta">
+        <a href="/sitemap/">Site map</a>
+        <span class="footer-site-meta-sep" aria-hidden="true">·</span>
+        Site by
+        <a href="https://dotwall.co.uk" target="_blank" rel="noopener noreferrer">dotwall</a>
+      </p>
     </div>
   </section>
 </footer>
@@ -538,6 +545,30 @@ const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeU
   .footer-bottom small {
     font-size: 0.6875rem;
     opacity: 0.75;
+  }
+
+  .footer-site-meta {
+    margin: 14px 0 0;
+    font-size: 0.6875rem;
+    line-height: 1.5;
+    opacity: 0.88;
+  }
+
+  .footer-site-meta a {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .footer-site-meta a:hover,
+  .footer-site-meta a:focus-visible {
+    color: #fff4c4;
+  }
+
+  .footer-site-meta-sep {
+    margin: 0 0.35rem;
+    opacity: 0.65;
   }
 
   @media (max-width: 980px) {

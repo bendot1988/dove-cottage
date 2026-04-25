@@ -41,6 +41,13 @@ const methods = d.suggestedMethods.map((m) => ({
 }));
 
 const sideLabel = toTitleCase("Ways to give");
+
+const beaconAccount = (d.beaconAccount ?? "dovecottagedayhospice").trim();
+const beaconDonateFormId = (d.beaconDonateFormId ?? "").trim();
+const showBeaconDonate = Boolean(beaconDonateFormId);
+
+const donateFormTitle = toTitleCase(d.donateFormSectionTitle ?? "Give online");
+const donateFormIntro = d.donateFormIntro ?? "";
 ---
 
 <BaseLayout title={layoutTitle}>
@@ -96,7 +103,7 @@ const sideLabel = toTitleCase("Ways to give");
         </div>
       </div>
 
-      <section class="donate-main" id="give" aria-labelledby="donate-about-heading">
+      <section class="donate-main" aria-labelledby="donate-about-heading">
       <img
         src="/images/sunflower-brand-small.png"
         alt=""
@@ -106,6 +113,24 @@ const sideLabel = toTitleCase("Ways to give");
       />
       <div class="container donate-layout">
         <div class="donate-primary">
+          <div class="donate-form-section" id="give-form">
+            <h2 class="donate-form-heading">{donateFormTitle}</h2>
+            {donateFormIntro && <p class="donate-form-lede">{donateFormIntro}</p>}
+            {
+              showBeaconDonate ? (
+                <div class="donate-form-embed form-embed-card">
+                  <div class="beacon-form" data-account={beaconAccount} data-form={beaconDonateFormId}></div>
+                </div>
+              ) : (
+                <p class="donate-form-fallback">
+                  To make a gift today, please call{" "}
+                  <a href={telHref}>{c.trustPhoneDisplay}</a>
+                  {" "}or use one of the options in the sidebar — we’re finishing the secure online form connection.
+                </p>
+              )
+            }
+          </div>
+
           <p class="eyebrow" id="donate-about-eyebrow">{h.aboutEyebrow}</p>
           <h2 id="donate-about-heading">{h.aboutHeading}</h2>
           <p class="lede about-lede">
@@ -184,6 +209,11 @@ const sideLabel = toTitleCase("Ways to give");
     </section>
     </div>
   </div>
+  {showBeaconDonate && (
+    <script is:inline>
+      !function(e,t){if(!e.getElementById(t)){var c=e.createElement("script");c.id=t,c.src="https://static.beaconproducts.co.uk/js-sdk/production/beaconcrm.min.js",e.getElementsByTagName("head")[0].appendChild(c)}}(document,"beacon-js-sdk");
+    </script>
+  )}
   <script>
     import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
     initMotionScrollReveal();
@@ -364,6 +394,67 @@ const sideLabel = toTitleCase("Ways to give");
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 36px 40px;
     align-items: start;
+  }
+
+  #give-form {
+    scroll-margin-top: 5.5rem;
+  }
+
+  .donate-form-section {
+    margin-bottom: 2.25rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(29, 80, 141, 0.14);
+  }
+
+  .donate-form-heading {
+    margin: 0 0 10px;
+  }
+
+  .donate-form-lede {
+    margin: 0 0 10px;
+    font-size: var(--type-body-large);
+    line-height: 1.55;
+    text-wrap: pretty;
+    color: #364861;
+    max-width: 640px;
+  }
+
+  .donate-form-fallback {
+    margin: 0;
+    padding: 16px 18px;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    color: #2f3f5a;
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(18, 44, 83, 0.06);
+    max-width: 640px;
+  }
+
+  .donate-form-fallback a {
+    color: var(--color-steel-blue-1);
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .donate-form-fallback a:hover,
+  .donate-form-fallback a:focus-visible {
+    text-decoration: underline;
+  }
+
+  .form-embed-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 8px 22px rgba(18, 44, 83, 0.07);
+    max-width: 720px;
+  }
+
+  :global(.donate-form-embed .beacon-form) {
+    width: 100%;
+    min-height: 560px;
   }
 
   .eyebrow {

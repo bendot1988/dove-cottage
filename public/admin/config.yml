@@ -415,6 +415,32 @@ collections:
           - { label: "Primary CTA — URL (can be anchor #)", name: "heroPrimaryCtaHref", widget: "string" }
           - { label: "Secondary CTA — label", name: "heroSecondaryCtaLabel", widget: "string" }
           - { label: "Secondary CTA — URL", name: "heroSecondaryCtaHref", widget: "string" }
+          - {
+              label: "Give online — section title",
+              name: "donateFormSectionTitle",
+              widget: "string",
+              default: "Give online",
+            }
+          - {
+              label: "Give online — intro (above the form)",
+              name: "donateFormIntro",
+              widget: "text",
+              hint: "Shown above the Beacon donation embed.",
+            }
+          - {
+              label: "Beacon account slug",
+              name: "beaconAccount",
+              widget: "string",
+              default: "dovecottagedayhospice",
+              hint: "Usually dovecottagedayhospice — same as other Beacon forms on the site.",
+            }
+          - {
+              label: "Beacon donation form ID",
+              name: "beaconDonateFormId",
+              widget: "string",
+              required: false,
+              hint: "From Beacon (data-form value). When set, the secure donation form appears on the donate page. Set the form’s thank-you / redirect URL in Beacon to /donation-thank-you/",
+            }
           - { label: "Main — about eyebrow", name: "aboutEyebrow", widget: "string" }
           - { label: "Main — about heading (H2)", name: "aboutHeading", widget: "string" }
           - { label: "About — paragraph 1", name: "aboutParagraph1", widget: "text" }
