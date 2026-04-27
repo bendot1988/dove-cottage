@@ -3,6 +3,26 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import archive from "../../data/site-archive.json";
 import contact from "../../data/contact.json";
 import { toTitleCase } from "../../lib/titleCase";
+import hospiceServicesOverviewData from "../../data/hospice-services-overview.json";
+import carerPatientWellbeingData from "../../data/carer-patient-wellbeing.json";
+import dementiaHomeSittingData from "../../data/dementia-home-sitting.json";
+import counsellingSupportOverviewData from "../../data/counselling-support-overview.json";
+import bereavementSupportData from "../../data/bereavement-support.json";
+import bereavementSupportGroupData from "../../data/bereavement-support-group.json";
+import counsellingData from "../../data/counselling.json";
+import nursingCareData from "../../data/nursing-care-medical-advice.json";
+import wellbeingActivitiesData from "../../data/wellbeing-activities.json";
+import complementaryTherapiesData from "../../data/complementary-therapies.json";
+import therapyBathingData from "../../data/therapy-bathing.json";
+import spiritualChaplaincyData from "../../data/spiritual-chaplaincy-support.json";
+import transportData from "../../data/transport.json";
+import supportGroupsData from "../../data/support-groups.json";
+import carerSupportData from "../../data/carer-support.json";
+import mensShedData from "../../data/mens-shed.json";
+import hireFacilitiesData from "../../data/hire-our-facilities.json";
+import supportUsOverviewData from "../../data/support-us-overview.json";
+import volunteerData from "../../data/volunteer-your-time.json";
+import donateData from "../../data/donate.json";
 
 const c = contact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
@@ -27,6 +47,38 @@ const filterLabelById = new Map(archive.filters.map((f) => [f.id, f.label]));
 function categoryLabelsForKeys(keys: string[]): string[] {
   return keys.map((id) => filterLabelById.get(id) ?? id);
 }
+
+type HeroRef = { heroImage: string; heroImageAlt: string };
+
+const featuredByHref = new Map<string, HeroRef>([
+  ["/hospice-services/", { heroImage: hospiceServicesOverviewData.heroImage, heroImageAlt: hospiceServicesOverviewData.heroImageAlt }],
+  ["/what-we-offer/carer-patient-wellbeing/", { heroImage: carerPatientWellbeingData.heroImage, heroImageAlt: carerPatientWellbeingData.heroImageAlt }],
+  ["/what-we-offer/dementia-home-sitting/", { heroImage: dementiaHomeSittingData.heroImage, heroImageAlt: dementiaHomeSittingData.heroImageAlt }],
+  ["/hospice-services/counselling-support/", { heroImage: counsellingSupportOverviewData.heroImage, heroImageAlt: counsellingSupportOverviewData.heroImageAlt }],
+  ["/hospice-services/bereavement-support/", { heroImage: bereavementSupportData.heroImage, heroImageAlt: bereavementSupportData.heroImageAlt }],
+  ["/hospice-services/bereavement-support-group/", { heroImage: bereavementSupportGroupData.heroImage, heroImageAlt: bereavementSupportGroupData.heroImageAlt }],
+  ["/hospice-services/counselling/", { heroImage: counsellingData.heroImage, heroImageAlt: counsellingData.heroImageAlt }],
+  ["/hospice-services/nursing-care-medical-advice/", { heroImage: nursingCareData.heroImage, heroImageAlt: nursingCareData.heroImageAlt }],
+  ["/hospice-services/wellbeing-activities/", { heroImage: wellbeingActivitiesData.heroImage, heroImageAlt: wellbeingActivitiesData.heroImageAlt }],
+  ["/hospice-services/complementary-therapies/", { heroImage: complementaryTherapiesData.heroImage, heroImageAlt: complementaryTherapiesData.heroImageAlt }],
+  ["/hospice-services/therapy-bathing/", { heroImage: therapyBathingData.heroImage, heroImageAlt: therapyBathingData.heroImageAlt }],
+  ["/hospice-services/spiritual-chaplaincy-support/", { heroImage: spiritualChaplaincyData.heroImage, heroImageAlt: spiritualChaplaincyData.heroImageAlt }],
+  ["/hospice-services/transport/", { heroImage: transportData.heroImage, heroImageAlt: transportData.heroImageAlt }],
+  ["/hospice-services/support-groups/", { heroImage: supportGroupsData.heroImage, heroImageAlt: supportGroupsData.heroImageAlt }],
+  ["/hospice-services/carer-support/", { heroImage: carerSupportData.heroImage, heroImageAlt: carerSupportData.heroImageAlt }],
+  ["/hospice-services/mens-shed/", { heroImage: mensShedData.heroImage, heroImageAlt: mensShedData.heroImageAlt }],
+  ["/hire-our-facilities/", { heroImage: hireFacilitiesData.heroImage, heroImageAlt: hireFacilitiesData.heroImageAlt }],
+  ["/support-us/", { heroImage: supportUsOverviewData.heroImage, heroImageAlt: supportUsOverviewData.heroImageAlt }],
+  ["/support-us/volunteer-your-time/", { heroImage: volunteerData.heroImage, heroImageAlt: volunteerData.heroImageAlt }],
+  ["/donate/", { heroImage: donateData.heroImage, heroImageAlt: donateData.heroImageAlt }]
+]);
+
+const syncedItems = archive.items.map((item) => {
+  const featured = featuredByHref.get(item.href);
+  return featured
+    ? { ...item, image: featured.heroImage, imageAlt: featured.heroImageAlt }
+    : item;
+});
 ---
 
 <BaseLayout title={layoutTitle}>
@@ -87,7 +139,7 @@ function categoryLabelsForKeys(keys: string[]): string[] {
 
           <div class="archive-grid">
             {
-              archive.items.map((item) => {
+              syncedItems.map((item) => {
                 const keys = filterKeysList(item.filterKeys);
                 const dataFilters = keys.join(" ");
                 const tagLabels = categoryLabelsForKeys(keys);
@@ -123,7 +175,7 @@ function categoryLabelsForKeys(keys: string[]): string[] {
                             </ul>
                           )
                         }
-                        <h2 class="archive-card-title">{item.title}</h2>
+                        <h2 class="archive-card-title">{toTitleCase(item.title)}</h2>
                       </div>
                     </div>
                     <div class="archive-card-body">
@@ -162,7 +214,7 @@ function categoryLabelsForKeys(keys: string[]): string[] {
                             </ul>
                           )
                         }
-                        <h2 class="archive-card-title">{item.title}</h2>
+                        <h2 class="archive-card-title">{toTitleCase(item.title)}</h2>
                       </div>
                     </div>
                     <div class="archive-card-body">
