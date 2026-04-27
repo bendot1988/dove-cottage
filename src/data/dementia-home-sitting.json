@@ -1,13 +1,17 @@
 {
   "pageTitle": "Dementia home-sitting | Dove Cottage",
-  "heroImage": "/images/hero-family-alt.png",
-  "heroImageAlt": "A supportive home visit conversation in a calm living room",
+  "heroImage": "/images/uploads/dementia-home-sitting-featured.png",
+  "heroImageAlt": "Two people sharing a warm conversation during a dementia support visit",
   "parentNavLabel": "What We Offer",
   "parentNavHref": "/explore/?topic=what-we-offer",
   "heroH1": "Dementia Home-Sitting",
   "heroShortDescription": "Supporting you at home, when you need it most.",
   "mainIntro1": "Caring for someone with dementia can be rewarding, but it can also be tiring and emotionally demanding. You do not have to manage alone.",
   "mainIntro2": "Our Dementia Home Visiting Service offers friendly, supportive visits at home for people living with dementia, giving unpaid carers time to rest, attend appointments, or take a short break with peace of mind.",
+  "sectionImage1": {
+    "src": "/images/uploads/dementia-home-sitting-featured.png",
+    "alt": "Two people sharing a warm conversation during a dementia support visit"
+  },
   "serviceHeading": "What is the Dementia Home Visiting Service?",
   "serviceIntro": "The Dementia Home Visiting Service provides safe, friendly social visits for people living with dementia who live at home. Visits are provided by trained volunteers and are focused on companionship and meaningful engagement.",
   "serviceOfferHeading": "During a visit, volunteers can offer:",

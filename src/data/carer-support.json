@@ -1,13 +1,17 @@
 {
   "pageTitle": "Carer Support Group | Dove Cottage",
-  "heroImage": "/images/hero-family-alt.png",
-  "heroImageAlt": "People in a welcoming support group setting",
+  "heroImage": "/images/uploads/carer-support-featured.png",
+  "heroImageAlt": "Two people chatting and laughing during a support group activity",
   "parentNavLabel": "Support Groups",
   "parentNavHref": "/hospice-services/support-groups/",
   "heroH1": "Carer Support Group",
   "heroShortDescription": "Ensuring Carers Receive The Support They Deserve.",
   "mainIntro1": "Being a carer for a loved one is tough. We get it. Putting someone else's needs before your own has become your everyday, and sometimes it might feel like you've forgotten who you were before.",
   "mainIntro2": "But that's why we're here - to support as many carers as possible and help them enjoy some time of their own.",
+  "sectionImage1": {
+    "src": "/images/uploads/carer-support-featured.png",
+    "alt": "Two people chatting and laughing during a support group activity"
+  },
   "whoHeading": "Who Is It For?",
   "whoList": [
     {

@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import p from "../../../data/support-groups.json";
+import mensShedData from "../../../data/mens-shed.json";
+import bereavementSupportGroupData from "../../../data/bereavement-support-group.json";
+import carerSupportData from "../../../data/carer-support.json";
 type SupportCard = {
   title: string;
   excerpt: string;
@@ -16,8 +19,18 @@ const layoutTitle = p.pageTitle
   .split(/\s*\|\s*/)
   .map((part) => part.trim())
   .join(" | ");
+
+const featuredImageByHref = new Map<string, string>([
+  ["/hospice-services/mens-shed/", mensShedData.heroImage],
+  ["/hospice-services/bereavement-support-group/", bereavementSupportGroupData.heroImage],
+  ["/hospice-services/carer-support/", carerSupportData.heroImage]
+]);
+
 const cards = p.cards.map((item: SupportCard) => ({
-  item,
+  item: {
+    ...item,
+    image: featuredImageByHref.get(item.href) ?? item.image
+  },
   live: Boolean(item.href && item.href !== "#" && item.href.trim().length)
 }));
 ---

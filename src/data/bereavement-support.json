@@ -1,7 +1,7 @@
 {
   "pageTitle": "Bereavement Support | Dove Cottage",
   "heroImage": "/images/uploads/bereavement-support-featured.png",
-  "heroImageAlt": "A patient and team member sharing a supportive fist bump",
+  "heroImageAlt": "A patient speaking with a bereavement support team member in a calm hospice setting",
   "parentNavLabel": "Hospice Services",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Bereavement Support",
@@ -59,7 +59,7 @@
   "sectionImages": {
     "afterIntro": {
       "src": "/images/uploads/bereavement-support-featured.png",
-      "alt": "A patient and team member sharing a supportive fist bump"
+      "alt": "A patient speaking with a bereavement support team member in a calm hospice setting"
     }
   }
 }

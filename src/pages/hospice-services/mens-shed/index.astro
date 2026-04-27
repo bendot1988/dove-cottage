@@ -93,6 +93,12 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
               <cite>{p.quoteAttribution}</cite>
             </blockquote>
 
+            <div class="svc-card" id="mens-shed-enquiry-form">
+              <div class="form-embed-card">
+                <div class="beacon-form" data-account="dovecottagedayhospice" data-form="fe636194"></div>
+              </div>
+            </div>
+
           </div>
 
           <aside class="svc-side" aria-label={asideTitle}>
@@ -134,6 +140,9 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
       </section>
     </div>
   </div>
+  <script is:inline>
+    !function(e,t){if(!e.getElementById(t)){var c=e.createElement("script");c.id=t,c.src="https://static.beaconproducts.co.uk/js-sdk/production/beaconcrm.min.js",e.getElementsByTagName("head")[0].appendChild(c)}}(document,"beacon-js-sdk");
+  </script>
   <script>
     import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
     initMotionScrollReveal();
@@ -166,6 +175,19 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
     font-style: normal;
     font-weight: 700;
     color: #385677;
+  }
+
+  .form-embed-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 8px 22px rgba(18, 44, 83, 0.07);
+  }
+
+  :global(.beacon-form) {
+    width: 100%;
+    min-height: 560px;
   }
 
 </style>
