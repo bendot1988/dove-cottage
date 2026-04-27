@@ -7,6 +7,9 @@ import { toTitleCase } from "../../lib/titleCase";
 const c = contact;
 
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+const charityCommissionHref =
+  c.charityCommissionUrl ??
+  "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/1057941/charity-overview";
 
 const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(c.mapSearchQuery)}&output=embed`;
 const mapExternalHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapSearchQuery)}`;
@@ -76,7 +79,14 @@ const asideLabel = toTitleCase("Other ways to get in touch");
     <div class="motion-scope">
       <div class="contact-trust" aria-label="Key details">
         <div class="container contact-trust-inner">
-          <span class="contact-trust-charity">{h.trustCharity}</span>
+          <a
+            class="contact-trust-charity"
+            href={charityCommissionHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {h.trustCharity}
+          </a>
           <div class="contact-trust-actions">
             <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
             <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{h.trustDonate}</a>
@@ -309,6 +319,12 @@ const asideLabel = toTitleCase("Other ways to get in touch");
     font-size: var(--type-body-small);
     font-weight: 600;
     color: #3a4e6a;
+    text-decoration: none;
+  }
+
+  .contact-trust-charity:hover,
+  .contact-trust-charity:focus-visible {
+    text-decoration: underline;
   }
 
   .contact-trust-actions {
@@ -418,6 +434,11 @@ const asideLabel = toTitleCase("Other ways to get in touch");
   :global(.rich-form-note a:hover),
   :global(.rich-form-note a:focus-visible) {
     text-decoration: underline;
+  }
+
+  :global(.rich-form-note a[href^="tel:"]) {
+    white-space: nowrap;
+    display: inline-block;
   }
 
   .inline-phone {

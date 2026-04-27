@@ -9,6 +9,9 @@ const d = donate;
 const c = contact;
 
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+const charityCommissionHref =
+  c.charityCommissionUrl ??
+  "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/1057941/charity-overview";
 
 const layoutTitle = d.pageTitle
   .split(/\s*\|\s*/)
@@ -95,7 +98,14 @@ const donateFormIntro = d.donateFormIntro ?? "";
     <div class="motion-scope">
       <div class="donate-trust" aria-label="Key details">
         <div class="container donate-trust-inner">
-          <span class="donate-trust-charity">{h.trustCharity}</span>
+          <a
+            class="donate-trust-charity"
+            href={charityCommissionHref}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {h.trustCharity}
+          </a>
           <div class="donate-trust-actions">
             <a class="donate-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
             <a href={c.trustDonateUrl} class="btn btn-primary btn-shine donate-trust-donate">{h.trustDonate}</a>
@@ -344,6 +354,12 @@ const donateFormIntro = d.donateFormIntro ?? "";
     font-size: var(--type-body-small);
     font-weight: 600;
     color: #3a4e6a;
+    text-decoration: none;
+  }
+
+  .donate-trust-charity:hover,
+  .donate-trust-charity:focus-visible {
+    text-decoration: underline;
   }
 
   .donate-trust-actions {

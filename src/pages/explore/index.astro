@@ -26,6 +26,9 @@ import donateData from "../../data/donate.json";
 
 const c = contact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+const charityCommissionHref =
+  c.charityCommissionUrl ??
+  "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/1057941/charity-overview";
 
 const layoutTitle = archive.pageTitle
   .split(/\s*\|\s*/)
@@ -106,7 +109,14 @@ const syncedItems = archive.items.map((item) => {
 
     <div class="contact-trust" aria-label="Key details">
       <div class="container contact-trust-inner">
-        <span class="contact-trust-charity">{titleCaseCharity}</span>
+        <a
+          class="contact-trust-charity"
+          href={charityCommissionHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {titleCaseCharity}
+        </a>
         <div class="contact-trust-actions">
           <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
           <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{trustDonate}</a>

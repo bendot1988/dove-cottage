@@ -2,6 +2,9 @@
 import contact from "../data/contact.json";
 
 const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contact.mapSearchQuery)}`;
+const charityCommissionHref =
+  contact.charityCommissionUrl ??
+  "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/1057941/charity-overview";
 ---
 
 <footer class="site-footer">
@@ -37,7 +40,7 @@ const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeU
         <h3>Support Us</h3>
         <a href="#">Make a Donation</a>
         <a href="#">Volunteer Your Time</a>
-        <a href="#">Leave a Gift in Your Will</a>
+        <a href="/support-us/leave-a-gift-in-your-will/">Leave a Gift in Your Will</a>
         <a href="#">Fundraise For Us</a>
         <a href="/shops/">Visit Our Shops</a>
         <a href="#">Corporate partnerships</a>
@@ -170,10 +173,15 @@ const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeU
         </a>
       </div>
       <p>Dove Cottage Day Hospice</p>
-      <small>© 2026 Registered Charity No. 1167291</small>
+      <small>
+        © 2026 Registered Charity No.
+        <a href={charityCommissionHref} target="_blank" rel="noopener noreferrer">1167291</a>
+      </small>
       <p class="footer-site-meta">
-        <a href="/sitemap/">Site map</a>
-        <span class="footer-site-meta-sep" aria-hidden="true">·</span>
+        <a href="/sitemap/">Page Sitemap</a>
+        <span class="footer-site-meta-sep" aria-hidden="true">/</span>
+        <a href="/sitemap.xml">Sitemap XML</a>
+        <span class="footer-site-meta-sep" aria-hidden="true">/</span>
         Site by
         <a href="https://dotwall.co.uk" target="_blank" rel="noopener noreferrer">dotwall</a>
       </p>
