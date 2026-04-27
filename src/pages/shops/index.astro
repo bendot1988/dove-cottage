@@ -14,7 +14,7 @@ const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Ever
   <section class="hospice-svc-hero" aria-label="Our Shops">
     <img
       class="hospice-svc-hero-bg"
-      src="/images/shops/bottesford-hero.png"
+      src="/images/uploads/shops-hero-featured.png"
       alt="Dove Cottage charity shop interior"
       width="1920"
       height="720"
@@ -37,7 +37,7 @@ const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Ever
     <div class="container">
       <header class="shops-intro">
         <p class="shops-eyebrow">Find your local shop</p>
-        <h2>Visit us in person</h2>
+        <h2>Visit Us in Person</h2>
         <p class="intro">{intro}</p>
       </header>
       {shops.length === 0 ? (
@@ -108,7 +108,7 @@ const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Ever
 
   .shops-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
   }
 
@@ -136,14 +136,15 @@ const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Ever
   .image-link {
     display: block;
     position: relative;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
   }
 
   .image-link img {
     width: 100%;
-    aspect-ratio: 4 / 3;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
   }
 
@@ -274,7 +275,7 @@ const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Ever
 
   @media (max-width: 980px) {
     .shops-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: 1fr;
     }
   }
 
