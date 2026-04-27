@@ -60,7 +60,80 @@
   "impactHeading": "A Meaningful Choice of Venue",
   "impactBody": "Hiring our facilities offers more than just a space — it is a chance to make a positive impact. Every booking helps support hospice care and the families who rely on us.",
   "galleryHeading": "Photo Gallery",
-  "galleryBody": "A gallery of our facilities and gardens will be added soon.",
+  "galleryBody": "Explore our spaces below.",
+  "gallerySections": [
+    {
+      "heading": "Meeting & Training Space",
+      "images": [
+        { "src": "/images/uploads/facilities/garden-room.png", "alt": "Garden room set up for small group meetings" },
+        { "src": "/images/uploads/facilities/hospice-sun-room-1.png", "alt": "Sun room with countryside views" },
+        { "src": "/images/uploads/facilities/hospice-sun-room-2.png", "alt": "Sun room seating area with table" },
+        { "src": "/images/uploads/facilities/hospice-sun-room-3.png", "alt": "Sun room lounge area" },
+        { "src": "/images/uploads/facilities/hospice-lounge-1.png", "alt": "Main lounge with recliner chairs" },
+        { "src": "/images/uploads/facilities/hospice-lounge-2.png", "alt": "Lounge seating and reading area" },
+        { "src": "/images/uploads/facilities/hospice-dining-room-1.png", "alt": "Dining room with group tables" },
+        { "src": "/images/uploads/facilities/hospice-dining-room-2.png", "alt": "Dining and social space" },
+        { "src": "/images/uploads/facilities/corridor.png", "alt": "Bright corridor and welcome area" }
+      ]
+    },
+    {
+      "heading": "Extensive Tranquil Gardens",
+      "images": [
+        { "src": "/images/uploads/facilities/external-shot-of-hospice-across-fields.png", "alt": "External view of the hospice and gardens across fields" }
+      ]
+    },
+    {
+      "heading": "Hairdressing Salon",
+      "images": [
+        { "src": "/images/uploads/facilities/hair-salon-1.png", "alt": "Hair salon wash station and styling chairs" },
+        { "src": "/images/uploads/facilities/hair-salon-2.png", "alt": "Hair salon mirrors and styling stations" },
+        { "src": "/images/uploads/facilities/salon.png", "alt": "Hair salon treatment area" }
+      ]
+    },
+    {
+      "heading": "Complementary Therapy & Beauty Suite",
+      "images": [
+        { "src": "/images/uploads/facilities/complementary-therapy-suite-1.png", "alt": "Complementary therapy suite treatment room" },
+        { "src": "/images/uploads/facilities/complementary-therapy-suite-2.png", "alt": "Complementary therapy suite sink and storage area" },
+        { "src": "/images/uploads/facilities/complementary-therapy-suite-3.png", "alt": "Complementary therapy suite with specialist bathing equipment" },
+        { "src": "/images/uploads/facilities/complementary-therapy-suite-4.png", "alt": "Complementary therapy suite therapy bed and equipment" },
+        { "src": "/images/uploads/facilities/medical-room-1.png", "alt": "Medical room with profiling bed" },
+        { "src": "/images/uploads/facilities/medical-room-2.png", "alt": "Medical room with sink and storage" },
+        { "src": "/images/uploads/facilities/medical-room-3.png", "alt": "Medical room treatment bed setup" }
+      ]
+    },
+    {
+      "heading": "Therapy Bathing Facility",
+      "images": [
+        { "src": "/images/uploads/facilities/therapy-bathing-facility-1.png", "alt": "Therapy bathing room with specialist bath" },
+        { "src": "/images/uploads/facilities/therapy-bathing-facility-2.png", "alt": "Therapy bathing room with patient hoist" },
+        { "src": "/images/uploads/facilities/therapy-bathing-facility-3.png", "alt": "Therapy bathing room facilities" }
+      ]
+    },
+    {
+      "heading": "Kitchen & Catering Areas",
+      "images": [
+        { "src": "/images/uploads/facilities/hospice-kitchen-1.png", "alt": "Hospice kitchen prep and sink area" },
+        { "src": "/images/uploads/facilities/hospice-kitchen-2.png", "alt": "Hospice kitchen with professional catering equipment" }
+      ]
+    },
+    {
+      "heading": "Accessibility Features",
+      "images": [
+        { "src": "/images/uploads/facilities/accessible-toilet-facilities-1.png", "alt": "Accessible toilet facilities" },
+        { "src": "/images/uploads/facilities/accessible-toilet-facilities-2.png", "alt": "Accessible sink and wash facilities" },
+        { "src": "/images/uploads/facilities/wheelchair-assisted-vehicle.png", "alt": "Wheelchair assisted Dove Cottage vehicle" }
+      ]
+    },
+    {
+      "heading": "A Meaningful Choice of Venue",
+      "images": [
+        { "src": "/images/uploads/facilities/external-shot-of-hospice-across-fields.png", "alt": "External view of the hospice venue" },
+        { "src": "/images/uploads/facilities/corridor.png", "alt": "Welcoming entrance and corridor area" },
+        { "src": "/images/uploads/facilities/wheelchair-assisted-vehicle.png", "alt": "Wheelchair assisted Dove Cottage vehicle supporting access" }
+      ]
+    }
+  ],
   "formHeading": "Facility Hire Enquiry",
   "formIntro": "To make an enquiry regarding booking our facilities please complete the enquiry form.",
   "sideFormLinkText": "Use our form",
