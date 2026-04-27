@@ -22,7 +22,7 @@ const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3, p.mainIntro4].fil
 const sectionGalleries = new Map((p.gallerySections ?? []).map((gallery) => [gallery.heading, gallery.images]));
 ---
 
-<BaseLayout title={layoutTitle}>
+<BaseLayout title={layoutTitle} description={p.heroShortDescription}>
   <div class="svc-page">
     <section class="hospice-svc-hero" aria-label={p.heroH1}>
       <img class="hospice-svc-hero-bg" src={p.heroImage} alt={p.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />

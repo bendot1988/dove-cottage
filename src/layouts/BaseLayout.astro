@@ -6,10 +6,27 @@ import "../styles/global.css";
 
 interface Props {
   title?: string;
+  description?: string;
   noindex?: boolean;
 }
 
-const { title = "Dove Cottage", noindex = false } = Astro.props;
+const {
+  title = "Dove Cottage",
+  description = "Dove Cottage Day Hospice provides free palliative care and support for families across Leicestershire, Nottinghamshire and Lincolnshire.",
+  noindex = false
+} = Astro.props;
+
+const clampText = (input: string, maxLength: number) => {
+  const normalized = input.replace(/\s+/g, " ").trim();
+  if (normalized.length <= maxLength) return normalized;
+  const sliced = normalized.slice(0, maxLength - 1);
+  const safeBoundary = sliced.lastIndexOf(" ");
+  const trimmed = (safeBoundary > Math.floor(maxLength * 0.6) ? sliced.slice(0, safeBoundary) : sliced).trim();
+  return `${trimmed}…`;
+};
+
+const seoTitle = clampText(title, 60);
+const seoDescription = clampText(description, 160);
 ---
 
 <!doctype html>
@@ -20,7 +37,12 @@ const { title = "Dove Cottage", noindex = false } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {noindex && <meta name="googlebot" content="noindex, nofollow" />}
-    <title>{title}</title>
+    <title>{seoTitle}</title>
+    <meta name="description" content={seoDescription} />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    <meta name="twitter:title" content={seoTitle} />
+    <meta name="twitter:description" content={seoDescription} />
   </head>
   <body>
     <Header />

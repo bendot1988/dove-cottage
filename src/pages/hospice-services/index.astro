@@ -35,7 +35,7 @@ const introParas = [overview.mainIntro1, overview.mainIntro2, overview.mainIntro
 const introKeyFacts = (overview.introKeyFacts ?? []).filter((row) => row?.label?.trim() && row?.value?.trim());
 ---
 
-<BaseLayout title={overview.pageTitle}>
+<BaseLayout title={overview.pageTitle} description={overview.heroShortDescription}>
   <section class="hospice-svc-hero" aria-label={overview.heroH1}>
     <img
       class="hospice-svc-hero-bg"

@@ -33,7 +33,10 @@ const homeShops = (await getCollection("shops", ({ data }) => !data.draft))
   }));
 ---
 
-<BaseLayout title="Dove Cottage">
+<BaseLayout
+  title="Dove Cottage"
+  description="Dove Cottage Day Hospice provides free palliative care, counselling and family support across Leicestershire, Nottinghamshire and Lincolnshire."
+>
   <div class="page-home motion-scope">
     <HeroSection {...homepage.hero} />
     <CareServicesSection {...homepage.careServices} />

@@ -14,7 +14,7 @@ const { post } = Astro.props as { post: CollectionEntry<"blog"> };
 const { Content } = await post.render();
 ---
 
-<BaseLayout title={`${post.data.title} | Dove Cottage`}>
+<BaseLayout title={`${post.data.title} | Dove Cottage`} description={post.data.excerpt}>
   <article class="news-post">
     <div class="motion-scope">
       <section class="news-article-inner" aria-label="Article">

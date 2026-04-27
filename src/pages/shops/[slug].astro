@@ -27,9 +27,10 @@ const heroLine1 = shop.data.hero_location ?? shop.data.title;
 const heroLine2 = shop.data.hero_location
   ? (shop.data.hero_tagline ?? "Hospice Shop")
   : null;
+const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.address}. ${shop.data.donations_blurb ?? "Shop pre-loved items and support Dove Cottage Day Hospice."}`;
 ---
 
-<BaseLayout title={`${shop.data.title} | Our Shops | Dove Cottage`}>
+<BaseLayout title={`${shop.data.title} | Our Shops | Dove Cottage`} description={shopSeoDescription}>
   <section class="hospice-svc-hero shop-hero" aria-label={heroLine1}>
     <img
       class="hospice-svc-hero-bg"
