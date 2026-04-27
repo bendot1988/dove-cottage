@@ -34,7 +34,7 @@ gallery:
   - /images/uploads/cotgrave-shop-interior-3.png
   - /images/uploads/cotgrave-shop-interior-4.png
 button_colour: "#2751a0"
-phone: ""
+phone: "0115 837 2628"
 address: "The Old Telephone Exchange, Main Street, Cotgrave, NG12 3HQ"
 donations_blurb: >
   We welcome donations of good-quality clothes, books, toys, bric-a-brac, and
