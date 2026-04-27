@@ -1,13 +1,17 @@
 {
   "pageTitle": "Counselling | Dove Cottage",
-  "heroImage": "/images/care-counselling.png",
-  "heroImageAlt": "A quiet, caring conversation with a member of our counselling team",
+  "heroImage": "/images/uploads/counselling-featured.png",
+  "heroImageAlt": "A counsellor and patient sharing a supportive moment",
   "parentNavLabel": "Hospice Services",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Counselling",
   "heroShortDescription": "Compassionate support for individuals, families and carers through every stage of your journey.",
   "mainIntro1": "Our counselling sessions are available to any individual, carer or family member that is living with or caring for someone with a palliative condition.",
   "mainIntro2": "Our qualified counsellors are on hand to listen to anyone who feels they might benefit from a safe, confidential space to talk. Conversations are welcome around any aspect of life (whether related to the diagnosis or not) offering an opportunity to help individuals feel heard and making sure they do not have to face a difficult time alone.",
+  "sectionImage1": {
+    "src": "/images/uploads/counselling-featured.png",
+    "alt": "A counsellor and patient sharing a supportive moment"
+  },
   "emotionalHeading": "Emotional support",
   "emotionalIntro": "Our team offers a calm and compassionate space to talk through worries, feelings and questions. This may include:",
   "emotionalList": [

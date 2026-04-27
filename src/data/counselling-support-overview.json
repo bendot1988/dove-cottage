@@ -1,12 +1,12 @@
 {
   "pageTitle": "Counselling & Support | Dove Cottage",
-  "heroImage": "/images/care-counselling.png",
-  "heroImageAlt": "Compassionate counselling and emotional support",
+  "heroImage": "/images/uploads/counselling-support-featured.png",
+  "heroImageAlt": "Two people chatting comfortably during a counselling support session",
   "parentNavLabel": "Hospice Services",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Counselling & Support",
   "heroShortDescription": "Compassionate Support for Everyone.",
-  "introEyebrow": "Counselling & support",
+  "introEyebrow": "Counselling & Support",
   "introHeading": "Compassionate Support for Everyone",
   "mainIntro1": "Our counselling and emotional support sessions are available to any individual, carer or family member that has been affected by a palliative condition.",
   "mainIntro2": "Our qualified counsellors are on hand to listen to anyone who feels they might benefit from a safe, confidential space to talk. Conversations are welcome around any aspect of life (whether related to the diagnosis or not), helping individuals feel heard and making sure they do not have to face a difficult time alone.",
@@ -17,19 +17,19 @@
       "excerpt": "Confidential one-to-one sessions with qualified counsellors for patients, family members, and unpaid carers.",
       "image": "/images/care-counselling.png",
       "imageAlt": "A quiet, private conversation in a safe environment",
-      "badge": "Emotional support",
-      "stat": "By appointment",
-      "ctaLabel": "Find out more",
+      "badge": "Emotional Support",
+      "stat": "By Appointment",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/counselling/"
     },
     {
-      "title": "Bereavement support",
+      "title": "Bereavement Support",
       "excerpt": "A listening ear, groups, and signposting for anyone affected by loss or preparing for a bereavement.",
       "image": "/images/bereavement-featured.png",
       "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
       "badge": "Support",
-      "stat": "For families & carers",
-      "ctaLabel": "Find out more",
+      "stat": "For Families & Carers",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/bereavement-support-group/"
     },
     {
@@ -37,9 +37,9 @@
       "excerpt": "Carer support groups offering connection, peer support, and signposting when needed.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "People in a welcoming group conversation",
-      "badge": "Group support",
-      "stat": "Register interest",
-      "ctaLabel": "Find out more",
+      "badge": "Group Support",
+      "stat": "Register Interest",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/support-groups/"
     },
     {
@@ -47,9 +47,9 @@
       "excerpt": "Trusted organisations, leaflets, and practical links to help with bereavement, grief, and financial support.",
       "image": "/images/care-counselling.png",
       "imageAlt": "Helpful information and support resources",
-      "badge": "Useful resources",
-      "stat": "Leaflets & links",
-      "ctaLabel": "Find out more",
+      "badge": "Useful Resources",
+      "stat": "Leaflets & Links",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/resource-hub/"
     }
   ],

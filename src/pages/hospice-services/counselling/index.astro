@@ -61,6 +61,22 @@ const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim()
           <div class="svc-primary">
             {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
 
+            {
+              p.sectionImage1?.src && (
+                <figure class="svc-figure">
+                  <img
+                    class="svc-figure__img"
+                    src={p.sectionImage1.src}
+                    alt={p.sectionImage1.alt}
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              )
+            }
+
             <div class="svc-card" role="group" aria-labelledby="emotional-heading">
               <h2 class="svc-card__title" id="emotional-heading">
                 {p.emotionalHeading}
@@ -87,6 +103,12 @@ const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim()
               </a>{" "}
               {p.referralOutro}
             </p>
+
+            <div class="svc-card" id="counselling-enquiry-form">
+              <div class="form-embed-card">
+                <div class="beacon-form" data-account="dovecottagedayhospice" data-form="fe636194"></div>
+              </div>
+            </div>
           </div>
 
           <aside class="svc-side" aria-label={asideTitle}>
@@ -128,8 +150,26 @@ const introBlocks = [p.mainIntro1, p.mainIntro2].filter((block) => block?.trim()
       </section>
     </div>
   </div>
+  <script is:inline>
+    !function(e,t){if(!e.getElementById(t)){var c=e.createElement("script");c.id=t,c.src="https://static.beaconproducts.co.uk/js-sdk/production/beaconcrm.min.js",e.getElementsByTagName("head")[0].appendChild(c)}}(document,"beacon-js-sdk");
+  </script>
   <script>
     import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
     initMotionScrollReveal();
   </script>
 </BaseLayout>
+
+<style>
+  .form-embed-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 8px 22px rgba(18, 44, 83, 0.07);
+  }
+
+  :global(.beacon-form) {
+    width: 100%;
+    min-height: 560px;
+  }
+</style>

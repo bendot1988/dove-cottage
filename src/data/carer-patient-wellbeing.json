@@ -1,7 +1,7 @@
 {
   "pageTitle": "Carer & patient wellbeing sessions | Dove Cottage",
-  "heroImage": "/images/hero-family-alt.png",
-  "heroImageAlt": "People sitting together in a bright, welcoming day hospice room",
+  "heroImage": "/images/uploads/carer-patient-wellbeing-featured.png",
+  "heroImageAlt": "A patient, carer and therapy dog in a welcoming hospice lounge",
   "parentNavLabel": "What We Offer",
   "parentNavHref": "/explore/?topic=what-we-offer",
   "heroH1": "Carer & Patient Wellbeing Sessions",
@@ -105,8 +105,8 @@
   "sideFormLinkText": "Use our contact form",
   "sideFormHint": "Enquire about carer and patient wellbeing sessions or ask for a referral.",
   "sectionImage1": {
-    "src": "/images/hero-family-alt.png",
-    "alt": "Guests and staff sharing refreshments in a relaxed group setting (replace via CMS if needed)"
+    "src": "/images/uploads/carer-patient-wellbeing-featured.png",
+    "alt": "A patient, carer and therapy dog in a welcoming hospice lounge"
   },
   "sectionImage2": {
     "src": "/images/hero-supporting-journey.png",

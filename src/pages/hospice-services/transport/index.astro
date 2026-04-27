@@ -59,6 +59,22 @@ const formLabel = toTitleCase("Enquiry");
             <p class="svc-lede">{p.mainIntro1}</p>
             <p class="svc-lede">{p.mainIntro2}</p>
 
+            {
+              p.sectionImage1?.src && (
+                <figure class="svc-figure">
+                  <img
+                    class="svc-figure__img"
+                    src={p.sectionImage1.src}
+                    alt={p.sectionImage1.alt}
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              )
+            }
+
             <div class="svc-card" role="group" aria-labelledby="transport-heading">
               <h2 class="svc-card__title" id="transport-heading">
                 {p.serviceHeading}

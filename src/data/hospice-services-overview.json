@@ -31,23 +31,23 @@
   "mainIntro3": "Click on the links below to discover more about our individual services that take place within our hospice building.",
   "buildingCards": [
     {
-      "title": "Nursing care & medical advice",
+      "title": "Nursing Care & Medical Advice",
       "excerpt": "Expert nursing support and symptom management in a social home-from-home environment.",
       "image": "/images/hero-supporting-journey.png",
       "imageAlt": "Nursing and medical care in a day hospice setting",
-      "badge": "Clinical care",
+      "badge": "Clinical Care",
       "stat": "Tue-Thu \u00b7 10am-3pm",
-      "ctaLabel": "Find out more",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/nursing-care-medical-advice/"
     },
     {
-      "title": "Wellbeing activities",
+      "title": "Wellbeing Activities",
       "excerpt": "Group sessions, creativity, and gentle activities that bring people together.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "People taking part in a group activity in the hospice",
       "badge": "Activities",
-      "stat": "In the day hospice",
-      "ctaLabel": "Find out more",
+      "stat": "In the Day Hospice",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/wellbeing-activities/"
     },
     {
@@ -55,49 +55,49 @@
       "excerpt": "Confidential one-to-one sessions with qualified counsellors for patients, family members, and unpaid carers.",
       "image": "/images/care-counselling.png",
       "imageAlt": "A quiet, private conversation in a safe environment",
-      "badge": "Emotional support",
-      "stat": "By appointment",
-      "ctaLabel": "Find out more",
+      "badge": "Emotional Support",
+      "stat": "By Appointment",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/counselling/"
     },
     {
-      "title": "Bereavement support",
+      "title": "Bereavement Support",
       "excerpt": "A listening ear, groups, and signposting for anyone affected by loss or preparing for a bereavement.",
       "image": "/images/bereavement-featured.png",
       "imageAlt": "Countryside and sky after a storm, symbolising hope and reflection",
       "badge": "Support",
-      "stat": "For families & carers",
-      "ctaLabel": "Find out more",
+      "stat": "For Families & Carers",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/bereavement-support/"
     },
     {
-      "title": "Complementary therapies",
+      "title": "Complementary Therapies",
       "excerpt": "Holistic support such as touch therapies and relaxation techniques to help with comfort and stress.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A peaceful therapy room",
       "badge": "Wellbeing",
-      "stat": "Alongside medical care",
-      "ctaLabel": "Find out more",
+      "stat": "Alongside Medical Care",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/complementary-therapies/"
     },
     {
-      "title": "Therapy bathing",
+      "title": "Therapy Bathing",
       "excerpt": "A dignified, soothing bathing service when everyday washing has become difficult at home.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A comfortable assisted bathing area",
-      "badge": "Assisted care",
-      "stat": "Specialist bathing suite",
-      "ctaLabel": "Find out more",
+      "badge": "Assisted Care",
+      "stat": "Specialist Bathing Suite",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/therapy-bathing/"
     },
     {
-      "title": "Spiritual & chaplaincy support",
+      "title": "Spiritual & Chaplaincy Support",
       "excerpt": "Space to talk about hope, meaning, and what matters to you, whatever your beliefs or background.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A quiet place for reflection",
-      "badge": "Spiritual support",
-      "stat": "By request",
-      "ctaLabel": "Find out more",
+      "badge": "Spiritual Support",
+      "stat": "By Request",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/spiritual-chaplaincy-support/"
     },
     {
@@ -106,8 +106,8 @@
       "image": "/images/reach-section-bg.png",
       "imageAlt": "A volunteer-driven accessible vehicle in the countryside",
       "badge": "Transport",
-      "stat": "Subject to availability",
-      "ctaLabel": "Find out more",
+      "stat": "Subject to Availability",
+      "ctaLabel": "Find Out More",
       "href": "/hospice-services/transport/"
     }
   ],
@@ -115,33 +115,33 @@
   "additionalIntro": "In addition to our core hospice-based services, we also offer support as follows:",
   "additionalCards": [
     {
-      "title": "Patient & carer wellbeing sessions",
+      "title": "Patient & Carer Wellbeing Sessions",
       "excerpt": "Holistic support for individuals and carers: relaxed Monday sessions to connect and access nursing and carer support.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A calm, supportive place to talk and learn together",
-      "badge": "What we offer",
+      "badge": "What We Offer",
       "stat": "Mondays \u00b7 10am-1pm",
-      "ctaLabel": "Find out more",
+      "ctaLabel": "Find Out More",
       "href": "/what-we-offer/carer-patient-wellbeing/"
     },
     {
-      "title": "Counselling & support",
+      "title": "Counselling & Support",
       "excerpt": "Counselling, support groups, and more \u2014 browse everything in this area of our work.",
       "image": "/images/care-counselling.png",
       "imageAlt": "Support and counselling in the community",
       "badge": "Explore",
-      "stat": "Services & groups",
-      "ctaLabel": "Browse support",
+      "stat": "Services & Groups",
+      "ctaLabel": "Browse Support",
       "href": "/hospice-services/counselling-support/"
     },
     {
-      "title": "Dementia home-sitting",
+      "title": "Dementia Home-Sitting",
       "excerpt": "Trained volunteers keep people company at home so carers can take a much-needed break with peace of mind.",
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A friendly volunteer visiting someone at home",
-      "badge": "What we offer",
-      "stat": "At home",
-      "ctaLabel": "Find out more",
+      "badge": "What We Offer",
+      "stat": "At Home",
+      "ctaLabel": "Find Out More",
       "href": "/what-we-offer/dementia-home-sitting/"
     }
   ],

@@ -1,13 +1,17 @@
 {
   "pageTitle": "Nursing Care and Medical Advice | Dove Cottage",
-  "heroImage": "/images/hero-supporting-journey.png",
-  "heroImageAlt": "Specialist nursing support being provided in a calm day hospice environment",
+  "heroImage": "/images/uploads/nursing-care-featured.png",
+  "heroImageAlt": "A nurse supporting a patient during a care session",
   "parentNavLabel": "Hospice Services",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Nursing Care and Medical Advice",
   "heroShortDescription": "Expert nursing support and symptom management in a social home-from-home environment.",
   "mainIntro1": "Our care is person-centred, with each individual offered a personalised care plan based on their specific requirements and goals.",
   "mainIntro2": "Elements of this plan can include, but are not limited to, the following areas:",
+  "sectionImage1": {
+    "src": "/images/uploads/nursing-care-featured.png",
+    "alt": "A nurse supporting a patient during a care session"
+  },
   "nursingHeading": "Nursing care",
   "nursingIntro": "Our palliative nursing team are on hand to support with any of the following:",
   "nursingList": [

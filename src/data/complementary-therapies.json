@@ -1,13 +1,17 @@
 {
   "pageTitle": "Complementary Therapies | Dove Cottage",
-  "heroImage": "/images/hero-family-alt.png",
-  "heroImageAlt": "A calm wellbeing treatment environment at Dove Cottage",
+  "heroImage": "/images/uploads/complementary-therapies-featured.png",
+  "heroImageAlt": "A complementary therapy massage session at Dove Cottage",
   "parentNavLabel": "Hospice Services",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Complementary Therapies",
   "heroShortDescription": "Relax and recharge.",
   "mainIntro1": "Our aim is to offer you an opportunity to relax and indulge in some self-care during your time here at Dove Cottage.",
   "mainIntro2": "These therapies are not offered as a replacement to the medical treatments you are already undergoing, but to complement them and support you as you navigate this stage of your life.",
+  "sectionImage1": {
+    "src": "/images/uploads/complementary-therapies-featured.png",
+    "alt": "A complementary therapy massage session at Dove Cottage"
+  },
   "benefitsHeading": "Complementary therapy treatments have been proven to provide the following benefits",
   "benefitsList": [
     { "text": "Reduce feelings of worry or stress" },

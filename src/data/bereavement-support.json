@@ -1,7 +1,7 @@
 {
   "pageTitle": "Bereavement Support | Dove Cottage",
-  "heroImage": "/images/bereavement-featured.png",
-  "heroImageAlt": "A vivid rainbow arcing over a misty green countryside, with a bare tree to the left and open fields, symbolising hope after a storm",
+  "heroImage": "/images/uploads/bereavement-support-featured.png",
+  "heroImageAlt": "A patient and team member sharing a supportive fist bump",
   "parentNavLabel": "Hospice Services",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Bereavement Support",
@@ -58,16 +58,8 @@
   "sideFormHint": "Register interest for support groups, or ask about bereavement support.",
   "sectionImages": {
     "afterIntro": {
-      "src": "/images/hero-family-alt.png",
-      "alt": "Two people together in a calm, supportive environment"
-    },
-    "afterCallout": {
-      "src": "/images/care-counselling.png",
-      "alt": "A quiet, caring conversation with a member of our team"
-    },
-    "beforeSupportGroups": {
-      "src": "/images/reach-section-bg.png",
-      "alt": "Our hospice and the rural community we serve across the Vale of Belvoir"
+      "src": "/images/uploads/bereavement-support-featured.png",
+      "alt": "A patient and team member sharing a supportive fist bump"
     }
   }
 }

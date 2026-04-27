@@ -1,6 +1,17 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import data from "../../data/hospice-services-overview.json";
+import nursingCareData from "../../data/nursing-care-medical-advice.json";
+import wellbeingActivitiesData from "../../data/wellbeing-activities.json";
+import counsellingData from "../../data/counselling.json";
+import bereavementSupportData from "../../data/bereavement-support.json";
+import complementaryTherapiesData from "../../data/complementary-therapies.json";
+import therapyBathingData from "../../data/therapy-bathing.json";
+import spiritualChaplaincyData from "../../data/spiritual-chaplaincy-support.json";
+import transportData from "../../data/transport.json";
+import carerPatientWellbeingData from "../../data/carer-patient-wellbeing.json";
+import counsellingSupportData from "../../data/counselling-support-overview.json";
+import dementiaHomeSittingData from "../../data/dementia-home-sitting.json";
 
 type OverviewCard = {
   title: string;
@@ -21,14 +32,33 @@ type OverviewData = typeof data & {
 
 const overview = data as OverviewData;
 
+const featuredImageByHref = new Map<string, string>([
+  ["/hospice-services/nursing-care-medical-advice/", nursingCareData.heroImage],
+  ["/hospice-services/wellbeing-activities/", wellbeingActivitiesData.heroImage],
+  ["/hospice-services/counselling/", counsellingData.heroImage],
+  ["/hospice-services/bereavement-support/", bereavementSupportData.heroImage],
+  ["/hospice-services/complementary-therapies/", complementaryTherapiesData.heroImage],
+  ["/hospice-services/therapy-bathing/", therapyBathingData.heroImage],
+  ["/hospice-services/spiritual-chaplaincy-support/", spiritualChaplaincyData.heroImage],
+  ["/hospice-services/transport/", transportData.heroImage],
+  ["/what-we-offer/carer-patient-wellbeing/", carerPatientWellbeingData.heroImage],
+  ["/hospice-services/counselling-support/", counsellingSupportData.heroImage],
+  ["/what-we-offer/dementia-home-sitting/", dementiaHomeSittingData.heroImage]
+]);
+
+const withSyncedFeaturedImage = (item: OverviewCard): OverviewCard => ({
+  ...item,
+  image: featuredImageByHref.get(item.href) ?? item.image
+});
+
 const renderCards = (items: OverviewCard[]) =>
   items.map((item) => {
     const live = Boolean(item.href && item.href !== "#" && item.href.trim().length);
     return { item, live };
   });
 
-const building = renderCards(overview.buildingCards);
-const additional = renderCards(overview.additionalCards);
+const building = renderCards(overview.buildingCards.map(withSyncedFeaturedImage));
+const additional = renderCards(overview.additionalCards.map(withSyncedFeaturedImage));
 
 const introParas = [overview.mainIntro1, overview.mainIntro2, overview.mainIntro3].filter((p) => p?.trim().length);
 
@@ -111,7 +141,7 @@ const introKeyFacts = (overview.introKeyFacts ?? []).filter((row) => row?.label?
                   <p class="support-card__stat">{item.stat}</p>
                   <h3>{item.title}</h3>
                   <p class="support-card__excerpt">{item.excerpt}</p>
-                  <span class="support-card__coming-soon">Coming soon</span>
+                  <span class="support-card__coming-soon">Coming Soon</span>
                 </div>
               </article>
             )
@@ -152,7 +182,7 @@ const introKeyFacts = (overview.introKeyFacts ?? []).filter((row) => row?.label?
                   <p class="support-card__stat">{item.stat}</p>
                   <h3>{item.title}</h3>
                   <p class="support-card__excerpt">{item.excerpt}</p>
-                  <span class="support-card__coming-soon">Coming soon</span>
+                  <span class="support-card__coming-soon">Coming Soon</span>
                 </div>
               </article>
             )

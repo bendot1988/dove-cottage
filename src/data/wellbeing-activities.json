@@ -1,13 +1,17 @@
 {
   "pageTitle": "Wellbeing Activities | Dove Cottage",
-  "heroImage": "/images/hero-family-alt.png",
-  "heroImageAlt": "People enjoying social wellbeing activities together at Dove Cottage",
+  "heroImage": "/images/uploads/wellbeing-activities-featured.png",
+  "heroImageAlt": "A Dove Cottage team member and patient enjoying a craft activity together",
   "parentNavLabel": "Hospice Services",
   "parentNavHref": "/hospice-services/",
   "heroH1": "Wellbeing Activities",
   "heroShortDescription": "A varied range of activities arranged throughout the day, with the freedom to join as many or as few as you choose.",
   "mainIntro1": "A varied range of activities are arranged throughout the day and patients are welcome to get involved in as many or as few as they choose.",
   "mainIntro2": "We endeavour to offer a range of activities to meet different interests and welcome suggestions for new additions.",
+  "sectionImage1": {
+    "src": "/images/uploads/wellbeing-activities-featured.png",
+    "alt": "A Dove Cottage team member and patient enjoying a craft activity together"
+  },
   "activitiesHeading": "Some examples of our current activities include",
   "activitiesList": [
     { "text": "Art therapy and crafts" },
