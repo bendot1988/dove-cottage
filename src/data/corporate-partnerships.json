@@ -1,0 +1,133 @@
+{
+  "pageTitle": "Corporate partnerships & fundraising | Support Us | Dove Cottage",
+  "metaDescription": "Partner with Dove Cottage Day Hospice: charity of the year, team challenges, events, sponsorship, volunteering, payroll giving, and corporate CSR.",
+  "heroImage": "/images/uploads/corporate/hero-corporate.png",
+  "heroImageAlt": "Supporters taking part in a bright, energetic community fundraising event",
+  "parentNavLabel": "Support us",
+  "parentNavHref": "/support-us/",
+  "heroH1": "Corporate partnerships & fundraising",
+  "heroShortDescription": "From charity of the year to sponsorship and team volunteering — discover how your organisation can help fund free care for local families while meeting your CSR goals.",
+  "intro": "Being in partnership with Dove Cottage can help you reach your corporate social responsibility targets, grow brand awareness, and inspire your workforce — while making a real difference to people living with life-limiting illness across our community.",
+  "visionTitle": "Our vision",
+  "visionBody": "Our vision is to maximise the quality of life for those living with life-limiting illnesses within our local community. We deliver a service that is accessible, compassionate, dignified and caring for families in need, and offers respite for carers.",
+  "whatWeDoTitle": "What we do",
+  "whatWeDoBody": "Dove Cottage is a voluntary organisation that cares for up to 100 families every week affected by life-limiting conditions. We have two sites — at Stathern near Melton Mowbray and at Ridlington in Rutland. Our care services are provided free of charge. Our income comes from a variety of sources, the majority of which is raised locally.",
+  "missionTitle": "Our mission",
+  "missionParagraphs": [
+    "Dove Cottage aims to deliver the best possible care through a range of services, including nursing care, the provision of information, emotional support, and therapeutic and diversional therapies. Through such activities we hope to maximise self-reliance, minimise dependency, and promote confidence and self-esteem.",
+    "We aim to offer a support system and valuable respite care to the family during the patient’s illness and in their bereavement. We work in partnership with other care providers to ensure that the needs of the family are met to the highest level possible.",
+    "We are fully compliant with all relevant regulators. We believe in transparency and good stewardship, and we work continuously to improve our services to match the evolving needs of our local area."
+  ],
+  "valuesTitle": "Our values",
+  "values": [
+    { "letter": "C", "word": "Caring" },
+    { "letter": "A", "word": "Above and beyond" },
+    { "letter": "R", "word": "Respect" },
+    { "letter": "I", "word": "Integrity" },
+    { "letter": "N", "word": "Nurturing" },
+    { "letter": "G", "word": "Giving" }
+  ],
+  "waysTitle": "Events, campaigns & corporate challenges",
+  "ways": [
+    {
+      "title": "Charity of the year",
+      "body": "Nominate Dove Cottage as your company or organisation’s charity of the year."
+    },
+    {
+      "title": "Sport & team challenges",
+      "body": "Challenge your team with a static challenge (for example a cycle ride on an exercise bike) or take part in our sporting and activity challenges."
+    },
+    {
+      "title": "Dove Cottage events",
+      "body": "Attend our events with colleagues, friends and family — and help spread the word."
+    },
+    {
+      "title": "Spread the word",
+      "body": "Circulate information about our events and initiatives using a notice board at work, literature at your premises, or mailings to clients, suppliers and members."
+    },
+    {
+      "title": "Pay for the day scheme",
+      "body": "Recognise an important birthday or anniversary, or mark a significant milestone for your company or staff."
+    },
+    {
+      "title": "Your own fundraising",
+      "body": "Hold your own event or campaign at your office or in your local community — for example dress-down days or festive jumper days."
+    }
+  ],
+  "donationsTitle": "Donations",
+  "donations": [
+    {
+      "title": "Donation station",
+      "body": "Host our indoor donation station in your reception or meeting or communal area. We deliver and collect — you just let us know. An average bag of clothing is estimated to be worth around £25, plus potential Gift Aid."
+    },
+    {
+      "title": "Donate prizes",
+      "body": "We are always in need of raffle and auction prizes. They help raise additional funds and are always appreciated."
+    },
+    {
+      "title": "Payroll giving",
+      "body": "Regular donations can come from employees’ salaries before tax."
+    },
+    {
+      "title": "Counter collection pots",
+      "body": "These help raise vital funds and promote brand awareness within the local community."
+    }
+  ],
+  "volunteeringTitle": "Volunteering opportunities",
+  "volunteeringBody": "Team-building and organisational volunteering can be a great away day at the hospice or at one of our events. There are also opportunities in the hospice, driving guests to and from the hospice, at our shops, and more.",
+  "sponsorshipTitle": "Sponsorship opportunities",
+  "sponsorshipBody": "Each year Dove Cottage holds a variety of events, offering sponsors excellent brand awareness and the chance to engage with new clients. Our programme can include our annual fete, Easter egg hunt, auction, lantern walk, carol service, Santa fun run, and challenge events with specialist partners. The more sponsors support our events, the more money comes directly to the hospice to help families in need.",
+  "expectTitle": "What you can expect in return",
+  "expectIntro": "If you decide to support Dove Cottage, we aim to offer as much as we can in return so the partnership between our corporate supporters and the hospice stays balanced.",
+  "expectations": [
+    "Support with reaching your corporate social responsibility (CSR) targets",
+    "Display your logo on our sponsors page on our website and add links to your company",
+    "Inspire your workforce and join with like-minded companies",
+    "Joint press releases and social media coverage where applicable",
+    "Develop your company’s brand reputation within the community",
+    "Show your business commitment to a great cause",
+    "Grow brand awareness and staff morale"
+  ],
+  "media": {
+    "iconStrip": [
+      {
+        "src": "/images/uploads/corporate/icon-handshake.png",
+        "alt": "Handshake representing corporate partnership"
+      },
+      {
+        "src": "/images/uploads/corporate/icon-target.png",
+        "alt": "Target representing CSR and fundraising goals"
+      },
+      {
+        "src": "/images/uploads/corporate/icon-growth.png",
+        "alt": "Bar chart representing growth and impact"
+      },
+      {
+        "src": "/images/uploads/corporate/icon-care.png",
+        "alt": "Hands holding a heart representing compassionate care"
+      },
+      {
+        "src": "/images/uploads/corporate/icon-ideas.png",
+        "alt": "Light bulb representing ideas and innovation"
+      }
+    ],
+    "waysPhoto": {
+      "src": "/images/uploads/corporate/photo-events.png",
+      "alt": "Participants enjoying a foam fundraising event"
+    },
+    "donationsPhoto": {
+      "src": "/images/uploads/corporate/photo-donations.png",
+      "alt": "Co-op presenting a large donation cheque to Dove Cottage Day Hospice"
+    },
+    "volunteeringPhoto": {
+      "src": "/images/uploads/corporate/photo-volunteering.png",
+      "alt": "Volunteer hosting tea with a guest in the day hospice lounge"
+    },
+    "sponsorshipPhoto": {
+      "src": "/images/uploads/corporate/photo-sponsorship.png",
+      "alt": "Santa fun run participants raising sponsorship for the hospice"
+    }
+  },
+  "ctaTitle": "How to get involved",
+  "ctaBody": "For more information about corporate fundraising, sponsorship, or volunteering, please contact our team — we would love to hear your ideas."
+}

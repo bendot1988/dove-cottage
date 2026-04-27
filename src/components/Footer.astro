@@ -28,33 +28,37 @@ const charityCommissionHref =
     />
 
     <div class="container footer-grid">
-      <div class="footer-col">
+      <div class="footer-col footer-col--links">
         <h3>What We Offer</h3>
-        <a href="#">Day Care</a>
-        <a href="#">Wellbeing Sessions</a>
-        <a href="#">Social-sitting</a>
-        <a href="#">Bereavement &amp; Family Support</a>
+        <a href="/hospice-services/">Hospice Services</a>
+        <a href="/what-we-offer/carer-patient-wellbeing/">Carer &amp; Patient Wellbeing</a>
+        <a href="/what-we-offer/dementia-home-sitting/">Dementia Home-Sitting</a>
+        <a href="/hospice-services/counselling-support/">Counselling &amp; Support</a>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col footer-col--links">
         <h3>Support Us</h3>
-        <a href="#">Make a Donation</a>
-        <a href="#">Volunteer Your Time</a>
+        <a href="/support-us/">See All Ways to Support Us</a>
+        <a href="/donate/">Make a Donation</a>
+        <a href="/support-us/volunteer-your-time/">Volunteer Your Time</a>
         <a href="/support-us/leave-a-gift-in-your-will/">Leave a Gift in Your Will</a>
-        <a href="#">Fundraise For Us</a>
+        <a href="#">Fundraise for Us</a>
         <a href="/shops/">Visit Our Shops</a>
-        <a href="#">Corporate partnerships</a>
+        <a href="/support-us/corporate-partnerships/">Corporate Partnerships</a>
       </div>
 
-      <div class="footer-col">
+      <div class="footer-col footer-col--links">
         <h3>Resources</h3>
-        <a href="#">Resource Hub</a>
-        <a href="#">Additional Support &amp; Information</a>
-        <a href="#">Hospice Image Gallery</a>
-        <a href="#">Hospice Videos</a>
-        <a href="/news/">Latest News</a>
+        <a href="/explore/">About us</a>
+        <a href="/contact/">Contact us</a>
+        <a href="/hospice-services/resource-hub/">Resource hub</a>
+        <a href="/news/">News &amp; events</a>
+        <a href="/news/?feed=event">Forthcoming events</a>
+        <a href="/newsletter/">Newsletter archive</a>
+        <a href="/hire-our-facilities/">Hire our facilities</a>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms-and-conditions/">Terms &amp; conditions</a>
         <a href="/sitemap/">Site map</a>
-        <a href="#">Forthcoming Events</a>
       </div>
 
       <div class="newsletter-card">
@@ -274,13 +278,84 @@ const charityCommissionHref =
     color: var(--color-golden-yellow);
   }
 
-  .footer-col a {
-    display: block;
+  .footer-col--links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  /* Animated white underline (grows from centre on hover / focus) */
+  .footer-site-meta a,
+  .footer-bottom small a {
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    max-width: 100%;
     color: rgba(255, 255, 255, 0.9);
     text-decoration: none;
+    padding-bottom: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col--links a {
+    position: relative;
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    padding-bottom: 3px;
+    transition: color 0.2s ease;
     font-size: var(--type-body-small);
     line-height: 1.45;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
+  }
+
+  .footer-col--links a:last-child {
+    margin-bottom: 0;
+  }
+
+  .footer-col--links a::after,
+  .footer-site-meta a::after,
+  .footer-bottom small a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .footer-col--links a:hover,
+  .footer-col--links a:focus-visible,
+  .footer-site-meta a:hover,
+  .footer-site-meta a:focus-visible,
+  .footer-bottom small a:hover,
+  .footer-bottom small a:focus-visible {
+    color: #fff;
+  }
+
+  .footer-col--links a:hover::after,
+  .footer-col--links a:focus-visible::after,
+  .footer-site-meta a:hover::after,
+  .footer-site-meta a:focus-visible::after,
+  .footer-bottom small a:hover::after,
+  .footer-bottom small a:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .footer-col--links a:focus-visible,
+  .footer-site-meta a:focus-visible,
+  .footer-bottom small a:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
   .newsletter-card {
@@ -522,6 +597,12 @@ const charityCommissionHref =
     .footer-bottom .socials a:focus-visible .social-icon {
       transform: none;
     }
+
+    .footer-col--links a::after,
+    .footer-site-meta a::after,
+    .footer-bottom small a::after {
+      transition: none;
+    }
   }
 
   .footer-bottom {
@@ -565,8 +646,6 @@ const charityCommissionHref =
   .footer-site-meta a {
     color: rgba(255, 255, 255, 0.95);
     font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 2px;
   }
 
   .footer-site-meta a:hover,

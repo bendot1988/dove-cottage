@@ -8,17 +8,33 @@ author: Dove Cottage Day Hospice
 featuredImage: /images/uploads/farewell_sally_featured-1024x683.jpg
 draft: false
 ---
+
 After more than 20 years of dedicated service, Nurse Sally retired from Dove Cottage Day Hospice at the end of March 2026.
 
 In this special interview, Sally reflects on her remarkable career as a nurse, sharing heartfelt memories, meaningful moments, and the experiences that have stayed with her throughout her time at the hospice. From the connections she has built with guests and their families to the impact of compassionate, person centred care, her story offers a powerful insight into life at Dove Cottage.
+
+<div class="yt-embed">
+  <iframe
+    src="https://www.youtube-nocookie.com/embed/hJv6BW1Ts9o?rel=0"
+    title="Sally reflects on her career at Dove Cottage Day Hospice (YouTube interview)"
+    loading="lazy"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen
+  ></iframe>
+</div>
+
+<p class="embed-fallback"><a href="https://www.youtube.com/watch?v=hJv6BW1Ts9o" target="_blank" rel="noopener noreferrer">Watch the interview on YouTube</a> if the video does not load.</p>
 
 ## How Sally came to join Dove Cottage
 
 Sally first came to Dove Cottage through a friend from her church who volunteered there. Encouraged to apply, she was told she would be a perfect fit, and it quickly became clear that this was exactly where she was meant to be.
 
-***“I remember feeling an immediate sense of calmness and warmth,” Sally recalls. “There was laughter coming from the guest areas. It did not feel clinical. It felt welcoming and full of life.”***
+> “I remember feeling an immediate sense of calmness and warmth,” Sally recalls. “There was laughter coming from the guest areas. It did not feel clinical. It felt welcoming and full of life.”
 
 Caring had always been a natural path for Sally. From a young age, she supported her grandmother and helped care for foster babies within her family. These early experiences shaped her desire to make a difference in people’s lives by combining clinical knowledge with compassionate, hands-on care.
+
+![Sally with guests at Dove Cottage, wearing a retirement sash](/images/uploads/sally-with-guests-retirement.png)
 
 ## Being a part of Dove Cottage
 
@@ -30,7 +46,11 @@ That time and space allows for moments that stay with you forever. One such memo
 
 “There was an afternoon where guests, staff and volunteers danced and sang along to an Elvis song in memory of a fellow guest. There were tears in our eyes, but also so much love and joy as we celebrated his life.”
 
+![Sally with colleagues in front of gold balloons at a retirement celebration](/images/uploads/sally-team-balloons.png)
+
 Dove Cottage also provides vital respite for carers and families, giving guests something to look forward to each week. It offers opportunities for connection, shared experiences, and friendship, often extending beyond the hospice itself. The team also advocates for guests and helps them navigate their healthcare needs with other professionals.
+
+![Staff, volunteers and friends together at Sally’s retirement celebration](/images/uploads/sally-group-celebration.png)
 
 ## Reflection and appreciation
 
@@ -38,11 +58,15 @@ For Sally, one of the most important lessons has been the power of hope and posi
 
 “No matter how difficult life feels, there is always a moment to smile or share a laugh.”
 
+![Sally sharing a hug with a colleague at her retirement celebration](/images/uploads/sally-hug-retirement.png)
+
 She describes the people she has cared for as brave and resilient, and considers it a privilege to have been welcomed into their lives, even for a short time.
 
 ## Receiving the Cavell Star Award
 
 In recognition of her outstanding contribution, Sally was recently awarded the Cavell Star Award, a truly well deserved honour celebrating her compassion, commitment, and excellence in nursing.
+
+![Sally in uniform with her Cavell Star Award](/images/uploads/sally-cavell-star-award.png)
 
 This is a celebration of Sally’s dedication and the difference she has made to so many lives.
 

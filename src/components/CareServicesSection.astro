@@ -1,7 +1,6 @@
 ---
 interface Card {
   tag: string;
-  tagClass: "tag-blue" | "tag-green" | "tag-orange" | "tag-purple";
   title: string;
   description: string;
   image: string;
@@ -15,45 +14,39 @@ interface Props {
   cards: Card[];
 }
 
-const defaultCards = [
+const defaultCards: Card[] = [
   {
     tag: "Tue-Thu | 10am-3pm",
-    tagClass: "tag-blue",
-    title: "Day Care",
-    description:
-      "Expert nursing support and symptom management in a social 'home-from-home' environment.",
+    title: "Hospice Services",
+    description: "Free day hospice on Tue–Thu, 10am–3pm, plus nursing, therapies, and support tailored to you.",
     image: "/images/hero-supporting-journey.png",
-    imagePosition: "center 44%",
-    href: "#"
+    imagePosition: "center 42%",
+    href: "/hospice-services/"
   },
   {
     tag: "Mondays | 10am-1pm",
-    tagClass: "tag-green",
-    title: "Wellbeing Sessions",
-    description: "Holistic support for individuals and carers.",
+    title: "Carer & Patient Wellbeing",
+    description:
+      "Relaxed Monday mornings for patients and carers together — activities, nursing advice, and lunch.",
     image: "/images/hero-family-alt.png",
     imagePosition: "center 48%",
     href: "/what-we-offer/carer-patient-wellbeing/"
   },
   {
     tag: "Dementia Support",
-    tagClass: "tag-orange",
-    title: "Dementia home-sitting",
-    description:
-      "Vital respite for unpaid carers. Our fully-trained volunteers provide companionship for your loved one at home.",
+    title: "Dementia Home-Sitting",
+    description: "Friendly home visits from trained volunteers so unpaid carers can take a proper break.",
     image: "/images/hero-family-alt.png",
-    imagePosition: "center 62%",
+    imagePosition: "center 48%",
     href: "/what-we-offer/dementia-home-sitting/"
   },
   {
-    tag: "Counselling",
-    tagClass: "tag-purple",
-    title: "Counselling & emotional support",
-    description:
-      "Compassionate support for individuals, families and carers through every stage of your journey.",
+    tag: "Counselling & Support",
+    title: "Counselling & Support",
+    description: "Confidential listening and counselling for patients, families, and carers at every stage.",
     image: "/images/care-counselling.png",
-    imagePosition: "center 38%",
-    href: "/hospice-services/counselling/"
+    imagePosition: "center 40%",
+    href: "/hospice-services/counselling-support/"
   }
 ];
 
@@ -75,7 +68,7 @@ const {
           <article class="service-card">
             <div class="card-image" style={`background-image:url('${card.image}');background-position:${card.imagePosition};`}>
             </div>
-            <span class={`tag ${card.tagClass}`}>{card.tag}</span>
+            <span class="tag">{card.tag}</span>
             <div class="card-content">
               <h3>{card.title}</h3>
               <p>{card.description}</p>
@@ -176,22 +169,7 @@ const {
     line-height: 1;
     font-weight: 700;
     color: var(--color-white);
-  }
-
-  .tag-blue {
-    background: #2d6fb3;
-  }
-
-  .tag-green {
-    background: var(--color-dark-slate-gray);
-  }
-
-  .tag-orange {
-    background: var(--color-fire-brick);
-  }
-
-  .tag-purple {
-    background: var(--color-dark-orchid);
+    background: var(--color-steel-blue-1, #1d508d);
   }
 
   .card-content {
@@ -212,7 +190,7 @@ const {
 
   .card-content p {
     margin: 0;
-    min-height: 104px;
+    min-height: 3.25rem;
     color: #495d78;
     font-size: var(--type-body);
     line-height: 1.6;

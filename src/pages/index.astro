@@ -10,6 +10,45 @@ import ReachSection from "../components/ReachSection.astro";
 import SupportCardsSection from "../components/SupportCardsSection.astro";
 import ImpactSection from "../components/ImpactSection.astro";
 import homepage from "../data/homepage.json";
+import hospiceServicesOverview from "../data/hospice-services-overview.json";
+import carerPatientWellbeing from "../data/carer-patient-wellbeing.json";
+import dementiaHomeSitting from "../data/dementia-home-sitting.json";
+import counsellingSupportOverview from "../data/counselling-support-overview.json";
+
+const careServiceCards = [
+  {
+    tag: "Tue-Thu | 10am-3pm",
+    title: hospiceServicesOverview.heroH1,
+    description: hospiceServicesOverview.homepageCareCardExcerpt,
+    image: hospiceServicesOverview.heroImage,
+    imagePosition: "center 42%",
+    href: "/hospice-services/"
+  },
+  {
+    tag: "Mondays | 10am-1pm",
+    title: "Carer & Patient Wellbeing",
+    description: carerPatientWellbeing.homepageCareCardExcerpt,
+    image: carerPatientWellbeing.heroImage,
+    imagePosition: "center 45%",
+    href: "/what-we-offer/carer-patient-wellbeing/"
+  },
+  {
+    tag: "Dementia Support",
+    title: dementiaHomeSitting.heroH1,
+    description: dementiaHomeSitting.homepageCareCardExcerpt,
+    image: dementiaHomeSitting.heroImage,
+    imagePosition: "center 48%",
+    href: "/what-we-offer/dementia-home-sitting/"
+  },
+  {
+    tag: "Counselling & Support",
+    title: counsellingSupportOverview.heroH1,
+    description: counsellingSupportOverview.homepageCareCardExcerpt,
+    image: counsellingSupportOverview.heroImage,
+    imagePosition: "center 40%",
+    href: "/hospice-services/counselling-support/"
+  }
+];
 
 const featuredNews = (await getCollection("blog", ({ data }) => !data.draft))
   .sort(
@@ -39,7 +78,11 @@ const homeShops = (await getCollection("shops", ({ data }) => !data.draft))
 >
   <div class="page-home motion-scope">
     <HeroSection {...homepage.hero} />
-    <CareServicesSection {...homepage.careServices} />
+    <CareServicesSection
+      title={homepage.careServices.title}
+      intro={homepage.careServices.intro}
+      cards={careServiceCards}
+    />
     <VideoFeatureSection {...homepage.videoFeature} />
     <HomeShopsSection {...homepage.shopsSection} shops={homeShops} />
     <ReachSection {...homepage.reachSection} />

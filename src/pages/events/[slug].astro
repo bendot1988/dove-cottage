@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import EventKeyInfo from "../../components/EventKeyInfo.astro";
 
 export async function getStaticPaths() {
   const events = await getCollection("events", ({ data }) => !data.draft);
@@ -18,59 +19,58 @@ const eventEnd = event.data.eventEndDate ? new Date(event.data.eventEndDate) : u
 const comparisonDate = eventEnd ?? eventStart;
 const now = new Date();
 const isPastEvent = comparisonDate.getTime() < now.getTime();
-
-const formatDate = (value: Date) =>
-  value.toLocaleDateString("en-GB", {
-    weekday: "short",
-    day: "numeric",
-    month: "long",
-    year: "numeric"
-  });
 ---
 
 <BaseLayout title={`${event.data.title} | Dove Cottage`} description={event.data.excerpt}>
   <article class="event-post">
-    <section class="event-article-inner">
-      <div class="container container--narrow">
-        <p class="meta">
-          <span class="category">{event.data.category}</span>
-          <span>·</span>
-          <time datetime={eventStart.toISOString()}>{formatDate(eventStart)}</time>
-          {eventEnd && (
-            <>
-              <span>to</span>
-              <time datetime={eventEnd.toISOString()}>{formatDate(eventEnd)}</time>
-            </>
-          )}
-          <span>·</span>
-          <span>{event.data.location}</span>
-        </p>
-        {isPastEvent && <p class="past-flag">Past event</p>}
-        <h1 class:list={{ "is-past": isPastEvent }}>{event.data.title}</h1>
+    <div class="motion-scope">
+      <section class="event-article-inner" aria-label="Event">
+        <div class="container container--narrow">
+          <p class="back-link back-link--top">
+            <a href="/news/">← Back to News &amp; Events</a>
+          </p>
+          <p class="meta">
+            <span class="category">{event.data.category}</span>
+          </p>
+          {isPastEvent && <p class="past-flag">Past event</p>}
+          <h1 class:list={{ "is-past": isPastEvent }}>{event.data.title}</h1>
 
-        {(event.data.featuredImage ?? event.data.featured_image) && (
-          <img
-            class="featured"
-            src={event.data.featuredImage ?? event.data.featured_image}
-            alt=""
-            loading="eager"
+          <EventKeyInfo
+            eventStart={eventStart}
+            eventEnd={eventEnd}
+            location={event.data.location}
           />
-        )}
 
-        <div class="content">
-          <Content />
-          {event.data.bookingUrl && !isPastEvent && (
-            <p class="event-booking">
-              <a href={event.data.bookingUrl} target="_blank" rel="noopener noreferrer">
-                Book event tickets
-              </a>
-            </p>
+          {(event.data.featuredImage ?? event.data.featured_image) && (
+            <img
+              class="featured"
+              src={event.data.featuredImage ?? event.data.featured_image}
+              alt=""
+              loading="eager"
+            />
           )}
+
+          <div class="content">
+            <Content />
+            {event.data.bookingUrl && !isPastEvent && (
+              <p class="event-booking">
+                <a href={event.data.bookingUrl} target="_blank" rel="noopener noreferrer">
+                  Book event tickets
+                </a>
+              </p>
+            )}
+          </div>
+          <p class="back-link back-link--bottom">
+            <a href="/news/">← Back to News &amp; Events</a>
+          </p>
         </div>
-        <p class="back-link"><a href="/news/">← Back to News &amp; Events</a></p>
-      </div>
-    </section>
+      </section>
+    </div>
   </article>
+  <script>
+    import { initMotionScrollReveal } from "../../scripts/motion-scroll-reveal.ts";
+    initMotionScrollReveal();
+  </script>
 </BaseLayout>
 
 <style>
@@ -106,7 +106,7 @@ const formatDate = (value: Date) =>
   }
 
   h1 {
-    margin: 0 0 18px;
+    margin: 0 0 16px;
     font-size: var(--type-section-title);
     color: #102a4e;
   }
@@ -140,6 +140,15 @@ const formatDate = (value: Date) =>
   }
 
   .back-link {
+    margin: 0;
+    font-size: var(--type-body-small);
+  }
+
+  .back-link--top {
+    margin-bottom: 14px;
+  }
+
+  .back-link--bottom {
     margin-top: 14px;
   }
 

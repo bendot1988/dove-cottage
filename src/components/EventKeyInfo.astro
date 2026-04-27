@@ -1,0 +1,91 @@
+---
+interface Props {
+  eventStart: Date;
+  eventEnd?: Date;
+  location?: string;
+}
+
+const { eventStart, eventEnd, location } = Astro.props;
+
+const formatDate = (value: Date) =>
+  value.toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "long",
+    year: "numeric"
+  });
+
+const startLabel = formatDate(eventStart);
+const endLabel = eventEnd ? formatDate(eventEnd) : null;
+const loc = location?.trim();
+---
+
+<div class="event-key-info">
+  <div class="event-key-info__block">
+    <p class="event-key-info__label">Event dates</p>
+    <p class="event-key-info__value">
+      <time datetime={eventStart.toISOString()}>{startLabel}</time>
+      {
+        endLabel && eventEnd && (
+          <>
+            <span class="event-key-info__sep">to</span>
+            <time datetime={eventEnd.toISOString()}>{endLabel}</time>
+          </>
+        )
+      }
+    </p>
+  </div>
+  {
+    loc && (
+      <div class="event-key-info__block">
+        <p class="event-key-info__label">Location</p>
+        <p class="event-key-info__value">{loc}</p>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .event-key-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 24px;
+    margin: 0 0 20px;
+    padding: 18px 20px;
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(18, 44, 83, 0.06);
+  }
+
+  .event-key-info__label {
+    margin: 0 0 6px;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-steel-blue);
+  }
+
+  .event-key-info__value {
+    margin: 0;
+    font-size: var(--type-body-large);
+    font-weight: 700;
+    line-height: 1.45;
+    color: #102a4e;
+  }
+
+  .event-key-info__sep {
+    display: inline-block;
+    margin: 0 0.35em;
+    font-weight: 600;
+    color: #596d89;
+    font-size: var(--type-body);
+  }
+
+  @media (max-width: 640px) {
+    .event-key-info {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

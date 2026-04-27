@@ -1,7 +1,7 @@
 {
   "pageTitle": "Explore our services and support | Dove Cottage",
-  "heroImage": "/images/hero-supporting-journey.png",
-  "heroImageAlt": "Smiling people in a calm, modern hospice day room",
+  "heroImage": "/images/uploads/services-support-hero.png",
+  "heroImageAlt": "Two women enjoying a wellbeing activity together in a bright day hospice lounge",
   "heroH1": "Services & Support",
   "heroDescription": "Browse everything Dove Cottage has to offer \u2014 from clinical and emotional support to ways you can get involved. Use the topics below to show one area, or start with all.",
   "filters": [
@@ -209,7 +209,7 @@
       "image": "/images/hero-family-alt.png",
       "imageAlt": "A partnership meeting in a local workplace",
       "filterKeys": "support-us",
-      "href": "#"
+      "href": "/support-us/corporate-partnerships/"
     }
   ]
 }

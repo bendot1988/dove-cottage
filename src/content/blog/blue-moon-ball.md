@@ -3,6 +3,8 @@ title: Blue Moon Ball
 category: Events
 excerpt: You're invited to join us for an unforgettable evening as we celebrate 30 remarkable years of palliative care, compassion and community.
 publishDate: 2026-04-21
+eventDate: 2026-05-30
+eventLocation: Courtyard Barns, Wartnaby, LE14 3HU
 author: Dove Cottage Day Hospice
 featuredImage: /images/uploads/blue-moon-ball-header.png
 draft: false

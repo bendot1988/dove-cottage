@@ -23,45 +23,7 @@
   },
   "careServices": {
     "title": "Care and Comfort Where You Need It Most",
-    "intro": "From specialist nursing to emotional support, we provide free, compassionate care for individuals and families within our local community.",
-    "cards": [
-      {
-        "tag": "Tue-Thu | 10am-3pm",
-        "tagClass": "tag-blue",
-        "title": "Day Care",
-        "description": "Expert nursing support and symptom management in a social 'home-from-home' environment.",
-        "image": "/images/hero-supporting-journey.png",
-        "imagePosition": "center 44%",
-        "href": "#"
-      },
-      {
-        "tag": "Mondays | 10am-1pm",
-        "tagClass": "tag-green",
-        "title": "Wellbeing Sessions",
-        "description": "Holistic support for individuals and carers.",
-        "image": "/images/hero-family-alt.png",
-        "imagePosition": "center 48%",
-        "href": "/what-we-offer/carer-patient-wellbeing/"
-      },
-      {
-        "tag": "Dementia Support",
-        "tagClass": "tag-orange",
-        "title": "Dementia home-sitting",
-        "description": "Vital respite for unpaid carers. Our fully-trained volunteers provide companionship for your loved one at home.",
-        "image": "/images/hero-family-alt.png",
-        "imagePosition": "center 62%",
-        "href": "/what-we-offer/dementia-home-sitting/"
-      },
-      {
-        "tag": "Counselling",
-        "tagClass": "tag-purple",
-        "title": "Counselling & emotional support",
-        "description": "Compassionate support for individuals, families and carers through every stage of your journey.",
-        "image": "/images/care-counselling.png",
-        "imagePosition": "center 38%",
-        "href": "/hospice-services/counselling/"
-      }
-    ]
+    "intro": "From specialist nursing to emotional support, we provide free, compassionate care for individuals and families within our local community."
   },
   "videoFeature": {
     "title": "Watch our Short Video to See the Difference We Make for Local Families",

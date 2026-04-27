@@ -4,6 +4,10 @@ import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import p from "../../../data/carer-patient-wellbeing.json";
 import contact from "../../../data/contact.json";
+import nursingCareData from "../../../data/nursing-care-medical-advice.json";
+import wellbeingActivitiesData from "../../../data/wellbeing-activities.json";
+import complementaryTherapiesData from "../../../data/complementary-therapies.json";
+import counsellingSupportOverviewData from "../../../data/counselling-support-overview.json";
 import { toTitleCase } from "../../../lib/titleCase";
 
 const c = contact;
@@ -16,8 +20,32 @@ const layoutTitle = p.pageTitle
 
 const parentLabel = p.parentNavLabel;
 const asideTitle = toTitleCase("Get in touch");
+const sidebarRegionLabel = toTitleCase("Contact and related services");
 const phoneLabel = toTitleCase("Phone");
 const formLabel = toTitleCase("Enquiry");
+
+const hospiceServicesPeekCards = [
+  {
+    title: toTitleCase(nursingCareData.heroH1),
+    href: "/hospice-services/nursing-care-medical-advice/",
+    image: nursingCareData.heroImage
+  },
+  {
+    title: toTitleCase(wellbeingActivitiesData.heroH1),
+    href: "/hospice-services/wellbeing-activities/",
+    image: wellbeingActivitiesData.heroImage
+  },
+  {
+    title: toTitleCase(complementaryTherapiesData.heroH1),
+    href: "/hospice-services/complementary-therapies/",
+    image: complementaryTherapiesData.heroImage
+  },
+  {
+    title: toTitleCase(counsellingSupportOverviewData.heroH1),
+    href: "/hospice-services/counselling-support/",
+    image: counsellingSupportOverviewData.heroImage
+  }
+];
 
 const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
 const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3].filter((block) => block?.trim().length);
@@ -150,7 +178,7 @@ const isLive = (h: string) => Boolean(h && h !== "#" && h.trim().length);
             </p>
           </div>
 
-          <aside class="svc-side" aria-label={asideTitle}>
+          <aside class="svc-side" aria-label={sidebarRegionLabel}>
             <div class="side-card">
               <h2 class="side-card-title">{asideTitle}</h2>
               <ul class="side-list">
@@ -183,6 +211,15 @@ const isLive = (h: string) => Boolean(h && h !== "#" && h.trim().length);
               </ul>
               <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
             </div>
+
+            <ArchiveSidebarPeek
+              staticCards={hospiceServicesPeekCards}
+              staticTitle={toTitleCase("Hospice Services")}
+              staticViewAllHref="/hospice-services/"
+              staticViewAllLabel={toTitleCase("View all hospice services")}
+              max={4}
+            />
+
             <ArchiveSidebarPeek filterId="what-we-offer" excludePath="/what-we-offer/carer-patient-wellbeing" />
           </aside>
         </div>

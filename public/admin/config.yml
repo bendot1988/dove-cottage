@@ -39,22 +39,6 @@ collections:
             fields:
               - { label: "Section Title", name: "title", widget: "string" }
               - { label: "Intro Text", name: "intro", widget: "text" }
-              - label: "Cards"
-                name: "cards"
-                widget: "list"
-                min: 4
-                max: 4
-                fields:
-                  - { label: "Tag Text", name: "tag", widget: "string" }
-                  - label: "Tag Color"
-                    name: "tagClass"
-                    widget: "select"
-                    options: ["tag-blue", "tag-green", "tag-orange", "tag-purple"]
-                  - { label: "Card Title", name: "title", widget: "string" }
-                  - { label: "Card Description", name: "description", widget: "text" }
-                  - { label: "Card Image", name: "image", widget: "image" }
-                  - { label: "Image Position", name: "imagePosition", widget: "string", hint: "Example: center 44%" }
-                  - { label: "Card Link", name: "href", widget: "string" }
           - label: "Video Feature"
             name: "videoFeature"
             widget: "object"
@@ -173,6 +157,31 @@ collections:
       - { label: "Excerpt", name: "excerpt", widget: "text" }
       - { label: "Publish Date", name: "publishDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
       - { label: "Author", name: "author", widget: "string", default: "Dove Cottage Day Hospice" }
+      - {
+          label: "Event date (optional)",
+          name: "eventDate",
+          widget: "datetime",
+          required: false,
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          hint: "For event announcements: first day of the event. Shown as “Event dates” on the post and in the News & Events grid.",
+        }
+      - {
+          label: "Event end date (optional)",
+          name: "eventEndDate",
+          widget: "datetime",
+          required: false,
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          hint: "Last day if the event runs over multiple days (e.g. weekend). Leave empty for a single-day event.",
+        }
+      - {
+          label: "Event location (optional)",
+          name: "eventLocation",
+          widget: "string",
+          required: false,
+          hint: "Venue and address as you want it to appear (e.g. Courtyard Barns, Wartnaby, LE14 3HU).",
+        }
       - { label: "Featured Image", name: "featuredImage", widget: "image", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }
       - { label: "Body", name: "body", widget: "markdown" }
@@ -186,11 +195,31 @@ collections:
     preview_path: "events/{{slug}}"
     fields:
       - { label: "Event title", name: "title", widget: "string" }
-      - { label: "Category", name: "category", widget: "string", default: "Event" }
-      - { label: "Short summary", name: "excerpt", widget: "text" }
-      - { label: "Event date", name: "eventDate", widget: "datetime", date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Event end date (optional)", name: "eventEndDate", widget: "datetime", required: false, date_format: "YYYY-MM-DD", time_format: false }
-      - { label: "Event location", name: "location", widget: "string" }
+      - { label: "Category", name: "category", widget: "string", default: "Event", hint: "Shown as a tag on the event page (e.g. Event, Fundraising)." }
+      - { label: "Short summary", name: "excerpt", widget: "text", hint: "Used in listings and search snippets." }
+      - {
+          label: "Event dates — start day",
+          name: "eventDate",
+          widget: "datetime",
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          hint: "Shown under “Event dates” on the event page and in the News & Events grid.",
+        }
+      - {
+          label: "Event dates — end day (optional)",
+          name: "eventEndDate",
+          widget: "datetime",
+          required: false,
+          date_format: "YYYY-MM-DD",
+          time_format: false,
+          hint: "For multi-day events only. Leave empty for a single day.",
+        }
+      - {
+          label: "Location",
+          name: "location",
+          widget: "string",
+          hint: "Venue name and address as visitors should see it.",
+        }
       - { label: "Featured image", name: "featuredImage", widget: "image", required: false }
       - { label: "Booking link (optional)", name: "bookingUrl", widget: "string", required: false }
       - { label: "Draft", name: "draft", widget: "boolean", required: false, default: false }

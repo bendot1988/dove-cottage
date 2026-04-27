@@ -10,6 +10,10 @@ const blog = defineCollection({
     author: z.string().default("Dove Cottage Day Hospice"),
     featuredImage: z.string().optional(),
     featured_image: z.string().optional(),
+    /** When set (e.g. category Events), shown as “Event dates” on the post and listing cards */
+    eventDate: z.coerce.date().optional(),
+    eventEndDate: z.coerce.date().optional(),
+    eventLocation: z.string().optional(),
     draft: z.boolean().default(false)
   })
 });

@@ -1,6 +1,7 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import EventKeyInfo from "../../components/EventKeyInfo.astro";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog", ({ data }) => !data.draft);
@@ -12,6 +13,11 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props as { post: CollectionEntry<"blog"> };
 const { Content } = await post.render();
+
+const relatedPosts = (await getCollection("blog", ({ data }) => !data.draft))
+  .filter((p) => p.slug !== post.slug)
+  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+  .slice(0, 3);
 ---
 
 <BaseLayout title={`${post.data.title} | Dove Cottage`} description={post.data.excerpt}>
@@ -19,6 +25,9 @@ const { Content } = await post.render();
     <div class="motion-scope">
       <section class="news-article-inner" aria-label="Article">
         <div class="container container--narrow">
+      <p class="back-link back-link--top">
+        <a href="/news/">← Back to News &amp; Events</a>
+      </p>
       <p class="meta">
         <span class="category">{post.data.category}</span>
         <span>·</span>
@@ -33,6 +42,13 @@ const { Content } = await post.render();
         <span>{post.data.author}</span>
       </p>
       <h1>{post.data.title}</h1>
+      {post.data.eventDate && (
+        <EventKeyInfo
+          eventStart={new Date(post.data.eventDate)}
+          eventEnd={post.data.eventEndDate ? new Date(post.data.eventEndDate) : undefined}
+          location={post.data.eventLocation}
+        />
+      )}
       {(post.data.featuredImage ?? post.data.featured_image) && (
         <img
           class="featured"
@@ -44,9 +60,58 @@ const { Content } = await post.render();
       <div class="content">
         <Content />
       </div>
-      <p class="back-link"><a href="/news/">← Back to News &amp; Events</a></p>
+      <p class="back-link back-link--bottom">
+        <a href="/news/">← Back to News &amp; Events</a>
+      </p>
         </div>
       </section>
+
+      {relatedPosts.length > 0 && (
+        <section class="related-news" aria-labelledby="related-news-heading">
+          <div class="container">
+            <h2 id="related-news-heading">More news</h2>
+            <p class="related-news-dek">Other stories from Dove Cottage.</p>
+            <div class="related-grid">
+              {relatedPosts.map((item) => {
+                const image = item.data.featuredImage ?? item.data.featured_image;
+                const href = `/news/${item.slug}/`;
+                const dateLabel = item.data.publishDate.toLocaleDateString("en-GB", {
+                  day: "numeric",
+                  month: "short",
+                  year: "numeric"
+                });
+                return (
+                  <article class="related-card">
+                    {image && (
+                      <a href={href} class="related-card__thumb">
+                        <img src={image} alt="" loading="lazy" width="640" height="360" />
+                      </a>
+                    )}
+                    <div class="related-card__body">
+                      <p class="related-card__meta">
+                        <span class="related-card__category">{item.data.category}</span>
+                        <span>·</span>
+                        <time datetime={item.data.publishDate.toISOString()}>{dateLabel}</time>
+                      </p>
+                      <h3 class="related-card__title">
+                        <a href={href}>{item.data.title}</a>
+                      </h3>
+                      <p class="related-card__excerpt">{item.data.excerpt}</p>
+                      <a href={href} class="related-card__read">
+                        <span class="related-card__read-text">Read more</span>
+                        <span aria-hidden="true">→</span>
+                      </a>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <p class="related-news-all">
+              <a href="/news/">View all news &amp; events</a>
+            </p>
+          </div>
+        </section>
+      )}
     </div>
   </article>
   <script>
@@ -105,7 +170,64 @@ const { Content } = await post.render();
     color: #12335f;
   }
 
+  .content :global(.yt-embed) {
+    position: relative;
+    margin: 1.25rem 0 0.5rem;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid #dce5f2;
+    background: #0f172a;
+    max-width: 100%;
+  }
+
+  .content :global(.yt-embed iframe) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .content :global(.embed-fallback) {
+    margin: 0 0 1.25rem;
+    font-size: var(--type-body-small);
+  }
+
+  .content :global(.embed-fallback a) {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+  }
+
+  .content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 1px solid #e8eef7;
+    margin: 0.75rem 0;
+  }
+
+  .content :global(blockquote) {
+    margin: 1rem 0;
+    padding: 0.75rem 1rem 0.75rem 1.1rem;
+    border-left: 4px solid var(--color-golden-yellow);
+    background: #f7f9fc;
+    color: #1a3558;
+    font-style: italic;
+  }
+
   .back-link {
+    margin: 0;
+    font-size: var(--type-body-small);
+  }
+
+  .back-link--top {
+    margin-bottom: 14px;
+  }
+
+  .back-link--bottom {
     margin-top: 14px;
   }
 
@@ -117,5 +239,190 @@ const { Content } = await post.render();
 
   .back-link a:hover {
     text-decoration: underline;
+  }
+
+  .related-news {
+    padding: 8px 0 0;
+    margin-top: 28px;
+    border-top: 1px solid #c9d6ea;
+  }
+
+  .related-news h2 {
+    margin: 0;
+    text-align: center;
+    font-size: var(--type-section-title);
+    color: #0f2240;
+  }
+
+  .related-news-dek {
+    margin: 8px auto 22px;
+    text-align: center;
+    color: #425772;
+    font-size: var(--type-body);
+    max-width: 36rem;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .related-card {
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 18px rgba(18, 44, 83, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+
+  .related-card:hover,
+  .related-card:focus-within {
+    transform: translateY(-4px);
+    border-color: #bfd0e7;
+    box-shadow: 0 14px 26px rgba(18, 44, 83, 0.14);
+  }
+
+  .related-card__thumb {
+    display: block;
+    overflow: hidden;
+  }
+
+  .related-card__thumb img {
+    width: 100%;
+    min-height: 160px;
+    max-height: 160px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .related-card:hover .related-card__thumb img,
+  .related-card:focus-within .related-card__thumb img {
+    transform: scale(1.06);
+  }
+
+  .related-card__body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .related-card__meta {
+    margin: 0 0 8px;
+    color: #61738d;
+    font-size: var(--type-body-small);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .related-card__category {
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--color-steel-blue);
+    font-weight: 700;
+  }
+
+  .related-card__title {
+    margin: 0 0 8px;
+    font-size: var(--type-card-title);
+    line-height: 1.3;
+  }
+
+  .related-card__title a {
+    color: #102a4e;
+    text-decoration: none;
+  }
+
+  .related-card__title a:hover {
+    text-decoration: underline;
+  }
+
+  .related-card__excerpt {
+    margin: 0;
+    color: #425772;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .related-card__read {
+    margin-top: auto;
+    padding-top: 14px;
+    color: var(--color-steel-blue);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: var(--type-button);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .related-card__read-text {
+    position: relative;
+  }
+
+  .related-card__read-text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--color-golden-yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .related-card__read:hover .related-card__read-text::after,
+  .related-card__read:focus-visible .related-card__read-text::after {
+    transform: scaleX(1);
+  }
+
+  .related-news-all {
+    margin: 22px 0 0;
+    text-align: center;
+  }
+
+  .related-news-all a {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    text-decoration: none;
+    font-size: var(--type-body);
+  }
+
+  .related-news-all a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 980px) {
+    .related-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 680px) {
+    .related-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .related-news {
+      margin-top: 22px;
+    }
   }
 </style>

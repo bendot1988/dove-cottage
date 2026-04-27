@@ -1,0 +1,405 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
+import data from "../../../data/corporate-partnerships.json";
+import contact from "../../../data/contact.json";
+import { toTitleCase } from "../../../lib/titleCase";
+
+const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
+
+type MediaBlock = {
+  iconStrip: { src: string; alt: string }[];
+  waysPhoto: { src: string; alt: string };
+  donationsPhoto: { src: string; alt: string };
+  volunteeringPhoto: { src: string; alt: string };
+  sponsorshipPhoto: { src: string; alt: string };
+};
+
+const media = (data as typeof data & { media?: MediaBlock }).media;
+---
+
+<BaseLayout title={data.pageTitle} description={data.metaDescription}>
+  <div class="svc-page corporate-page">
+    <section class="hospice-svc-hero" aria-label={data.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={data.heroImage}
+        alt={data.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={data.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {toTitleCase(data.parentNavLabel)}
+        </a>
+        <h1>{data.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{data.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <div class="motion-scope">
+      <section class="svc-main" aria-label={data.heroH1}>
+        <img
+          src="/images/sunflower-brand-small.png"
+          alt=""
+          class="svc-sunflower"
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <div class="container svc-layout">
+          <div class="svc-primary">
+            <p class="svc-lede corporate-intro">{data.intro}</p>
+
+            {
+              media?.iconStrip?.length ? (
+                <ul class="corporate-icon-strip">
+                  {media.iconStrip.map((icon) => (
+                    <li>
+                      <img
+                        class="corporate-icon-strip__img"
+                        src={icon.src}
+                        alt={icon.alt}
+                        width="72"
+                        height="72"
+                        loading="lazy"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              ) : null
+            }
+
+            <h2 class="svc-section-h2">{data.visionTitle}</h2>
+            <p class="svc-lede">{data.visionBody}</p>
+
+            <h2 class="svc-section-h2">{data.whatWeDoTitle}</h2>
+            <p class="svc-lede">{data.whatWeDoBody}</p>
+
+            <h2 class="svc-section-h2">{data.missionTitle}</h2>
+            {data.missionParagraphs.map((p) => <p class="svc-lede">{p}</p>)}
+
+            <h2 class="svc-section-h2">{data.valuesTitle}</h2>
+            <ul class="corporate-values">
+              {data.values.map((v) => (
+                <li>
+                  <span class="corporate-values__letter" aria-hidden="true">{v.letter}</span>
+                  <span class="corporate-values__word">{v.word}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h2 class="svc-section-h2">{data.waysTitle}</h2>
+            {
+              media?.waysPhoto ? (
+                <figure class="corporate-section-figure">
+                  <img
+                    src={media.waysPhoto.src}
+                    alt={media.waysPhoto.alt}
+                    width="960"
+                    height="540"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              ) : null
+            }
+            <ul class="corporate-card-list">
+              {data.ways.map((item) => (
+                <li>
+                  <h3 class="corporate-card-list__title">{item.title}</h3>
+                  <p class="svc-body">{item.body}</p>
+                </li>
+              ))}
+            </ul>
+
+            <h2 class="svc-section-h2">{data.donationsTitle}</h2>
+            {
+              media?.donationsPhoto ? (
+                <figure class="corporate-section-figure">
+                  <img
+                    src={media.donationsPhoto.src}
+                    alt={media.donationsPhoto.alt}
+                    width="960"
+                    height="540"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              ) : null
+            }
+            <ul class="corporate-card-list">
+              {data.donations.map((item) => (
+                <li>
+                  <h3 class="corporate-card-list__title">{item.title}</h3>
+                  <p class="svc-body">{item.body}</p>
+                </li>
+              ))}
+            </ul>
+
+            <h2 class="svc-section-h2">{data.volunteeringTitle}</h2>
+            {
+              media?.volunteeringPhoto ? (
+                <figure class="corporate-section-figure">
+                  <img
+                    src={media.volunteeringPhoto.src}
+                    alt={media.volunteeringPhoto.alt}
+                    width="960"
+                    height="540"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              ) : null
+            }
+            <p class="svc-lede">{data.volunteeringBody}</p>
+
+            <h2 class="svc-section-h2">{data.sponsorshipTitle}</h2>
+            {
+              media?.sponsorshipPhoto ? (
+                <figure class="corporate-section-figure">
+                  <img
+                    src={media.sponsorshipPhoto.src}
+                    alt={media.sponsorshipPhoto.alt}
+                    width="960"
+                    height="540"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              ) : null
+            }
+            <p class="svc-lede">{data.sponsorshipBody}</p>
+
+            <h2 class="svc-section-h2">{data.expectTitle}</h2>
+            <p class="svc-lede">{data.expectIntro}</p>
+            <ul class="corporate-expect-cards">
+              {data.expectations.map((line) => (
+                <li class="corporate-expect-cards__item">{line}</li>
+              ))}
+            </ul>
+
+            <h2 class="svc-section-h2">{data.ctaTitle}</h2>
+            <p class="svc-lede">{data.ctaBody}</p>
+            <p class="svc-lede">
+              <a class="svc-inline-link" href={telHref}>{contact.trustPhoneDisplay}</a>
+              {" · "}
+              <a class="svc-inline-link" href={`mailto:${contact.email}`}>{contact.email}</a>
+              {" · "}
+              <a class="svc-inline-link" href="/contact/">Contact form</a>
+            </p>
+          </div>
+
+          <aside class="svc-side" aria-label={toTitleCase("Get in touch")}>
+            <div class="side-card">
+              <h2 class="side-card-title">{toTitleCase("Get in touch")}</h2>
+              <ul class="side-list">
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{toTitleCase("Phone")}</span>
+                    <a class="side-value side-link" href={telHref}>{contact.trustPhoneDisplay}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{toTitleCase("Email")}</span>
+                    <a class="side-value side-link" href={`mailto:${contact.email}`}>{contact.email}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{toTitleCase("Contact form")}</span>
+                    <a class="side-value side-link" href="/contact/">Use our contact form</a>
+                  </div>
+                </li>
+              </ul>
+              <p class="side-charity">{toTitleCase(contact.sideCharityFooter)}</p>
+            </div>
+
+            <ArchiveSidebarPeek filterId="support-us" excludePath="/support-us/corporate-partnerships" />
+          </aside>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
+  initMotionScrollReveal();
+</script>
+
+<style>
+  .corporate-intro {
+    font-size: var(--type-body-large);
+    font-weight: 600;
+    color: #2a3f5c;
+  }
+
+  .corporate-icon-strip {
+    list-style: none;
+    margin: 0 0 1.75rem;
+    padding: 14px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px 20px;
+    background: linear-gradient(135deg, rgba(234, 241, 251, 0.9), rgba(251, 252, 254, 0.95));
+    border: 1px solid rgba(29, 101, 178, 0.12);
+    border-radius: 12px;
+  }
+
+  .corporate-icon-strip li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .corporate-icon-strip__img {
+    display: block;
+    width: 64px;
+    height: auto;
+    max-height: 72px;
+    object-fit: contain;
+  }
+
+  .corporate-section-figure {
+    margin: 0 0 1rem;
+    padding: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #dce5f2;
+    background: #eef3fb;
+  }
+
+  .corporate-section-figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+  }
+
+  .corporate-values {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    max-width: 32rem;
+  }
+
+  .corporate-values li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 8px 12px;
+    background: rgba(234, 241, 251, 0.85);
+    border: 1px solid rgba(29, 101, 178, 0.14);
+    border-radius: 8px;
+    font-weight: 600;
+    color: #12335f;
+  }
+
+  .corporate-values__letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 6px;
+    background: var(--color-golden-yellow);
+    color: #102a4e;
+    font-size: var(--type-body-small);
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .corporate-card-list {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .corporate-card-list > li {
+    margin: 0;
+    padding: 14px 16px;
+    border: 1px solid #dce5f2;
+    border-radius: 10px;
+    background: #fbfcfe;
+  }
+
+  .corporate-card-list__title {
+    margin: 0 0 6px;
+    font-size: var(--type-body);
+    font-weight: 800;
+    color: #102a4e;
+  }
+
+  .corporate-expect-cards {
+    list-style: none;
+    margin: 0 0 1.25rem;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  @media (min-width: 640px) {
+    .corporate-expect-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .corporate-expect-cards__item {
+    margin: 0;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px solid #dce5f2;
+    border-radius: 12px;
+    color: #354a67;
+    line-height: 1.6;
+    box-shadow: 0 1px 2px rgba(16, 42, 78, 0.05);
+    transition:
+      transform 0.22s ease,
+      box-shadow 0.22s ease,
+      border-color 0.22s ease;
+  }
+
+  .corporate-expect-cards__item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(29, 101, 178, 0.14);
+    border-color: rgba(29, 101, 178, 0.28);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .corporate-expect-cards__item {
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .corporate-expect-cards__item:hover {
+      transform: none;
+    }
+  }
+</style>
