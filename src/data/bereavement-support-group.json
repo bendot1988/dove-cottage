@@ -1,7 +1,7 @@
 {
   "pageTitle": "Bereavement Support Group | Dove Cottage",
-  "heroImage": "/images/bereavement-featured.png",
-  "heroImageAlt": "A calm landscape representing comfort and reflection",
+  "heroImage": "/images/uploads/bereavement/bereavement-support-group-featured.png",
+  "heroImageAlt": "A guest and staff member sharing a supportive fist bump during a group session",
   "parentNavLabel": "Counselling & Support",
   "parentNavHref": "/hospice-services/counselling-support/",
   "heroH1": "Bereavement Support Group",
@@ -24,8 +24,14 @@
   "detailsFoot": "This is a brand new service that will launch soon. Dates and times of the groups will be listed below as soon as they are confirmed.",
   "registerInterestIntro": "To register your interest, please complete the",
   "registerInterestCta": "enquiry form",
-  "registerInterestHref": "/contact/",
+  "registerInterestHref": "#bereavement-enquiry-form",
   "registerInterestOutro": "and one of our team will be in touch as soon as we have more details.",
   "sideFormLinkText": "Use our contact form",
-  "sideFormHint": "Register your interest in the bereavement support group."
+  "sideFormHint": "Register your interest in the bereavement support group.",
+  "sectionImage1": {
+    "src": "/images/uploads/bereavement/bereavement-support-group-featured.png",
+    "alt": "A guest and staff member sharing a supportive fist bump during a group session"
+  },
+  "beaconAccount": "dovecottagedayhospice",
+  "beaconFormId": "fe636194"
 }

@@ -19,6 +19,9 @@ const asideTitle = toTitleCase("Get in touch");
 const phoneLabel = toTitleCase("Phone");
 const formLabel = toTitleCase("Enquiry");
 const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
+const beaconAccount = (p.beaconAccount ?? "dovecottagedayhospice").trim();
+const beaconFormId = (p.beaconFormId ?? "").trim();
+const showBeaconForm = Boolean(beaconFormId);
 ---
 
 <BaseLayout title={layoutTitle}>
@@ -61,6 +64,22 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
             <p class="svc-lede">{p.mainIntro2}</p>
             <p class="svc-lede">{p.mainIntro3}</p>
 
+            {
+              p.sectionImage1 && (
+                <figure class="svc-figure">
+                  <img
+                    class="svc-figure__img"
+                    src={p.sectionImage1.src}
+                    alt={p.sectionImage1.alt}
+                    width="1200"
+                    height="675"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </figure>
+              )
+            }
+
             <h2 class="svc-section-h2">{p.groupHeading}</h2>
             <div class="svc-group-grid">
               <div class="svc-card svc-card--tight" role="group" aria-label={p.groupHeading}>
@@ -80,6 +99,16 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
               </a>{" "}
               {p.registerInterestOutro}
             </p>
+
+            {
+              showBeaconForm && (
+                <div class="svc-card" id="bereavement-enquiry-form">
+                  <div class="form-embed-card">
+                    <div class="beacon-form" data-account={beaconAccount} data-form={beaconFormId}></div>
+                  </div>
+                </div>
+              )
+            }
           </div>
 
           <aside class="svc-side" aria-label={asideTitle}>
@@ -125,9 +154,38 @@ const line = (row: { text: string } | string) => (typeof row === "string" ? row 
     import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
     initMotionScrollReveal();
   </script>
+  <script is:inline>
+    !function(e,t){if(!e.getElementById(t)){var c=e.createElement("script");c.id=t,c.src="https://static.beaconproducts.co.uk/js-sdk/production/beaconcrm.min.js",e.getElementsByTagName("head")[0].appendChild(c)}}(document,"beacon-js-sdk");
+  </script>
 </BaseLayout>
 
 <style>
+  .form-embed-card {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 8px 22px rgba(18, 44, 83, 0.07);
+  }
+
+  :global(.beacon-form) {
+    width: 100%;
+    min-height: 560px;
+  }
+
+  .svc-figure {
+    margin: 1rem 0 1.2rem;
+  }
+
+  .svc-figure__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid #d9e3f0;
+    box-shadow: 0 10px 24px rgba(18, 44, 83, 0.08);
+  }
+
   .support-groups-page .svc-primary > .svc-lede:first-of-type {
     margin-bottom: 0.9rem;
   }
