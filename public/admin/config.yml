@@ -544,6 +544,7 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line (legacy)", name: "stat", widget: "string", required: false }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
       - name: "hospice_services_overview"
@@ -560,6 +561,15 @@ collections:
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
           - { label: "Section eyebrow", name: "introEyebrow", widget: "string", default: "Day hospice" }
           - { label: "Section heading", name: "introHeading", widget: "string", default: "Care in our building" }
+          - label: "Day hospice key facts (legacy)"
+            name: "introKeyFacts"
+            widget: "list"
+            required: false
+            min: 0
+            max: 6
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "Value", name: "value", widget: "string" }
           - { label: "Intro paragraph 1", name: "mainIntro1", widget: "text" }
           - { label: "Intro paragraph 2", name: "mainIntro2", widget: "text", required: false }
           - { label: "Intro paragraph 3 (before service cards)", name: "mainIntro3", widget: "text", required: false }
@@ -574,6 +584,7 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line (legacy)", name: "stat", widget: "string", required: false }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
           - { label: "Additional section heading", name: "additionalHeading", widget: "string" }
@@ -589,6 +600,7 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line (legacy)", name: "stat", widget: "string", required: false }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
           - { label: "Referral — paragraph 1", name: "referralIntro", widget: "text" }
@@ -624,6 +636,7 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
+              - { label: "Stat line (legacy)", name: "stat", widget: "string", required: false }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
           - { label: "Referral line — text before the enquiry link", name: "referralIntro", widget: "string" }
