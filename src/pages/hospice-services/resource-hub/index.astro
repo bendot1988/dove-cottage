@@ -5,7 +5,10 @@ import p from "../../../data/resource-hub.json";
 type ResourceRow = {
   title: string;
   organisation: string;
-  url: string;
+  url?: string;
+  file?: string;
+  category?: string;
+  resourceType?: "external" | "file" | "article";
   linkLabel: string;
 };
 
@@ -25,6 +28,8 @@ const resourceKind = (href: string) => {
   if (isExternal(href)) return { label: "External resource", tone: "external" } as const;
   return { label: "Article", tone: "article" } as const;
 };
+
+const resolveHref = (item: ResourceRow) => item.file?.trim() || item.url?.trim() || "";
 ---
 
 <BaseLayout title={layoutTitle}>
@@ -54,14 +59,22 @@ const resourceKind = (href: string) => {
 
       <ul class="resource-grid" aria-label="Resource links">
         {resources.map((item) => {
-          const kind = resourceKind(item.url);
-          const external = isExternal(item.url);
-          const downloadable = isPdf(item.url) && !external;
+          const href = resolveHref(item);
+          if (!href) return null;
+          const kind = item.resourceType
+            ? item.resourceType === "file"
+              ? ({ label: "Leaflet (PDF)", tone: "pdf" } as const)
+              : item.resourceType === "external"
+                ? ({ label: "External resource", tone: "external" } as const)
+                : ({ label: "Article", tone: "article" } as const)
+            : resourceKind(href);
+          const external = isExternal(href);
+          const downloadable = isPdf(href) && !external;
           return (
             <li class="resource-grid__item">
               <a
                 class:list={["rcard", `rcard--${kind.tone}`]}
-                href={item.url}
+                href={href}
                 target={external ? "_blank" : undefined}
                 rel={external ? "noopener noreferrer" : undefined}
                 download={downloadable ? true : undefined}
@@ -71,7 +84,7 @@ const resourceKind = (href: string) => {
                   <span class="rcard__top">
                     <span class="rcard__pill" aria-hidden="true">
                       <span class="rcard__pill-dot" />
-                      {kind.label}
+                      {item.category?.trim() || kind.label}
                     </span>
                     {external && (
                       <span class="rcard__corner" aria-hidden="true">

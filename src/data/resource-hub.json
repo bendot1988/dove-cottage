@@ -15,19 +15,25 @@
     {
       "title": "Help with benefits",
       "organisation": "Macmillan Cancer UK",
+      "category": "Benefits & Finance",
+      "resourceType": "external",
       "url": "https://www.macmillan.org.uk/cancer-information-and-support/impacts-of-cancer/benefits-and-financial-support",
       "linkLabel": "Finding the right benefits and help leaflet"
     },
     {
       "title": "Supporting children & teenagers through grief",
       "organisation": "Dementia UK",
+      "category": "Bereavement",
+      "resourceType": "external",
       "url": "https://www.dementiauk.org/information-and-support/looking-after-yourself-as-a-carer/grief-bereavement-and-loss/how-you-can-support-children-and-teenagers/",
       "linkLabel": "Open Dementia UK guidance"
     },
     {
       "title": "Coping with losing a partner",
       "organisation": "Men’s Shed",
-      "url": "/resources/Coping-with-Losing-a-Partner6.pdf",
+      "category": "Bereavement",
+      "resourceType": "file",
+      "file": "/resources/Coping-with-Losing-a-Partner6.pdf",
       "linkLabel": "Download leaflet (PDF)"
     }
   ],

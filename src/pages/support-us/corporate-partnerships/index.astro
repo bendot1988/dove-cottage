@@ -26,16 +26,26 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
 
 <BaseLayout title={layoutTitle} description={data.metaDescription}>
   <div class="svc-page corporate-page">
-    <header class="corporate-text-hero" aria-label={pageHeading}>
-      <div class="container corporate-text-hero__inner">
-        <a class="interior-hero-eyebrow corporate-text-hero__eyebrow" href={data.parentNavHref}>
+    <section class="hospice-svc-hero" aria-label={pageHeading}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={data.heroImage}
+        alt={data.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={data.parentNavHref}>
           <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
           {cap(data.parentNavLabel)}
         </a>
-        <h1 class="corporate-text-hero__title">{pageHeading}</h1>
-        <p class="corporate-text-hero__dek">{cap(data.heroShortDescription)}</p>
+        <h1>{pageHeading}</h1>
+        <p class="hospice-svc-hero-dek">{data.heroShortDescription}</p>
       </div>
-    </header>
+    </section>
 
     <div class="motion-scope">
       <section class="svc-main" aria-label={pageHeading}>
@@ -245,46 +255,6 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
 </script>
 
 <style>
-  .corporate-text-hero {
-    position: relative;
-    background: linear-gradient(180deg, #eef4fb 0%, #fafcfe 100%);
-    border-bottom: 1px solid #d9e3f0;
-    padding: clamp(2rem, 5vw, 2.75rem) 0 clamp(1.5rem, 4vw, 2.25rem);
-  }
-
-  .corporate-text-hero__inner {
-    max-width: 48rem;
-  }
-
-  .corporate-text-hero__title {
-    margin: 0 0 0.65rem;
-    font-size: var(--type-hero-title);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.03em;
-    color: #102a4e;
-  }
-
-  .corporate-text-hero__dek {
-    margin: 0;
-    max-width: 40rem;
-    font-size: var(--type-body-large);
-    line-height: 1.5;
-    text-wrap: pretty;
-    color: #354a67;
-  }
-
-  .corporate-text-hero__eyebrow.interior-hero-eyebrow,
-  a.corporate-text-hero__eyebrow.interior-hero-eyebrow {
-    color: #1a5080;
-  }
-
-  a.corporate-text-hero__eyebrow.interior-hero-eyebrow:hover,
-  a.corporate-text-hero__eyebrow.interior-hero-eyebrow:focus-visible {
-    color: #0a2540;
-    background: rgba(29, 101, 178, 0.08);
-  }
-
   .corporate-intro {
     font-size: var(--type-body-large);
     font-weight: 600;
