@@ -717,7 +717,7 @@ collections:
               - { label: "Link label", name: "label", widget: "string" }
               - { label: "Link URL", name: "href", widget: "string" }
       - name: "corporate_partnerships"
-        label: "Corporate partnerships & fundraising page"
+        label: "Become a Corporate Partner page"
         file: "src/data/corporate-partnerships.json"
         format: "json"
         fields:
