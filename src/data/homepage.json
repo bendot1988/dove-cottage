@@ -5,19 +5,14 @@
     "backgroundImage": "/images/hero-supporting-journey.png",
     "ctas": [
       {
-        "label": "I am a Patient",
-        "href": "#",
-        "style": "secondary"
-      },
-      {
-        "label": "I am a Carer",
-        "href": "#",
-        "style": "ghost"
-      },
-      {
-        "label": "I am a Healthcare Professional",
+        "label": "Make a Referral",
         "href": "#",
         "style": "primary"
+      },
+      {
+        "label": "Explore Our Services",
+        "href": "/explore/",
+        "style": "ghost"
       }
     ]
   },

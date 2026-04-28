@@ -230,14 +230,6 @@ const resolveHref = (item: ResourceRow) => item.file?.trim() || item.url?.trim()
     --rcard-tone-soft: #e6f1ea;
   }
 
-  .rcard::before {
-    content: "";
-    position: absolute;
-    inset: 0 0 auto;
-    height: 4px;
-    background: linear-gradient(90deg, var(--rcard-tone) 0%, var(--rcard-tone) 60%, var(--color-golden-yellow) 100%);
-  }
-
   .rcard:hover,
   .rcard:focus-visible {
     transform: translateY(-4px);

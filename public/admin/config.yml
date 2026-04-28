@@ -528,7 +528,6 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
-              - { label: "Stat line", name: "stat", widget: "string" }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
       - name: "hospice_services_overview"
@@ -568,7 +567,6 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
-              - { label: "Stat line", name: "stat", widget: "string" }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
           - { label: "Additional section heading", name: "additionalHeading", widget: "string" }
@@ -584,7 +582,6 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
-              - { label: "Stat line", name: "stat", widget: "string" }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
           - { label: "Referral — paragraph 1", name: "referralIntro", widget: "text" }
@@ -620,7 +617,6 @@ collections:
               - { label: "Card image", name: "image", widget: "image" }
               - { label: "Card image description (accessibility)", name: "imageAlt", widget: "string" }
               - { label: "Badge label", name: "badge", widget: "string" }
-              - { label: "Stat line", name: "stat", widget: "string" }
               - { label: "CTA label", name: "ctaLabel", widget: "string" }
               - { label: "Link URL (use # for Coming soon)", name: "href", widget: "string", default: "#" }
           - { label: "Referral line — text before the enquiry link", name: "referralIntro", widget: "string" }
