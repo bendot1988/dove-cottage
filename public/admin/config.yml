@@ -6,7 +6,6 @@ local_backend: true
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
-logo_url: "/images/dove-logo-white.svg"
 site_url: "https://www.dovecottage.org"
 display_url: "https://www.dovecottage.org"
 

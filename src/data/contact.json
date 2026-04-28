@@ -1,6 +1,6 @@
 {
+  "pageTitle": "Contact us | Dove Cottage",
   "heroImage": "/images/uploads/contact/contact-featured.png",
-<<<<<<< HEAD
   "heroImageAlt": "Team member smiling while answering the phone at reception desk",
   "heroBadge": "Contact us",
   "heroTitleBefore": "Get in touch with",
@@ -16,41 +16,15 @@
   "mainHeading": "We'd love to hear from you",
   "mainLede": "Send us a message using the form below, pop in to see us, or call if you'd like to speak to someone directly. We're a small, friendly team and we'll do our best to point you in the right direction.",
   "formSectionTitle": "Send us a message",
-=======
-  "addressPostcode": "LE14 4EX",
-  "heroDescription": "Whether you have a question, want to find out more about our care, we are here to help.",
-  "mapSearchQuery": "Canal Lane, Stathern, Melton Mowbray LE14 4EX",
->>>>>>> 999e9018153f8d4c9725f3a1965f18c0c18da848
   "formNoteMarkdown": "We aim to respond within **5 working days**.\n\nIf your enquiry is urgent, please call us on [01949 860303](tel:01949860303).",
-  "heroImageAlt": "Team member smiling while answering the phone at reception desk",
-  "trustDonateUrl": "/donate/",
-  "pageTitle": "Contact us | Dove Cottage",
-  "mainHeading": "We'd love to hear from you",
-  "addressLine1": "Canal Lane, Stathern, Melton Mowbray",
-  "heroBadge": "Contact us",
   "filloutFormId": "xrJnnVS553us",
   "sidebarCardTitle": "Contact details",
-<<<<<<< HEAD
   "openingHours": "Mon–Thu, 9am–4pm",
   "addressLine1": "Canal Lane, Stathern, Melton Mowbray",
   "addressPostcode": "LE14 4EX",
   "email": "admin@dovecottage.org",
   "sideCharityFooter": "Registered charity no. 105794",
-=======
-  "charityCommissionUrl": "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/1057941/charity-overview",
-  "trustPhoneDisplay": "01949 860303",
->>>>>>> 999e9018153f8d4c9725f3a1965f18c0c18da848
   "mapCardTitle": "Get directions",
-  "trustDonateLabel": "Donate today",
-  "mainEyebrow": "How to reach us",
-  "mainLede": "Send us a message using the form below, pop in to see us, or call if you'd like to speak to someone directly. We're a small, friendly team and we'll do our best to point you in the right direction.",
-  "trustCharityLine": "Charity no. 1167291",
-  "trustPhone": "01949860303",
-  "heroTitleHighlight": "our team",
-  "openingHours": "Mon–Thu, 9am–4pm",
-  "formSectionTitle": "Send us a message",
-  "sideCharityFooter": "Registered charity no. 1167291",
-  "email": "admin@dovecottage.org",
-  "heroTitleBefore": "Get in touch with",
+  "mapSearchQuery": "Canal Lane, Stathern, Melton Mowbray LE14 4EX",
   "mapLinkLabel": "Open in Google Maps"
 }
