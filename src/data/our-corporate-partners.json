@@ -1,0 +1,53 @@
+{
+  "pageTitle": "Our Corporate Partners | Support Us | Dove Cottage",
+  "metaDescription": "Meet the organisations supporting Dove Cottage Day Hospice through corporate partnerships and community fundraising.",
+  "heroImage": "/images/uploads/corporate/hero-corporate.png",
+  "heroImageAlt": "Supporter recognition board displaying local business and community partner logos",
+  "parentNavLabel": "Support Us",
+  "parentNavHref": "/support-us/",
+  "heroH1": "Our Corporate Partners",
+  "heroShortDescription": "Businesses making a meaningful local impact.",
+  "introParagraph1": "With less than 4% of our funding coming from the government, we rely heavily on the support from organisations such as these to continue our work and are truly grateful to them all.",
+  "introParagraph2": "Please take a look at their websites below to see what services they offer.",
+  "closingParagraph": "If you are an organisation that would like to get involved with supporting the work of Dove Cottage, please visit our corporate partnerships page for more information.",
+  "closingCtaLabel": "Visit our corporate partnerships page",
+  "closingCtaHref": "/support-us/corporate-partnerships/",
+  "partners": [
+    {
+      "name": "Partner 1",
+      "logo": "/images/sunflower-brand-small.png",
+      "logoAlt": "Partner 1 logo",
+      "website": "https://example.com"
+    },
+    {
+      "name": "Partner 2",
+      "logo": "/images/sunflower-brand-small.png",
+      "logoAlt": "Partner 2 logo",
+      "website": "https://example.com"
+    },
+    {
+      "name": "Partner 3",
+      "logo": "/images/sunflower-brand-small.png",
+      "logoAlt": "Partner 3 logo",
+      "website": "https://example.com"
+    },
+    {
+      "name": "Partner 4",
+      "logo": "/images/sunflower-brand-small.png",
+      "logoAlt": "Partner 4 logo",
+      "website": "https://example.com"
+    },
+    {
+      "name": "Partner 5",
+      "logo": "/images/sunflower-brand-small.png",
+      "logoAlt": "Partner 5 logo",
+      "website": "https://example.com"
+    },
+    {
+      "name": "Partner 6",
+      "logo": "/images/sunflower-brand-small.png",
+      "logoAlt": "Partner 6 logo",
+      "website": "https://example.com"
+    }
+  ]
+}

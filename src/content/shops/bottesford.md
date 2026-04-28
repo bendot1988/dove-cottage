@@ -15,7 +15,7 @@ shop_info: >
 callout: >
   **Your purchases help local families** — every item you buy supports
   palliative care and support at Dove Cottage Day Hospice.
-shop_main_image: /images/uploads/bottesford-shop-module.png
+shop_main_image: /images/uploads/shops/bottesford-featured.png
 opening_hours: |
   **Monday – Saturday:** 9:00am – 4:00pm
 

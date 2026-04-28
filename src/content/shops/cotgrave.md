@@ -23,12 +23,13 @@ shop_info: >
 callout: >
   **Your purchases help local families** — every item you buy supports
   palliative care and support at Dove Cottage Day Hospice.
-shop_main_image: /images/uploads/cotgrave-shop-exterior.png
+shop_main_image: /images/uploads/shops/cotgrave-featured.png
 opening_hours: |
   **Monday – Saturday:** 9:00am – 4:00pm
 
   **Sunday:** Closed
 gallery:
+  - /images/uploads/shops/cotgrave-featured.png
   - /images/uploads/cotgrave-shop-interior-1.png
   - /images/uploads/cotgrave-shop-interior-2.png
   - /images/uploads/cotgrave-shop-interior-3.png

@@ -1,0 +1,136 @@
+{
+  "pageTitle": "Meet the Team | Dove Cottage",
+  "metaDescription": "Meet the people behind Dove Cottage Day Hospice, from nursing and admin to retail teams and trustees.",
+  "heroImage": "/images/uploads/team/meet-the-team-featured.png",
+  "heroImageAlt": "Three Dove Cottage team members smiling together in festive attire",
+  "parentNavLabel": "About Us",
+  "parentNavHref": "/explore/",
+  "heroH1": "Meet the Team",
+  "heroShortDescription": "Partnership, trust, and compassionate care are at the heart of everything we do.",
+  "trustBlocks": [
+    {
+      "title": "A Team Built on Trust",
+      "body": "Our people work across clinical care, operations, retail, and governance to make sure families receive consistent, high-quality support. We believe trust is built through clear communication, kindness, and dependable teamwork.",
+      "image": "/images/uploads/team/meet-the-team-featured.png",
+      "imageAlt": "Three Dove Cottage team members smiling together"
+    },
+    {
+      "title": "Culture That Puts People First",
+      "body": "From frontline care to behind-the-scenes support, we create a welcoming culture where every role matters. We support one another, share knowledge, and stay focused on helping local people live well with serious illness.",
+      "image": "/images/uploads/volunteer/volunteer-featured-shop.png",
+      "imageAlt": "Supportive team culture in a Dove Cottage charity shop"
+    }
+  ],
+  "departments": [
+    {
+      "name": "Executive Leadership",
+      "description": "Strategic direction, partnerships, and long-term sustainability.",
+      "image": "/images/uploads/team/departments/executive-leadership.png",
+      "imageAlt": "Dove Cottage leadership setting inside the hospice"
+    },
+    {
+      "name": "Nursing Team",
+      "description": "Clinical expertise, day hospice care, and guest wellbeing support.",
+      "image": "/images/uploads/team/departments/nursing-team.png",
+      "imageAlt": "Clinical treatment room representing the nursing team"
+    },
+    {
+      "name": "Admin & Support",
+      "description": "Coordination, communications, finance, and operational support.",
+      "image": "/images/uploads/team/departments/admin-support.png",
+      "imageAlt": "Hospice corridor representing day-to-day operations and admin support"
+    },
+    {
+      "name": "Shop Staff",
+      "description": "Retail teams and volunteers helping drive essential fundraising income.",
+      "image": "/images/uploads/team/departments/shop-staff.png",
+      "imageAlt": "Dove Cottage charity shop frontage representing the retail team"
+    },
+    {
+      "name": "Trustees",
+      "description": "Governance, oversight, and stewardship of our charitable mission.",
+      "image": "/images/uploads/team/departments/trustees.png",
+      "imageAlt": "Supporter board representing trustees and community stewardship"
+    }
+  ],
+  "teamGroups": [
+    {
+      "title": "CEO",
+      "members": [
+        { "name": "Dan Smeeton", "jobTitle": "Chief Executive Officer", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for Dan Smeeton" }
+      ]
+    },
+    {
+      "title": "Nursing Team",
+      "members": [
+        { "name": "Nursing Team Member 1", "jobTitle": "Registered Nurse", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for nursing team member" },
+        { "name": "Nursing Team Member 2", "jobTitle": "Registered Nurse", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for nursing team member" },
+        { "name": "Nursing Team Member 3", "jobTitle": "Registered Nurse", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for nursing team member" },
+        { "name": "Nursing Team Member 4", "jobTitle": "Registered Nurse", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for nursing team member" },
+        { "name": "Nursing Team Member 5", "jobTitle": "Healthcare Assistant", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for nursing team member" }
+      ]
+    },
+    {
+      "title": "Admin & Support",
+      "members": [
+        { "name": "Admin & Support Member 1", "jobTitle": "Operations Coordinator", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for admin and support team member" },
+        { "name": "Admin & Support Member 2", "jobTitle": "Finance Administrator", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for admin and support team member" },
+        { "name": "Admin & Support Member 3", "jobTitle": "Reception & Guest Services", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for admin and support team member" },
+        { "name": "Admin & Support Member 4", "jobTitle": "Fundraising Assistant", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for admin and support team member" },
+        { "name": "Admin & Support Member 5", "jobTitle": "Communications Officer", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for admin and support team member" },
+        { "name": "Admin & Support Member 6", "jobTitle": "Facilities Support", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for admin and support team member" },
+        { "name": "Admin & Support Member 7", "jobTitle": "Volunteer Coordinator", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for admin and support team member" }
+      ]
+    },
+    {
+      "title": "Shop Staff",
+      "members": [
+        { "name": "Shop Team Member 1", "jobTitle": "Shop Manager", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" },
+        { "name": "Shop Team Member 2", "jobTitle": "Assistant Shop Manager", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" },
+        { "name": "Shop Team Member 3", "jobTitle": "Retail Supervisor", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" },
+        { "name": "Shop Team Member 4", "jobTitle": "Retail Assistant", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" },
+        { "name": "Shop Team Member 5", "jobTitle": "Retail Assistant", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" },
+        { "name": "Shop Team Member 6", "jobTitle": "Retail Assistant", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" },
+        { "name": "Shop Team Member 7", "jobTitle": "Retail Assistant", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" },
+        { "name": "Shop Team Member 8", "jobTitle": "Stock Coordinator", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for shop team member" }
+      ]
+    },
+    {
+      "title": "Trustees",
+      "members": [
+        { "name": "Trustee 1", "jobTitle": "Chair of Trustees", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for trustee" },
+        { "name": "Trustee 2", "jobTitle": "Trustee", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for trustee" },
+        { "name": "Trustee 3", "jobTitle": "Trustee", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for trustee" },
+        { "name": "Trustee 4", "jobTitle": "Trustee", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for trustee" },
+        { "name": "Trustee 5", "jobTitle": "Trustee", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for trustee" },
+        { "name": "Trustee 6", "jobTitle": "Trustee", "photo": "/images/sunflower-brand-small.png", "photoAlt": "Placeholder portrait for trustee" }
+      ]
+    }
+  ],
+  "stats": [
+    { "value": "30+", "label": "Team Members" },
+    { "value": "4", "label": "Community Shops" },
+    { "value": "120+", "label": "Active Volunteers" }
+  ],
+  "testimonials": [
+    {
+      "quote": "The team at Dove Cottage are kind, professional, and always make people feel welcome.",
+      "rating": 5,
+      "authorName": "Local Family",
+      "authorRole": "Guest Family Feedback",
+      "authorPhoto": "/images/sunflower-brand-small.png",
+      "authorPhotoAlt": "Placeholder profile image for testimonial author"
+    },
+    {
+      "quote": "Working with Dove Cottage has been a genuine partnership rooted in trust and shared values.",
+      "rating": 5,
+      "authorName": "Corporate Supporter",
+      "authorRole": "Community Partner",
+      "authorPhoto": "/images/sunflower-brand-small.png",
+      "authorPhotoAlt": "Placeholder profile image for testimonial author"
+    }
+  ],
+  "footerCtaText": "Ready to connect with the team behind Dove Cottage?",
+  "footerCtaLabel": "Get Started",
+  "footerCtaHref": "/contact/"
+}

@@ -1,0 +1,673 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import data from "../../../data/meet-the-team.json";
+import { toTitleCase } from "../../../lib/titleCase";
+---
+
+<BaseLayout title={data.pageTitle} description={data.metaDescription}>
+  <div class="svc-page team-page">
+    <section class="hospice-svc-hero" aria-label={data.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={data.heroImage}
+        alt={data.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={data.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {toTitleCase(data.parentNavLabel)}
+        </a>
+        <h1>{data.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{data.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <div class="motion-scope">
+      <section class="team-trust">
+        <div class="container">
+          {data.trustBlocks.map((block, idx) => (
+            <article class:list={["trust-row", { "trust-row--reverse": idx % 2 === 1 }]}>
+              <div class="trust-media">
+                <img src={block.image} alt={block.imageAlt} loading="lazy" decoding="async" />
+              </div>
+              <div class="trust-copy">
+                <h2>{block.title}</h2>
+                <p>{block.body}</p>
+                {
+                  idx === 1 && (
+                    <p class="trust-copy-link-wrap">
+                      <a class="team-anchor-link" href="#team-section" aria-label="Jump to Meet the Team section">
+                        <span class="team-anchor-link__text">Meet the Team</span>
+                        <svg
+                          class="team-anchor-link__icon"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          aria-hidden="true"
+                        >
+                          <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                      </a>
+                    </p>
+                  )
+                }
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="team-departments">
+        <div class="container">
+          <h2>Department Overview</h2>
+          <div class="department-grid">
+            {data.departments.map((dept) => (
+              <article class="department-card">
+                {
+                  dept.image && (
+                    <img
+                      class="department-photo"
+                      src={dept.image}
+                      alt={dept.imageAlt || `${dept.name} department`}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )
+                }
+                <img
+                  class="department-icon-logo"
+                  src="/images/sunflower-brand-small.png"
+                  alt=""
+                  aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <h3>{dept.name}</h3>
+                <p>{dept.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="team-grid-section" id="team-section">
+        <div class="container">
+          <h2>Our Team</h2>
+          {data.teamGroups.map((group) => (
+            <div class="team-group">
+              <h3>{group.title}</h3>
+              <div class="team-grid">
+                {group.members.map((member) => (
+                  <article class="team-card">
+                    <img src={member.photo} alt={member.photoAlt || `${member.name} profile photo`} loading="lazy" decoding="async" />
+                    <h4>{member.name}</h4>
+                    <p>{member.jobTitle}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="team-stats">
+        <div class="container stats-grid">
+          {data.stats.map((stat) => (
+            <div class="stat-card">
+              <p class="stat-value">{stat.value}</p>
+              <p class="stat-label">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="team-proof">
+        <div class="container">
+          <h2>What People Say</h2>
+          <div class="proof-slider" data-proof-slider>
+            {data.testimonials.map((item, idx) => (
+              <article class:list={["proof-card", { "is-active": idx === 0 }]} data-proof-slide>
+                <div class="proof-stars" aria-label={`${item.rating} out of 5 stars`}>
+                  {"★".repeat(Math.max(0, Math.min(5, item.rating ?? 0)))}
+                </div>
+                <blockquote>{item.quote}</blockquote>
+                <div class="proof-author">
+                  <img src={item.authorPhoto} alt={item.authorPhotoAlt || `${item.authorName} profile photo`} loading="lazy" decoding="async" />
+                  <div>
+                    <p class="proof-author-name">{item.authorName}</p>
+                    <p class="proof-author-role">{item.authorRole}</p>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
+  initMotionScrollReveal();
+
+  const slider = document.querySelector("[data-proof-slider]");
+  if (slider) {
+    const slides = Array.from(slider.querySelectorAll("[data-proof-slide]"));
+    let index = 0;
+    if (slides.length > 1) {
+      setInterval(() => {
+        slides[index].classList.remove("is-active");
+        index = (index + 1) % slides.length;
+        slides[index].classList.add("is-active");
+      }, 4500);
+    }
+  }
+</script>
+
+<style>
+  .team-trust,
+  .team-grid-section,
+  .team-proof {
+    background: #fff;
+    padding: clamp(2rem, 5vw, 3.2rem) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-departments,
+  .team-stats {
+    background: #f6f9fe;
+    padding: clamp(2rem, 5vw, 3rem) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .team-trust::before,
+  .team-grid-section::before,
+  .team-proof::before,
+  .team-departments::before,
+  .team-stats::before {
+    content: "";
+    position: absolute;
+    inset: auto;
+    width: clamp(220px, 28vw, 380px);
+    height: clamp(220px, 28vw, 380px);
+    background-image: url("/images/sunflower-brand.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .team-trust::before {
+    top: -40px;
+    right: -70px;
+  }
+
+  .team-departments::before {
+    bottom: -80px;
+    left: -70px;
+  }
+
+  .team-grid-section::before {
+    top: 20%;
+    right: -90px;
+  }
+
+  .team-stats::before {
+    top: -70px;
+    left: 52%;
+    transform: translateX(-50%);
+  }
+
+  .team-proof::before {
+    bottom: -70px;
+    right: 2%;
+  }
+
+  .team-trust .container,
+  .team-departments .container,
+  .team-grid-section .container,
+  .team-stats .container,
+  .team-proof .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .trust-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    align-items: stretch;
+    margin-bottom: 1.2rem;
+  }
+
+  .trust-row--reverse .trust-media {
+    order: 2;
+  }
+
+  .trust-row--reverse .trust-copy {
+    order: 1;
+  }
+
+  .trust-media img {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    object-fit: cover;
+    border-radius: 14px;
+    display: block;
+    transition: transform 0.35s var(--motion-ease-out);
+  }
+
+  .trust-copy {
+    background: #fff;
+    border: 1px solid #d9e4f2;
+    border-radius: 14px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition:
+      transform 0.28s var(--motion-ease-out),
+      box-shadow 0.28s var(--motion-ease-out),
+      border-color 0.28s var(--motion-ease-out);
+  }
+
+  .trust-copy::before {
+    content: "";
+    position: absolute;
+    width: clamp(150px, 20vw, 250px);
+    height: clamp(150px, 20vw, 250px);
+    right: -55px;
+    bottom: -65px;
+    background-image: url("/images/sunflower-brand-small.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    opacity: 0.16;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .trust-copy::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.9));
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .trust-copy > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .trust-copy-link-wrap {
+    margin: 10px 0 0;
+  }
+
+  .team-anchor-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-steel-blue-1);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .team-anchor-link__text {
+    position: relative;
+  }
+
+  .team-anchor-link__text::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 3px;
+    background: var(--color-golden-yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.22s ease;
+  }
+
+  .team-anchor-link__icon {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.22s var(--motion-ease-out);
+  }
+
+  .team-anchor-link:hover .team-anchor-link__text::after,
+  .team-anchor-link:focus-visible .team-anchor-link__text::after {
+    transform: scaleX(1);
+  }
+
+  .team-anchor-link:hover .team-anchor-link__icon,
+  .team-anchor-link:focus-visible .team-anchor-link__icon {
+    transform: translateY(2px);
+  }
+
+  .team-anchor-link:focus-visible {
+    outline: 2px solid rgba(39, 81, 160, 0.3);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+
+  .trust-row:hover .trust-copy,
+  .trust-row:focus-within .trust-copy {
+    transform: translateY(-2px);
+    border-color: #c7d8ee;
+    box-shadow: 0 10px 24px rgba(16, 48, 92, 0.1);
+  }
+
+  .trust-row:hover .trust-media img,
+  .trust-row:focus-within .trust-media img {
+    transform: scale(1.02);
+  }
+
+  .department-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .department-card {
+    background: #fff;
+    border: 1px solid #d9e4f2;
+    border-radius: 12px;
+    padding: 16px;
+    overflow: hidden;
+    transition:
+      transform 0.24s var(--motion-ease-out),
+      box-shadow 0.24s var(--motion-ease-out),
+      border-color 0.24s var(--motion-ease-out);
+  }
+
+  .department-photo {
+    width: calc(100% + 32px);
+    margin: -16px -16px 12px;
+    height: 132px;
+    object-fit: cover;
+    display: block;
+    border-bottom: 1px solid #e2eaf6;
+    transition: transform 0.28s var(--motion-ease-out);
+  }
+
+  .department-card:hover,
+  .department-card:focus-within {
+    transform: translateY(-2px);
+    border-color: #c7d8ee;
+    box-shadow: 0 8px 18px rgba(19, 58, 103, 0.1);
+  }
+
+  .department-card:hover .department-photo,
+  .department-card:focus-within .department-photo {
+    transform: scale(1.03);
+  }
+
+  .department-icon-logo {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    display: block;
+    margin-bottom: 6px;
+    transition: transform 0.24s var(--motion-ease-out);
+  }
+
+  .department-card:hover .department-icon-logo,
+  .department-card:focus-within .department-icon-logo {
+    transform: translateY(-1px) scale(1.08);
+  }
+
+  .department-card h3 {
+    margin: 0 0 6px;
+  }
+
+  .department-card p {
+    margin: 0;
+  }
+
+  .team-group {
+    margin-bottom: 1.25rem;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .team-card {
+    background: #fff;
+    border: 1px solid #d9e4f2;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    transition:
+      transform 0.24s var(--motion-ease-out),
+      box-shadow 0.24s var(--motion-ease-out),
+      border-color 0.24s var(--motion-ease-out);
+  }
+
+  .team-card:hover,
+  .team-card:focus-within {
+    transform: translateY(-2px);
+    border-color: #c9dbf0;
+    box-shadow: 0 10px 20px rgba(18, 49, 90, 0.1);
+  }
+
+  .team-card img {
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #dbe6f5;
+    margin: 0 auto 10px;
+    display: block;
+    transition:
+      transform 0.24s var(--motion-ease-out),
+      border-color 0.24s var(--motion-ease-out);
+  }
+
+  .team-card:hover img,
+  .team-card:focus-within img {
+    transform: scale(1.04);
+    border-color: #aec8e8;
+  }
+
+  .team-card h4 {
+    margin: 0;
+    font-size: var(--type-body);
+    color: #13345e;
+  }
+
+  .team-card p {
+    margin: 4px 0 0;
+    font-size: var(--type-body-small);
+    color: #4a607f;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .stat-card {
+    text-align: center;
+    background: #fff;
+    border: 1px solid #d9e4f2;
+    border-radius: 12px;
+    padding: 16px;
+    transition:
+      transform 0.24s var(--motion-ease-out),
+      box-shadow 0.24s var(--motion-ease-out);
+  }
+
+  .stat-card:hover,
+  .stat-card:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(18, 49, 90, 0.09);
+  }
+
+  .stat-value {
+    margin: 0;
+    font-size: clamp(1.7rem, 3.6vw, 2.3rem);
+    font-weight: 800;
+    color: #1a4d86;
+  }
+
+  .stat-label {
+    margin: 6px 0 0;
+    color: #506887;
+    font-size: var(--type-body-small);
+  }
+
+  .proof-slider {
+    position: relative;
+    min-height: 220px;
+  }
+
+  .proof-card {
+    display: none;
+    background: #fff;
+    border: 1px solid #d9e4f2;
+    border-radius: 14px;
+    padding: 18px;
+  }
+
+  .proof-card.is-active {
+    display: block;
+    animation: proofFadeIn 0.36s var(--motion-ease-out);
+  }
+
+  .proof-stars {
+    color: #f2b705;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .proof-card blockquote {
+    margin: 0 0 14px;
+    font-size: var(--type-body);
+    line-height: 1.6;
+    color: #2c4566;
+  }
+
+  .proof-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .proof-author img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .proof-author-name {
+    margin: 0;
+    color: #163b68;
+    font-weight: 700;
+  }
+
+  .proof-author-role {
+    margin: 2px 0 0;
+    color: #5f7594;
+    font-size: var(--type-body-small);
+  }
+
+  @media (max-width: 980px) {
+    .trust-row,
+    .department-grid,
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .trust-row,
+    .department-grid,
+    .team-grid,
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .team-trust::before,
+    .team-grid-section::before,
+    .team-proof::before,
+    .team-departments::before,
+    .team-stats::before {
+      width: 190px;
+      height: 190px;
+      opacity: 0.06;
+    }
+
+    .trust-copy::before {
+      width: 145px;
+      height: 145px;
+      opacity: 0.13;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .team-anchor-link__text::after,
+    .team-anchor-link__icon {
+      transition: none;
+    }
+
+    .team-anchor-link__text::after,
+    .team-anchor-link:hover .team-anchor-link__text::after,
+    .team-anchor-link:focus-visible .team-anchor-link__text::after {
+      transform: scaleX(1);
+    }
+
+    .team-anchor-link:hover .team-anchor-link__icon,
+    .team-anchor-link:focus-visible .team-anchor-link__icon {
+      transform: none;
+    }
+
+    .trust-media img,
+    .trust-copy,
+    .department-card,
+    .department-icon-logo,
+    .department-photo,
+    .team-card,
+    .team-card img,
+    .stat-card {
+      transition: none;
+    }
+
+    .proof-card.is-active {
+      animation: none;
+    }
+  }
+
+  @keyframes proofFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -54,11 +54,21 @@ body {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--color-white);
   color: var(--text-primary);
   font-family: "Montserrat", "Segoe UI", Arial, sans-serif;
   line-height: 1.5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* Max width + shared horizontal gutters (header, hero, trust strip, main sections) */

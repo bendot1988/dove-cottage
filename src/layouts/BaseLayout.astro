@@ -62,5 +62,97 @@ const seoDescription = clampText(description, 160);
         }
       })();
     </script>
+    <script is:inline>
+      (() => {
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const getHeaderOffset = () => {
+          const stickyNav = document.querySelector(".nav-row");
+          if (stickyNav instanceof HTMLElement) {
+            return stickyNav.getBoundingClientRect().height + 8;
+          }
+          return 8;
+        };
+
+        const getTargetFromHref = (href) => {
+          if (!href || href === "#") return null;
+          try {
+            const url = new URL(href, window.location.href);
+            if (
+              url.origin !== window.location.origin ||
+              url.pathname !== window.location.pathname ||
+              !url.hash
+            ) {
+              return null;
+            }
+            return document.getElementById(decodeURIComponent(url.hash.slice(1)));
+          } catch {
+            return null;
+          }
+        };
+
+        const smoothScrollToTarget = (target) => {
+          const startY = window.scrollY;
+          const destinationY = Math.max(
+            0,
+            window.scrollY + target.getBoundingClientRect().top - getHeaderOffset()
+          );
+
+          if (prefersReducedMotion) {
+            window.scrollTo(0, destinationY);
+            return;
+          }
+
+          const distance = destinationY - startY;
+          if (Math.abs(distance) < 2) return;
+          const duration = Math.min(900, Math.max(320, Math.abs(distance) * 0.55));
+          const start = performance.now();
+          const easeInOutCubic = (t) =>
+            t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+          const tick = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(1, elapsed / duration);
+            const eased = easeInOutCubic(progress);
+            window.scrollTo(0, startY + distance * eased);
+            if (progress < 1) requestAnimationFrame(tick);
+          };
+
+          requestAnimationFrame(tick);
+        };
+
+        document.addEventListener("click", (event) => {
+          const target = event.target;
+          if (!(target instanceof Element)) return;
+          const anchor = target.closest("a[href]");
+          if (!(anchor instanceof HTMLAnchorElement)) return;
+          const targetEl = getTargetFromHref(anchor.getAttribute("href"));
+          if (!targetEl) return;
+          event.preventDefault();
+          if (targetEl.id) {
+            history.replaceState(null, "", `#${encodeURIComponent(targetEl.id)}`);
+          }
+          smoothScrollToTarget(targetEl);
+        });
+
+        if (window.location.hash && !prefersReducedMotion) {
+          window.requestAnimationFrame(() => {
+            const initialTarget = document.getElementById(
+              decodeURIComponent(window.location.hash.slice(1))
+            );
+            if (initialTarget) {
+              window.scrollTo(
+                0,
+                Math.max(
+                  0,
+                  window.scrollY +
+                    initialTarget.getBoundingClientRect().top -
+                    getHeaderOffset()
+                )
+              );
+            }
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

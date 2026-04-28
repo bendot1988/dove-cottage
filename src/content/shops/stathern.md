@@ -31,7 +31,7 @@ shop_info: >
 callout: >
   **Rated 4.7 stars from 114 reviews** - thank you for supporting our Stathern
   shop and helping fund specialist hospice care for local families.
-shop_main_image: /images/uploads/stathern-shop-exterior.png
+shop_main_image: /images/uploads/shops/stathern-featured.png
 opening_hours: |
   **Monday:** 10:30am - 4:30pm
 

@@ -1,20 +1,16 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
-import data from "../../../data/corporate-partnerships.json";
+import data from "../../../data/our-corporate-partners.json";
 import contact from "../../../data/contact.json";
-import { toEachWordCapitalized, toTitleCase } from "../../../lib/titleCase";
+import { toTitleCase } from "../../../lib/titleCase";
 
 const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
-const cap = toEachWordCapitalized;
-const pageHeading = data.heroH1;
-const layoutTitle = data.pageTitle;
-
 ---
 
-<BaseLayout title={layoutTitle} description={data.metaDescription}>
-  <div class="svc-page corporate-page">
-    <section class="hospice-svc-hero" aria-label={pageHeading}>
+<BaseLayout title={data.pageTitle} description={data.metaDescription}>
+  <div class="svc-page corporate-partners-page">
+    <section class="hospice-svc-hero" aria-label={data.heroH1}>
       <img
         class="hospice-svc-hero-bg"
         src={data.heroImage}
@@ -28,15 +24,15 @@ const layoutTitle = data.pageTitle;
       <div class="container hospice-svc-hero-inner">
         <a class="interior-hero-eyebrow" href={data.parentNavHref}>
           <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
-          {cap(data.parentNavLabel)}
+          {toTitleCase(data.parentNavLabel)}
         </a>
-        <h1>{pageHeading}</h1>
+        <h1>{data.heroH1}</h1>
         <p class="hospice-svc-hero-dek">{data.heroShortDescription}</p>
       </div>
     </section>
 
     <div class="motion-scope">
-      <section class="svc-main" aria-label={pageHeading}>
+      <section class="svc-main" aria-label={data.heroH1}>
         <img
           src="/images/sunflower-brand-small.png"
           alt=""
@@ -46,34 +42,23 @@ const layoutTitle = data.pageTitle;
         />
         <div class="container svc-layout">
           <div class="svc-primary">
-            <p class="svc-lede corporate-intro">{data.intro}</p>
-            <h2 class="svc-section-h2">{cap(data.visionTitle)}</h2>
-            <p class="svc-lede">{data.visionBody}</p>
-            <p class="svc-lede">{data.whatWeDoBody}</p>
-            {data.missionParagraphs.map((p) => <p class="svc-lede">{p}</p>)}
+            <p class="svc-lede">{data.introParagraph1}</p>
+            <p class="svc-lede">{data.introParagraph2}</p>
 
-            <ul class="corporate-main-list">
-              {data.ways.map((item) => (
-                <li class="svc-body">
-                  <strong>{item.title}:</strong> {item.body}
-                </li>
+            <div class="partner-grid">
+              {data.partners.map((partner) => (
+                <article class="partner-card">
+                  <a href={partner.website} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${partner.name} website`}>
+                    <img src={partner.logo} alt={partner.logoAlt || `${partner.name} logo`} loading="lazy" decoding="async" />
+                    <h3>{partner.name}</h3>
+                  </a>
+                </article>
               ))}
-              {data.donations.map((item) => (
-                <li class="svc-body">
-                  <strong>{item.title}:</strong> {item.body}
-                </li>
-              ))}
-            </ul>
+            </div>
 
-            <p class="svc-lede">{data.sponsorshipBody}</p>
-            <p class="svc-lede">{data.expectIntro}</p>
-            <p class="svc-lede">{data.ctaBody}</p>
+            <p class="svc-lede">{data.closingParagraph}</p>
             <p class="svc-lede">
-              <a class="svc-inline-link" href={telHref}>{contact.trustPhoneDisplay}</a>
-              {" · "}
-              <a class="svc-inline-link" href={`mailto:${contact.email}`}>{contact.email}</a>
-              {" · "}
-              <a class="svc-inline-link" href="/contact/">{cap("Contact form")}</a>
+              <a class="svc-inline-link" href={data.closingCtaHref}>{data.closingCtaLabel}</a>
             </p>
           </div>
 
@@ -104,22 +89,11 @@ const layoutTitle = data.pageTitle;
                     <a class="side-value side-link" href={`mailto:${contact.email}`}>{contact.email}</a>
                   </div>
                 </li>
-                <li>
-                  <span class="side-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
-                    </svg>
-                  </span>
-                  <div>
-                    <span class="side-label">{toTitleCase("Contact form")}</span>
-                    <a class="side-value side-link" href="/contact/">Use our contact form</a>
-                  </div>
-                </li>
               </ul>
               <p class="side-charity">{toTitleCase(contact.sideCharityFooter)}</p>
             </div>
 
-            <ArchiveSidebarPeek filterId="support-us" excludePath="/support-us/corporate-partnerships" />
+            <ArchiveSidebarPeek filterId="support-us" excludePath="/support-us/our-corporate-partners" />
           </aside>
         </div>
       </section>
@@ -133,26 +107,54 @@ const layoutTitle = data.pageTitle;
 </script>
 
 <style>
-  .corporate-intro {
-    font-size: var(--type-body-large);
-    font-weight: 600;
-    color: #2a3f5c;
+  .partner-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin: 1rem 0 1.35rem;
   }
 
-  .corporate-main-list {
-    list-style: none;
-    margin: 0 0 1.25rem;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .corporate-main-list > li {
-    margin: 0;
-    padding: 14px 16px;
+  .partner-card {
+    background: #fff;
     border: 1px solid #dce5f2;
-    border-radius: 10px;
-    background: #fbfcfe;
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .partner-card a {
+    color: inherit;
+    text-decoration: none;
+    display: block;
+  }
+
+  .partner-card img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: #f9fbff;
+    border-radius: 8px;
+    border: 1px solid #e7edf8;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+
+  .partner-card h3 {
+    margin: 0.65rem 0 0;
+    font-size: var(--type-body);
+    color: #153a6d;
+    text-align: center;
+  }
+
+  @media (max-width: 980px) {
+    .partner-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .partner-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

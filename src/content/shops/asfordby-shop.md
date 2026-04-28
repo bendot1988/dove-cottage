@@ -28,7 +28,7 @@ shop_info: >
 callout: >
   **Your purchases help local families** — every item you buy supports
   palliative care and support at Dove Cottage Day Hospice.
-shop_main_image: /images/uploads/asfordby-shop-exterior.png
+shop_main_image: /images/uploads/shops/shops-featured-asfordby.png
 opening_hours: |
   **Monday – Friday:** 9:30am – 4:30pm
 
@@ -36,6 +36,7 @@ opening_hours: |
 
   **Sunday:** Closed
 gallery:
+  - /images/uploads/shops/shops-featured-asfordby.png
   - /images/uploads/asfordby-shop-interior-1.png
   - /images/uploads/asfordby-shop-interior-2.png
   - /images/uploads/asfordby-shop-interior-3.png

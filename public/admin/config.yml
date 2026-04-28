@@ -518,6 +518,79 @@ collections:
           - { label: "Main content (markdown)", name: "bodyMarkdown", widget: "markdown" }
           - { label: "Beacon account slug", name: "beaconAccount", widget: "string", default: "dovecottagedayhospice" }
           - { label: "Beacon form ID", name: "beaconFormId", widget: "string", default: "fe636194" }
+      - name: "meet_the_team"
+        label: "Meet the Team page"
+        file: "src/data/meet-the-team.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string" }
+          - { label: "Meta description", name: "metaDescription", widget: "text" }
+          - { label: "Hero image", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "About Us" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/explore/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Meet the Team" }
+          - { label: "Hero subtitle", name: "heroShortDescription", widget: "text" }
+          - label: "Trust section rows"
+            name: "trustBlocks"
+            widget: "list"
+            min: 2
+            max: 6
+            fields:
+              - { label: "Heading", name: "title", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Image alt text", name: "imageAlt", widget: "string" }
+          - label: "Department overview"
+            name: "departments"
+            widget: "list"
+            min: 3
+            max: 12
+            fields:
+              - { label: "Department name", name: "name", widget: "string" }
+              - { label: "Short description", name: "description", widget: "text" }
+              - { label: "Department image (optional)", name: "image", widget: "image", required: false }
+              - { label: "Department image alt text (optional)", name: "imageAlt", widget: "string", required: false }
+          - label: "Team groups"
+            name: "teamGroups"
+            widget: "list"
+            min: 1
+            max: 12
+            fields:
+              - { label: "Group heading", name: "title", widget: "string" }
+              - label: "Members"
+                name: "members"
+                widget: "list"
+                min: 1
+                max: 50
+                fields:
+                  - { label: "Name", name: "name", widget: "string" }
+                  - { label: "Job title", name: "jobTitle", widget: "string" }
+                  - { label: "Photo", name: "photo", widget: "image" }
+                  - { label: "Photo alt text", name: "photoAlt", widget: "string", required: false }
+          - label: "Stats bar (3 cards)"
+            name: "stats"
+            widget: "list"
+            min: 3
+            max: 3
+            fields:
+              - { label: "Value", name: "value", widget: "string" }
+              - { label: "Label", name: "label", widget: "string" }
+          - label: "Testimonials (slider)"
+            name: "testimonials"
+            widget: "list"
+            min: 1
+            max: 8
+            fields:
+              - { label: "Quote", name: "quote", widget: "text" }
+              - { label: "Star rating (1-5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
+              - { label: "Author name", name: "authorName", widget: "string" }
+              - { label: "Author role", name: "authorRole", widget: "string" }
+              - { label: "Author photo", name: "authorPhoto", widget: "image" }
+              - { label: "Author photo alt text", name: "authorPhotoAlt", widget: "string", required: false }
+          - { label: "Footer CTA text", name: "footerCtaText", widget: "text" }
+          - { label: "Footer CTA button label", name: "footerCtaLabel", widget: "string", default: "Get Started" }
+          - { label: "Footer CTA button URL", name: "footerCtaHref", widget: "string", default: "/contact/" }
       - name: "support_us_overview"
         label: "See all ways to support us"
         file: "src/data/support-us-overview.json"
@@ -814,6 +887,34 @@ collections:
                   - { label: "Alt text", name: "alt", widget: "string" }
           - { label: "CTA heading", name: "ctaTitle", widget: "string" }
           - { label: "CTA body", name: "ctaBody", widget: "text" }
+      - name: "our_corporate_partners"
+        label: "Our Corporate Partners page"
+        file: "src/data/our-corporate-partners.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string" }
+          - { label: "Meta description", name: "metaDescription", widget: "text" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Support Us" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/support-us/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Our Corporate Partners" }
+          - { label: "Hero subtitle", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro paragraph 1", name: "introParagraph1", widget: "text" }
+          - { label: "Intro paragraph 2", name: "introParagraph2", widget: "text" }
+          - { label: "Closing paragraph", name: "closingParagraph", widget: "text" }
+          - { label: "Closing CTA label", name: "closingCtaLabel", widget: "string", default: "Visit our corporate partnerships page" }
+          - { label: "Closing CTA URL", name: "closingCtaHref", widget: "string", default: "/support-us/corporate-partnerships/" }
+          - label: "Partner logos"
+            name: "partners"
+            widget: "list"
+            min: 6
+            max: 24
+            fields:
+              - { label: "Business name", name: "name", widget: "string" }
+              - { label: "Logo image", name: "logo", widget: "image" }
+              - { label: "Logo alt text", name: "logoAlt", widget: "string", required: false }
+              - { label: "Website URL", name: "website", widget: "string" }
       - name: "hire_our_facilities"
         label: "Hire our facilities page"
         file: "src/data/hire-our-facilities.json"
