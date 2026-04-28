@@ -3,9 +3,15 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import data from "../../../data/corporate-partnerships.json";
 import contact from "../../../data/contact.json";
-import { toTitleCase } from "../../../lib/titleCase";
+import { toEachWordCapitalized, toTitleCase } from "../../../lib/titleCase";
 
 const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
+const cap = toEachWordCapitalized;
+const pageHeading = cap(data.heroH1);
+const layoutTitle = data.pageTitle
+  .split(/\s*\|\s*/)
+  .map((part) => cap(part.trim()))
+  .join(" | ");
 
 type MediaBlock = {
   iconStrip: { src: string; alt: string }[];
@@ -18,31 +24,21 @@ type MediaBlock = {
 const media = (data as typeof data & { media?: MediaBlock }).media;
 ---
 
-<BaseLayout title={data.pageTitle} description={data.metaDescription}>
+<BaseLayout title={layoutTitle} description={data.metaDescription}>
   <div class="svc-page corporate-page">
-    <section class="hospice-svc-hero" aria-label={data.heroH1}>
-      <img
-        class="hospice-svc-hero-bg"
-        src={data.heroImage}
-        alt={data.heroImageAlt}
-        width="1920"
-        height="720"
-        loading="eager"
-        fetchpriority="high"
-      />
-      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
-      <div class="container hospice-svc-hero-inner">
-        <a class="interior-hero-eyebrow" href={data.parentNavHref}>
+    <header class="corporate-text-hero" aria-label={pageHeading}>
+      <div class="container corporate-text-hero__inner">
+        <a class="interior-hero-eyebrow corporate-text-hero__eyebrow" href={data.parentNavHref}>
           <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
-          {toTitleCase(data.parentNavLabel)}
+          {cap(data.parentNavLabel)}
         </a>
-        <h1>{data.heroH1}</h1>
-        <p class="hospice-svc-hero-dek">{data.heroShortDescription}</p>
+        <h1 class="corporate-text-hero__title">{pageHeading}</h1>
+        <p class="corporate-text-hero__dek">{cap(data.heroShortDescription)}</p>
       </div>
-    </section>
+    </header>
 
     <div class="motion-scope">
-      <section class="svc-main" aria-label={data.heroH1}>
+      <section class="svc-main" aria-label={pageHeading}>
         <img
           src="/images/sunflower-brand-small.png"
           alt=""
@@ -62,7 +58,7 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
                       <img
                         class="corporate-icon-strip__img"
                         src={icon.src}
-                        alt={icon.alt}
+                        alt={cap(icon.alt)}
                         width="72"
                         height="72"
                         loading="lazy"
@@ -73,32 +69,32 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
               ) : null
             }
 
-            <h2 class="svc-section-h2">{data.visionTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.visionTitle)}</h2>
             <p class="svc-lede">{data.visionBody}</p>
 
-            <h2 class="svc-section-h2">{data.whatWeDoTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.whatWeDoTitle)}</h2>
             <p class="svc-lede">{data.whatWeDoBody}</p>
 
-            <h2 class="svc-section-h2">{data.missionTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.missionTitle)}</h2>
             {data.missionParagraphs.map((p) => <p class="svc-lede">{p}</p>)}
 
-            <h2 class="svc-section-h2">{data.valuesTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.valuesTitle)}</h2>
             <ul class="corporate-values">
               {data.values.map((v) => (
                 <li>
                   <span class="corporate-values__letter" aria-hidden="true">{v.letter}</span>
-                  <span class="corporate-values__word">{v.word}</span>
+                  <span class="corporate-values__word">{cap(v.word)}</span>
                 </li>
               ))}
             </ul>
 
-            <h2 class="svc-section-h2">{data.waysTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.waysTitle)}</h2>
             {
               media?.waysPhoto ? (
                 <figure class="corporate-section-figure">
                   <img
                     src={media.waysPhoto.src}
-                    alt={media.waysPhoto.alt}
+                    alt={cap(media.waysPhoto.alt)}
                     width="960"
                     height="540"
                     loading="lazy"
@@ -110,19 +106,19 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
             <ul class="corporate-card-list">
               {data.ways.map((item) => (
                 <li>
-                  <h3 class="corporate-card-list__title">{item.title}</h3>
+                  <h3 class="corporate-card-list__title">{cap(item.title)}</h3>
                   <p class="svc-body">{item.body}</p>
                 </li>
               ))}
             </ul>
 
-            <h2 class="svc-section-h2">{data.donationsTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.donationsTitle)}</h2>
             {
               media?.donationsPhoto ? (
                 <figure class="corporate-section-figure">
                   <img
                     src={media.donationsPhoto.src}
-                    alt={media.donationsPhoto.alt}
+                    alt={cap(media.donationsPhoto.alt)}
                     width="960"
                     height="540"
                     loading="lazy"
@@ -134,19 +130,19 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
             <ul class="corporate-card-list">
               {data.donations.map((item) => (
                 <li>
-                  <h3 class="corporate-card-list__title">{item.title}</h3>
+                  <h3 class="corporate-card-list__title">{cap(item.title)}</h3>
                   <p class="svc-body">{item.body}</p>
                 </li>
               ))}
             </ul>
 
-            <h2 class="svc-section-h2">{data.volunteeringTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.volunteeringTitle)}</h2>
             {
               media?.volunteeringPhoto ? (
                 <figure class="corporate-section-figure">
                   <img
                     src={media.volunteeringPhoto.src}
-                    alt={media.volunteeringPhoto.alt}
+                    alt={cap(media.volunteeringPhoto.alt)}
                     width="960"
                     height="540"
                     loading="lazy"
@@ -157,13 +153,13 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
             }
             <p class="svc-lede">{data.volunteeringBody}</p>
 
-            <h2 class="svc-section-h2">{data.sponsorshipTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.sponsorshipTitle)}</h2>
             {
               media?.sponsorshipPhoto ? (
                 <figure class="corporate-section-figure">
                   <img
                     src={media.sponsorshipPhoto.src}
-                    alt={media.sponsorshipPhoto.alt}
+                    alt={cap(media.sponsorshipPhoto.alt)}
                     width="960"
                     height="540"
                     loading="lazy"
@@ -174,22 +170,22 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
             }
             <p class="svc-lede">{data.sponsorshipBody}</p>
 
-            <h2 class="svc-section-h2">{data.expectTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.expectTitle)}</h2>
             <p class="svc-lede">{data.expectIntro}</p>
             <ul class="corporate-expect-cards">
               {data.expectations.map((line) => (
-                <li class="corporate-expect-cards__item">{line}</li>
+                <li class="corporate-expect-cards__item">{cap(line)}</li>
               ))}
             </ul>
 
-            <h2 class="svc-section-h2">{data.ctaTitle}</h2>
+            <h2 class="svc-section-h2">{cap(data.ctaTitle)}</h2>
             <p class="svc-lede">{data.ctaBody}</p>
             <p class="svc-lede">
               <a class="svc-inline-link" href={telHref}>{contact.trustPhoneDisplay}</a>
               {" · "}
               <a class="svc-inline-link" href={`mailto:${contact.email}`}>{contact.email}</a>
               {" · "}
-              <a class="svc-inline-link" href="/contact/">Contact form</a>
+              <a class="svc-inline-link" href="/contact/">{cap("Contact form")}</a>
             </p>
           </div>
 
@@ -249,6 +245,46 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
 </script>
 
 <style>
+  .corporate-text-hero {
+    position: relative;
+    background: linear-gradient(180deg, #eef4fb 0%, #fafcfe 100%);
+    border-bottom: 1px solid #d9e3f0;
+    padding: clamp(2rem, 5vw, 2.75rem) 0 clamp(1.5rem, 4vw, 2.25rem);
+  }
+
+  .corporate-text-hero__inner {
+    max-width: 48rem;
+  }
+
+  .corporate-text-hero__title {
+    margin: 0 0 0.65rem;
+    font-size: var(--type-hero-title);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: #102a4e;
+  }
+
+  .corporate-text-hero__dek {
+    margin: 0;
+    max-width: 40rem;
+    font-size: var(--type-body-large);
+    line-height: 1.5;
+    text-wrap: pretty;
+    color: #354a67;
+  }
+
+  .corporate-text-hero__eyebrow.interior-hero-eyebrow,
+  a.corporate-text-hero__eyebrow.interior-hero-eyebrow {
+    color: #1a5080;
+  }
+
+  a.corporate-text-hero__eyebrow.interior-hero-eyebrow:hover,
+  a.corporate-text-hero__eyebrow.interior-hero-eyebrow:focus-visible {
+    color: #0a2540;
+    background: rgba(29, 101, 178, 0.08);
+  }
+
   .corporate-intro {
     font-size: var(--type-body-large);
     font-weight: 600;

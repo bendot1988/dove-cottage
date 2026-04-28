@@ -26,3 +26,28 @@ export function toTitleCase(input: string): string {
     })
     .join(" ");
 }
+
+const ACRONYM_LOWER = new Map<string, string>([
+  ["csr", "CSR"],
+  ["uk", "UK"],
+  ["eu", "EU"],
+]);
+
+/**
+ * Capitalises the first letter of every alphabetic run (each “word”), lowercasing the rest.
+ * Use for display labels where small words should not stay lowercase. Preserves a few acronyms.
+ */
+export function toEachWordCapitalized(input: string): string {
+  const s = input.trim();
+  if (!s) return input;
+
+  let out = s.replace(/[a-z]+/gi, (word) => {
+    const lower = word.toLowerCase();
+    const mapped = ACRONYM_LOWER.get(lower);
+    if (mapped) return mapped;
+    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+  });
+
+  out = out.replace(/\bCo-Op\b/gi, "Co-op");
+  return out;
+}
