@@ -503,6 +503,22 @@ collections:
                 hint: "web=online, repeat=regular giving, phone, map=visit"
               - { label: "Label (e.g. Donate online)", name: "kicker", widget: "string", required: false }
               - { label: "Description", name: "body", widget: "text" }
+      - name: "make_a_referral"
+        label: "Make a Referral page"
+        file: "src/data/make-a-referral.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Make a Referral | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Hospice Services" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Make a Referral" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro paragraph (markdown)", name: "introMarkdown", widget: "markdown" }
+          - { label: "Main content (markdown)", name: "bodyMarkdown", widget: "markdown" }
+          - { label: "Beacon account slug", name: "beaconAccount", widget: "string", default: "dovecottagedayhospice" }
+          - { label: "Beacon form ID", name: "beaconFormId", widget: "string", default: "fe636194" }
       - name: "support_us_overview"
         label: "See all ways to support us"
         file: "src/data/support-us-overview.json"
@@ -940,20 +956,16 @@ collections:
                   required: false,
                   options: ["Benefits & Finance", "Bereavement", "Counselling", "Carer Support", "Practical Help", "General Support", "Other"],
                 }
-              - {
-                  label: "Resource type",
-                  name: "resourceType",
-                  widget: "select",
-                  required: false,
-                  options:
-                    [
-                      { label: "External Link", value: "external" },
-                      { label: "Downloadable File", value: "file" },
-                      { label: "Article / Internal Link", value: "article" }
-                    ],
-                }
+              - label: "Resource type"
+                name: "resourceType"
+                widget: "select"
+                required: false
+                options:
+                  - { label: "External Link", value: "external" }
+                  - { label: "Downloadable File", value: "file" }
+                  - { label: "Article / Internal Link", value: "article" }
               - { label: "External / internal URL", name: "url", widget: "string", required: false, hint: "Use for web links (https://...) or on-site URLs (/resources/example.pdf)." }
-              - { label: "Upload file (PDF/doc)", name: "file", widget: "file", required: false, hint: "If set, this file is used as the resource link." }
+              - { label: "Upload file (PDF/doc)", name: "downloadFile", widget: "file", required: false, hint: "If set, this file is used as the resource link." }
               - { label: "Link label", name: "linkLabel", widget: "string", default: "Open resource" }
           - { label: "Referral line — text before link", name: "referralIntro", widget: "string" }
           - { label: "Referral line — link text", name: "referralCta", widget: "string", default: "enquiry form" }

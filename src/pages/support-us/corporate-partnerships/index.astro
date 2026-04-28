@@ -13,15 +13,6 @@ const layoutTitle = data.pageTitle
   .map((part) => cap(part.trim()))
   .join(" | ");
 
-type MediaBlock = {
-  iconStrip: { src: string; alt: string }[];
-  waysPhoto: { src: string; alt: string };
-  donationsPhoto: { src: string; alt: string };
-  volunteeringPhoto: { src: string; alt: string };
-  sponsorshipPhoto: { src: string; alt: string };
-};
-
-const media = (data as typeof data & { media?: MediaBlock }).media;
 ---
 
 <BaseLayout title={layoutTitle} description={data.metaDescription}>
@@ -59,136 +50,26 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
         <div class="container svc-layout">
           <div class="svc-primary">
             <p class="svc-lede corporate-intro">{data.intro}</p>
-
-            {
-              media?.iconStrip?.length ? (
-                <ul class="corporate-icon-strip">
-                  {media.iconStrip.map((icon) => (
-                    <li>
-                      <img
-                        class="corporate-icon-strip__img"
-                        src={icon.src}
-                        alt={cap(icon.alt)}
-                        width="72"
-                        height="72"
-                        loading="lazy"
-                      />
-                    </li>
-                  ))}
-                </ul>
-              ) : null
-            }
-
             <h2 class="svc-section-h2">{cap(data.visionTitle)}</h2>
             <p class="svc-lede">{data.visionBody}</p>
-
-            <h2 class="svc-section-h2">{cap(data.whatWeDoTitle)}</h2>
             <p class="svc-lede">{data.whatWeDoBody}</p>
-
-            <h2 class="svc-section-h2">{cap(data.missionTitle)}</h2>
             {data.missionParagraphs.map((p) => <p class="svc-lede">{p}</p>)}
 
-            <h2 class="svc-section-h2">{cap(data.valuesTitle)}</h2>
-            <ul class="corporate-values">
-              {data.values.map((v) => (
-                <li>
-                  <span class="corporate-values__letter" aria-hidden="true">{v.letter}</span>
-                  <span class="corporate-values__word">{cap(v.word)}</span>
-                </li>
-              ))}
-            </ul>
-
-            <h2 class="svc-section-h2">{cap(data.waysTitle)}</h2>
-            {
-              media?.waysPhoto ? (
-                <figure class="corporate-section-figure">
-                  <img
-                    src={media.waysPhoto.src}
-                    alt={cap(media.waysPhoto.alt)}
-                    width="960"
-                    height="540"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ) : null
-            }
-            <ul class="corporate-card-list">
+            <ul class="corporate-main-list">
               {data.ways.map((item) => (
-                <li>
-                  <h3 class="corporate-card-list__title">{cap(item.title)}</h3>
-                  <p class="svc-body">{item.body}</p>
+                <li class="svc-body">
+                  <strong>{item.title}:</strong> {item.body}
                 </li>
               ))}
-            </ul>
-
-            <h2 class="svc-section-h2">{cap(data.donationsTitle)}</h2>
-            {
-              media?.donationsPhoto ? (
-                <figure class="corporate-section-figure">
-                  <img
-                    src={media.donationsPhoto.src}
-                    alt={cap(media.donationsPhoto.alt)}
-                    width="960"
-                    height="540"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ) : null
-            }
-            <ul class="corporate-card-list">
               {data.donations.map((item) => (
-                <li>
-                  <h3 class="corporate-card-list__title">{cap(item.title)}</h3>
-                  <p class="svc-body">{item.body}</p>
+                <li class="svc-body">
+                  <strong>{item.title}:</strong> {item.body}
                 </li>
               ))}
             </ul>
 
-            <h2 class="svc-section-h2">{cap(data.volunteeringTitle)}</h2>
-            {
-              media?.volunteeringPhoto ? (
-                <figure class="corporate-section-figure">
-                  <img
-                    src={media.volunteeringPhoto.src}
-                    alt={cap(media.volunteeringPhoto.alt)}
-                    width="960"
-                    height="540"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ) : null
-            }
-            <p class="svc-lede">{data.volunteeringBody}</p>
-
-            <h2 class="svc-section-h2">{cap(data.sponsorshipTitle)}</h2>
-            {
-              media?.sponsorshipPhoto ? (
-                <figure class="corporate-section-figure">
-                  <img
-                    src={media.sponsorshipPhoto.src}
-                    alt={cap(media.sponsorshipPhoto.alt)}
-                    width="960"
-                    height="540"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </figure>
-              ) : null
-            }
             <p class="svc-lede">{data.sponsorshipBody}</p>
-
-            <h2 class="svc-section-h2">{cap(data.expectTitle)}</h2>
             <p class="svc-lede">{data.expectIntro}</p>
-            <ul class="corporate-expect-cards">
-              {data.expectations.map((line) => (
-                <li class="corporate-expect-cards__item">{cap(line)}</li>
-              ))}
-            </ul>
-
-            <h2 class="svc-section-h2">{cap(data.ctaTitle)}</h2>
             <p class="svc-lede">{data.ctaBody}</p>
             <p class="svc-lede">
               <a class="svc-inline-link" href={telHref}>{contact.trustPhoneDisplay}</a>
@@ -261,151 +142,20 @@ const media = (data as typeof data & { media?: MediaBlock }).media;
     color: #2a3f5c;
   }
 
-  .corporate-icon-strip {
-    list-style: none;
-    margin: 0 0 1.75rem;
-    padding: 14px 16px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 14px 20px;
-    background: linear-gradient(135deg, rgba(234, 241, 251, 0.9), rgba(251, 252, 254, 0.95));
-    border: 1px solid rgba(29, 101, 178, 0.12);
-    border-radius: 12px;
-  }
-
-  .corporate-icon-strip li {
-    margin: 0;
-    padding: 0;
-  }
-
-  .corporate-icon-strip__img {
-    display: block;
-    width: 64px;
-    height: auto;
-    max-height: 72px;
-    object-fit: contain;
-  }
-
-  .corporate-section-figure {
-    margin: 0 0 1rem;
-    padding: 0;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #dce5f2;
-    background: #eef3fb;
-  }
-
-  .corporate-section-figure img {
-    display: block;
-    width: 100%;
-    height: auto;
-    vertical-align: middle;
-  }
-
-  .corporate-values {
-    list-style: none;
-    margin: 0 0 1.25rem;
-    padding: 0;
-    display: grid;
-    gap: 8px;
-    max-width: 32rem;
-  }
-
-  .corporate-values li {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    padding: 8px 12px;
-    background: rgba(234, 241, 251, 0.85);
-    border: 1px solid rgba(29, 101, 178, 0.14);
-    border-radius: 8px;
-    font-weight: 600;
-    color: #12335f;
-  }
-
-  .corporate-values__letter {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    height: 1.75rem;
-    border-radius: 6px;
-    background: var(--color-golden-yellow);
-    color: #102a4e;
-    font-size: var(--type-body-small);
-    font-weight: 800;
-    flex-shrink: 0;
-  }
-
-  .corporate-card-list {
+  .corporate-main-list {
     list-style: none;
     margin: 0 0 1.25rem;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 10px;
   }
 
-  .corporate-card-list > li {
+  .corporate-main-list > li {
     margin: 0;
     padding: 14px 16px;
     border: 1px solid #dce5f2;
     border-radius: 10px;
     background: #fbfcfe;
-  }
-
-  .corporate-card-list__title {
-    margin: 0 0 6px;
-    font-size: var(--type-body);
-    font-weight: 800;
-    color: #102a4e;
-  }
-
-  .corporate-expect-cards {
-    list-style: none;
-    margin: 0 0 1.25rem;
-    padding: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  @media (min-width: 640px) {
-    .corporate-expect-cards {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-
-  .corporate-expect-cards__item {
-    margin: 0;
-    padding: 16px 18px;
-    background: #fff;
-    border: 1px solid #dce5f2;
-    border-radius: 12px;
-    color: #354a67;
-    line-height: 1.6;
-    box-shadow: 0 1px 2px rgba(16, 42, 78, 0.05);
-    transition:
-      transform 0.22s ease,
-      box-shadow 0.22s ease,
-      border-color 0.22s ease;
-  }
-
-  .corporate-expect-cards__item:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 32px rgba(29, 101, 178, 0.14);
-    border-color: rgba(29, 101, 178, 0.28);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .corporate-expect-cards__item {
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .corporate-expect-cards__item:hover {
-      transform: none;
-    }
   }
 </style>

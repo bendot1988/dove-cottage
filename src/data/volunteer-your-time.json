@@ -1,7 +1,7 @@
 {
   "pageTitle": "Volunteer Your Time | Dove Cottage",
-  "heroImage": "/images/hero-family-alt.png",
-  "heroImageAlt": "Volunteers and guests together in a welcoming hospice setting",
+  "heroImage": "/images/uploads/volunteer/volunteer-featured-shop.png",
+  "heroImageAlt": "Two volunteers smiling in a Dove Cottage charity shop while arranging clothing",
   "parentNavLabel": "Support Us",
   "parentNavHref": "/support-us/",
   "heroH1": "Volunteer Your Time",
@@ -32,8 +32,8 @@
   "introParagraph1": "Dove Cottage volunteers play a vital role in the smooth running of the hospice. Around 120 people give their time, expertise, and commitment to support our work, helping us create a warm, welcoming environment for guests, families, carers, visitors, and supporters.",
   "introParagraph2": "The time given by volunteers saves the hospice around £250,000 each year. More importantly, it helps make Dove Cottage feel personal, friendly, and connected to the local community.",
   "sectionImage": {
-    "src": "/images/uploads/volunteer-gazebo.png",
-    "alt": "Dove Cottage volunteer gazebo and information stand at a community event"
+    "src": "/images/uploads/volunteer/volunteer-featured-shop.png",
+    "alt": "Two volunteers smiling in a Dove Cottage charity shop while arranging clothing"
   },
   "waysHeading": "Ways you could help",
   "waysIntro": "There are different ways to volunteer, depending on your interests, availability, and experience. Full training is given, and we will talk with you about the role that feels right.",

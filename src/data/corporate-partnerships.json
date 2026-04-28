@@ -1,22 +1,22 @@
 {
-  "pageTitle": "Corporate Partnerships & Fundraising | Support Us | Dove Cottage",
-  "metaDescription": "Partner with Dove Cottage Day Hospice: charity of the year, team challenges, events, sponsorship, volunteering, payroll giving, and corporate CSR.",
+  "pageTitle": "Become a Corporate Partner | Support Us | Dove Cottage",
+  "metaDescription": "Become a corporate partner with Dove Cottage and support local families through fundraising, volunteering, sponsorship, and payroll giving.",
   "heroImage": "/images/uploads/corporate/hero-corporate.png",
-  "heroImageAlt": "Supporters taking part in a bright, energetic community fundraising event",
+  "heroImageAlt": "Supporter recognition board displaying local business and community partner logos",
   "parentNavLabel": "Support us",
   "parentNavHref": "/support-us/",
-  "heroH1": "Corporate partnerships & fundraising",
-  "heroShortDescription": "From charity of the year to sponsorship and team volunteering — discover how your organisation can help fund free care for local families while meeting your CSR goals.",
-  "intro": "Being in partnership with Dove Cottage can help you reach your corporate social responsibility targets, grow brand awareness, and inspire your workforce — while making a real difference to people living with life-limiting illness across our community.",
-  "visionTitle": "Our vision",
-  "visionBody": "Our vision is to maximise the quality of life for those living with life-limiting illnesses within our local community. We deliver a service that is accessible, compassionate, dignified and caring for families in need, and offers respite for carers.",
-  "whatWeDoTitle": "What we do",
-  "whatWeDoBody": "Dove Cottage is a voluntary organisation that cares for up to 100 families every week affected by life-limiting conditions. We have two sites — at Stathern near Melton Mowbray and at Ridlington in Rutland. Our care services are provided free of charge. Our income comes from a variety of sources, the majority of which is raised locally.",
-  "missionTitle": "Our mission",
+  "heroH1": "Become a Corporate Partner",
+  "heroShortDescription": "Corporate Commitment, Community Impact.",
+  "intro": "A partnership with Dove Cottage offers numerous benefits for your organisation.",
+  "visionTitle": "Why partner with Dove Cottage",
+  "visionBody": "A partnership with Dove Cottage offers numerous benefits for your organisation: Enhanced Corporate Social Responsibility (CSR): Demonstrate your commitment to the local community and make a positive impact.",
+  "whatWeDoTitle": "Partnership benefits",
+  "whatWeDoBody": "Increased Brand Awareness: Gain exposure through our marketing channels and events. Employee Engagement: Boost morale and create team-building opportunities through fundraising and volunteering. Positive PR: Enhance your company's reputation and attract customers who value social responsibility. Networking Opportunities: Connect with other businesses and community leaders.",
+  "missionTitle": "Working together for impact",
   "missionParagraphs": [
-    "Dove Cottage aims to deliver the best possible care through a range of services, including nursing care, the provision of information, emotional support, and therapeutic and diversional therapies. Through such activities we hope to maximise self-reliance, minimise dependency, and promote confidence and self-esteem.",
-    "We aim to offer a support system and valuable respite care to the family during the patient’s illness and in their bereavement. We work in partnership with other care providers to ensure that the needs of the family are met to the highest level possible.",
-    "We are fully compliant with all relevant regulators. We believe in transparency and good stewardship, and we work continuously to improve our services to match the evolving needs of our local area."
+    "A fun fact about corporate fundraising is that it often boosts employee morale as much as it raises money. Supporting a good cause can strengthen teams while making a real difference in the community.",
+    "There are many meaningful and flexible ways your organisation can support Dove Cottage Day Hospice.",
+    "Some examples are given below however this is not an exhaustive list! We encourage you to suggest your own ideas that are bespoke to your particular company / industry."
   ],
   "valuesTitle": "Our values",
   "values": [
@@ -27,66 +27,61 @@
     { "letter": "N", "word": "Nurturing" },
     { "letter": "G", "word": "Giving" }
   ],
-  "waysTitle": "Events, campaigns & corporate challenges",
+  "waysTitle": "Ways your organisation can support us",
   "ways": [
     {
-      "title": "Charity of the year",
-      "body": "Nominate Dove Cottage as your company or organisation’s charity of the year."
+      "title": "Support our fundraising campaigns and initiatives",
+      "body": "Partner with us to help maximise donations and impact of initiatives."
     },
     {
-      "title": "Sport & team challenges",
-      "body": "Challenge your team with a static challenge (for example a cycle ride on an exercise bike) or take part in our sporting and activity challenges."
+      "title": "Host fundraising events",
+      "body": "Organise events on our behalf to engage your team and customers."
     },
     {
-      "title": "Dove Cottage events",
-      "body": "Attend our events with colleagues, friends and family — and help spread the word."
+      "title": "Sponsored challenges",
+      "body": "Take part in organised events, often with free or reduced entry fees available."
     },
     {
-      "title": "Spread the word",
-      "body": "Circulate information about our events and initiatives using a notice board at work, literature at your premises, or mailings to clients, suppliers and members."
+      "title": "Matched giving",
+      "body": "Support your employees fundraising efforts by offering to match the total amount raised."
     },
     {
-      "title": "Pay for the day scheme",
-      "body": "Recognise an important birthday or anniversary, or mark a significant milestone for your company or staff."
+      "title": "Gifts in kind",
+      "body": "Donate items that can be used for fundraising activities or patient care."
     },
     {
-      "title": "Your own fundraising",
-      "body": "Hold your own event or campaign at your office or in your local community — for example dress-down days or festive jumper days."
+      "title": "Volunteer days",
+      "body": "Offer staff volunteering opportunities to support our hospice and activities."
     }
   ],
-  "donationsTitle": "Donations",
+  "donationsTitle": "More ways to get involved",
   "donations": [
     {
-      "title": "Donation station",
-      "body": "Host our indoor donation station in your reception or meeting or communal area. We deliver and collect — you just let us know. An average bag of clothing is estimated to be worth around £25, plus potential Gift Aid."
+      "title": "Host a donation station",
+      "body": "encourage employees to bring in items suitable for re-sale through our charity shops."
     },
     {
-      "title": "Donate prizes",
-      "body": "We are always in need of raffle and auction prizes. They help raise additional funds and are always appreciated."
+      "title": "Venue support",
+      "body": "Provide space for Dove Cottage events, helping us reduce costs and expand our reach."
     },
     {
-      "title": "Payroll giving",
-      "body": "Regular donations can come from employees’ salaries before tax."
+      "title": "Guest speaking opportunities",
+      "body": "Share your expertise, interests or experiences with our patients, volunteers or supporters."
     },
     {
-      "title": "Counter collection pots",
-      "body": "These help raise vital funds and promote brand awareness within the local community."
+      "title": "Factory or site visits",
+      "body": "Host visits for our volunteers as part of our enrichment programme."
     }
   ],
-  "volunteeringTitle": "Volunteering opportunities",
-  "volunteeringBody": "Team-building and organisational volunteering can be a great away day at the hospice or at one of our events. There are also opportunities in the hospice, driving guests to and from the hospice, at our shops, and more.",
-  "sponsorshipTitle": "Sponsorship opportunities",
-  "sponsorshipBody": "Each year Dove Cottage holds a variety of events, offering sponsors excellent brand awareness and the chance to engage with new clients. Our programme can include our annual fete, Easter egg hunt, auction, lantern walk, carol service, Santa fun run, and challenge events with specialist partners. The more sponsors support our events, the more money comes directly to the hospice to help families in need.",
-  "expectTitle": "What you can expect in return",
-  "expectIntro": "If you decide to support Dove Cottage, we aim to offer as much as we can in return so the partnership between our corporate supporters and the hospice stays balanced.",
+  "volunteeringTitle": "Regular giving options",
+  "volunteeringBody": "Payroll giving enables employees to donate regularly through their salaries. You can also encourage participation in our 500 Club Lottery as a regular giving option.",
+  "sponsorshipTitle": "Sponsorship and business club",
+  "sponsorshipBody": "There are many other ways you can support our cause, including sponsorship opportunities and joining our Business Club!",
+  "expectTitle": "Further information",
+  "expectIntro": "Download the attached leaflet for more information and ideas.",
   "expectations": [
-    "Support with reaching your corporate social responsibility (CSR) targets",
-    "Display your logo on our sponsors page on our website and add links to your company",
-    "Inspire your workforce and join with like-minded companies",
-    "Joint press releases and social media coverage where applicable",
-    "Develop your company’s brand reputation within the community",
-    "Show your business commitment to a great cause",
-    "Grow brand awareness and staff morale"
+    "Payroll giving: Enable employees to donate regularly through their salaries",
+    "500 Club Lottery: Encourage participation in our regular giving lottery"
   ],
   "media": {
     "iconStrip": [
@@ -128,6 +123,6 @@
       "alt": "Santa fun run participants raising sponsorship for the hospice"
     }
   },
-  "ctaTitle": "How to get involved",
-  "ctaBody": "For more information about corporate fundraising, sponsorship, or volunteering, please contact our team — we would love to hear your ideas."
+  "ctaTitle": "Speak to our fundraising team",
+  "ctaBody": "To speak to someone in more detail please complete the enquiry form or call 01949 860303 and speak to the fundraising team."
 }

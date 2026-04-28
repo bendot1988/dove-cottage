@@ -1,134 +1,115 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import data from "../../data/make-a-referral.json";
+import { marked } from "marked";
+
+const introHtml = marked.parse(data.introMarkdown.trim(), { async: false }) as string;
+const bodyHtml = marked.parse(data.bodyMarkdown.trim(), { async: false }) as string;
 ---
 
-<BaseLayout title="Make a Referral | Dove Cottage" description="Referral criteria and process for accessing Dove Cottage Day Hospice services.">
-  <section class="referral-page">
-    <div class="container referral-container">
-      <p class="referral-eyebrow">Access our services</p>
-      <h1>Make a Referral</h1>
-
-      <p>Referrals to access our services can be made by family members, carers or health care professionals.</p>
-      <p>
-        To make a referral, call <a href="tel:01949860303">01949 860303</a> speak to one of our nursing team.
-      </p>
-
-      <h2>Referral Criteria and Process of Referral</h2>
-
-      <p>
-        <strong>Aims of the service:</strong> The aim of specialist palliative day care is to support guests with
-        palliative and end of life care needs, enhance independence and quality of life, and reduce carer fatigue
-        through respite.
-      </p>
-
-      <p>
-        <strong>Referral criteria:</strong> Dove Cottage Day Hospice provides a range of services for guests over the
-        age of 18 with advanced, progressive, incurable conditions or general frailty with co-existing conditions,
-        where the treatment is palliative.
-      </p>
-
-      <p>
-        Guests will need to be well enough to attend day care and tolerate the journey to and from the hospice. They
-        will also need to be able to access and use our hospice premises and equipment safely.
-      </p>
-
-      <p>These criteria will be assessed on an individual basis by the nursing team.</p>
-
-      <p>Dove Cottage does not routinely offer places to patients:</p>
-      <ul>
-        <li>With a primary diagnosis of (or advanced) dementia, acute mental illness or learning disability</li>
-        <li>Whose behaviour is liable to be disruptive</li>
-        <li>Whose main needs are rehabilitative rather than palliative</li>
-        <li>Who are in residential care</li>
-        <li>Who are known to have a healthcare acquired infection e.g.: Clostridium Difficile</li>
-      </ul>
-
-      <p>
-        Dove Cottage provides supportive palliative care but is a non-medical unit. All patients remain under the care
-        of their own GP.
-      </p>
-
-      <p>
-        Acceptance of each referral is at the discretion of the day care leader or nurse in charge and will depend on:
-      </p>
-      <ul>
-        <li>Individual assessment of needs</li>
-        <li>Whether Dove Cottage can meet those needs</li>
-        <li>Whether attendance at Dove Cottage will be of benefit to the potential day care guest</li>
-        <li>Availability of resources and places</li>
-      </ul>
-
-      <h2>Referral Process and Assessment</h2>
-      <p>
-        Referrals can be made by health professionals, guests or their families. To make a referral please telephone
-        Dove Cottage Stathern: <a href="tel:01949860303">01949 860303</a>
-      </p>
-      <p>And ask to speak to one of the nurses, with the following information:</p>
-      <ul>
-        <li>Name and contact details of the individual being referred</li>
-        <li>Date of birth</li>
-        <li>Diagnosis</li>
-        <li>Treatment</li>
-        <li>General condition and home circumstances</li>
-        <li>Name of GP</li>
-      </ul>
-
-      <div class="referral-form-wrap">
-        <div class="beacon-form" data-account="dovecottagedayhospice" data-form="fe636194"></div>
+<BaseLayout title={data.pageTitle} description={data.heroShortDescription}>
+  <div class="svc-page">
+    <section class="hospice-svc-hero" aria-label={data.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={data.heroImage}
+        alt={data.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={data.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {data.parentNavLabel}
+        </a>
+        <h1>{data.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{data.heroShortDescription}</p>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="svc-main referral-main" aria-label={data.heroH1}>
+      <div class="container referral-container">
+        <div class="referral-content">
+          <div class="referral-intro" set:html={introHtml} />
+        <figure class="svc-figure">
+          <img
+            class="svc-figure__img"
+            src={data.heroImage}
+            alt={data.heroImageAlt}
+            width="1200"
+            height="675"
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
+          <div class="referral-body" set:html={bodyHtml} />
+        </div>
+        <div class="referral-form-wrap">
+          <div class="beacon-form" data-account={data.beaconAccount} data-form={data.beaconFormId}></div>
+        </div>
+      </div>
+    </section>
+  </div>
   <script is:inline>
     !function(e,t){if(!e.getElementById(t)){var c=e.createElement("script");c.id=t,c.src="https://static.beaconproducts.co.uk/js-sdk/production/beaconcrm.min.js",e.getElementsByTagName("head")[0].appendChild(c)}}(document,"beacon-js-sdk");
   </script>
 </BaseLayout>
 
 <style>
-  .referral-page {
-    background: #f5f7fc;
-    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  .hospice-svc-hero-overlay {
+    background: linear-gradient(105deg, rgba(8, 22, 48, 0.88) 0%, rgba(8, 22, 48, 0.62) 45%, rgba(8, 22, 48, 0.38) 100%);
+  }
+
+  .hospice-svc-hero h1,
+  .hospice-svc-hero-dek {
+    color: #fff;
+  }
+
+  .referral-main {
+    padding-top: clamp(2rem, 5vw, 3rem);
   }
 
   .referral-container {
     max-width: 820px;
   }
 
-  .referral-eyebrow {
-    margin: 0 0 0.5rem;
-    font-size: var(--type-micro);
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: var(--color-steel-blue-1);
+  .referral-content {
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 16px;
+    padding: clamp(1rem, 3vw, 1.5rem);
+    box-shadow: 0 8px 22px rgba(18, 44, 83, 0.07);
   }
 
-  h1 {
-    margin: 0 0 1rem;
+  .referral-content :global(h2) {
+    margin: 1.8rem 0 0.65rem;
     color: #0f2240;
-  }
-
-  h2 {
-    margin: 2rem 0 0.65rem;
-    color: #15305b;
     font-size: clamp(1.15rem, 2vw, 1.35rem);
   }
 
-  p,
-  li {
+  .referral-content :global(h2:first-child) {
+    margin-top: 0.25rem;
+  }
+
+  .referral-content :global(p),
+  .referral-content :global(li) {
     color: #2c3f5d;
     line-height: 1.65;
   }
 
-  p {
+  .referral-content :global(p) {
     margin: 0 0 0.9rem;
   }
 
-  ul {
+  .referral-content :global(ul) {
     margin: 0 0 1rem 1.2rem;
     padding: 0;
   }
 
-  a {
+  .referral-content :global(a) {
     color: var(--color-steel-blue);
     font-weight: 700;
     text-decoration: underline;

@@ -7,6 +7,7 @@ type ResourceRow = {
   organisation: string;
   url?: string;
   file?: string;
+  downloadFile?: string;
   category?: string;
   resourceType?: "external" | "file" | "article";
   linkLabel: string;
@@ -29,7 +30,7 @@ const resourceKind = (href: string) => {
   return { label: "Article", tone: "article" } as const;
 };
 
-const resolveHref = (item: ResourceRow) => item.file?.trim() || item.url?.trim() || "";
+const resolveHref = (item: ResourceRow) => item.downloadFile?.trim() || item.file?.trim() || item.url?.trim() || "";
 ---
 
 <BaseLayout title={layoutTitle}>
