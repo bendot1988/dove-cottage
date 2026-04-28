@@ -1,146 +1,154 @@
 {
-  "pageTitle": "Hire Our Facilities | Dove Cottage",
-  "heroImage": "/images/hero-supporting-journey.png",
-  "heroImageAlt": "A bright, flexible room set up for a community session",
-  "parentNavLabel": "About Us",
-  "parentNavHref": "/",
-  "heroH1": "Hire our facilities",
-  "heroShortDescription": "Welcoming spaces available for hire",
-  "mainIntro1": "Our building offers calm and accessible spaces available for hire by external organisations and individuals.",
-  "mainIntro2": "Located within the beautiful rural Vale of Belvoir, our rooms are ideal for meetings, training sessions, wellbeing activities, creative groups and special appointments that benefit from privacy and tranquillity.",
   "mainIntro3": "With extensive free parking on site, tea and coffee making facilities and free Wifi access, our hospice building offers the perfect alternative to traditional corporate rooms for hire.",
-  "mainIntro4": "By choosing to hire our facilities, you are also supporting the vital work of our hospice, with all income reinvested into patient care and family support.",
-  "sections": [
-    {
-      "heading": "Meeting & Training Space",
-      "subheading": "Inspiring spaces for focused thinking and collaboration",
-      "body": "Our hexagonal-shaped light and airy meeting room provides a refreshing alternative to traditional corporate venues. Designed to encourage calm, clarity and connection, it is perfect for:",
-      "bullets": [
-        { "text": "Team meetings and away days" },
-        { "text": "Training sessions and workshops" },
-        { "text": "Strategic planning or reflective discussions" }
-      ],
-      "closing": "Users can enjoy a quiet, confidential environment surrounded by nature, helping conversations flow and ideas flourish."
-    },
-    {
-      "heading": "Extensive Tranquil Gardens",
-      "subheading": "A peaceful outdoor setting for reflection, creativity and connection",
-      "body": "Our beautifully maintained hospice gardens offer a rare sense of calm and space. The garden area is ideal for:",
-      "bullets": [
-        { "text": "Small gatherings or reflective events" },
-        { "text": "Birthday celebrations" },
-        { "text": "Creative or mindfulness sessions" },
-        { "text": "Photography or quiet outdoor activities" }
-      ],
-      "closing": "The gardens provide a serene backdrop, allowing guests to pause, breathe and reconnect in nature."
-    },
-    {
-      "heading": "Hairdressing Salon",
-      "subheading": "A professional, fully equipped salon",
-      "body": "Our on-site hairdressing salon is available for use by independent stylists and organisations seeking a peaceful, well-appointed space. It offers:",
-      "bullets": [
-        { "text": "A calm, private environment" },
-        { "text": "Professional facilities" },
-        { "text": "Easy access and a welcoming atmosphere" }
-      ],
-      "closing": "Perfect for client appointments where comfort and discretion are paramount."
-    },
-    {
-      "heading": "Complementary Therapy & Beauty Suite",
-      "subheading": "A restorative space for wellbeing professionals",
-      "body": "Our complementary therapy and beauty suite provides a soothing, thoughtfully designed environment suitable for:",
-      "bullets": [
-        { "text": "Massage and holistic therapies" },
-        { "text": "Beauty treatments" },
-        { "text": "One-to-one wellbeing sessions" }
-      ],
-      "closing": "The space promotes relaxation and trust, making it ideal for practitioners who value a calm, supportive setting for their clients."
-    }
-  ],
-  "impactHeading": "A Meaningful Choice of Venue",
-  "impactBody": "Hiring our facilities offers more than just a space — it is a chance to make a positive impact. Every booking helps support hospice care and the families who rely on us.",
-  "galleryHeading": "Photo Gallery",
-  "galleryBody": "Explore our spaces below.",
   "gallerySections": [
     {
       "heading": "Meeting & Training Space",
       "images": [
-        { "src": "/images/uploads/facilities/garden-room.png", "alt": "Garden room set up for small group meetings" },
-        { "src": "/images/uploads/facilities/hospice-sun-room-1.png", "alt": "Sun room with countryside views" },
-        { "src": "/images/uploads/facilities/hospice-sun-room-2.png", "alt": "Sun room seating area with table" },
-        { "src": "/images/uploads/facilities/hospice-sun-room-3.png", "alt": "Sun room lounge area" },
-        { "src": "/images/uploads/facilities/hospice-lounge-1.png", "alt": "Main lounge with recliner chairs" },
-        { "src": "/images/uploads/facilities/hospice-lounge-2.png", "alt": "Lounge seating and reading area" },
-        { "src": "/images/uploads/facilities/hospice-dining-room-1.png", "alt": "Dining room with group tables" },
-        { "src": "/images/uploads/facilities/hospice-dining-room-2.png", "alt": "Dining and social space" },
-        { "src": "/images/uploads/facilities/corridor.png", "alt": "Bright corridor and welcome area" }
+        {
+          "src": "/images/uploads/facilities/garden-room.png",
+          "alt": "Garden room set up for small group meetings"
+        },
+        {
+          "src": "/images/uploads/facilities/corridor.png",
+          "alt": "Bright corridor and welcome area"
+        }
       ]
     },
     {
       "heading": "Extensive Tranquil Gardens",
       "images": [
-        { "src": "/images/uploads/facilities/external-shot-of-hospice-across-fields.png", "alt": "External view of the hospice and gardens across fields" }
+        {
+          "src": "/images/uploads/facilities/external-shot-of-hospice-across-fields.png",
+          "alt": "External view of the hospice and gardens across fields"
+        }
       ]
     },
     {
       "heading": "Hairdressing Salon",
       "images": [
-        { "src": "/images/uploads/facilities/hair-salon-1.png", "alt": "Hair salon wash station and styling chairs" },
-        { "src": "/images/uploads/facilities/hair-salon-2.png", "alt": "Hair salon mirrors and styling stations" },
-        { "src": "/images/uploads/facilities/salon.png", "alt": "Hair salon treatment area" }
+        {
+          "src": "/images/uploads/facilities/hair-salon-1.png",
+          "alt": "Hair salon wash station and styling chairs"
+        },
+        {
+          "src": "/images/uploads/facilities/hair-salon-2.png",
+          "alt": "Hair salon mirrors and styling stations"
+        },
+        {
+          "src": "/images/uploads/facilities/salon.png",
+          "alt": "Hair salon treatment area"
+        }
       ]
     },
     {
       "heading": "Complementary Therapy & Beauty Suite",
       "images": [
-        { "src": "/images/uploads/facilities/complementary-therapy-suite-1.png", "alt": "Complementary therapy suite treatment room" },
-        { "src": "/images/uploads/facilities/complementary-therapy-suite-2.png", "alt": "Complementary therapy suite sink and storage area" },
-        { "src": "/images/uploads/facilities/complementary-therapy-suite-3.png", "alt": "Complementary therapy suite with specialist bathing equipment" },
-        { "src": "/images/uploads/facilities/complementary-therapy-suite-4.png", "alt": "Complementary therapy suite therapy bed and equipment" },
-        { "src": "/images/uploads/facilities/medical-room-1.png", "alt": "Medical room with profiling bed" },
-        { "src": "/images/uploads/facilities/medical-room-2.png", "alt": "Medical room with sink and storage" },
-        { "src": "/images/uploads/facilities/medical-room-3.png", "alt": "Medical room treatment bed setup" }
+        {
+          "src": "/images/uploads/facilities/complementary-therapy-suite-1.png",
+          "alt": "Complementary therapy suite treatment room"
+        },
+        {
+          "src": "/images/uploads/facilities/complementary-therapy-suite-2.png",
+          "alt": "Complementary therapy suite sink and storage area"
+        },
+        {
+          "src": "/images/uploads/facilities/complementary-therapy-suite-3.png",
+          "alt": "Complementary therapy suite with specialist bathing equipment"
+        },
+        {
+          "src": "/images/uploads/facilities/complementary-therapy-suite-4.png",
+          "alt": "Complementary therapy suite therapy bed and equipment"
+        },
+        {
+          "src": "/images/uploads/facilities/medical-room-1.png",
+          "alt": "Medical room with profiling bed"
+        },
+        {
+          "src": "/images/uploads/facilities/medical-room-2.png",
+          "alt": "Medical room with sink and storage"
+        },
+        {
+          "src": "/images/uploads/facilities/medical-room-3.png",
+          "alt": "Medical room treatment bed setup"
+        }
       ]
     },
     {
       "heading": "Therapy Bathing Facility",
       "images": [
-        { "src": "/images/uploads/facilities/therapy-bathing-facility-1.png", "alt": "Therapy bathing room with specialist bath" },
-        { "src": "/images/uploads/facilities/therapy-bathing-facility-2.png", "alt": "Therapy bathing room with patient hoist" },
-        { "src": "/images/uploads/facilities/therapy-bathing-facility-3.png", "alt": "Therapy bathing room facilities" }
+        {
+          "src": "/images/uploads/facilities/therapy-bathing-facility-1.png",
+          "alt": "Therapy bathing room with specialist bath"
+        },
+        {
+          "src": "/images/uploads/facilities/therapy-bathing-facility-2.png",
+          "alt": "Therapy bathing room with patient hoist"
+        },
+        {
+          "src": "/images/uploads/facilities/therapy-bathing-facility-3.png",
+          "alt": "Therapy bathing room facilities"
+        }
       ]
     },
     {
       "heading": "Kitchen & Catering Areas",
       "images": [
-        { "src": "/images/uploads/facilities/hospice-kitchen-1.png", "alt": "Hospice kitchen prep and sink area" },
-        { "src": "/images/uploads/facilities/hospice-kitchen-2.png", "alt": "Hospice kitchen with professional catering equipment" }
+        {
+          "src": "/images/uploads/facilities/hospice-kitchen-1.png",
+          "alt": "Hospice kitchen prep and sink area"
+        },
+        {
+          "src": "/images/uploads/facilities/hospice-kitchen-2.png",
+          "alt": "Hospice kitchen with professional catering equipment"
+        }
       ]
     },
     {
       "heading": "Accessibility Features",
       "images": [
-        { "src": "/images/uploads/facilities/accessible-toilet-facilities-1.png", "alt": "Accessible toilet facilities" },
-        { "src": "/images/uploads/facilities/accessible-toilet-facilities-2.png", "alt": "Accessible sink and wash facilities" },
-        { "src": "/images/uploads/facilities/wheelchair-assisted-vehicle.png", "alt": "Wheelchair assisted Dove Cottage vehicle" }
+        {
+          "src": "/images/uploads/facilities/accessible-toilet-facilities-1.png",
+          "alt": "Accessible toilet facilities"
+        },
+        {
+          "src": "/images/uploads/facilities/accessible-toilet-facilities-2.png",
+          "alt": "Accessible sink and wash facilities"
+        },
+        {
+          "src": "/images/uploads/facilities/wheelchair-assisted-vehicle.png",
+          "alt": "Wheelchair assisted Dove Cottage vehicle"
+        }
       ]
     },
     {
       "heading": "A Meaningful Choice of Venue",
       "images": [
-        { "src": "/images/uploads/facilities/external-shot-of-hospice-across-fields.png", "alt": "External view of the hospice venue" },
-        { "src": "/images/uploads/facilities/corridor.png", "alt": "Welcoming entrance and corridor area" },
-        { "src": "/images/uploads/facilities/wheelchair-assisted-vehicle.png", "alt": "Wheelchair assisted Dove Cottage vehicle supporting access" }
+        {
+          "src": "/images/uploads/facilities/external-shot-of-hospice-across-fields.png",
+          "alt": "External view of the hospice venue"
+        },
+        {
+          "src": "/images/uploads/facilities/corridor.png",
+          "alt": "Welcoming entrance and corridor area"
+        },
+        {
+          "src": "/images/uploads/facilities/wheelchair-assisted-vehicle.png",
+          "alt": "Wheelchair assisted Dove Cottage vehicle supporting access"
+        }
       ]
     }
   ],
-  "formHeading": "Facility Hire Enquiry",
-  "formIntro": "To make an enquiry regarding booking our facilities please complete the enquiry form.",
+  "heroImage": "/images/hero-supporting-journey.png",
+  "sidebarPeekTitle": "More from Dove Cottage",
+  "mainIntro4": "By choosing to hire our facilities, you are also supporting the vital work of our hospice, with all income reinvested into patient care and family support.",
   "sideFormLinkText": "Use our form",
   "sideFormHint": "General enquiries about facility hire.",
-  "sidebarPeekTitle": "More from Dove Cottage",
-  "sidebarPeekViewAllHref": "/explore/",
-  "sidebarPeekViewAllLabel": "Browse services & support",
+  "heroH1": "Hire our facilities",
+  "parentNavHref": "/",
+  "formIntro": "To make an enquiry regarding booking our facilities please complete the enquiry form.",
+  "impactBody": "Hiring our facilities offers more than just a space — it is a chance to make a positive impact. Every booking helps support hospice care and the families who rely on us.",
+  "heroImageAlt": "A bright, flexible room set up for a community session",
+  "pageTitle": "Hire Our Facilities | Dove Cottage",
   "sidebarPeekCards": [
     {
       "title": "Contact",
@@ -162,5 +170,88 @@
       "href": "/support-us/",
       "image": "/images/reach-section-bg.png"
     }
-  ]
+  ],
+  "sections": [
+    {
+      "heading": "Meeting & Training Space",
+      "subheading": "Inspiring spaces for focused thinking and collaboration",
+      "body": "Our hexagonal-shaped light and airy meeting room provides a refreshing alternative to traditional corporate venues. Designed to encourage calm, clarity and connection, it is perfect for:",
+      "bullets": [
+        {
+          "text": "Team meetings and away days"
+        },
+        {
+          "text": "Training sessions and workshops"
+        },
+        {
+          "text": "Strategic planning or reflective discussions"
+        }
+      ],
+      "closing": "Users can enjoy a quiet, confidential environment surrounded by nature, helping conversations flow and ideas flourish."
+    },
+    {
+      "heading": "Extensive Tranquil Gardens",
+      "subheading": "A peaceful outdoor setting for reflection, creativity and connection",
+      "body": "Our beautifully maintained hospice gardens offer a rare sense of calm and space. The garden area is ideal for:",
+      "bullets": [
+        {
+          "text": "Small gatherings or reflective events"
+        },
+        {
+          "text": "Birthday celebrations"
+        },
+        {
+          "text": "Creative or mindfulness sessions"
+        },
+        {
+          "text": "Photography or quiet outdoor activities"
+        }
+      ],
+      "closing": "The gardens provide a serene backdrop, allowing guests to pause, breathe and reconnect in nature."
+    },
+    {
+      "heading": "Hairdressing Salon",
+      "subheading": "A professional, fully equipped salon",
+      "body": "Our on-site hairdressing salon is available for use by independent stylists and organisations seeking a peaceful, well-appointed space. It offers:",
+      "bullets": [
+        {
+          "text": "A calm, private environment"
+        },
+        {
+          "text": "Professional facilities"
+        },
+        {
+          "text": "Easy access and a welcoming atmosphere"
+        }
+      ],
+      "closing": "Perfect for client appointments where comfort and discretion are paramount."
+    },
+    {
+      "heading": "Complementary Therapy & Beauty Suite",
+      "subheading": "A restorative space for wellbeing professionals",
+      "body": "Our complementary therapy and beauty suite provides a soothing, thoughtfully designed environment suitable for:",
+      "bullets": [
+        {
+          "text": "Massage and holistic therapies"
+        },
+        {
+          "text": "Beauty treatments"
+        },
+        {
+          "text": "One-to-one wellbeing sessions"
+        }
+      ],
+      "closing": "The space promotes relaxation and trust, making it ideal for practitioners who value a calm, supportive setting for their clients."
+    }
+  ],
+  "sidebarPeekViewAllLabel": "Browse services & support",
+  "galleryHeading": "Photo Gallery",
+  "sidebarPeekViewAllHref": "/explore/",
+  "galleryBody": "Explore our spaces below.",
+  "heroShortDescription": "Welcoming spaces available for hire",
+  "parentNavLabel": "About Us",
+  "impactHeading": "A Meaningful Choice of Venue",
+  "formHeading": "Facility Hire Enquiry",
+  "mainIntro1": "Our building offers calm and accessible spaces available for hire by external organisations and individuals.",
+  "mainIntro2": "Located within the beautiful rural Vale of Belvoir, our rooms are ideal for meetings, training sessions, wellbeing activities, creative groups and special appointments that benefit from privacy and tranquillity."
 }
