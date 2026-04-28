@@ -654,18 +654,6 @@ collections:
           - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/support-us/" }
           - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Volunteer Your Time" }
           - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
-          - label: "Impact strip items (below hero)"
-            name: "impactItems"
-            widget: "list"
-            min: 4
-            max: 4
-            fields:
-              - label: "Icon"
-                name: "icon"
-                widget: "select"
-                options: ["team", "time", "training", "impact"]
-              - { label: "Label (small caps)", name: "label", widget: "string" }
-              - { label: "Value (main line)", name: "value", widget: "string" }
           - { label: "Intro heading", name: "introHeading", widget: "string" }
           - { label: "Intro paragraph 1", name: "introParagraph1", widget: "text" }
           - { label: "Intro paragraph 2", name: "introParagraph2", widget: "text" }
@@ -682,12 +670,14 @@ collections:
             name: "roles"
             widget: "list"
             min: 1
-            max: 8
             fields:
               - { label: "Role title", name: "title", widget: "string" }
               - { label: "Role description", name: "description", widget: "text" }
-              - { label: "Link label", name: "ctaLabel", widget: "string" }
-              - { label: "Link URL", name: "ctaHref", widget: "string", default: "/contact/" }
+              - { label: "PDF link text", name: "pdfLabel", widget: "string", default: "Download role PDF" }
+              - { label: "PDF URL (optional)", name: "pdfHref", widget: "string", required: false, hint: "Use for an external PDF link. If a PDF file is uploaded below, that file is used first." }
+              - { label: "Upload PDF file (optional)", name: "pdfFile", widget: "file", required: false }
+              - { label: "Link label (legacy)", name: "ctaLabel", widget: "string", required: false }
+              - { label: "Link URL (legacy)", name: "ctaHref", widget: "string", required: false }
           - { label: "Expect section heading", name: "expectHeading", widget: "string" }
           - { label: "Expect paragraph 1", name: "expectParagraph1", widget: "text" }
           - { label: "Expect paragraph 2", name: "expectParagraph2", widget: "text" }

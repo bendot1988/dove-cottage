@@ -41,24 +41,32 @@
     {
       "title": "Hospice support",
       "description": "Help create a friendly, welcoming environment for guests by supporting day-to-day activities, refreshments, companionship, or practical tasks around the hospice.",
+      "pdfLabel": "Download hospice role PDF",
+      "pdfHref": "/contact/",
       "ctaLabel": "Ask about hospice roles",
       "ctaHref": "/contact/"
     },
     {
       "title": "Volunteer driving",
       "description": "Support guests by helping them travel safely to and from Dove Cottage. Mileage expenses are paid for hospice drivers.",
+      "pdfLabel": "Download driving role PDF",
+      "pdfHref": "/contact/",
       "ctaLabel": "Ask about driving",
       "ctaHref": "/contact/"
     },
     {
       "title": "Shop volunteering",
       "description": "Join one of our friendly charity shop teams and help with serving customers, sorting donations, preparing stock, and keeping the shops welcoming.",
+      "pdfLabel": "Download shop role PDF",
+      "pdfHref": "/contact/",
       "ctaLabel": "Ask about shop roles",
       "ctaHref": "/contact/"
     },
     {
       "title": "Fundraising and events",
       "description": "Help with community events, fundraising activities, collections, or behind-the-scenes support that keeps Dove Cottage visible and active locally.",
+      "pdfLabel": "Download events role PDF",
+      "pdfHref": "/contact/",
       "ctaLabel": "Ask about events",
       "ctaHref": "/contact/"
     }
