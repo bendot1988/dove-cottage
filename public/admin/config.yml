@@ -1113,64 +1113,67 @@ collections:
           - { label: "Referral line — text after link", name: "referralOutro", widget: "string" }
   - name: "vacancies"
     label: "Vacancies"
-    file: "src/data/vacancies.json"
-    format: "json"
-    fields:
-      - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Vacancies | Dove Cottage" }
-      - { label: "Meta description", name: "metaDescription", widget: "text", required: false }
-      - { label: "Hero image", name: "heroImage", widget: "image" }
-      - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
-      - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Resource Hub" }
-      - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/resource-hub/" }
-      - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Vacancies" }
-      - { label: "Hero subtitle", name: "heroShortDescription", widget: "text" }
-      - { label: "Intro markdown", name: "introMarkdown", widget: "markdown" }
-      - { label: "Paid roles section title", name: "paidSectionTitle", widget: "string", default: "Paid Roles" }
-      - { label: "Volunteer roles section title", name: "volunteerSectionTitle", widget: "string", default: "Volunteer Roles" }
-      - { label: "Volunteer roles intro markdown", name: "volunteerIntroMarkdown", widget: "markdown" }
-      - label: "Paid roles"
-        name: "paidRoles"
-        widget: "list"
-        min: 0
+    files:
+      - name: "vacancies_page"
+        label: "Vacancies Page"
+        file: "src/data/vacancies.json"
+        format: "json"
         fields:
-          - { label: "Role title", name: "title", widget: "string" }
-          - { label: "Location / shop (optional)", name: "location", widget: "string", required: false }
-          - { label: "Working hours", name: "workingHours", widget: "text" }
-          - { label: "Role overview (markdown)", name: "roleOverviewMarkdown", widget: "markdown" }
-          - { label: "Responsible to", name: "responsibleTo", widget: "string" }
-          - { label: "PDF download label", name: "pdfLabel", widget: "string", default: "Download more information about the role here" }
-          - {
-              label: "PDF URL (optional)",
-              name: "pdfHref",
-              widget: "string",
-              required: false,
-              hint: "Use for an external PDF link. If a PDF file is uploaded below, that file is used first."
-            }
-          - { label: "Upload PDF file (optional)", name: "pdfFile", widget: "file", required: false }
-          - { label: "Contact instructions (markdown)", name: "contactMarkdown", widget: "markdown", required: false }
-      - label: "Volunteer roles"
-        name: "volunteerRoles"
-        widget: "list"
-        min: 0
-        fields:
-          - { label: "Role title", name: "title", widget: "string" }
-          - { label: "Location / shop (optional)", name: "location", widget: "string", required: false }
-          - { label: "Working hours", name: "workingHours", widget: "text" }
-          - { label: "Role overview (markdown)", name: "roleOverviewMarkdown", widget: "markdown" }
-          - { label: "Responsible to", name: "responsibleTo", widget: "string" }
-          - { label: "PDF download label", name: "pdfLabel", widget: "string", default: "Download more information about the role here" }
-          - {
-              label: "PDF URL (optional)",
-              name: "pdfHref",
-              widget: "string",
-              required: false,
-              hint: "Use for an external PDF link. If a PDF file is uploaded below, that file is used first."
-            }
-          - { label: "Upload PDF file (optional)", name: "pdfFile", widget: "file", required: false }
-          - { label: "Contact instructions (markdown)", name: "contactMarkdown", widget: "markdown", required: false }
-      - { label: "Vacancy CTA button text", name: "vacancyCtaButtonText", widget: "string", default: "Apply for a role" }
-      - { label: "Form heading", name: "formHeading", widget: "string", required: false }
-      - { label: "Form hint (markdown)", name: "formHintMarkdown", widget: "markdown", required: false }
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Vacancies | Dove Cottage" }
+          - { label: "Meta description", name: "metaDescription", widget: "text", required: false }
+          - { label: "Hero image", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Resource Hub" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/hospice-services/resource-hub/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Vacancies" }
+          - { label: "Hero subtitle", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro markdown", name: "introMarkdown", widget: "markdown" }
+          - { label: "Paid roles section title", name: "paidSectionTitle", widget: "string", default: "Paid Roles" }
+          - { label: "Volunteer roles section title", name: "volunteerSectionTitle", widget: "string", default: "Volunteer Roles" }
+          - { label: "Volunteer roles intro markdown", name: "volunteerIntroMarkdown", widget: "markdown" }
+          - label: "Paid roles"
+            name: "paidRoles"
+            widget: "list"
+            min: 0
+            fields:
+              - { label: "Role title", name: "title", widget: "string" }
+              - { label: "Location / shop (optional)", name: "location", widget: "string", required: false }
+              - { label: "Working hours", name: "workingHours", widget: "text" }
+              - { label: "Role overview (markdown)", name: "roleOverviewMarkdown", widget: "markdown" }
+              - { label: "Responsible to", name: "responsibleTo", widget: "string" }
+              - { label: "PDF download label", name: "pdfLabel", widget: "string", default: "Download more information about the role here" }
+              - {
+                  label: "PDF URL (optional)",
+                  name: "pdfHref",
+                  widget: "string",
+                  required: false,
+                  hint: "Use for an external PDF link. If a PDF file is uploaded below, that file is used first."
+                }
+              - { label: "Upload PDF file (optional)", name: "pdfFile", widget: "file", required: false }
+              - { label: "Contact instructions (markdown)", name: "contactMarkdown", widget: "markdown", required: false }
+          - label: "Volunteer roles"
+            name: "volunteerRoles"
+            widget: "list"
+            min: 0
+            fields:
+              - { label: "Role title", name: "title", widget: "string" }
+              - { label: "Location / shop (optional)", name: "location", widget: "string", required: false }
+              - { label: "Working hours", name: "workingHours", widget: "text" }
+              - { label: "Role overview (markdown)", name: "roleOverviewMarkdown", widget: "markdown" }
+              - { label: "Responsible to", name: "responsibleTo", widget: "string" }
+              - { label: "PDF download label", name: "pdfLabel", widget: "string", default: "Download more information about the role here" }
+              - {
+                  label: "PDF URL (optional)",
+                  name: "pdfHref",
+                  widget: "string",
+                  required: false,
+                  hint: "Use for an external PDF link. If a PDF file is uploaded below, that file is used first."
+                }
+              - { label: "Upload PDF file (optional)", name: "pdfFile", widget: "file", required: false }
+              - { label: "Contact instructions (markdown)", name: "contactMarkdown", widget: "markdown", required: false }
+          - { label: "Vacancy CTA button text", name: "vacancyCtaButtonText", widget: "string", default: "Apply for a role" }
+          - { label: "Form heading", name: "formHeading", widget: "string", required: false }
+          - { label: "Form hint (markdown)", name: "formHintMarkdown", widget: "markdown", required: false }
   - name: "hospice_services_pages"
     label: "Hospice services"
     files:
