@@ -1,77 +1,21 @@
 ---
-interface SideCard {
-  icon: string;
-  title: string;
-  description: string;
-}
-
 interface Props {
   backgroundImage: string;
-  statNumber: string;
-  statLabel: string;
-  statCaption: string;
-  title: string;
-  description: string;
-  sideCards: SideCard[];
 }
 
 const {
-  backgroundImage = "/images/reach-section-bg.png",
-  statNumber = "110",
-  statLabel = "villages",
-  statCaption = "ACROSS THE VALE OF BELVOIR",
-  title = "Care that's within everyone's reach",
-  description = "Our hospice lies in the heart of our rural community. Our fleet of wheelchair-accessible vehicles, supported by dedicated volunteer drivers, ensures that no matter where you live within our 10-mile catchment area, expert palliative care is always within reach.",
-  sideCards = [
-    {
-      icon: "🚐",
-      title: "Wheelchair-Accessible Transport Available",
-      description: "Available for all Day Hospice guests"
-    },
-    {
-      icon: "📍",
-      title: "10-Mile Catchment Area",
-      description: "Leicestershire, Nottinghamshire & Lincolnshire"
-    }
-  ]
+  backgroundImage = "/images/reach-section-bg.png"
 } = Astro.props as Props;
 ---
 
 <section class="reach-section" style={`background-image: url('${backgroundImage}')`}>
   <div class="overlay"></div>
-  <div class="container reach-grid">
-    <article class="main-card">
-      <div class="stat-block">
-        <span class="stat-number">{statNumber}</span>
-        <span class="stat-label">{statLabel}</span>
-        <span class="stat-caption">{statCaption}</span>
-      </div>
-      <div class="main-copy">
-        <h2>{title}</h2>
-        <p>{description}</p>
-      </div>
-    </article>
-
-    <div class="side-stack">
-      {
-        sideCards.map((item) => (
-          <article class="side-card">
-            <span class="icon-chip" aria-hidden="true">{item.icon}</span>
-            <div class="side-copy">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </div>
 </section>
 
 <style>
   .reach-section {
     position: relative;
-    padding: 46px 0;
+    min-height: 400px;
     background-size: cover;
     background-position: center;
     overflow: hidden;
@@ -83,131 +27,15 @@ const {
     background: rgba(18, 31, 47, 0.22);
   }
 
-  .container {
-    position: relative;
-    z-index: 1;
-  }
-
-  .reach-grid {
-    display: grid;
-    grid-template-columns: 2.3fr 1fr;
-    gap: 24px;
-    align-items: stretch;
-  }
-
-  .main-card,
-  .side-card {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.72);
-    border-radius: 14px;
-    backdrop-filter: blur(3px);
-  }
-
-  .main-card {
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 24px;
-    padding: 24px 28px;
-  }
-
-  .stat-block {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    color: var(--color-steel-blue);
-  }
-
-  .stat-number {
-    font-size: clamp(60px, 8vw, 86px);
-    line-height: 0.95;
-    font-weight: 700;
-    letter-spacing: -0.03em;
-  }
-
-  .stat-label {
-    margin-top: 8px;
-    font-size: 40px;
-    font-weight: 600;
-    color: #1d2f48;
-    line-height: 1;
-  }
-
-  .stat-caption {
-    margin-top: 8px;
-    font-size: 10px;
-    line-height: 1.3;
-    letter-spacing: 0.08em;
-    font-weight: 700;
-    color: #314660;
-  }
-
-  .main-copy h2 {
-    margin: 0 0 10px;
-    font-size: var(--type-card-title);
-    line-height: 1.25;
-    font-weight: 700;
-    color: #101f35;
-    letter-spacing: -0.02em;
-  }
-
-  .main-copy p {
-    margin: 0;
-    font-size: var(--type-body-large);
-    line-height: 1.55;
-    color: #2f435f;
-    max-width: 780px;
-  }
-
-  .side-stack {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    height: 100%;
-  }
-
-  .side-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 18px 16px;
-    flex: 1;
-  }
-
-  .icon-chip {
-    width: 34px;
-    height: 34px;
-    border-radius: 9px;
-    background: linear-gradient(180deg, #2d6fb3, #1f5a9c);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-
-  .side-copy h3 {
-    margin: 0 0 6px;
-    font-size: var(--type-body-small);
-    line-height: 1.3;
-    color: #142b49;
-    font-weight: 700;
-  }
-
-  .side-copy p {
-    margin: 0;
-    font-size: var(--type-body-small);
-    line-height: 1.45;
-    color: #394e68;
-  }
-
   @media (max-width: 980px) {
-    .reach-grid {
-      grid-template-columns: 1fr;
+    .reach-section {
+      min-height: 280px;
     }
+  }
 
-    .main-card {
-      grid-template-columns: 1fr;
-      gap: 14px;
+  @media (max-width: 640px) {
+    .reach-section {
+      min-height: 220px;
     }
   }
 </style>

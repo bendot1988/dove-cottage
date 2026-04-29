@@ -8,7 +8,6 @@ import VideoFeatureSection from "../components/VideoFeatureSection.astro";
 import HomeShopsSection from "../components/HomeShopsSection.astro";
 import ReachSection from "../components/ReachSection.astro";
 import SupportCardsSection from "../components/SupportCardsSection.astro";
-import ImpactSection from "../components/ImpactSection.astro";
 import homepage from "../data/homepage.json";
 import hospiceServicesOverview from "../data/hospice-services-overview.json";
 import carerPatientWellbeing from "../data/carer-patient-wellbeing.json";
@@ -87,7 +86,6 @@ const homeShops = (await getCollection("shops", ({ data }) => !data.draft))
     <HomeShopsSection {...homepage.shopsSection} shops={homeShops} />
     <ReachSection {...homepage.reachSection} />
     <SupportCardsSection {...homepage.supportSection} />
-    <ImpactSection {...homepage.impactSection} />
     {featuredNews.length > 0 && <FeaturedNewsSection posts={featuredNews} />}
   </div>
   <script>
