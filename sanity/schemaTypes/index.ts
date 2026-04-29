@@ -1,6 +1,7 @@
 import eventPost from "./documents/eventPost";
 import newsPost from "./documents/newsPost";
 import newsletterIssue from "./documents/newsletterIssue";
+import corporatePartnershipsPage from "./documents/corporatePartnershipsPage";
 import ourFacilitiesPage from "./documents/ourFacilitiesPage";
 import shop from "./documents/shop";
 import singletonPage from "./documents/singletonPage";
@@ -10,6 +11,7 @@ export const schemaTypes = [
   newsPost,
   eventPost,
   newsletterIssue,
+  corporatePartnershipsPage,
   ourFacilitiesPage,
   shop,
   singletonPage,

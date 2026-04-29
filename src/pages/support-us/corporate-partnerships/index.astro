@@ -3,11 +3,35 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import fallbackData from "../../../data/corporate-partnerships.json";
 import fallbackContact from "../../../data/contact.json";
+import { sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toEachWordCapitalized, toTitleCase } from "../../../lib/titleCase";
 
-const data =
-  (await fetchSingletonPageJson<typeof fallbackData>("corporate_partnerships")) ?? fallbackData;
+const structuredData = await sanityClient.fetch(`
+  *[_type == "corporatePartnershipsPage"][0]{
+    pageTitle,
+    metaDescription,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    intro,
+    visionTitle,
+    visionBody,
+    whatWeDoBody,
+    missionParagraphs,
+    ways,
+    donations,
+    sponsorshipBody,
+    expectIntro,
+    ctaBody
+  }
+`);
+const singletonData =
+  (await fetchSingletonPageJson<typeof fallbackData>("corporate_partnerships")) ?? null;
+const data = structuredData ?? singletonData ?? fallbackData;
 const contact = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
 const cap = toEachWordCapitalized;
