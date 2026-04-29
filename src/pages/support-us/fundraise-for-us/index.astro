@@ -1,0 +1,168 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
+import contact from "../../../data/contact.json";
+import data from "../../../data/fundraise-for-us.json";
+import { toTitleCase } from "../../../lib/titleCase";
+
+const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
+---
+
+<BaseLayout title={data.pageTitle} description={data.heroShortDescription}>
+  <div class="svc-page fundraise-page">
+    <section class="hospice-svc-hero" aria-label={data.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={data.heroImage}
+        alt={data.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={data.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {toTitleCase(data.parentNavLabel)}
+        </a>
+        <h1>{data.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{data.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <div class="motion-scope">
+      <section class="svc-main" aria-label={data.heroH1}>
+        <img
+          src="/images/sunflower-brand-small.png"
+          alt=""
+          class="svc-sunflower"
+          loading="lazy"
+          aria-hidden="true"
+        />
+        <div class="container svc-layout">
+          <div class="svc-primary">
+            <h2 class="svc-section-h2">{data.introHeading}</h2>
+            <p class="svc-lede">{data.introBody}</p>
+
+            <figure class="svc-figure">
+              <img
+                class="svc-figure__img"
+                src={data.heroImage}
+                alt={data.heroImageAlt}
+                width="1200"
+                height="675"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <h2 class="svc-section-h2">{data.sponsoredHeading}</h2>
+            <p class="svc-lede svc-lede--after-h2">{data.sponsoredBody}</p>
+            {data.sponsoredCtaHref && data.sponsoredCtaHref !== "#" && (
+              <p class="svc-body">
+                <a class="svc-inline-link" href={data.sponsoredCtaHref}>{data.sponsoredCtaLabel}</a>
+              </p>
+            )}
+
+            <h2 class="svc-section-h2">{data.eventsHeading}</h2>
+            <p class="svc-lede">{data.eventsBody}</p>
+
+            <h2 class="svc-section-h2">{data.birthdayHeading}</h2>
+            <p class="svc-lede">{data.birthdayBody}</p>
+
+            <h2 class="svc-section-h2">{data.fundraiseYourWayHeading}</h2>
+            <p class="svc-lede">{data.fundraiseYourWayBody}</p>
+
+            <div class="svc-card fundraise-contact-card" id="fundraise-contact">
+              <h3 class="svc-card__subtitle">{data.contactCtaHeading}</h3>
+              <p class="svc-body">{data.contactCtaBody}</p>
+              <div class="form-embed-card">
+                <div class="beacon-form" data-account="dovecottagedayhospice" data-form="d951a607"></div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="svc-side" aria-label={toTitleCase("Get in touch")}>
+            <div class="side-card">
+              <h2 class="side-card-title">{toTitleCase("Get in touch")}</h2>
+              <ul class="side-list">
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{toTitleCase("Phone")}</span>
+                    <a class="side-value side-link" href={telHref}>{contact.trustPhoneDisplay}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{toTitleCase("Email")}</span>
+                    <a class="side-value side-link" href={`mailto:${contact.email}`}>{contact.email}</a>
+                  </div>
+                </li>
+                <li>
+                  <span class="side-icon" aria-hidden="true">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.75"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />
+                    </svg>
+                  </span>
+                  <div>
+                    <span class="side-label">{toTitleCase("Contact form")}</span>
+                    <a class="side-value side-link" href="/contact/">Use Our Contact Form</a>
+                  </div>
+                </li>
+              </ul>
+              <p class="side-charity">{toTitleCase(contact.sideCharityFooter)}</p>
+            </div>
+
+            <ArchiveSidebarPeek filterId="support-us" excludePath="/support-us/fundraise-for-us" />
+          </aside>
+        </div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  !function(e,t){if(!e.getElementById(t)){var c=e.createElement("script");c.id=t,c.src="https://static.beaconproducts.co.uk/js-sdk/production/beaconcrm.min.js",e.getElementsByTagName("head")[0].appendChild(c)}}(document,"beacon-js-sdk");
+</script>
+
+<script>
+  import { initMotionScrollReveal } from "../../../scripts/motion-scroll-reveal.ts";
+  initMotionScrollReveal();
+</script>
+

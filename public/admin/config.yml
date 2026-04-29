@@ -518,6 +518,34 @@ collections:
           - { label: "Main content (markdown)", name: "bodyMarkdown", widget: "markdown" }
           - { label: "Beacon account slug", name: "beaconAccount", widget: "string", default: "dovecottagedayhospice" }
           - { label: "Beacon form ID", name: "beaconFormId", widget: "string", default: "fe636194" }
+      - name: "fundraise_for_us"
+        label: "Fundraise for Us page"
+        file: "src/data/fundraise-for-us.json"
+        format: "json"
+        fields:
+          - { label: "Page title (browser tab)", name: "pageTitle", widget: "string", default: "Fundraise for Us | Dove Cottage" }
+          - { label: "Hero image (featured)", name: "heroImage", widget: "image" }
+          - { label: "Hero image description (accessibility)", name: "heroImageAlt", widget: "string" }
+          - { label: "Back link — label", name: "parentNavLabel", widget: "string", default: "Support Us" }
+          - { label: "Back link — URL", name: "parentNavHref", widget: "string", default: "/support-us/" }
+          - { label: "Hero title (H1)", name: "heroH1", widget: "string", default: "Fundraise for Us" }
+          - { label: "Hero subtitle (short description)", name: "heroShortDescription", widget: "text" }
+          - { label: "Intro heading", name: "introHeading", widget: "string", default: "Do it for Dove" }
+          - { label: "Intro body", name: "introBody", widget: "text" }
+          - { label: "Sponsored challenges heading", name: "sponsoredHeading", widget: "string" }
+          - { label: "Sponsored challenges body", name: "sponsoredBody", widget: "text" }
+          - { label: "Sponsored challenges CTA label", name: "sponsoredCtaLabel", widget: "string", required: false }
+          - { label: "Sponsored challenges CTA URL", name: "sponsoredCtaHref", widget: "string", required: false }
+          - { label: "Organise your own event heading", name: "eventsHeading", widget: "string" }
+          - { label: "Organise your own event body", name: "eventsBody", widget: "text" }
+          - { label: "Birthday heading", name: "birthdayHeading", widget: "string" }
+          - { label: "Birthday body", name: "birthdayBody", widget: "text" }
+          - { label: "Fundraise your way heading", name: "fundraiseYourWayHeading", widget: "string" }
+          - { label: "Fundraise your way body", name: "fundraiseYourWayBody", widget: "text" }
+          - { label: "Contact CTA heading", name: "contactCtaHeading", widget: "string" }
+          - { label: "Contact CTA body", name: "contactCtaBody", widget: "text" }
+          - { label: "Contact CTA button label", name: "contactCtaButtonLabel", widget: "string", default: "Contact the fundraising team" }
+          - { label: "Contact CTA button URL", name: "contactCtaButtonHref", widget: "string", default: "/contact/" }
       - name: "meet_the_team"
         label: "Meet the Team"
         file: "src/data/meet-the-team.json"
