@@ -13,10 +13,22 @@ import fallbackHospiceServicesOverview from "../data/hospice-services-overview.j
 import fallbackCarerPatientWellbeing from "../data/carer-patient-wellbeing.json";
 import fallbackDementiaHomeSitting from "../data/dementia-home-sitting.json";
 import fallbackCounsellingSupportOverview from "../data/counselling-support-overview.json";
+import { sanityClient } from "../lib/sanity";
 import { fetchSingletonPageJson } from "../lib/sanitySingleton";
 
-const homepage =
-  (await fetchSingletonPageJson<typeof fallbackHomepage>("homepage-content")) ?? fallbackHomepage;
+const structuredHomepage = await sanityClient.fetch(`
+  *[_type == "homepagePage"][0]{
+    hero,
+    careServices,
+    videoFeature,
+    shopsSection,
+    reachSection,
+    supportSection
+  }
+`);
+const singletonHomepage =
+  (await fetchSingletonPageJson<typeof fallbackHomepage>("homepage-content")) ?? null;
+const homepage = structuredHomepage ?? singletonHomepage ?? fallbackHomepage;
 const hospiceServicesOverview =
   (await fetchSingletonPageJson<typeof fallbackHospiceServicesOverview>("hospice_services_overview")) ??
   fallbackHospiceServicesOverview;

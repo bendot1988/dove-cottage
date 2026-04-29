@@ -4,10 +4,19 @@ import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import fallbackData from "../../../data/counselling.json";
 import fallbackContact from "../../../data/contact.json";
+import { sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const p = (await fetchSingletonPageJson<typeof fallbackData>("counselling")) ?? fallbackData;
+const structuredData = await sanityClient.fetch(`
+  *[_type == "counsellingPage"][0]{
+    pageTitle, heroImage, heroImageAlt, parentNavLabel, parentNavHref, heroH1, heroShortDescription,
+    mainIntro1, mainIntro2, sectionImage1, emotionalHeading, emotionalIntro, emotionalList,
+    practicalHeading, practicalBody, sideFormLinkText, sideFormHint
+  }
+`);
+const singletonData = (await fetchSingletonPageJson<typeof fallbackData>("counselling")) ?? null;
+const p = structuredData ?? singletonData ?? fallbackData;
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
