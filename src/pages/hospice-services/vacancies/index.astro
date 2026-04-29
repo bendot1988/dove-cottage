@@ -1,0 +1,364 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import vacancies from "../../../data/vacancies.json";
+import { marked } from "marked";
+
+type VacancyRole = {
+  title: string;
+  location?: string;
+  workingHours: string;
+  roleOverviewMarkdown: string;
+  responsibleTo: string;
+  pdfLabel?: string;
+  pdfFile?: string;
+  pdfHref?: string;
+  ctaHref?: string; // legacy
+  contactMarkdown?: string;
+};
+
+const p = vacancies;
+
+const layoutTitle = p.pageTitle ?? "Vacancies | Dove Cottage";
+const paidRoles = (p.paidRoles ?? []) as VacancyRole[];
+const volunteerRoles = (p.volunteerRoles ?? []) as VacancyRole[];
+const resolveRolePdfHref = (role: Pick<VacancyRole, "pdfFile" | "pdfHref" | "ctaHref">) => {
+  const pdfFile = role.pdfFile?.trim();
+  if (pdfFile) return pdfFile;
+  const pdfHref = role.pdfHref?.trim();
+  if (pdfHref) return pdfHref;
+  const legacy = role.ctaHref?.trim();
+  if (legacy) return legacy;
+  return "";
+};
+
+const markedHtml = (md?: string) => {
+  if (!md?.trim()) return "";
+  return marked.parse(md.trim(), { async: false }) as string;
+};
+---
+
+<BaseLayout title={layoutTitle} description={p.metaDescription ?? p.heroShortDescription}>
+  <div class="svc-page vacancies-page">
+    <section class="hospice-svc-hero" aria-label={p.heroH1}>
+      <img
+        class="hospice-svc-hero-bg"
+        src={p.heroImage}
+        alt={p.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          {p.parentNavLabel}
+        </a>
+        <h1>{p.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
+      </div>
+    </section>
+
+    <section class="svc-main vacancies-main" aria-labelledby="vacancies-intro-title">
+      <div class="container vacancies-container">
+        <header class="vacancies-header">
+          <h2 id="vacancies-intro-title" class="svc-section-h2 vacancies-h2">
+            Our current vacancies
+          </h2>
+          <div class="vacancies-prose" set:html={markedHtml(p.introMarkdown)} />
+        </header>
+
+        <div class="vacancies-section vacancies-section--paid" aria-label="Paid roles">
+          <h3 class="vacancies-subtitle">{p.paidSectionTitle}</h3>
+          <div class="vacancies-role-grid">
+            {paidRoles.map((role) => (
+              <article class="svc-card vacancy-card">
+                <img
+                  class="vacancy-card__petal"
+                  src="/images/sunflower-brand-small.png"
+                  alt=""
+                  aria-hidden="true"
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <h3 class="svc-card__subtitle vacancy-card__title">
+                  {role.title}
+                  {role.location ? <span class="vacancy-card__location"> — {role.location}</span> : null}
+                </h3>
+
+                <p class="vacancy-card__meta">
+                  <strong>Working hours:</strong> {role.workingHours}
+                </p>
+
+                <div class="vacancy-card__overview" set:html={markedHtml(role.roleOverviewMarkdown)} />
+
+                <p class="vacancy-card__meta">
+                  <strong>Responsible to:</strong> {role.responsibleTo}
+                </p>
+
+                {resolveRolePdfHref(role) ? (
+                  <p class="vacancy-card__pdf">
+                    <a
+                      class="svc-inline-link"
+                      href={resolveRolePdfHref(role)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {role.pdfLabel ?? "Download more information about the role here"}
+                    </a>
+                  </p>
+                ) : (
+                  <p class="vacancy-card__pdf vacancy-card__pdf--missing">
+                    {role.pdfLabel ?? "Download more information about the role here"}
+                  </p>
+                )}
+
+                {role.contactMarkdown ? (
+                  <div class="vacancy-card__contact" set:html={markedHtml(role.contactMarkdown)} />
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="vacancies-section vacancies-section--volunteer" aria-label="Volunteer roles">
+          <h3 class="vacancies-subtitle">{p.volunteerSectionTitle}</h3>
+          <div class="vacancies-prose vacancies-prose--volunteer-intro" set:html={markedHtml(p.volunteerIntroMarkdown)} />
+
+          <div class="vacancies-role-grid">
+            {volunteerRoles.map((role) => (
+              <article class="svc-card vacancy-card">
+                <img
+                  class="vacancy-card__petal"
+                  src="/images/sunflower-brand-small.png"
+                  alt=""
+                  aria-hidden="true"
+                  width="44"
+                  height="44"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <h3 class="svc-card__subtitle vacancy-card__title">
+                  {role.title}
+                  {role.location ? <span class="vacancy-card__location"> — {role.location}</span> : null}
+                </h3>
+
+                <p class="vacancy-card__meta">
+                  <strong>Working hours:</strong> {role.workingHours}
+                </p>
+
+                <div class="vacancy-card__overview" set:html={markedHtml(role.roleOverviewMarkdown)} />
+
+                <p class="vacancy-card__meta">
+                  <strong>Responsible to:</strong> {role.responsibleTo}
+                </p>
+
+                {resolveRolePdfHref(role) ? (
+                  <p class="vacancy-card__pdf">
+                    <a
+                      class="svc-inline-link"
+                      href={resolveRolePdfHref(role)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {role.pdfLabel ?? "Download more information about the role here"}
+                    </a>
+                  </p>
+                ) : (
+                  <p class="vacancy-card__pdf vacancy-card__pdf--missing">
+                    {role.pdfLabel ?? "Download more information about the role here"}
+                  </p>
+                )}
+
+                {role.contactMarkdown ? (
+                  <div class="vacancy-card__contact" set:html={markedHtml(role.contactMarkdown)} />
+                ) : null}
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div class="vacancies-cta">
+          <a class="btn btn-primary btn-shine vacancies-cta-btn" href="#vacancies-form">
+            {p.vacancyCtaButtonText ?? "Apply for a role"}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 5v14"></path>
+              <path d="m19 12-7 7-7-7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <section
+          class="vacancies-form-target"
+          id="vacancies-form"
+          aria-labelledby={p.formHeading ? "vacancies-form-title" : undefined}
+        >
+          {p.formHeading ? <h2 id="vacancies-form-title" class="svc-section-h2">{p.formHeading}</h2> : null}
+          {p.formHintMarkdown ? (
+            <div class="vacancies-prose vacancies-form-hint" set:html={markedHtml(p.formHintMarkdown)} />
+          ) : null}
+          <div class="vacancies-form-placeholder" aria-hidden="true"></div>
+        </section>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .vacancies-container {
+    max-width: 980px;
+  }
+
+  .vacancies-h2 {
+    margin-bottom: 0.85rem;
+  }
+
+  .vacancies-prose :global(p) {
+    margin: 0 0 0.9rem;
+    color: #2f3f5a;
+    line-height: 1.65;
+  }
+
+  .vacancies-prose :global(strong) {
+    color: #0f2240;
+  }
+
+  .vacancies-main {
+    padding-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  .vacancies-subtitle {
+    margin: 2.2rem 0 1rem;
+    font-size: var(--type-section-title);
+    color: #0f2240;
+    line-height: 1.2;
+    font-weight: 800;
+  }
+
+  .vacancies-section--paid .vacancies-subtitle {
+    width: 100%;
+    margin: 2.2rem 0 1.2rem;
+    padding: 18px 18px;
+    background: var(--color-alice-blue);
+    border: 1px solid rgba(29, 80, 141, 0.12);
+    border-radius: 14px;
+  }
+
+  .vacancies-section--volunteer .vacancies-subtitle {
+    width: 100%;
+    margin: 2.2rem 0 1.2rem;
+    padding: 18px 18px;
+    background: var(--color-alice-blue);
+    border: 1px solid rgba(29, 80, 141, 0.12);
+    border-radius: 14px;
+  }
+
+  .vacancies-role-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px 20px;
+    margin-bottom: 2rem;
+  }
+
+  .vacancy-card {
+    margin-bottom: 0;
+    position: relative;
+  }
+
+  .vacancy-card__petal {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin: -2px 0 10px;
+  }
+
+  .vacancy-card__title {
+    margin-bottom: 10px;
+    font-size: clamp(1.13rem, 1.45vw, 1.28rem);
+    line-height: 1.25;
+  }
+
+  .vacancy-card__location {
+    font-weight: 800;
+    color: #2f3f5a;
+  }
+
+  .vacancy-card__meta {
+    margin: 0 0 10px;
+    color: #2f3f5a;
+    line-height: 1.55;
+  }
+
+  .vacancy-card__overview :global(p) {
+    margin: 0 0 12px;
+    color: #2f3f5a;
+    line-height: 1.65;
+  }
+
+  .vacancy-card__pdf {
+    margin: 0 0 10px;
+  }
+
+  .vacancy-card__pdf--missing {
+    opacity: 0.55;
+  }
+
+  .vacancy-card__contact :global(p) {
+    margin: 0;
+  }
+
+  .vacancies-cta {
+    display: flex;
+    justify-content: flex-start;
+    margin: 1.5rem 0 1rem;
+  }
+
+  .vacancies-cta-btn {
+    height: 46px;
+    padding: 0 20px;
+    text-transform: none;
+  }
+
+  .vacancies-cta-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  #vacancies-form {
+    scroll-margin-top: 5.5rem;
+    margin-top: 1rem;
+    padding: 18px;
+    background: #fff;
+    border: 1px solid rgba(29, 80, 141, 0.14);
+    border-radius: 14px;
+  }
+
+  .vacancies-form-placeholder {
+    min-height: 260px;
+  }
+
+  @media (max-width: 840px) {
+    .vacancies-role-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vacancies-cta-btn {
+      transition: none;
+    }
+  }
+</style>
+

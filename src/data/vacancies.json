@@ -1,0 +1,110 @@
+{
+  "pageTitle": "Vacancies | Dove Cottage",
+  "metaDescription": "Explore current paid and volunteer vacancies at Dove Cottage Day Hospice, including downloadable role information.",
+  "heroImage": "/images/uploads/volunteer/volunteer-featured-shop.png",
+  "heroImageAlt": "Dove Cottage charity shop frontage and signage",
+  "parentNavLabel": "Resource Hub",
+  "parentNavHref": "/hospice-services/resource-hub/",
+  "heroH1": "Vacancies",
+  "heroShortDescription": "Our current paid and volunteer roles — learn more and apply.",
+  "introMarkdown": "Our current vacancies are listed below (including both paid roles and volunteer roles).\n\nIf you would like to be considered for future roles that may become available, please do send us an email with a copy of your CV for us to keep on file to admin@dovecottage.org",
+  "paidSectionTitle": "Paid Roles",
+  "volunteerSectionTitle": "Volunteer Roles",
+  "volunteerIntroMarkdown": "In order to run Dove Cottage we rely heavily on a base of willing volunteers, who selflessly donate their time to help support in all aspects of the charity. If you would like to offer your time to help with a role that is not being actively promoted, please do get in touch!\n\nPlease contact us on 01949 860303 / admin@dovecottage.org for more information, or you can download a Volunteer Application Form and apply straight away!",
+  "vacancyCtaButtonText": "Apply for a role",
+  "formHeading": "Vacancy application form",
+  "formHintMarkdown": "When you’re ready, use the form below to send your details. (A branded form embed will be added here soon.)",
+  "paidRoles": [
+    {
+      "title": "Sales Assistant (Saturdays)",
+      "location": "Cotgrave shop",
+      "workingHours": "8 hours (Saturdays only)",
+      "roleOverviewMarkdown": "To assist the shop manager in managing all aspects of the operational running of the charity shop and promote the work of Dove Cottage Day Hospice.",
+      "responsibleTo": "Shop Manager & Assistant Shop Manager",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "For more information or to arrange an informal chat about the role please contact Tim at the hospice via email tim@dovecottage.org"
+    }
+  ],
+  "volunteerRoles": [
+    {
+      "title": "Hairdresser",
+      "location": "Volunteer role",
+      "workingHours": "Various days (Monday/Tuesday/Wednesday/Thursday) Please enquire to find out specific availability",
+      "roleOverviewMarkdown": "To provide a gentle and compassionate hairdressing service to our hospice guests and carers. We’re looking for an experienced, friendly and reliable hairdresser to offer simple haircuts, styling and blow‑dries in our on‑site salon space. Experience and relevant qualifications are essential. Please contact us for more details and an informal chat.",
+      "responsibleTo": "Clinical Lead",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "Please email admin@dovecottage.org to request more details"
+    },
+    {
+      "title": "Chaplaincy support",
+      "location": "Volunteer role",
+      "workingHours": "Various days (Monday/Wednesday/Thursday) Please enquire to find out specific availability",
+      "roleOverviewMarkdown": "To provide emotional support to hospice guests in a multi-faith setting.",
+      "responsibleTo": "Clinical Lead",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "Please email admin@dovecottage.org to request more details"
+    },
+    {
+      "title": "Pets as Therapy",
+      "location": "Volunteer role",
+      "workingHours": "Various days (Monday – Thursday) Ad-hoc visits, not set days.",
+      "roleOverviewMarkdown": "To visit the hospice with your animal companion, to enhance our wellbeing provision for our guests and create smiles and laughter. NB: official PAT registered animals are preferred, however we can accommodate other animals too – please contact us to discuss.",
+      "responsibleTo": "Clinical Lead",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "Please email admin@dovecottage.org to request more details"
+    },
+    {
+      "title": "Dementia Support",
+      "location": "Volunteer role",
+      "workingHours": "Various days (Monday – Thursday) Ad-hoc visits, not set days.",
+      "roleOverviewMarkdown": "To support our nursing team with visiting families out in the community to offer social support to individuals to enable their carer some respite. Previous experience is preferred but not essential as full training will be provided.",
+      "responsibleTo": "Clinical Lead",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "Please email admin@dovecottage.org to request more details"
+    },
+    {
+      "title": "Crafts & Wellbeing support",
+      "location": "Volunteer role",
+      "workingHours": "Various days (Monday – Thursday) Ad-hoc visits, not set days.",
+      "roleOverviewMarkdown": "To coordinate and lead various activities to enhance our wellbeing provision for our guests and carers. Experience and interests in a wide range of crafts is preferable, but specific interests are also welcomed!",
+      "responsibleTo": "Clinical Lead",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "Please email admin@dovecottage.org to request more details"
+    },
+    {
+      "title": "Shop Assistant",
+      "location": "Cotgrave shop (Volunteer role)",
+      "workingHours": "Various days (Monday – Saturday) Please enquire to find out specific availability",
+      "roleOverviewMarkdown": "To support the shop managers at our Cotgrave charity shop, sorting donations, steaming clothes, restocking, pricing items for sale, using the till and handling customer enquiries.",
+      "responsibleTo": "Shop Manager & Assistant Shop Manager",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "Please email admin@dovecottage.org to request more details"
+    },
+    {
+      "title": "Fundraising & Events support",
+      "location": "Volunteer role",
+      "workingHours": "Various (usually weekends)",
+      "roleOverviewMarkdown": "To assist the fundraising team at various community events throughout the year. Supporting with set-up/breakdown of stands where required and promoting the hospice services to the wider community.",
+      "responsibleTo": "Fundraising & Events Lead",
+      "pdfLabel": "Download more information about the role here",
+      "pdfFile": "",
+      "pdfHref": "",
+      "contactMarkdown": "Please email fundraising@dovecottage.org to request more details"
+    }
+  ]
+}
+
