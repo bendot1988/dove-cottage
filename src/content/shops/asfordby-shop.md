@@ -8,23 +8,16 @@ shop_info: >
   of car parking available nearby.
 
 
-  The bright and spacious building follows the winning formula of our other
-  shops, selling high quality used clothes and collectables, with helpful
-  service and a friendly smile.
+  The bright and spacious building follows the winning formula of our other shops, selling high quality used clothes and collectables, with helpful service and a friendly smile.
 
 
-  Browse our rails of pre-loved clothes, find the vase that will look lovely on
-  your bedroom dresser or pick up a novel for those cosy nights at home!
+  Browse our rails of pre-loved clothes, find the vase that will look lovely on your bedroom dresser or pick up a novel for those cosy nights at home!
 
 
-  Every purchase helps support the vital work of our hospice in Stathern — shop
-  sustainably and make a real difference to local families living with
-  life-limiting conditions.
+  Every purchase helps support the vital work of our hospice in Stathern — shop sustainably and make a real difference to local families living with life-limiting conditions.
 
 
-  Our charity shops are the heartbeat of our fundraising, and our wonderful team
-  of volunteers are always happy to see you — whether you're browsing for a
-  bargain, dropping off a donation, or simply popping in to say hello.
+  Our charity shops are the heartbeat of our fundraising, and our wonderful team of volunteers are always happy to see you — whether you're browsing for a bargain, dropping off a donation, or simply popping in to say hello.
 callout: >
   **Your purchases help local families** — every item you buy supports
   palliative care and support at Dove Cottage Day Hospice.
@@ -43,11 +36,11 @@ gallery:
   - /images/uploads/asfordby-shop-interior-4.png
 button_colour: "#2751a0"
 phone: 01664 668934
-address: "9 Bradgate Lane, Asfordby, Melton Mowbray, LE14 3YD"
+address: 9 Bradgate Lane, Asfordby, Melton Mowbray, LE14 3YD
 donations_blurb: >
   We gratefully accept pre-loved clothes, books, toys, ornaments and more.
   Please drop items in during opening hours.
-facebook_link: ""
+facebook_link: https://www.facebook.com/profile.php?id=61586165712001
 draft: false
 ---
 

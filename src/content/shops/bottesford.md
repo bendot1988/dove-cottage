@@ -28,7 +28,7 @@ address: Market Street, Bottesford, NG13 0BW
 donations_blurb: >
   We welcome donations of good-quality clothes, books, toys, bric-a-brac, and
   small household items. Please drop items in during opening hours.
-facebook_link: https://www.facebook.com/
+facebook_link: https://www.facebook.com/profile.php?id=61586269957893
 draft: false
 ---
 
