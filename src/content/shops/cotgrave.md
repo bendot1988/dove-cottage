@@ -8,18 +8,13 @@ shop_info: >
   pub.
 
 
-  Inside, you'll find a well-stocked selection of pre‑loved treasures and there
-  is plenty of car-parking available (in the pub car park next door).
+  Inside, you'll find a well-stocked selection of pre‑loved treasures and there is plenty of car-parking available (in the pub car park next door).
 
 
-  Every purchase helps support the vital work of our hospice in Stathern — shop
-  sustainably and make a real difference to local families living with
-  life-limiting conditions.
+  Every purchase helps support the vital work of our hospice in Stathern — shop sustainably and make a real difference to local families living with life-limiting conditions.
 
 
-  Our charity shops are the heartbeat of our fundraising, and our wonderful team
-  of volunteers are always happy to see you — whether you're browsing for a
-  bargain, dropping off a donation, or simply popping in to say hello.
+  Our charity shops are the heartbeat of our fundraising, and our wonderful team of volunteers are always happy to see you — whether you're browsing for a bargain, dropping off a donation, or simply popping in to say hello.
 callout: >
   **Your purchases help local families** — every item you buy supports
   palliative care and support at Dove Cottage Day Hospice.
@@ -35,12 +30,12 @@ gallery:
   - /images/uploads/cotgrave-shop-interior-3.png
   - /images/uploads/cotgrave-shop-interior-4.png
 button_colour: "#2751a0"
-phone: "0115 837 2628"
-address: "The Old Telephone Exchange, Main Street, Cotgrave, NG12 3HQ"
+phone: 0115 837 2628
+address: The Old Telephone Exchange, Main Street, Cotgrave, NG12 3HQ
 donations_blurb: >
   We welcome donations of good-quality clothes, books, toys, bric-a-brac, and
   small household items. Please drop items in during opening hours.
-facebook_link: ""
+facebook_link: https://www.facebook.com/profile.php?id=61586656283366
 draft: false
 ---
 
