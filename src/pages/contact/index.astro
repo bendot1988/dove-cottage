@@ -3,8 +3,9 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import contact from "../../data/contact.json";
 import { marked } from "marked";
 import { toTitleCase } from "../../lib/titleCase";
+import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 
-const c = contact;
+const c = (await fetchSingletonPageJson<typeof contact>("contact")) ?? contact;
 
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 const charityCommissionHref =

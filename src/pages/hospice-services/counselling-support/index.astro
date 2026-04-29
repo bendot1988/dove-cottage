@@ -1,10 +1,15 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import data from "../../../data/counselling-support-overview.json";
+import counsellingSupportOverview from "../../../data/counselling-support-overview.json";
 import counsellingData from "../../../data/counselling.json";
 import bereavementSupportGroupData from "../../../data/bereavement-support-group.json";
 import supportGroupsData from "../../../data/support-groups.json";
 import resourceHubData from "../../../data/resource-hub.json";
+import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
+
+const data =
+  (await fetchSingletonPageJson<typeof counsellingSupportOverview>("counselling_support_overview")) ??
+  counsellingSupportOverview;
 
 type OverviewCard = {
   title: string;

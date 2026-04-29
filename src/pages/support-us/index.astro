@@ -1,6 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import data from "../../data/support-us-overview.json";
+import supportUsOverview from "../../data/support-us-overview.json";
+import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
+
+const data = (await fetchSingletonPageJson<typeof supportUsOverview>("support_us_overview")) ?? supportUsOverview;
 ---
 
 <BaseLayout title={data.pageTitle} description={data.heroShortDescription}>

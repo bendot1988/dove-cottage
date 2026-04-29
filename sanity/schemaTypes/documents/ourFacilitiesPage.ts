@@ -6,7 +6,25 @@ export default defineType({
   type: "document",
   fields: [
     defineField({ name: "pageTitle", title: "Page Title", type: "string", initialValue: "Our Facilities | Dove Cottage" }),
-    defineField({ name: "heroImage", title: "Hero Image", type: "string" }),
+    defineField({
+      name: "heroImage",
+      title: "Hero Image",
+      type: "object",
+      fields: [
+        defineField({
+          name: "image",
+          title: "Uploaded image",
+          type: "image",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "legacyUrl",
+          title: "Legacy URL/Path",
+          type: "string",
+          description: "Old migration value. Prefer uploading a proper image instead.",
+        }),
+      ],
+    }),
     defineField({ name: "heroImageAlt", title: "Hero Image Alt", type: "string" }),
     defineField({ name: "parentNavLabel", title: "Back Link Label", type: "string", initialValue: "About Us" }),
     defineField({ name: "parentNavHref", title: "Back Link URL", type: "string", initialValue: "/explore/" }),
@@ -40,7 +58,18 @@ export default defineType({
                   title: "Image",
                   type: "object",
                   fields: [
-                    defineField({ name: "src", title: "Image URL/Path", type: "string" }),
+                    defineField({
+                      name: "image",
+                      title: "Uploaded image",
+                      type: "image",
+                      options: { hotspot: true },
+                    }),
+                    defineField({
+                      name: "legacyUrl",
+                      title: "Legacy URL/Path",
+                      type: "string",
+                      description: "Old migration value. Prefer uploading a proper image instead.",
+                    }),
                     defineField({ name: "alt", title: "Alt Text", type: "string" }),
                   ],
                 }),
@@ -56,7 +85,7 @@ export default defineType({
     select: {
       title: "heroH1",
       subtitle: "pageTitle",
-      media: "heroImage",
+      media: "heroImage.image",
     },
   },
 });

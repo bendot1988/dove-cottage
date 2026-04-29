@@ -17,9 +17,68 @@ export default defineType({
     defineField({ name: "hero_tagline", title: "Hero Tagline", type: "string", initialValue: "Hospice Shop" }),
     defineField({ name: "shop_info", title: "Shop Info", type: "array", of: [{ type: "block" }] }),
     defineField({ name: "callout", title: "Callout Box", type: "array", of: [{ type: "block" }] }),
-    defineField({ name: "shop_main_image", title: "Shop Main Image", type: "image", options: { hotspot: true } }),
+    defineField({
+      name: "shop_main_image",
+      title: "Shop Main Image",
+      type: "object",
+      fields: [
+        defineField({
+          name: "image",
+          title: "Uploaded image",
+          type: "image",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "legacyUrl",
+          title: "Legacy URL/Path",
+          type: "string",
+          description: "Old migration value. Prefer uploading a proper image instead.",
+        }),
+      ],
+      preview: {
+        select: { media: "image", legacyUrl: "legacyUrl" },
+        prepare({ media, legacyUrl }) {
+          return {
+            title: "Shop main image",
+            subtitle: legacyUrl ? `Legacy: ${legacyUrl}` : "Uploaded image",
+            media,
+          };
+        },
+      },
+      description: "Upload the main hero/shop image. Legacy URL values are still supported.",
+    }),
     defineField({ name: "opening_hours", title: "Opening Hours", type: "array", of: [{ type: "block" }] }),
-    defineField({ name: "gallery", title: "Gallery", type: "array", of: [{ type: "image" }] }),
+    defineField({
+      name: "gallery",
+      title: "Gallery",
+      type: "array",
+      of: [
+        { type: "image", options: { hotspot: true } },
+        {
+          type: "object",
+          name: "legacyGalleryUrl",
+          title: "Legacy image URL",
+          fields: [
+            defineField({
+              name: "url",
+              title: "URL",
+              type: "string",
+            }),
+          ],
+          preview: {
+            select: { url: "url" },
+            prepare({ url }) {
+              return {
+                title: "Legacy image URL",
+                subtitle: url || "No URL set",
+              };
+            },
+          },
+          description: "Old migration value. Prefer uploading a proper image instead.",
+        },
+      ],
+      description: "Upload one or more gallery images for this shop. Legacy URL entries are still supported.",
+    }),
     defineField({ name: "button_colour", title: "Button Colour", type: "string", initialValue: "#2d6fb3" }),
     defineField({ name: "phone", title: "Phone", type: "string" }),
     defineField({ name: "address", title: "Address", type: "text" }),

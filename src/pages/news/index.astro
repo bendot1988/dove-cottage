@@ -1,14 +1,33 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sanityClient } from "../../lib/sanity";
 
-const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime()
-);
+const posts = await sanityClient.fetch(`
+  *[_type == "newsPost" && !coalesce(draft, false)] | order(publishDate desc) {
+    title,
+    category,
+    excerpt,
+    "slug": slug.current,
+    featuredImage,
+    eventDate,
+    eventEndDate,
+    eventLocation,
+    publishDate
+  }
+`);
 
-const events = (await getCollection("events", ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.eventDate.getTime() - b.data.eventDate.getTime()
-);
+const events = await sanityClient.fetch(`
+  *[_type == "eventPost" && !coalesce(draft, false)] | order(eventDate asc) {
+    title,
+    category,
+    excerpt,
+    "slug": slug.current,
+    featuredImage,
+    eventDate,
+    eventEndDate,
+    location
+  }
+`);
 
 const now = new Date();
 const isPastEvent = (startDate: Date, endDate?: Date) => {
@@ -35,49 +54,52 @@ const isEventsCategory = (category: string) => category.trim().toLowerCase() ===
 
 const feedItems = [
   ...posts.map((post) => {
-    const evStart = post.data.eventDate;
-    const evEnd = post.data.eventEndDate;
+    const evStart = post.eventDate ? new Date(post.eventDate) : null;
+    const evEnd = post.eventEndDate ? new Date(post.eventEndDate) : undefined;
     const hasEventSchedule = evStart != null;
     const past = hasEventSchedule ? isPastEvent(evStart, evEnd) : false;
-    const sortDate = hasEventSchedule ? evStart : post.data.publishDate;
+    const publishDate = post.publishDate ? new Date(post.publishDate) : new Date();
+    const sortDate = hasEventSchedule ? evStart : publishDate;
     const dateLabel = hasEventSchedule
       ? formatEventDate(evStart, evEnd)
-      : post.data.publishDate.toLocaleDateString("en-GB", {
+      : publishDate.toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",
           year: "numeric"
         });
     return {
       type: "news" as const,
-      feedFilter: (isEventsCategory(post.data.category) ? "event" : "news") as "news" | "event",
+      feedFilter: (isEventsCategory(post.category) ? "event" : "news") as "news" | "event",
       key: `news-${post.slug}`,
-      title: post.data.title,
-      excerpt: post.data.excerpt,
+      title: post.title,
+      excerpt: post.excerpt,
       href: `/news/${post.slug}/`,
-      image: post.data.featuredImage ?? post.data.featured_image,
-      category: post.data.category,
-      eventDate: post.data.eventDate,
+      image: post.featuredImage,
+      category: post.category,
+      eventDate: post.eventDate,
       date: sortDate,
       dateLabel,
-      location: post.data.eventLocation?.trim() ?? "",
+      location: post.eventLocation?.trim() ?? "",
       past
     };
   }),
   ...events.map((event) => {
-    const past = isPastEvent(event.data.eventDate, event.data.eventEndDate);
+    const eventStart = event.eventDate ? new Date(event.eventDate) : new Date();
+    const eventEnd = event.eventEndDate ? new Date(event.eventEndDate) : undefined;
+    const past = isPastEvent(eventStart, eventEnd);
     return {
       type: "event" as const,
       feedFilter: "event" as const,
       key: `event-${event.slug}`,
-      title: event.data.title,
-      excerpt: event.data.excerpt,
+      title: event.title,
+      excerpt: event.excerpt,
       href: `/events/${event.slug}/`,
-      image: event.data.featuredImage ?? event.data.featured_image,
-      category: event.data.category,
-      eventDate: event.data.eventDate,
-      date: event.data.eventDate,
-      dateLabel: formatEventDate(event.data.eventDate, event.data.eventEndDate),
-      location: event.data.location,
+      image: event.featuredImage,
+      category: event.category,
+      eventDate: event.eventDate,
+      date: eventStart,
+      dateLabel: formatEventDate(eventStart, eventEnd),
+      location: event.location,
       past
     };
   })

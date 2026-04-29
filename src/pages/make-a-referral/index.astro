@@ -1,8 +1,10 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import data from "../../data/make-a-referral.json";
+import fallbackData from "../../data/make-a-referral.json";
+import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 import { marked } from "marked";
 
+const data = (await fetchSingletonPageJson<typeof fallbackData>("make_a_referral")) ?? fallbackData;
 const introHtml = marked.parse(data.introMarkdown.trim(), { async: false }) as string;
 const bodyHtml = marked.parse(data.bodyMarkdown.trim(), { async: false }) as string;
 ---

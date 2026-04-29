@@ -18,7 +18,9 @@ const doc = {
   _id: "ourFacilitiesPage.main",
   _type: "ourFacilitiesPage",
   pageTitle: "Our Facilities | Dove Cottage",
-  heroImage: facilities.heroImage,
+  heroImage: {
+    legacyUrl: facilities.heroImage,
+  },
   heroImageAlt: facilities.heroImageAlt,
   parentNavLabel: "About Us",
   parentNavHref: "/explore/",
@@ -31,7 +33,7 @@ const doc = {
     heading: section.heading,
     images: (section.images || []).map((image) => ({
       _type: "imageItem",
-      src: image.src,
+      legacyUrl: image.src,
       alt: image.alt,
     })),
   })),

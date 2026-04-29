@@ -1,12 +1,51 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import facilities from "../../../data/hire-our-facilities.json";
+import { sanityClient, urlForSanityImage } from "../../../lib/sanity";
 
-const pageTitle = "Our Facilities | Dove Cottage";
-const heroH1 = "Our Facilities";
-const heroDescription =
+const sanityFacilities = await sanityClient.fetch(`
+  *[_type == "ourFacilitiesPage"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    introBlocks,
+    gallerySections
+  }
+`);
+
+const resolveImageUrl = (value?: { image?: unknown; legacyUrl?: string } | null) => {
+  if (value?.image) return urlForSanityImage(value.image);
+  return value?.legacyUrl || "";
+};
+
+const pageTitle = sanityFacilities?.pageTitle || "Our Facilities | Dove Cottage";
+const heroH1 = sanityFacilities?.heroH1 || "Our Facilities";
+const heroDescription = sanityFacilities?.heroShortDescription ||
   "Explore the welcoming spaces at Dove Cottage, from our salon and therapy rooms to meeting spaces, gardens, and accessible facilities.";
-const introBlocks = [facilities.mainIntro1, facilities.mainIntro2].filter((text) => text?.trim().length);
+const heroImage = resolveImageUrl(sanityFacilities?.heroImage) || facilities.heroImage;
+const heroImageAlt = sanityFacilities?.heroImageAlt || facilities.heroImageAlt;
+const parentNavLabel = sanityFacilities?.parentNavLabel || "About Us";
+const parentNavHref = sanityFacilities?.parentNavHref || "/explore/";
+const introBlocks =
+  Array.isArray(sanityFacilities?.introBlocks) && sanityFacilities.introBlocks.length > 0
+    ? sanityFacilities.introBlocks.filter((text) => text?.trim().length)
+    : [facilities.mainIntro1, facilities.mainIntro2].filter((text) => text?.trim().length);
+const gallerySections =
+  Array.isArray(sanityFacilities?.gallerySections) && sanityFacilities.gallerySections.length > 0
+    ? sanityFacilities.gallerySections.map((section) => ({
+        ...section,
+        images: Array.isArray(section.images)
+          ? section.images.map((image) => ({
+              ...image,
+              src: resolveImageUrl(image),
+            }))
+          : [],
+      }))
+    : facilities.gallerySections;
 ---
 
 <BaseLayout title={pageTitle} description={heroDescription}>
@@ -14,8 +53,8 @@ const introBlocks = [facilities.mainIntro1, facilities.mainIntro2].filter((text)
     <section class="hospice-svc-hero" aria-label={heroH1}>
       <img
         class="hospice-svc-hero-bg"
-        src={facilities.heroImage}
-        alt={facilities.heroImageAlt}
+        src={heroImage}
+        alt={heroImageAlt}
         width="1920"
         height="720"
         loading="eager"
@@ -23,9 +62,9 @@ const introBlocks = [facilities.mainIntro1, facilities.mainIntro2].filter((text)
       />
       <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
       <div class="container hospice-svc-hero-inner">
-        <a class="interior-hero-eyebrow" href="/explore/">
+        <a class="interior-hero-eyebrow" href={parentNavHref}>
           <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
-          About Us
+          {parentNavLabel}
         </a>
         <h1>{heroH1}</h1>
         <p class="hospice-svc-hero-dek">{heroDescription}</p>
@@ -44,7 +83,7 @@ const introBlocks = [facilities.mainIntro1, facilities.mainIntro2].filter((text)
         {introBlocks.map((text) => <p class="svc-lede">{text}</p>)}
 
         <div class="facility-sections">
-          {facilities.gallerySections.map((section) => (
+          {gallerySections.map((section) => (
             <article class="svc-card facility-section" aria-label={section.heading}>
               <h2 class="svc-card__title">{section.heading}</h2>
               <div class="facility-gallery-grid">

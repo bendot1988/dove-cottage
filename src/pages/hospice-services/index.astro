@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import data from "../../data/hospice-services-overview.json";
+import hospiceServicesOverview from "../../data/hospice-services-overview.json";
 import nursingCareData from "../../data/nursing-care-medical-advice.json";
 import wellbeingActivitiesData from "../../data/wellbeing-activities.json";
 import counsellingData from "../../data/counselling.json";
@@ -12,6 +12,7 @@ import transportData from "../../data/transport.json";
 import carerPatientWellbeingData from "../../data/carer-patient-wellbeing.json";
 import counsellingSupportData from "../../data/counselling-support-overview.json";
 import dementiaHomeSittingData from "../../data/dementia-home-sitting.json";
+import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 
 type OverviewCard = {
   title: string;
@@ -23,7 +24,9 @@ type OverviewCard = {
   href: string;
 };
 
-const overview = data;
+const overview =
+  (await fetchSingletonPageJson<typeof hospiceServicesOverview>("hospice_services_overview")) ??
+  hospiceServicesOverview;
 
 const featuredImageByHref = new Map<string, string>([
   ["/hospice-services/nursing-care-medical-advice/", nursingCareData.heroImage],

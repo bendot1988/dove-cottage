@@ -1,27 +1,52 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import EventKeyInfo from "../../components/EventKeyInfo.astro";
+import { sanityClient } from "../../lib/sanity";
+import { portableTextToHtml } from "../../lib/portableText";
 
 export async function getStaticPaths() {
-  const events = await getCollection("events", ({ data }) => !data.draft);
+  const events = await sanityClient.fetch(`
+    *[_type == "eventPost" && !coalesce(draft, false) && defined(slug.current)]{
+      "slug": slug.current
+    }
+  `);
   return events.map((event) => ({
     params: { slug: event.slug },
     props: { event }
   }));
 }
 
-const { event } = Astro.props as { event: CollectionEntry<"events"> };
-const { Content } = await event.render();
+const { event } = Astro.props as { event: { slug: string } };
+const entry = await sanityClient.fetch(
+  `
+    *[_type == "eventPost" && slug.current == $slug][0]{
+      title,
+      excerpt,
+      category,
+      eventDate,
+      eventEndDate,
+      location,
+      featuredImage,
+      bookingUrl,
+      body
+    }
+  `,
+  { slug: event.slug }
+);
 
-const eventStart = new Date(event.data.eventDate);
-const eventEnd = event.data.eventEndDate ? new Date(event.data.eventEndDate) : undefined;
+if (!entry) {
+  throw new Error(`Event not found for slug: ${event.slug}`);
+}
+
+const eventStart = entry.eventDate ? new Date(entry.eventDate) : new Date();
+const eventEnd = entry.eventEndDate ? new Date(entry.eventEndDate) : undefined;
 const comparisonDate = eventEnd ?? eventStart;
 const now = new Date();
 const isPastEvent = comparisonDate.getTime() < now.getTime();
+const contentHtml = portableTextToHtml(entry.body);
 ---
 
-<BaseLayout title={`${event.data.title} | Dove Cottage`} description={event.data.excerpt}>
+<BaseLayout title={`${entry.title} | Dove Cottage`} description={entry.excerpt}>
   <article class="event-post">
     <div class="motion-scope">
       <section class="event-article-inner" aria-label="Event">
@@ -30,31 +55,31 @@ const isPastEvent = comparisonDate.getTime() < now.getTime();
             <a href="/news/">← Back to News &amp; Events</a>
           </p>
           <p class="meta">
-            <span class="category">{event.data.category}</span>
+            <span class="category">{entry.category}</span>
           </p>
           {isPastEvent && <p class="past-flag">Past event</p>}
-          <h1 class:list={{ "is-past": isPastEvent }}>{event.data.title}</h1>
+          <h1 class:list={{ "is-past": isPastEvent }}>{entry.title}</h1>
 
           <EventKeyInfo
             eventStart={eventStart}
             eventEnd={eventEnd}
-            location={event.data.location}
+            location={entry.location}
           />
 
-          {(event.data.featuredImage ?? event.data.featured_image) && (
+          {entry.featuredImage && (
             <img
               class="featured"
-              src={event.data.featuredImage ?? event.data.featured_image}
+              src={entry.featuredImage}
               alt=""
               loading="eager"
             />
           )}
 
           <div class="content">
-            <Content />
-            {event.data.bookingUrl && !isPastEvent && (
+            <div set:html={contentHtml} />
+            {entry.bookingUrl && !isPastEvent && (
               <p class="event-booking">
-                <a href={event.data.bookingUrl} target="_blank" rel="noopener noreferrer">
+                <a href={entry.bookingUrl} target="_blank" rel="noopener noreferrer">
                   Book event tickets
                 </a>
               </p>

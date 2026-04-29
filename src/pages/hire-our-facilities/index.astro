@@ -5,11 +5,13 @@ import SubpageReviewCarousel from "../../components/SubpageReviewCarousel.astro"
 import p from "../../data/hire-our-facilities.json";
 import contact from "../../data/contact.json";
 import { toTitleCase } from "../../lib/titleCase";
+import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 
-const c = contact;
+const pageData = (await fetchSingletonPageJson<typeof p>("hire_our_facilities")) ?? p;
+const c = (await fetchSingletonPageJson<typeof contact>("contact")) ?? contact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
-const layoutTitle = p.pageTitle
+const layoutTitle = pageData.pageTitle
   .split(/\s*\|\s*/)
   .map((part) => toTitleCase(part.trim()))
   .join(" | ");
@@ -18,35 +20,35 @@ const asideTitle = toTitleCase("Get in touch");
 const phoneLabel = toTitleCase("Phone");
 const formLabel = toTitleCase("Enquiry");
 const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
-const introBlocks = [p.mainIntro1, p.mainIntro2, p.mainIntro3, p.mainIntro4].filter((block) => block?.trim().length);
-const sectionGalleries = new Map((p.gallerySections ?? []).map((gallery) => [gallery.heading, gallery.images]));
+const introBlocks = [pageData.mainIntro1, pageData.mainIntro2, pageData.mainIntro3, pageData.mainIntro4].filter((block) => block?.trim().length);
+const sectionGalleries = new Map((pageData.gallerySections ?? []).map((gallery) => [gallery.heading, gallery.images]));
 ---
 
-<BaseLayout title={layoutTitle} description={p.heroShortDescription}>
+<BaseLayout title={layoutTitle} description={pageData.heroShortDescription}>
   <div class="svc-page">
-    <section class="hospice-svc-hero" aria-label={p.heroH1}>
-      <img class="hospice-svc-hero-bg" src={p.heroImage} alt={p.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
+    <section class="hospice-svc-hero" aria-label={pageData.heroH1}>
+      <img class="hospice-svc-hero-bg" src={pageData.heroImage} alt={pageData.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
       <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
       <div class="container hospice-svc-hero-inner">
-        <a class="interior-hero-eyebrow" href={p.parentNavHref}>
+        <a class="interior-hero-eyebrow" href={pageData.parentNavHref}>
           <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
-          {p.parentNavLabel}
+          {pageData.parentNavLabel}
         </a>
-        <h1>{p.heroH1}</h1>
-        <p class="hospice-svc-hero-dek">{p.heroShortDescription}</p>
+        <h1>{pageData.heroH1}</h1>
+        <p class="hospice-svc-hero-dek">{pageData.heroShortDescription}</p>
       </div>
     </section>
 
     <div class="motion-scope">
       <SubpageReviewCarousel />
-      <section class="svc-main" aria-label={p.heroH1}>
+      <section class="svc-main" aria-label={pageData.heroH1}>
         <img src="/images/sunflower-brand-small.png" alt="" class="svc-sunflower" loading="lazy" aria-hidden="true" />
         <div class="container svc-layout">
           <div class="svc-primary">
             {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
 
             {
-              p.sections.map((section) => (
+              pageData.sections.map((section) => (
                 <div class="svc-card" role="group" aria-label={section.heading}>
                   <h2 class="svc-card__title">{section.heading}</h2>
                   {section.subheading && <p class="svc-body svc-body--strong">{section.subheading}</p>}
@@ -74,13 +76,13 @@ const sectionGalleries = new Map((p.gallerySections ?? []).map((gallery) => [gal
               ))
             }
 
-            <div class="svc-card" role="group" aria-label={p.impactHeading}>
-              <h2 class="svc-card__title">{p.impactHeading}</h2>
-              <p class="svc-body">{p.impactBody}</p>
+            <div class="svc-card" role="group" aria-label={pageData.impactHeading}>
+              <h2 class="svc-card__title">{pageData.impactHeading}</h2>
+              <p class="svc-body">{pageData.impactBody}</p>
               {
-                sectionGalleries.get(p.impactHeading)?.length > 0 && (
-                  <div class="facility-gallery-grid" aria-label={`${p.impactHeading} photos`}>
-                    {sectionGalleries.get(p.impactHeading)?.map((image) => (
+                sectionGalleries.get(pageData.impactHeading)?.length > 0 && (
+                  <div class="facility-gallery-grid" aria-label={`${pageData.impactHeading} photos`}>
+                    {sectionGalleries.get(pageData.impactHeading)?.map((image) => (
                       <figure class="facility-gallery-item">
                         <img src={image.src} alt={image.alt} loading="lazy" decoding="async" />
                       </figure>
@@ -91,8 +93,8 @@ const sectionGalleries = new Map((p.gallerySections ?? []).map((gallery) => [gal
             </div>
 
             <div class="svc-card" id="facility-hire-enquiry-form">
-              <h2 class="svc-card__title">{p.formHeading}</h2>
-              <p class="svc-body">{p.formIntro}</p>
+              <h2 class="svc-card__title">{pageData.formHeading}</h2>
+              <p class="svc-body">{pageData.formIntro}</p>
               <div class="form-embed-card">
                 <div class="beacon-form" data-account="dovecottagedayhospice" data-form="5cada45e"></div>
               </div>
@@ -128,23 +130,23 @@ const sectionGalleries = new Map((p.gallerySections ?? []).map((gallery) => [gal
                       href="#facility-hire-enquiry-form"
                       aria-label="Scroll to the facility hire enquiry form on this page"
                     >
-                      <span>{p.sideFormLinkText}</span>
+                      <span>{pageData.sideFormLinkText}</span>
                       <svg class="side-form-scroll-btn__arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M12 5v14" />
                         <path d="m19 12-7 7-7-7" />
                       </svg>
                     </a>
-                    <p class="svc-side-hint">{p.sideFormHint}</p>
+                    <p class="svc-side-hint">{pageData.sideFormHint}</p>
                   </div>
                 </li>
               </ul>
               <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
             </div>
             <ArchiveSidebarPeek
-              staticCards={p.sidebarPeekCards}
-              staticTitle={p.sidebarPeekTitle}
-              staticViewAllHref={p.sidebarPeekViewAllHref}
-              staticViewAllLabel={p.sidebarPeekViewAllLabel}
+              staticCards={pageData.sidebarPeekCards}
+              staticTitle={pageData.sidebarPeekTitle}
+              staticViewAllHref={pageData.sidebarPeekViewAllHref}
+              staticViewAllLabel={pageData.sidebarPeekViewAllLabel}
             />
           </aside>
         </div>

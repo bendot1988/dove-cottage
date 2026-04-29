@@ -4,9 +4,10 @@ import ArchiveSidebarPeek from "../../components/ArchiveSidebarPeek.astro";
 import donate from "../../data/donate.json";
 import contact from "../../data/contact.json";
 import { toTitleCase } from "../../lib/titleCase";
+import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 
-const d = donate;
-const c = contact;
+const d = (await fetchSingletonPageJson<typeof donate>("donate")) ?? donate;
+const c = (await fetchSingletonPageJson<typeof contact>("contact")) ?? contact;
 
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 const charityCommissionHref =

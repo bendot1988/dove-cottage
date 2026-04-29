@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import vacancies from "../../../data/vacancies.json";
+import fallbackVacancies from "../../../data/vacancies.json";
+import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { marked } from "marked";
 
 type VacancyRole = {
@@ -17,7 +18,8 @@ type VacancyRole = {
   contactMarkdown?: string;
 };
 
-const p = vacancies;
+const p =
+  (await fetchSingletonPageJson<typeof fallbackVacancies>("vacancies_page")) ?? fallbackVacancies;
 const fallbackRoleImage = "/images/uploads/volunteer/volunteer-featured-shop.png";
 
 const layoutTitle = p.pageTitle ?? "Vacancies | Dove Cottage";

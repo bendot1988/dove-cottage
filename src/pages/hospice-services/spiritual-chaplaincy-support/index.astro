@@ -2,11 +2,15 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
-import p from "../../../data/spiritual-chaplaincy-support.json";
-import contact from "../../../data/contact.json";
+import fallbackData from "../../../data/spiritual-chaplaincy-support.json";
+import fallbackContact from "../../../data/contact.json";
+import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const c = contact;
+const p =
+  (await fetchSingletonPageJson<typeof fallbackData>("spiritual_chaplaincy_support")) ??
+  fallbackData;
+const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
 const layoutTitle = p.pageTitle

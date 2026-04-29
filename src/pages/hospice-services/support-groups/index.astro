@@ -1,9 +1,10 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
-import p from "../../../data/support-groups.json";
-import mensShedData from "../../../data/mens-shed.json";
-import bereavementSupportGroupData from "../../../data/bereavement-support-group.json";
-import carerSupportData from "../../../data/carer-support.json";
+import fallbackData from "../../../data/support-groups.json";
+import fallbackMensShedData from "../../../data/mens-shed.json";
+import fallbackBereavementSupportGroupData from "../../../data/bereavement-support-group.json";
+import fallbackCarerSupportData from "../../../data/carer-support.json";
+import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 type SupportCard = {
   title: string;
   excerpt: string;
@@ -13,6 +14,16 @@ type SupportCard = {
   ctaLabel: string;
   href: string;
 };
+
+const p = (await fetchSingletonPageJson<typeof fallbackData>("support_groups")) ?? fallbackData;
+const mensShedData =
+  (await fetchSingletonPageJson<typeof fallbackMensShedData>("mens_shed")) ?? fallbackMensShedData;
+const bereavementSupportGroupData =
+  (await fetchSingletonPageJson<typeof fallbackBereavementSupportGroupData>("bereavement_support_group")) ??
+  fallbackBereavementSupportGroupData;
+const carerSupportData =
+  (await fetchSingletonPageJson<typeof fallbackCarerSupportData>("carer_support_group")) ??
+  fallbackCarerSupportData;
 
 const layoutTitle = p.pageTitle
   .split(/\s*\|\s*/)

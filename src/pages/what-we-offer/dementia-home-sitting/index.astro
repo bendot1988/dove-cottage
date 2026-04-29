@@ -2,15 +2,30 @@
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
-import p from "../../../data/dementia-home-sitting.json";
-import contact from "../../../data/contact.json";
-import nursingCareData from "../../../data/nursing-care-medical-advice.json";
-import wellbeingActivitiesData from "../../../data/wellbeing-activities.json";
-import complementaryTherapiesData from "../../../data/complementary-therapies.json";
-import counsellingSupportOverviewData from "../../../data/counselling-support-overview.json";
+import fallbackData from "../../../data/dementia-home-sitting.json";
+import fallbackContact from "../../../data/contact.json";
+import fallbackNursingCareData from "../../../data/nursing-care-medical-advice.json";
+import fallbackWellbeingActivitiesData from "../../../data/wellbeing-activities.json";
+import fallbackComplementaryTherapiesData from "../../../data/complementary-therapies.json";
+import fallbackCounsellingSupportOverviewData from "../../../data/counselling-support-overview.json";
+import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const c = contact;
+const p =
+  (await fetchSingletonPageJson<typeof fallbackData>("dementia_home_sitting")) ?? fallbackData;
+const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
+const nursingCareData =
+  (await fetchSingletonPageJson<typeof fallbackNursingCareData>("nursing_care_medical_advice")) ??
+  fallbackNursingCareData;
+const wellbeingActivitiesData =
+  (await fetchSingletonPageJson<typeof fallbackWellbeingActivitiesData>("wellbeing_activities")) ??
+  fallbackWellbeingActivitiesData;
+const complementaryTherapiesData =
+  (await fetchSingletonPageJson<typeof fallbackComplementaryTherapiesData>("complementary_therapies")) ??
+  fallbackComplementaryTherapiesData;
+const counsellingSupportOverviewData =
+  (await fetchSingletonPageJson<typeof fallbackCounsellingSupportOverviewData>("counselling_support_overview")) ??
+  fallbackCounsellingSupportOverviewData;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
 const layoutTitle = p.pageTitle

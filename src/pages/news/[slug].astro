@@ -1,26 +1,63 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import EventKeyInfo from "../../components/EventKeyInfo.astro";
+import { sanityClient } from "../../lib/sanity";
+import { portableTextToHtml } from "../../lib/portableText";
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const posts = await sanityClient.fetch(`
+    *[_type == "newsPost" && !coalesce(draft, false) && defined(slug.current)]{
+      "slug": slug.current
+    }
+  `);
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post }
   }));
 }
 
-const { post } = Astro.props as { post: CollectionEntry<"blog"> };
-const { Content } = await post.render();
+const { post } = Astro.props as { post: { slug: string } };
+const entry = await sanityClient.fetch(
+  `
+    *[_type == "newsPost" && slug.current == $slug][0]{
+      title,
+      excerpt,
+      category,
+      author,
+      publishDate,
+      eventDate,
+      eventEndDate,
+      eventLocation,
+      featuredImage,
+      body
+    }
+  `,
+  { slug: post.slug }
+);
 
-const relatedPosts = (await getCollection("blog", ({ data }) => !data.draft))
-  .filter((p) => p.slug !== post.slug)
-  .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
-  .slice(0, 3);
+if (!entry) {
+  throw new Error(`News article not found for slug: ${post.slug}`);
+}
+
+const relatedPosts = await sanityClient.fetch(
+  `
+    *[_type == "newsPost" && !coalesce(draft, false) && slug.current != $slug] | order(publishDate desc)[0...3]{
+      title,
+      excerpt,
+      category,
+      publishDate,
+      featuredImage,
+      "slug": slug.current
+    }
+  `,
+  { slug: post.slug }
+);
+
+const contentHtml = portableTextToHtml(entry.body);
+const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date();
 ---
 
-<BaseLayout title={`${post.data.title} | Dove Cottage`} description={post.data.excerpt}>
+<BaseLayout title={`${entry.title} | Dove Cottage`} description={entry.excerpt}>
   <article class="news-post">
     <div class="motion-scope">
       <section class="news-article-inner" aria-label="Article">
@@ -29,36 +66,36 @@ const relatedPosts = (await getCollection("blog", ({ data }) => !data.draft))
         <a href="/news/">← Back to News &amp; Events</a>
       </p>
       <p class="meta">
-        <span class="category">{post.data.category}</span>
+        <span class="category">{entry.category}</span>
         <span>·</span>
-        <time datetime={post.data.publishDate.toISOString()}>
-          {post.data.publishDate.toLocaleDateString("en-GB", {
+        <time datetime={publishDate.toISOString()}>
+          {publishDate.toLocaleDateString("en-GB", {
             day: "numeric",
             month: "long",
             year: "numeric"
           })}
         </time>
         <span>·</span>
-        <span>{post.data.author}</span>
+        <span>{entry.author}</span>
       </p>
-      <h1>{post.data.title}</h1>
-      {post.data.eventDate && (
+      <h1>{entry.title}</h1>
+      {entry.eventDate && (
         <EventKeyInfo
-          eventStart={new Date(post.data.eventDate)}
-          eventEnd={post.data.eventEndDate ? new Date(post.data.eventEndDate) : undefined}
-          location={post.data.eventLocation}
+          eventStart={new Date(entry.eventDate)}
+          eventEnd={entry.eventEndDate ? new Date(entry.eventEndDate) : undefined}
+          location={entry.eventLocation}
         />
       )}
-      {(post.data.featuredImage ?? post.data.featured_image) && (
+      {entry.featuredImage && (
         <img
           class="featured"
-          src={post.data.featuredImage ?? post.data.featured_image}
+          src={entry.featuredImage}
           alt=""
           loading="eager"
         />
       )}
       <div class="content">
-        <Content />
+        <div set:html={contentHtml} />
       </div>
       <p class="back-link back-link--bottom">
         <a href="/news/">← Back to News &amp; Events</a>
@@ -73,9 +110,9 @@ const relatedPosts = (await getCollection("blog", ({ data }) => !data.draft))
             <p class="related-news-dek">Other stories from Dove Cottage.</p>
             <div class="related-grid">
               {relatedPosts.map((item) => {
-                const image = item.data.featuredImage ?? item.data.featured_image;
+                const image = item.featuredImage;
                 const href = `/news/${item.slug}/`;
-                const dateLabel = item.data.publishDate.toLocaleDateString("en-GB", {
+                const dateLabel = new Date(item.publishDate).toLocaleDateString("en-GB", {
                   day: "numeric",
                   month: "short",
                   year: "numeric"
@@ -89,14 +126,14 @@ const relatedPosts = (await getCollection("blog", ({ data }) => !data.draft))
                     )}
                     <div class="related-card__body">
                       <p class="related-card__meta">
-                        <span class="related-card__category">{item.data.category}</span>
+                        <span class="related-card__category">{item.category}</span>
                         <span>·</span>
-                        <time datetime={item.data.publishDate.toISOString()}>{dateLabel}</time>
+                        <time datetime={new Date(item.publishDate).toISOString()}>{dateLabel}</time>
                       </p>
                       <h3 class="related-card__title">
-                        <a href={href}>{item.data.title}</a>
+                        <a href={href}>{item.title}</a>
                       </h3>
-                      <p class="related-card__excerpt">{item.data.excerpt}</p>
+                      <p class="related-card__excerpt">{item.excerpt}</p>
                       <a href={href} class="related-card__read">
                         <span class="related-card__read-text">Read more</span>
                         <span aria-hidden="true">→</span>

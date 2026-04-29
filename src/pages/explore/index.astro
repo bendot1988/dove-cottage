@@ -1,28 +1,87 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import archive from "../../data/site-archive.json";
-import contact from "../../data/contact.json";
+import fallbackArchive from "../../data/site-archive.json";
+import fallbackContact from "../../data/contact.json";
 import { toTitleCase } from "../../lib/titleCase";
-import hospiceServicesOverviewData from "../../data/hospice-services-overview.json";
-import carerPatientWellbeingData from "../../data/carer-patient-wellbeing.json";
-import dementiaHomeSittingData from "../../data/dementia-home-sitting.json";
-import counsellingSupportOverviewData from "../../data/counselling-support-overview.json";
-import bereavementSupportData from "../../data/bereavement-support.json";
-import bereavementSupportGroupData from "../../data/bereavement-support-group.json";
-import counsellingData from "../../data/counselling.json";
-import nursingCareData from "../../data/nursing-care-medical-advice.json";
-import wellbeingActivitiesData from "../../data/wellbeing-activities.json";
-import complementaryTherapiesData from "../../data/complementary-therapies.json";
-import therapyBathingData from "../../data/therapy-bathing.json";
-import spiritualChaplaincyData from "../../data/spiritual-chaplaincy-support.json";
-import transportData from "../../data/transport.json";
-import supportGroupsData from "../../data/support-groups.json";
-import carerSupportData from "../../data/carer-support.json";
-import mensShedData from "../../data/mens-shed.json";
-import hireFacilitiesData from "../../data/hire-our-facilities.json";
-import supportUsOverviewData from "../../data/support-us-overview.json";
-import volunteerData from "../../data/volunteer-your-time.json";
-import donateData from "../../data/donate.json";
+import fallbackHospiceServicesOverviewData from "../../data/hospice-services-overview.json";
+import fallbackCarerPatientWellbeingData from "../../data/carer-patient-wellbeing.json";
+import fallbackDementiaHomeSittingData from "../../data/dementia-home-sitting.json";
+import fallbackCounsellingSupportOverviewData from "../../data/counselling-support-overview.json";
+import fallbackBereavementSupportData from "../../data/bereavement-support.json";
+import fallbackBereavementSupportGroupData from "../../data/bereavement-support-group.json";
+import fallbackCounsellingData from "../../data/counselling.json";
+import fallbackNursingCareData from "../../data/nursing-care-medical-advice.json";
+import fallbackWellbeingActivitiesData from "../../data/wellbeing-activities.json";
+import fallbackComplementaryTherapiesData from "../../data/complementary-therapies.json";
+import fallbackTherapyBathingData from "../../data/therapy-bathing.json";
+import fallbackSpiritualChaplaincyData from "../../data/spiritual-chaplaincy-support.json";
+import fallbackTransportData from "../../data/transport.json";
+import fallbackSupportGroupsData from "../../data/support-groups.json";
+import fallbackCarerSupportData from "../../data/carer-support.json";
+import fallbackMensShedData from "../../data/mens-shed.json";
+import fallbackHireFacilitiesData from "../../data/hire-our-facilities.json";
+import fallbackSupportUsOverviewData from "../../data/support-us-overview.json";
+import fallbackVolunteerData from "../../data/volunteer-your-time.json";
+import fallbackDonateData from "../../data/donate.json";
+import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
+
+const archive = (await fetchSingletonPageJson<typeof fallbackArchive>("site_archive")) ?? fallbackArchive;
+const contact = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
+const hospiceServicesOverviewData =
+  (await fetchSingletonPageJson<typeof fallbackHospiceServicesOverviewData>("hospice_services_overview")) ??
+  fallbackHospiceServicesOverviewData;
+const carerPatientWellbeingData =
+  (await fetchSingletonPageJson<typeof fallbackCarerPatientWellbeingData>("carer_patient_wellbeing")) ??
+  fallbackCarerPatientWellbeingData;
+const dementiaHomeSittingData =
+  (await fetchSingletonPageJson<typeof fallbackDementiaHomeSittingData>("dementia_home_sitting")) ??
+  fallbackDementiaHomeSittingData;
+const counsellingSupportOverviewData =
+  (await fetchSingletonPageJson<typeof fallbackCounsellingSupportOverviewData>("counselling_support_overview")) ??
+  fallbackCounsellingSupportOverviewData;
+const bereavementSupportData =
+  (await fetchSingletonPageJson<typeof fallbackBereavementSupportData>("bereavement")) ??
+  fallbackBereavementSupportData;
+const bereavementSupportGroupData =
+  (await fetchSingletonPageJson<typeof fallbackBereavementSupportGroupData>("bereavement_support_group")) ??
+  fallbackBereavementSupportGroupData;
+const counsellingData =
+  (await fetchSingletonPageJson<typeof fallbackCounsellingData>("counselling")) ?? fallbackCounsellingData;
+const nursingCareData =
+  (await fetchSingletonPageJson<typeof fallbackNursingCareData>("nursing_care_medical_advice")) ??
+  fallbackNursingCareData;
+const wellbeingActivitiesData =
+  (await fetchSingletonPageJson<typeof fallbackWellbeingActivitiesData>("wellbeing_activities")) ??
+  fallbackWellbeingActivitiesData;
+const complementaryTherapiesData =
+  (await fetchSingletonPageJson<typeof fallbackComplementaryTherapiesData>("complementary_therapies")) ??
+  fallbackComplementaryTherapiesData;
+const therapyBathingData =
+  (await fetchSingletonPageJson<typeof fallbackTherapyBathingData>("therapy_bathing")) ??
+  fallbackTherapyBathingData;
+const spiritualChaplaincyData =
+  (await fetchSingletonPageJson<typeof fallbackSpiritualChaplaincyData>("spiritual_chaplaincy_support")) ??
+  fallbackSpiritualChaplaincyData;
+const transportData =
+  (await fetchSingletonPageJson<typeof fallbackTransportData>("transport")) ?? fallbackTransportData;
+const supportGroupsData =
+  (await fetchSingletonPageJson<typeof fallbackSupportGroupsData>("support_groups")) ??
+  fallbackSupportGroupsData;
+const carerSupportData =
+  (await fetchSingletonPageJson<typeof fallbackCarerSupportData>("carer_support_group")) ??
+  fallbackCarerSupportData;
+const mensShedData =
+  (await fetchSingletonPageJson<typeof fallbackMensShedData>("mens_shed")) ?? fallbackMensShedData;
+const hireFacilitiesData =
+  (await fetchSingletonPageJson<typeof fallbackHireFacilitiesData>("hire_our_facilities")) ??
+  fallbackHireFacilitiesData;
+const supportUsOverviewData =
+  (await fetchSingletonPageJson<typeof fallbackSupportUsOverviewData>("support_us_overview")) ??
+  fallbackSupportUsOverviewData;
+const volunteerData =
+  (await fetchSingletonPageJson<typeof fallbackVolunteerData>("volunteer_your_time")) ??
+  fallbackVolunteerData;
+const donateData = (await fetchSingletonPageJson<typeof fallbackDonateData>("donate")) ?? fallbackDonateData;
 
 const c = contact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;

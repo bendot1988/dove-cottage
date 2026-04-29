@@ -8,11 +8,27 @@ import VideoFeatureSection from "../components/VideoFeatureSection.astro";
 import HomeShopsSection from "../components/HomeShopsSection.astro";
 import ReachSection from "../components/ReachSection.astro";
 import SupportCardsSection from "../components/SupportCardsSection.astro";
-import homepage from "../data/homepage.json";
-import hospiceServicesOverview from "../data/hospice-services-overview.json";
-import carerPatientWellbeing from "../data/carer-patient-wellbeing.json";
-import dementiaHomeSitting from "../data/dementia-home-sitting.json";
-import counsellingSupportOverview from "../data/counselling-support-overview.json";
+import fallbackHomepage from "../data/homepage.json";
+import fallbackHospiceServicesOverview from "../data/hospice-services-overview.json";
+import fallbackCarerPatientWellbeing from "../data/carer-patient-wellbeing.json";
+import fallbackDementiaHomeSitting from "../data/dementia-home-sitting.json";
+import fallbackCounsellingSupportOverview from "../data/counselling-support-overview.json";
+import { fetchSingletonPageJson } from "../lib/sanitySingleton";
+
+const homepage =
+  (await fetchSingletonPageJson<typeof fallbackHomepage>("homepage-content")) ?? fallbackHomepage;
+const hospiceServicesOverview =
+  (await fetchSingletonPageJson<typeof fallbackHospiceServicesOverview>("hospice_services_overview")) ??
+  fallbackHospiceServicesOverview;
+const carerPatientWellbeing =
+  (await fetchSingletonPageJson<typeof fallbackCarerPatientWellbeing>("carer_patient_wellbeing")) ??
+  fallbackCarerPatientWellbeing;
+const dementiaHomeSitting =
+  (await fetchSingletonPageJson<typeof fallbackDementiaHomeSitting>("dementia_home_sitting")) ??
+  fallbackDementiaHomeSitting;
+const counsellingSupportOverview =
+  (await fetchSingletonPageJson<typeof fallbackCounsellingSupportOverview>("counselling_support_overview")) ??
+  fallbackCounsellingSupportOverview;
 
 const careServiceCards = [
   {

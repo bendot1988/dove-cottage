@@ -1,10 +1,13 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
-import contact from "../../../data/contact.json";
-import data from "../../../data/fundraise-for-us.json";
+import fallbackContact from "../../../data/contact.json";
+import fallbackData from "../../../data/fundraise-for-us.json";
+import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
+const data = (await fetchSingletonPageJson<typeof fallbackData>("fundraise_for_us")) ?? fallbackData;
+const contact = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
 ---
 
