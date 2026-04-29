@@ -5,6 +5,7 @@ import { marked } from "marked";
 
 type VacancyRole = {
   title: string;
+  roleImage?: string;
   location?: string;
   workingHours: string;
   roleOverviewMarkdown: string;
@@ -17,6 +18,7 @@ type VacancyRole = {
 };
 
 const p = vacancies;
+const fallbackRoleImage = "/images/uploads/volunteer/volunteer-featured-shop.png";
 
 const layoutTitle = p.pageTitle ?? "Vacancies | Dove Cottage";
 const paidRoles = (p.paidRoles ?? []) as VacancyRole[];
@@ -34,6 +36,11 @@ const resolveRolePdfHref = (role: Pick<VacancyRole, "pdfFile" | "pdfHref" | "cta
 const markedHtml = (md?: string) => {
   if (!md?.trim()) return "";
   return marked.parse(md.trim(), { async: false }) as string;
+};
+
+const resolveRoleImage = (role: Pick<VacancyRole, "roleImage">) => {
+  const roleImage = role.roleImage?.trim();
+  return roleImage || fallbackRoleImage;
 };
 ---
 
@@ -74,6 +81,15 @@ const markedHtml = (md?: string) => {
           <div class="vacancies-role-grid">
             {paidRoles.map((role) => (
               <article class="svc-card vacancy-card">
+                <img
+                  class="vacancy-card__header-image"
+                  src={resolveRoleImage(role)}
+                  alt={`${role.title} role`}
+                  width="1200"
+                  height="675"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <img
                   class="vacancy-card__petal"
                   src="/images/sunflower-brand-small.png"
@@ -131,6 +147,15 @@ const markedHtml = (md?: string) => {
           <div class="vacancies-role-grid">
             {volunteerRoles.map((role) => (
               <article class="svc-card vacancy-card">
+                <img
+                  class="vacancy-card__header-image"
+                  src={resolveRoleImage(role)}
+                  alt={`${role.title} role`}
+                  width="1200"
+                  height="675"
+                  loading="lazy"
+                  decoding="async"
+                />
                 <img
                   class="vacancy-card__petal"
                   src="/images/sunflower-brand-small.png"
@@ -285,6 +310,40 @@ const markedHtml = (md?: string) => {
   .vacancy-card {
     margin-bottom: 0;
     position: relative;
+    overflow: hidden;
+  }
+
+  .vacancy-card__header-image {
+    width: calc(100% + 32px);
+    margin: -16px -16px 12px;
+    height: 132px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    border-bottom: 1px solid #e2eaf6;
+    transition: transform 0.28s var(--motion-ease-out);
+  }
+
+  .vacancy-card:hover .vacancy-card__header-image,
+  .vacancy-card:focus-within .vacancy-card__header-image {
+    transform: scale(1.03);
+  }
+
+  @media (max-width: 640px) {
+    .vacancy-card__header-image {
+      height: 116px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vacancy-card__header-image {
+      transition: none;
+    }
+
+    .vacancy-card:hover .vacancy-card__header-image,
+    .vacancy-card:focus-within .vacancy-card__header-image {
+      transform: none;
+    }
   }
 
   .vacancy-card__petal {
