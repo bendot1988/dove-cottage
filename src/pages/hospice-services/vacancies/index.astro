@@ -316,11 +316,12 @@ const resolveRoleImage = (role: Pick<VacancyRole, "roleImage">) => {
   .vacancy-card__header-image {
     width: calc(100% + 32px);
     margin: -16px -16px 12px;
-    height: 132px;
+    height: 156px;
     object-fit: cover;
     object-position: center;
     display: block;
     border-bottom: 1px solid #e2eaf6;
+    border-radius: 12px 12px 0 0;
     transition: transform 0.28s var(--motion-ease-out);
   }
 
@@ -331,7 +332,7 @@ const resolveRoleImage = (role: Pick<VacancyRole, "roleImage">) => {
 
   @media (max-width: 640px) {
     .vacancy-card__header-image {
-      height: 116px;
+      height: 136px;
     }
   }
 
