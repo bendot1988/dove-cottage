@@ -8,26 +8,16 @@ shop_info: >
   support.
 
 
-  The shop offers a wide range of high-quality clothing, accessories, homeware,
-  books and collectables. Spread over two floors, the ground floor is
-  wheelchair accessible.
+  The shop offers a wide range of high-quality clothing, accessories, homeware, books and collectables. Spread over two floors, the ground floor is wheelchair accessible.
 
 
-  Thanks to its rural location, the shop is a popular stop for walkers and
-  cyclists. We also serve hot drinks and a small selection of snacks and ice
-  creams. The large garden space and children's playground make the shop a real
-  destination - bring a picnic and make your shopping trip a family afternoon
-  out.
+  Thanks to its rural location, the shop is a popular stop for walkers and cyclists. We also serve hot drinks and a small selection of snacks and ice creams. The large garden space and children's playground make the shop a real destination - bring a picnic and make your shopping trip a family afternoon out.
 
 
-  Every purchase helps support the vital work of our hospice in Stathern - shop
-  sustainably and make a real difference to local families living with
-  life-limiting conditions.
+  Every purchase helps support the vital work of our hospice in Stathern - shop sustainably and make a real difference to local families living with life-limiting conditions.
 
 
-  Our charity shops are the heartbeat of our fundraising, and our wonderful team
-  of volunteers are always happy to see you - whether you're browsing for a
-  bargain, dropping off a donation, or simply popping in to say hello.
+  Our charity shops are the heartbeat of our fundraising, and our wonderful team of volunteers are always happy to see you - whether you're browsing for a bargain, dropping off a donation, or simply popping in to say hello.
 callout: >
   **Rated 4.7 stars from 114 reviews** - thank you for supporting our Stathern
   shop and helping fund specialist hospice care for local families.
@@ -50,11 +40,11 @@ gallery:
   - /images/uploads/stathern-shop-exterior.png
   - /images/uploads/stathern-shop-interior-1.png
 button_colour: "#2751a0"
-phone: "01949 861950"
-address: "Canal Ln, Stathern, Melton Mowbray, LE14 4EX"
-donations_blurb: >
+phone: 01949 861950
+address: Canal Ln, Stathern, Melton Mowbray, LE14 4EX
+donations_blurb: |
   We gratefully accept pre-loved clothes, books, toys, ornaments and more.
-facebook_link: ""
+facebook_link: https://www.facebook.com/profile.php?id=61586703051000
 draft: false
 ---
 
