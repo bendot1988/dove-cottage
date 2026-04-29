@@ -14,17 +14,30 @@ const client = createClient({
   token,
 });
 
+const withKeys = (items, prefix) =>
+  Array.isArray(items) ? items.map((item, i) => ({ ...item, _key: `${prefix}-${i}` })) : items;
+
+const hero = {
+  ...homepage.hero,
+  ctas: withKeys(homepage.hero?.ctas, "hero-cta"),
+};
+
+const supportSection = {
+  ...homepage.supportSection,
+  cards: withKeys(homepage.supportSection?.cards, "support-card"),
+};
+
 await client.createOrReplace({
   _id: "homepagePage.main",
   _type: "homepagePage",
-  hero: homepage.hero,
+  hero,
   careServices: homepage.careServices,
   videoFeature: homepage.videoFeature,
   shopsSection: homepage.shopsSection,
   reachSection: {
     backgroundImage: homepage.reachSection?.backgroundImage,
   },
-  supportSection: homepage.supportSection,
+  supportSection,
 });
 
 console.log("Seeded Sanity document: homepagePage.main");
