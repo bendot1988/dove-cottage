@@ -13,7 +13,7 @@ import fallbackHospiceServicesOverview from "../data/hospice-services-overview.j
 import fallbackCarerPatientWellbeing from "../data/carer-patient-wellbeing.json";
 import fallbackDementiaHomeSitting from "../data/dementia-home-sitting.json";
 import fallbackCounsellingSupportOverview from "../data/counselling-support-overview.json";
-import { sanityClient } from "../lib/sanity";
+import { resolveSanityImageUrl, sanityClient } from "../lib/sanity";
 import { fetchSingletonPageJson } from "../lib/sanitySingleton";
 
 const structuredHomepage = await sanityClient.fetch(`
@@ -28,7 +28,61 @@ const structuredHomepage = await sanityClient.fetch(`
 `);
 const singletonHomepage =
   (await fetchSingletonPageJson<typeof fallbackHomepage>("homepage-content")) ?? null;
-const homepage = structuredHomepage ?? singletonHomepage ?? fallbackHomepage;
+
+function mergeHomepageForSite(
+  structured: typeof structuredHomepage,
+  singleton: typeof singletonHomepage,
+  fb: typeof fallbackHomepage
+) {
+  const src = structured ?? singleton;
+  if (!src) return fb;
+
+  const fbCards = fb.supportSection.cards;
+  const srcCards = src.supportSection?.cards ?? fbCards;
+  const cards = srcCards.map((card, i) => ({
+    ...(fbCards[i] ?? fbCards[0]),
+    ...card,
+    icon: resolveSanityImageUrl(card.icon, fbCards[i]?.icon ?? "")
+  }));
+
+  return {
+    ...fb,
+    ...src,
+    hero: {
+      ...fb.hero,
+      ...src.hero,
+      backgroundImage: resolveSanityImageUrl(src.hero?.backgroundImage, fb.hero.backgroundImage),
+      ctas: src.hero?.ctas ?? fb.hero.ctas
+    },
+    careServices: { ...fb.careServices, ...src.careServices },
+    videoFeature: { ...fb.videoFeature, ...src.videoFeature },
+    shopsSection: {
+      ...fb.shopsSection,
+      ...src.shopsSection,
+      sunflowerImage: resolveSanityImageUrl(src.shopsSection?.sunflowerImage, fb.shopsSection.sunflowerImage)
+    },
+    reachSection: {
+      ...fb.reachSection,
+      ...src.reachSection,
+      backgroundImage: resolveSanityImageUrl(src.reachSection?.backgroundImage, fb.reachSection.backgroundImage)
+    },
+    supportSection: {
+      ...fb.supportSection,
+      ...src.supportSection,
+      backgroundFlowerLeft: resolveSanityImageUrl(
+        src.supportSection?.backgroundFlowerLeft,
+        fb.supportSection.backgroundFlowerLeft
+      ),
+      backgroundFlowerRight: resolveSanityImageUrl(
+        src.supportSection?.backgroundFlowerRight,
+        fb.supportSection.backgroundFlowerRight
+      ),
+      cards
+    }
+  };
+}
+
+const homepage = mergeHomepageForSite(structuredHomepage, singletonHomepage, fallbackHomepage);
 const hospiceServicesOverview =
   (await fetchSingletonPageJson<typeof fallbackHospiceServicesOverview>("hospice_services_overview")) ??
   fallbackHospiceServicesOverview;

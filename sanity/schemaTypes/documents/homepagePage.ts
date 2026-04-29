@@ -12,7 +12,12 @@ export default defineType({
       fields: [
         defineField({ name: "title", title: "Title", type: "string" }),
         defineField({ name: "description", title: "Description", type: "text", rows: 3 }),
-        defineField({ name: "backgroundImage", title: "Background Image URL/Path", type: "string" }),
+        defineField({
+          name: "backgroundImage",
+          title: "Background Image",
+          type: "image",
+          options: { hotspot: true },
+        }),
         defineField({
           name: "ctas",
           title: "Buttons",
@@ -58,14 +63,26 @@ export default defineType({
         defineField({ name: "intro", title: "Intro", type: "text", rows: 3 }),
         defineField({ name: "vintedUrl", title: "Vinted URL", type: "string" }),
         defineField({ name: "ebayUrl", title: "Ebay URL", type: "string" }),
-        defineField({ name: "sunflowerImage", title: "Sunflower Image URL/Path", type: "string" }),
+        defineField({
+          name: "sunflowerImage",
+          title: "Sunflower Image",
+          type: "image",
+          options: { hotspot: true },
+        }),
       ],
     }),
     defineField({
       name: "reachSection",
       title: "Reach Section",
       type: "object",
-      fields: [defineField({ name: "backgroundImage", title: "Background Image URL/Path", type: "string" })],
+      fields: [
+        defineField({
+          name: "backgroundImage",
+          title: "Background Image",
+          type: "image",
+          options: { hotspot: true },
+        }),
+      ],
     }),
     defineField({
       name: "supportSection",
@@ -74,8 +91,18 @@ export default defineType({
       fields: [
         defineField({ name: "title", title: "Title", type: "string" }),
         defineField({ name: "intro", title: "Intro", type: "text", rows: 3 }),
-        defineField({ name: "backgroundFlowerLeft", title: "Left Flower URL/Path", type: "string" }),
-        defineField({ name: "backgroundFlowerRight", title: "Right Flower URL/Path", type: "string" }),
+        defineField({
+          name: "backgroundFlowerLeft",
+          title: "Left Flower",
+          type: "image",
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: "backgroundFlowerRight",
+          title: "Right Flower",
+          type: "image",
+          options: { hotspot: true },
+        }),
         defineField({
           name: "cards",
           title: "Cards",
@@ -84,7 +111,7 @@ export default defineType({
             defineField({
               type: "object",
               fields: [
-                defineField({ name: "icon", title: "Icon URL/Path", type: "string" }),
+                defineField({ name: "icon", title: "Icon", type: "image", options: { hotspot: false } }),
                 defineField({ name: "title", title: "Title", type: "string" }),
                 defineField({ name: "description", title: "Description", type: "text", rows: 3 }),
                 defineField({ name: "buttonLabel", title: "Button Label", type: "string" }),
