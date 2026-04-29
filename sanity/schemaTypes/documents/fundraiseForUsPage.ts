@@ -1,0 +1,35 @@
+import { defineField, defineType } from "sanity";
+
+export default defineType({
+  name: "fundraiseForUsPage",
+  title: "Fundraise For Us Page",
+  type: "document",
+  fields: [
+    defineField({ name: "pageTitle", title: "Page Title", type: "string" }),
+    defineField({ name: "heroImage", title: "Hero Image URL/Path", type: "string" }),
+    defineField({ name: "heroImageAlt", title: "Hero Image Alt", type: "string" }),
+    defineField({ name: "parentNavLabel", title: "Back Link Label", type: "string" }),
+    defineField({ name: "parentNavHref", title: "Back Link URL", type: "string" }),
+    defineField({ name: "heroH1", title: "Hero Heading", type: "string" }),
+    defineField({ name: "heroShortDescription", title: "Hero Short Description", type: "text", rows: 2 }),
+    defineField({ name: "introHeading", title: "Intro Heading", type: "string" }),
+    defineField({ name: "introBody", title: "Intro Body", type: "text", rows: 4 }),
+    defineField({ name: "sponsoredHeading", title: "Sponsored Heading", type: "string" }),
+    defineField({ name: "sponsoredBody", title: "Sponsored Body", type: "text", rows: 5 }),
+    defineField({ name: "sponsoredCtaLabel", title: "Sponsored CTA Label", type: "string" }),
+    defineField({ name: "sponsoredCtaHref", title: "Sponsored CTA URL", type: "string" }),
+    defineField({ name: "eventsHeading", title: "Events Heading", type: "string" }),
+    defineField({ name: "eventsBody", title: "Events Body", type: "text", rows: 5 }),
+    defineField({ name: "birthdayHeading", title: "Birthday Heading", type: "string" }),
+    defineField({ name: "birthdayBody", title: "Birthday Body", type: "text", rows: 4 }),
+    defineField({ name: "fundraiseYourWayHeading", title: "Fundraise Your Way Heading", type: "string" }),
+    defineField({ name: "fundraiseYourWayBody", title: "Fundraise Your Way Body", type: "text", rows: 4 }),
+    defineField({ name: "contactCtaHeading", title: "Contact CTA Heading", type: "string" }),
+    defineField({ name: "contactCtaBody", title: "Contact CTA Body", type: "text", rows: 3 }),
+    defineField({ name: "contactCtaButtonLabel", title: "Contact CTA Button Label", type: "string" }),
+    defineField({ name: "contactCtaButtonHref", title: "Contact CTA Button URL", type: "string" }),
+  ],
+  preview: {
+    select: { title: "heroH1", subtitle: "pageTitle" },
+  },
+});

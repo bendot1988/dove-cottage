@@ -1,10 +1,27 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import fallbackData from "../../../data/meet-the-team.json";
+import { sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const data = (await fetchSingletonPageJson<typeof fallbackData>("meet_the_team")) ?? fallbackData;
+const structuredData = await sanityClient.fetch(`
+  *[_type == "meetTheTeamPage"][0]{
+    pageTitle,
+    metaDescription,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    teamGroups,
+    stats,
+    testimonials
+  }
+`);
+const singletonData = (await fetchSingletonPageJson<typeof fallbackData>("meet_the_team")) ?? null;
+const data = structuredData ?? singletonData ?? fallbackData;
 ---
 
 <BaseLayout title={data.pageTitle} description={data.metaDescription}>
