@@ -209,12 +209,22 @@ const markedHtml = (md?: string) => {
           {p.formHintMarkdown ? (
             <div class="vacancies-prose vacancies-form-hint" set:html={markedHtml(p.formHintMarkdown)} />
           ) : null}
-          <div class="vacancies-form-placeholder" aria-hidden="true"></div>
+          <div class="vacancies-form-embed">
+            <div
+              style="width:100%;height:500px;"
+              data-fillout-id="xrJnnVS553us"
+              data-fillout-embed-type="standard"
+              data-fillout-inherit-parameters
+              data-fillout-dynamic-resize
+            ></div>
+          </div>
         </section>
       </div>
     </section>
   </div>
 </BaseLayout>
+
+<script is:inline src="https://server.fillout.com/embed/v1/"></script>
 
 <style>
   .vacancies-container {
@@ -339,14 +349,19 @@ const markedHtml = (md?: string) => {
   #vacancies-form {
     scroll-margin-top: 5.5rem;
     margin-top: 1rem;
-    padding: 18px;
-    background: #fff;
-    border: 1px solid rgba(29, 80, 141, 0.14);
+    padding: 14px;
+    background: #f3f7ff;
+    border: 2px solid #2c6eb4;
     border-radius: 14px;
   }
 
-  .vacancies-form-placeholder {
-    min-height: 260px;
+  .vacancies-form-embed {
+    margin-top: 0.75rem;
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #b7cdee;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(16, 38, 72, 0.06);
   }
 
   @media (max-width: 840px) {
