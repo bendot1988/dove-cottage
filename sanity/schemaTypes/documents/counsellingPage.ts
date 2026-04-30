@@ -1,12 +1,20 @@
 import { defineField, defineType } from "sanity";
 
+const textListField = (name: string, title: string) =>
+  defineField({
+    name,
+    title,
+    type: "array",
+    of: [defineField({ type: "object", fields: [defineField({ name: "text", title: "Text", type: "string" })] })],
+  });
+
 export default defineType({
   name: "counsellingPage",
   title: "Counselling Page",
   type: "document",
   fields: [
     defineField({ name: "pageTitle", title: "Page Title", type: "string" }),
-    defineField({ name: "heroImage", title: "Hero Image URL/Path", type: "string" }),
+    defineField({ name: "heroImage", title: "Hero Image", type: "image", options: { hotspot: true } }),
     defineField({ name: "heroImageAlt", title: "Hero Image Alt", type: "string" }),
     defineField({ name: "parentNavLabel", title: "Back Link Label", type: "string" }),
     defineField({ name: "parentNavHref", title: "Back Link URL", type: "string" }),
@@ -19,20 +27,19 @@ export default defineType({
       title: "Main Section Image",
       type: "object",
       fields: [
-        defineField({ name: "src", title: "Image URL/Path", type: "string" }),
-        defineField({ name: "alt", title: "Image Alt", type: "string" }),
+        defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+        defineField({ name: "alt", title: "Alt Text", type: "string" }),
       ],
     }),
     defineField({ name: "emotionalHeading", title: "Emotional Heading", type: "string" }),
     defineField({ name: "emotionalIntro", title: "Emotional Intro", type: "text", rows: 3 }),
-    defineField({
-      name: "emotionalList",
-      title: "Emotional Support List",
-      type: "array",
-      of: [{ type: "object", fields: [defineField({ name: "text", title: "Text", type: "string" })] }],
-    }),
+    textListField("emotionalList", "Emotional Support List"),
     defineField({ name: "practicalHeading", title: "Practical Heading", type: "string" }),
     defineField({ name: "practicalBody", title: "Practical Body", type: "text", rows: 4 }),
+    defineField({ name: "referralIntro", title: "Referral Intro", type: "string" }),
+    defineField({ name: "referralCta", title: "Referral CTA Label", type: "string" }),
+    defineField({ name: "referralCtaHref", title: "Referral CTA URL", type: "string" }),
+    defineField({ name: "referralOutro", title: "Referral Outro", type: "string" }),
     defineField({ name: "sideFormLinkText", title: "Side Form Link Text", type: "string" }),
     defineField({ name: "sideFormHint", title: "Side Form Hint", type: "text", rows: 2 }),
   ],

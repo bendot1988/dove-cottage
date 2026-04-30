@@ -4,10 +4,104 @@ import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import fallbackData from "../../../data/bereavement-support.json";
 import fallbackContact from "../../../data/contact.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const b = (await fetchSingletonPageJson<typeof fallbackData>("bereavement")) ?? fallbackData;
+const structuredBereavement = await sanityClient.fetch(`
+  *[_type == "bereavementSupportPage"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    mainIntro1,
+    mainIntro2,
+    whoHeading,
+    whoList,
+    callout,
+    anticipatoryHeading,
+    anticipatoryBody1,
+    anticipatoryBody2,
+    nurseHeading,
+    nurseIntro,
+    nurseListIntro,
+    nurseList,
+    nurseFoot,
+    dropInHeading,
+    dropInIntro,
+    dropInGroups,
+    dropInFoot,
+    counsellingHeading,
+    counsellingBody,
+    counsellingCta,
+    counsellingCtaHref,
+    sideFormLinkText,
+    sideFormHint,
+    sectionImages
+  }
+`);
+const singletonBereavement =
+  (await fetchSingletonPageJson<typeof fallbackData>("bereavement")) ?? null;
+
+const normalizeSectionImage = (
+  value: unknown,
+  fallbackSrc: string,
+  fallbackAlt: string
+) => {
+  if (!value) return { src: fallbackSrc, alt: fallbackAlt };
+  if (typeof value === "object" && value !== null && "src" in value) {
+    const typed = value as { src?: unknown; alt?: unknown };
+    return {
+      src: typeof typed.src === "string" && typed.src ? typed.src : fallbackSrc,
+      alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+    };
+  }
+  const typed = value as { image?: unknown; alt?: unknown };
+  return {
+    src: resolveSanityImageUrl(typed.image, fallbackSrc),
+    alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+  };
+};
+
+const mergeBereavementForSite = (
+  structured: typeof structuredBereavement,
+  singleton: typeof singletonBereavement,
+  fallback: typeof fallbackData
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fallback;
+
+  return {
+    ...fallback,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fallback.heroImage),
+    whoList: source.whoList ?? fallback.whoList,
+    nurseList: source.nurseList ?? fallback.nurseList,
+    dropInGroups: source.dropInGroups ?? fallback.dropInGroups,
+    sectionImages: {
+      afterIntro: normalizeSectionImage(
+        source.sectionImages?.afterIntro,
+        fallback.sectionImages.afterIntro.src,
+        fallback.sectionImages.afterIntro.alt
+      ),
+      afterCallout: normalizeSectionImage(
+        source.sectionImages?.afterCallout,
+        fallback.sectionImages.afterCallout?.src ?? "",
+        fallback.sectionImages.afterCallout?.alt ?? ""
+      ),
+      beforeSupportGroups: normalizeSectionImage(
+        source.sectionImages?.beforeSupportGroups,
+        fallback.sectionImages.beforeSupportGroups?.src ?? "",
+        fallback.sectionImages.beforeSupportGroups?.alt ?? ""
+      ),
+    },
+  };
+};
+
+const b = mergeBereavementForSite(structuredBereavement, singletonBereavement, fallbackData);
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
@@ -68,7 +162,7 @@ const introBlocks = [b.mainIntro1, b.mainIntro2].filter((p) => p?.trim().length)
             {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
 
             {
-              b.sectionImages?.afterIntro && (
+              b.sectionImages?.afterIntro?.src && (
                 <figure class="svc-figure">
                   <img
                     class="svc-figure__img"
@@ -99,7 +193,7 @@ const introBlocks = [b.mainIntro1, b.mainIntro2].filter((p) => p?.trim().length)
             </div>
 
             {
-              b.sectionImages?.afterCallout && (
+              b.sectionImages?.afterCallout?.src && (
                 <figure class="svc-figure">
                   <img
                     class="svc-figure__img"
@@ -137,7 +231,7 @@ const introBlocks = [b.mainIntro1, b.mainIntro2].filter((p) => p?.trim().length)
             </div>
 
             {
-              b.sectionImages?.beforeSupportGroups && (
+              b.sectionImages?.beforeSupportGroups?.src && (
                 <figure class="svc-figure">
                   <img
                     class="svc-figure__img"

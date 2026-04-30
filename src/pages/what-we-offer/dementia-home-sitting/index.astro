@@ -8,11 +8,93 @@ import fallbackNursingCareData from "../../../data/nursing-care-medical-advice.j
 import fallbackWellbeingActivitiesData from "../../../data/wellbeing-activities.json";
 import fallbackComplementaryTherapiesData from "../../../data/complementary-therapies.json";
 import fallbackCounsellingSupportOverviewData from "../../../data/counselling-support-overview.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const p =
-  (await fetchSingletonPageJson<typeof fallbackData>("dementia_home_sitting")) ?? fallbackData;
+const structuredData = await sanityClient.fetch(`
+  *[_type == "dementiaHomeSittingPage"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    homepageCareCardExcerpt,
+    mainIntro1,
+    mainIntro2,
+    sectionImage1,
+    serviceHeading,
+    serviceIntro,
+    serviceOfferHeading,
+    serviceOfferList,
+    serviceOutro,
+    whoHeading,
+    whoList,
+    helpHeading,
+    helpCards,
+    importantHeading,
+    importantList,
+    importantOutro,
+    flexHeading,
+    flexIntro,
+    flexList,
+    referralsHeading,
+    referralsBody1,
+    referralsBody2,
+    referralIntro,
+    referralCta,
+    referralCtaHref,
+    referralOutro,
+    sideFormLinkText,
+    sideFormHint
+  }
+`);
+const singletonData =
+  (await fetchSingletonPageJson<typeof fallbackData>("dementia_home_sitting")) ?? null;
+
+const normalizeSectionImage = (value: unknown, fallbackSrc: string, fallbackAlt: string) => {
+  if (!value) return { src: fallbackSrc, alt: fallbackAlt };
+  if (typeof value === "object" && value !== null && "src" in value) {
+    const typed = value as { src?: unknown; alt?: unknown };
+    return {
+      src: typeof typed.src === "string" && typed.src ? typed.src : fallbackSrc,
+      alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+    };
+  }
+  const typed = value as { image?: unknown; alt?: unknown };
+  return {
+    src: resolveSanityImageUrl(typed.image, fallbackSrc),
+    alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+  };
+};
+
+const mergeDementiaForSite = (
+  structured: typeof structuredData,
+  singleton: typeof singletonData,
+  fallback: typeof fallbackData
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fallback;
+  return {
+    ...fallback,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fallback.heroImage),
+    serviceOfferList: source.serviceOfferList ?? fallback.serviceOfferList,
+    whoList: source.whoList ?? fallback.whoList,
+    helpCards: source.helpCards ?? fallback.helpCards,
+    importantList: source.importantList ?? fallback.importantList,
+    flexList: source.flexList ?? fallback.flexList,
+    sectionImage1: normalizeSectionImage(
+      source.sectionImage1,
+      fallback.sectionImage1.src,
+      fallback.sectionImage1.alt
+    ),
+  };
+};
+
+const p = mergeDementiaForSite(structuredData, singletonData, fallbackData);
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const nursingCareData =
   (await fetchSingletonPageJson<typeof fallbackNursingCareData>("nursing_care_medical_advice")) ??

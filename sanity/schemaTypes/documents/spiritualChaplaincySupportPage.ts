@@ -9,8 +9,8 @@ const textListField = (name: string, title: string) =>
   });
 
 export default defineType({
-  name: "complementaryTherapiesPage",
-  title: "Complementary Therapies Page",
+  name: "spiritualChaplaincySupportPage",
+  title: "Spiritual & Chaplaincy Support Page",
   type: "document",
   fields: [
     defineField({ name: "pageTitle", title: "Page Title", type: "string" }),
@@ -31,11 +31,8 @@ export default defineType({
         defineField({ name: "alt", title: "Alt Text", type: "string" }),
       ],
     }),
-    defineField({ name: "benefitsHeading", title: "Benefits Heading", type: "string" }),
-    textListField("benefitsList", "Benefits List"),
-    defineField({ name: "treatmentsHeading", title: "Treatments Heading", type: "string" }),
-    defineField({ name: "treatmentsIntro", title: "Treatments Intro", type: "text", rows: 3 }),
-    textListField("treatmentsList", "Treatments List"),
+    defineField({ name: "supportHeading", title: "Support Heading", type: "string" }),
+    textListField("supportList", "Support List"),
     defineField({ name: "referralIntro", title: "Referral Intro", type: "string" }),
     defineField({ name: "referralCta", title: "Referral CTA Label", type: "string" }),
     defineField({ name: "referralCtaHref", title: "Referral CTA URL", type: "string" }),

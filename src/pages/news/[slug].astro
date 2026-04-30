@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import EventKeyInfo from "../../components/EventKeyInfo.astro";
-import { sanityClient } from "../../lib/sanity";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 import { portableTextToHtml } from "../../lib/portableText";
 
 export async function getStaticPaths() {
@@ -53,6 +53,12 @@ const relatedPosts = await sanityClient.fetch(
   { slug: post.slug }
 );
 
+const featuredImageUrl = resolveSanityImageUrl(entry.featuredImage, "");
+const relatedPostsWithImage = relatedPosts.map((item) => ({
+  ...item,
+  featuredImage: resolveSanityImageUrl(item.featuredImage, ""),
+}));
+
 const contentHtml = portableTextToHtml(entry.body);
 const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date();
 ---
@@ -86,10 +92,10 @@ const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date()
           location={entry.eventLocation}
         />
       )}
-      {entry.featuredImage && (
+      {featuredImageUrl && (
         <img
           class="featured"
-          src={entry.featuredImage}
+          src={featuredImageUrl}
           alt=""
           loading="eager"
         />
@@ -103,13 +109,13 @@ const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date()
         </div>
       </section>
 
-      {relatedPosts.length > 0 && (
+      {relatedPostsWithImage.length > 0 && (
         <section class="related-news" aria-labelledby="related-news-heading">
           <div class="container">
             <h2 id="related-news-heading">More news</h2>
             <p class="related-news-dek">Other stories from Dove Cottage.</p>
             <div class="related-grid">
-              {relatedPosts.map((item) => {
+              {relatedPostsWithImage.map((item) => {
                 const image = item.featuredImage;
                 const href = `/news/${item.slug}/`;
                 const dateLabel = new Date(item.publishDate).toLocaleDateString("en-GB", {

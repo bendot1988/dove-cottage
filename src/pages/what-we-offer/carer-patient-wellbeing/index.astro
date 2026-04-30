@@ -8,11 +8,87 @@ import fallbackNursingCareData from "../../../data/nursing-care-medical-advice.j
 import fallbackWellbeingActivitiesData from "../../../data/wellbeing-activities.json";
 import fallbackComplementaryTherapiesData from "../../../data/complementary-therapies.json";
 import fallbackCounsellingSupportOverviewData from "../../../data/counselling-support-overview.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const p =
-  (await fetchSingletonPageJson<typeof fallbackData>("carer_patient_wellbeing")) ?? fallbackData;
+const structuredData = await sanityClient.fetch(`
+  *[_type == "carerPatientWellbeingPage"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    homepageCareCardExcerpt,
+    mainIntro1,
+    mainIntro2,
+    mainIntro3,
+    elementsHeading,
+    elementsIntro,
+    elementBlocks,
+    notMedicalBody,
+    sessionTimesBody,
+    relatedHeading,
+    relatedIntro,
+    relatedLinks,
+    referralIntro,
+    referralCta,
+    referralCtaHref,
+    referralOutro,
+    sideFormLinkText,
+    sideFormHint,
+    sectionImage1,
+    sectionImage2
+  }
+`);
+const singletonData =
+  (await fetchSingletonPageJson<typeof fallbackData>("carer_patient_wellbeing")) ?? null;
+
+const normalizeSectionImage = (value: unknown, fallbackSrc: string, fallbackAlt: string) => {
+  if (!value) return { src: fallbackSrc, alt: fallbackAlt };
+  if (typeof value === "object" && value !== null && "src" in value) {
+    const typed = value as { src?: unknown; alt?: unknown };
+    return {
+      src: typeof typed.src === "string" && typed.src ? typed.src : fallbackSrc,
+      alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+    };
+  }
+  const typed = value as { image?: unknown; alt?: unknown };
+  return {
+    src: resolveSanityImageUrl(typed.image, fallbackSrc),
+    alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+  };
+};
+
+const mergeCarerWellbeingForSite = (
+  structured: typeof structuredData,
+  singleton: typeof singletonData,
+  fallback: typeof fallbackData
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fallback;
+  return {
+    ...fallback,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fallback.heroImage),
+    elementBlocks: source.elementBlocks ?? fallback.elementBlocks,
+    relatedLinks: source.relatedLinks ?? fallback.relatedLinks,
+    sectionImage1: normalizeSectionImage(
+      source.sectionImage1,
+      fallback.sectionImage1.src,
+      fallback.sectionImage1.alt
+    ),
+    sectionImage2: normalizeSectionImage(
+      source.sectionImage2,
+      fallback.sectionImage2?.src ?? "",
+      fallback.sectionImage2?.alt ?? ""
+    ),
+  };
+};
+
+const p = mergeCarerWellbeingForSite(structuredData, singletonData, fallbackData);
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const nursingCareData =
   (await fetchSingletonPageJson<typeof fallbackNursingCareData>("nursing_care_medical_advice")) ??

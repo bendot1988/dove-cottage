@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { sanityClient } from "../../lib/sanity";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 
 const posts = await sanityClient.fetch(`
   *[_type == "newsPost" && !coalesce(draft, false)] | order(publishDate desc) {
@@ -29,6 +29,16 @@ const events = await sanityClient.fetch(`
   }
 `);
 
+const postsWithImage = posts.map((post) => ({
+  ...post,
+  featuredImage: resolveSanityImageUrl(post.featuredImage, ""),
+}));
+
+const eventsWithImage = events.map((event) => ({
+  ...event,
+  featuredImage: resolveSanityImageUrl(event.featuredImage, ""),
+}));
+
 const now = new Date();
 const isPastEvent = (startDate: Date, endDate?: Date) => {
   const checkDate = endDate ?? startDate;
@@ -53,7 +63,7 @@ const formatEventDate = (startDate: Date, endDate?: Date) => {
 const isEventsCategory = (category: string) => category.trim().toLowerCase() === "events";
 
 const feedItems = [
-  ...posts.map((post) => {
+  ...postsWithImage.map((post) => {
     const evStart = post.eventDate ? new Date(post.eventDate) : null;
     const evEnd = post.eventEndDate ? new Date(post.eventEndDate) : undefined;
     const hasEventSchedule = evStart != null;
@@ -83,7 +93,7 @@ const feedItems = [
       past
     };
   }),
-  ...events.map((event) => {
+  ...eventsWithImage.map((event) => {
     const eventStart = event.eventDate ? new Date(event.eventDate) : new Date();
     const eventEnd = event.eventEndDate ? new Date(event.eventEndDate) : undefined;
     const past = isPastEvent(eventStart, eventEnd);

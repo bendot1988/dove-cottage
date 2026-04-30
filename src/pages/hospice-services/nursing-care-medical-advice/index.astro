@@ -4,21 +4,83 @@ import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import fallbackData from "../../../data/nursing-care-medical-advice.json";
 import fallbackContact from "../../../data/contact.json";
-import { sanityClient } from "../../../lib/sanity";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
 const structuredData = await sanityClient.fetch(`
   *[_type == "nursingCareMedicalAdvicePage"][0]{
-    pageTitle, heroImage, heroImageAlt, parentNavLabel, parentNavHref, heroH1, heroShortDescription,
-    mainIntro1, mainIntro2, sectionImage1, nursingHeading, nursingIntro, nursingList, medicalHeading,
-    medicalBody, advocacyHeading, advocacyIntro, advocacyList, additionalHeading, additionalIntro,
-    additionalServices, sideFormLinkText, sideFormHint
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    mainIntro1,
+    mainIntro2,
+    sectionImage1,
+    nursingHeading,
+    nursingIntro,
+    nursingList,
+    medicalHeading,
+    medicalBody,
+    advocacyHeading,
+    advocacyIntro,
+    advocacyList,
+    additionalHeading,
+    additionalIntro,
+    additionalServices,
+    referralIntro,
+    referralCta,
+    referralCtaHref,
+    referralOutro,
+    sideFormLinkText,
+    sideFormHint
   }
 `);
 const singletonData =
   (await fetchSingletonPageJson<typeof fallbackData>("nursing_care_medical_advice")) ?? null;
-const p = structuredData ?? singletonData ?? fallbackData;
+
+const normalizeSectionImage = (value: unknown, fallbackSrc: string, fallbackAlt: string) => {
+  if (!value) return { src: fallbackSrc, alt: fallbackAlt };
+  if (typeof value === "object" && value !== null && "src" in value) {
+    const typed = value as { src?: unknown; alt?: unknown };
+    return {
+      src: typeof typed.src === "string" && typed.src ? typed.src : fallbackSrc,
+      alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+    };
+  }
+  const typed = value as { image?: unknown; alt?: unknown };
+  return {
+    src: resolveSanityImageUrl(typed.image, fallbackSrc),
+    alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+  };
+};
+
+const mergeNursingForSite = (
+  structured: typeof structuredData,
+  singleton: typeof singletonData,
+  fallback: typeof fallbackData
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fallback;
+  return {
+    ...fallback,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fallback.heroImage),
+    nursingList: source.nursingList ?? fallback.nursingList,
+    advocacyList: source.advocacyList ?? fallback.advocacyList,
+    additionalServices: source.additionalServices ?? fallback.additionalServices,
+    sectionImage1: normalizeSectionImage(
+      source.sectionImage1,
+      fallback.sectionImage1.src,
+      fallback.sectionImage1.alt
+    ),
+  };
+};
+
+const p = mergeNursingForSite(structuredData, singletonData, fallbackData);
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 

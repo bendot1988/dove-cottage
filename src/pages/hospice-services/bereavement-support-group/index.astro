@@ -4,11 +4,76 @@ import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import fallbackData from "../../../data/bereavement-support-group.json";
 import fallbackContact from "../../../data/contact.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const p =
-  (await fetchSingletonPageJson<typeof fallbackData>("bereavement_support_group")) ?? fallbackData;
+const structuredGroup = await sanityClient.fetch(`
+  *[_type == "bereavementSupportGroupPage"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    mainIntro1,
+    mainIntro2,
+    mainIntro3,
+    groupHeading,
+    groupBullets,
+    detailsFoot,
+    registerInterestIntro,
+    registerInterestCta,
+    registerInterestHref,
+    registerInterestOutro,
+    sideFormLinkText,
+    sideFormHint,
+    sectionImage1,
+    beaconAccount,
+    beaconFormId
+  }
+`);
+const singletonGroup =
+  (await fetchSingletonPageJson<typeof fallbackData>("bereavement_support_group")) ?? null;
+
+const normalizeSectionImage = (value: unknown, fallbackSrc: string, fallbackAlt: string) => {
+  if (!value) return { src: fallbackSrc, alt: fallbackAlt };
+  if (typeof value === "object" && value !== null && "src" in value) {
+    const typed = value as { src?: unknown; alt?: unknown };
+    return {
+      src: typeof typed.src === "string" && typed.src ? typed.src : fallbackSrc,
+      alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+    };
+  }
+  const typed = value as { image?: unknown; alt?: unknown };
+  return {
+    src: resolveSanityImageUrl(typed.image, fallbackSrc),
+    alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+  };
+};
+
+const mergeGroupForSite = (
+  structured: typeof structuredGroup,
+  singleton: typeof singletonGroup,
+  fallback: typeof fallbackData
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fallback;
+  return {
+    ...fallback,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fallback.heroImage),
+    groupBullets: source.groupBullets ?? fallback.groupBullets,
+    sectionImage1: normalizeSectionImage(
+      source.sectionImage1,
+      fallback.sectionImage1.src,
+      fallback.sectionImage1.alt
+    ),
+  };
+};
+
+const p = mergeGroupForSite(structuredGroup, singletonGroup, fallbackData);
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
@@ -68,7 +133,7 @@ const showBeaconForm = Boolean(beaconFormId);
             <p class="svc-lede">{p.mainIntro3}</p>
 
             {
-              p.sectionImage1 && (
+              p.sectionImage1?.src && (
                 <figure class="svc-figure">
                   <img
                     class="svc-figure__img"

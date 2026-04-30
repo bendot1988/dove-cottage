@@ -5,11 +5,12 @@ import counsellingData from "../../../data/counselling.json";
 import bereavementSupportGroupData from "../../../data/bereavement-support-group.json";
 import supportGroupsData from "../../../data/support-groups.json";
 import resourceHubData from "../../../data/resource-hub.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 
-const data =
-  (await fetchSingletonPageJson<typeof counsellingSupportOverview>("counselling_support_overview")) ??
-  counsellingSupportOverview;
+const structuredOverview = await sanityClient.fetch(`*[_type == "counsellingSupportOverviewPage"][0]`);
+const singletonOverview =
+  (await fetchSingletonPageJson<typeof counsellingSupportOverview>("counselling_support_overview")) ?? null;
 
 type OverviewCard = {
   title: string;
@@ -27,6 +28,41 @@ const featuredImageByHref = new Map<string, string>([
   ["/hospice-services/support-groups/", supportGroupsData.heroImage],
   ["/hospice-services/resource-hub/", resourceHubData.heroImage]
 ]);
+
+const mergeCards = (
+  sourceCards: Array<Partial<OverviewCard> & { image?: unknown }> | undefined,
+  fallbackCards: OverviewCard[]
+): OverviewCard[] => {
+  const rows = sourceCards ?? fallbackCards;
+  return rows.map((card, i) => ({
+    ...(fallbackCards[i] ?? fallbackCards[0]),
+    ...card,
+    image: resolveSanityImageUrl(card.image, fallbackCards[i]?.image ?? ""),
+    imageAlt: (card.imageAlt as string) ?? fallbackCards[i]?.imageAlt ?? "",
+    title: (card.title as string) ?? fallbackCards[i]?.title ?? "",
+    excerpt: (card.excerpt as string) ?? fallbackCards[i]?.excerpt ?? "",
+    badge: (card.badge as string) ?? fallbackCards[i]?.badge ?? "",
+    ctaLabel: (card.ctaLabel as string) ?? fallbackCards[i]?.ctaLabel ?? "",
+    href: (card.href as string) ?? fallbackCards[i]?.href ?? "#",
+  }));
+};
+
+const mergeOverviewForSite = (
+  structured: typeof structuredOverview,
+  singleton: typeof singletonOverview,
+  fb: typeof counsellingSupportOverview
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fb;
+  return {
+    ...fb,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fb.heroImage),
+    cards: mergeCards(source.cards, fb.cards),
+  };
+};
+
+const data = mergeOverviewForSite(structuredOverview, singletonOverview, counsellingSupportOverview);
 
 const cards = data.cards.map((item: OverviewCard) => ({
   item: {

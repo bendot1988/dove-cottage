@@ -4,12 +4,72 @@ import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import fallbackData from "../../../data/spiritual-chaplaincy-support.json";
 import fallbackContact from "../../../data/contact.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const p =
-  (await fetchSingletonPageJson<typeof fallbackData>("spiritual_chaplaincy_support")) ??
-  fallbackData;
+const structuredData = await sanityClient.fetch(`
+  *[_type == "spiritualChaplaincySupportPage"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    mainIntro1,
+    mainIntro2,
+    sectionImage1,
+    supportHeading,
+    supportList,
+    referralIntro,
+    referralCta,
+    referralCtaHref,
+    referralOutro,
+    sideFormLinkText,
+    sideFormHint
+  }
+`);
+const singletonData =
+  (await fetchSingletonPageJson<typeof fallbackData>("spiritual_chaplaincy_support")) ?? null;
+
+const normalizeSectionImage = (value: unknown, fallbackSrc: string, fallbackAlt: string) => {
+  if (!value) return { src: fallbackSrc, alt: fallbackAlt };
+  if (typeof value === "object" && value !== null && "src" in value) {
+    const typed = value as { src?: unknown; alt?: unknown };
+    return {
+      src: typeof typed.src === "string" && typed.src ? typed.src : fallbackSrc,
+      alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+    };
+  }
+  const typed = value as { image?: unknown; alt?: unknown };
+  return {
+    src: resolveSanityImageUrl(typed.image, fallbackSrc),
+    alt: typeof typed.alt === "string" && typed.alt ? typed.alt : fallbackAlt,
+  };
+};
+
+const mergeSpiritualForSite = (
+  structured: typeof structuredData,
+  singleton: typeof singletonData,
+  fallback: typeof fallbackData
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fallback;
+  return {
+    ...fallback,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fallback.heroImage),
+    supportList: source.supportList ?? fallback.supportList,
+    sectionImage1: normalizeSectionImage(
+      source.sectionImage1,
+      fallback.sectionImage1.src,
+      fallback.sectionImage1.alt
+    ),
+  };
+};
+
+const p = mergeSpiritualForSite(structuredData, singletonData, fallbackData);
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 

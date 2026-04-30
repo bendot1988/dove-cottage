@@ -12,6 +12,7 @@ import transportData from "../../data/transport.json";
 import carerPatientWellbeingData from "../../data/carer-patient-wellbeing.json";
 import counsellingSupportData from "../../data/counselling-support-overview.json";
 import dementiaHomeSittingData from "../../data/dementia-home-sitting.json";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 
 type OverviewCard = {
@@ -24,9 +25,46 @@ type OverviewCard = {
   href: string;
 };
 
-const overview =
-  (await fetchSingletonPageJson<typeof hospiceServicesOverview>("hospice_services_overview")) ??
-  hospiceServicesOverview;
+const structuredOverview = await sanityClient.fetch(`*[_type == "hospiceServicesOverviewPage"][0]`);
+const singletonOverview =
+  (await fetchSingletonPageJson<typeof hospiceServicesOverview>("hospice_services_overview")) ?? null;
+
+const mergeOverviewCards = (
+  sourceCards: Array<Partial<OverviewCard> & { image?: unknown }> | undefined,
+  fallbackCards: OverviewCard[]
+): OverviewCard[] => {
+  const rows = sourceCards ?? fallbackCards;
+  return rows.map((card, i) => ({
+    ...(fallbackCards[i] ?? fallbackCards[0]),
+    ...card,
+    image: resolveSanityImageUrl(card.image, fallbackCards[i]?.image ?? ""),
+    imageAlt: (card.imageAlt as string) ?? fallbackCards[i]?.imageAlt ?? "",
+    title: (card.title as string) ?? fallbackCards[i]?.title ?? "",
+    excerpt: (card.excerpt as string) ?? fallbackCards[i]?.excerpt ?? "",
+    badge: (card.badge as string) ?? fallbackCards[i]?.badge ?? "",
+    ctaLabel: (card.ctaLabel as string) ?? fallbackCards[i]?.ctaLabel ?? "",
+    href: (card.href as string) ?? fallbackCards[i]?.href ?? "#",
+  }));
+};
+
+const mergeOverviewForSite = (
+  structured: typeof structuredOverview,
+  singleton: typeof singletonOverview,
+  fb: typeof hospiceServicesOverview
+) => {
+  const source = structured ?? singleton;
+  if (!source) return fb;
+  return {
+    ...fb,
+    ...source,
+    heroImage: resolveSanityImageUrl(source.heroImage, fb.heroImage),
+    introKeyFacts: source.introKeyFacts ?? fb.introKeyFacts,
+    buildingCards: mergeOverviewCards(source.buildingCards, fb.buildingCards),
+    additionalCards: mergeOverviewCards(source.additionalCards, fb.additionalCards),
+  };
+};
+
+const overview = mergeOverviewForSite(structuredOverview, singletonOverview, hospiceServicesOverview);
 
 const featuredImageByHref = new Map<string, string>([
   ["/hospice-services/nursing-care-medical-advice/", nursingCareData.heroImage],

@@ -9,8 +9,8 @@ const textListField = (name: string, title: string) =>
   });
 
 export default defineType({
-  name: "complementaryTherapiesPage",
-  title: "Complementary Therapies Page",
+  name: "transportPage",
+  title: "Transport Page",
   type: "document",
   fields: [
     defineField({ name: "pageTitle", title: "Page Title", type: "string" }),
@@ -31,11 +31,24 @@ export default defineType({
         defineField({ name: "alt", title: "Alt Text", type: "string" }),
       ],
     }),
-    defineField({ name: "benefitsHeading", title: "Benefits Heading", type: "string" }),
-    textListField("benefitsList", "Benefits List"),
-    defineField({ name: "treatmentsHeading", title: "Treatments Heading", type: "string" }),
-    defineField({ name: "treatmentsIntro", title: "Treatments Intro", type: "text", rows: 3 }),
-    textListField("treatmentsList", "Treatments List"),
+    defineField({ name: "serviceHeading", title: "Service Heading", type: "string" }),
+    defineField({ name: "serviceBody", title: "Service Body", type: "text", rows: 3 }),
+    defineField({ name: "additionalHeading", title: "Additional Heading", type: "string" }),
+    defineField({ name: "additionalIntro", title: "Additional Intro", type: "text", rows: 3 }),
+    defineField({
+      name: "additionalServices",
+      title: "Additional Services",
+      type: "array",
+      of: [
+        defineField({
+          type: "object",
+          fields: [
+            defineField({ name: "label", title: "Label", type: "string" }),
+            defineField({ name: "href", title: "URL", type: "string" }),
+          ],
+        }),
+      ],
+    }),
     defineField({ name: "referralIntro", title: "Referral Intro", type: "string" }),
     defineField({ name: "referralCta", title: "Referral CTA Label", type: "string" }),
     defineField({ name: "referralCtaHref", title: "Referral CTA URL", type: "string" }),

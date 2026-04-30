@@ -9,8 +9,8 @@ const textListField = (name: string, title: string) =>
   });
 
 export default defineType({
-  name: "complementaryTherapiesPage",
-  title: "Complementary Therapies Page",
+  name: "bereavementSupportGroupPage",
+  title: "Bereavement Support Group Page",
   type: "document",
   fields: [
     defineField({ name: "pageTitle", title: "Page Title", type: "string" }),
@@ -22,26 +22,29 @@ export default defineType({
     defineField({ name: "heroShortDescription", title: "Hero Short Description", type: "text", rows: 2 }),
     defineField({ name: "mainIntro1", title: "Intro Paragraph 1", type: "text", rows: 3 }),
     defineField({ name: "mainIntro2", title: "Intro Paragraph 2", type: "text", rows: 3 }),
+    defineField({ name: "mainIntro3", title: "Intro Paragraph 3", type: "text", rows: 3 }),
+    defineField({ name: "groupHeading", title: "Group Heading", type: "string" }),
+    textListField("groupBullets", "Group Bullets"),
+    defineField({ name: "detailsFoot", title: "Details Footnote", type: "text", rows: 3 }),
+    defineField({ name: "registerInterestIntro", title: "Register Interest Intro", type: "string" }),
+    defineField({ name: "registerInterestCta", title: "Register Interest CTA", type: "string" }),
+    defineField({ name: "registerInterestHref", title: "Register Interest URL", type: "string" }),
+    defineField({ name: "registerInterestOutro", title: "Register Interest Outro", type: "string" }),
+    defineField({ name: "sideFormLinkText", title: "Side Form Link Text", type: "string" }),
+    defineField({ name: "sideFormHint", title: "Side Form Hint", type: "text", rows: 2 }),
     defineField({
       name: "sectionImage1",
-      title: "Main Section Image",
+      title: "Section Image",
       type: "object",
       fields: [
         defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
         defineField({ name: "alt", title: "Alt Text", type: "string" }),
       ],
     }),
-    defineField({ name: "benefitsHeading", title: "Benefits Heading", type: "string" }),
-    textListField("benefitsList", "Benefits List"),
-    defineField({ name: "treatmentsHeading", title: "Treatments Heading", type: "string" }),
-    defineField({ name: "treatmentsIntro", title: "Treatments Intro", type: "text", rows: 3 }),
-    textListField("treatmentsList", "Treatments List"),
-    defineField({ name: "referralIntro", title: "Referral Intro", type: "string" }),
-    defineField({ name: "referralCta", title: "Referral CTA Label", type: "string" }),
-    defineField({ name: "referralCtaHref", title: "Referral CTA URL", type: "string" }),
-    defineField({ name: "referralOutro", title: "Referral Outro", type: "string" }),
-    defineField({ name: "sideFormLinkText", title: "Side Form Link Text", type: "string" }),
-    defineField({ name: "sideFormHint", title: "Side Form Hint", type: "text", rows: 2 }),
+    defineField({ name: "beaconAccount", title: "Beacon Account", type: "string" }),
+    defineField({ name: "beaconFormId", title: "Beacon Form ID", type: "string" }),
   ],
-  preview: { select: { title: "heroH1", subtitle: "pageTitle" } },
+  preview: {
+    select: { title: "heroH1", subtitle: "pageTitle" },
+  },
 });
