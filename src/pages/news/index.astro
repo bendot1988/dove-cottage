@@ -114,6 +114,9 @@ const feedItems = [
     };
   })
 ].sort((a, b) => b.date.getTime() - a.date.getTime());
+
+const currentFeedItems = feedItems.filter((item) => !(item.feedFilter === "event" && item.past));
+const previousEvents = feedItems.filter((item) => item.feedFilter === "event" && item.past);
 ---
 
 <BaseLayout
@@ -158,15 +161,15 @@ const feedItems = [
         </button>
       </div>
 
-      {feedItems.length === 0 ? (
+      {currentFeedItems.length === 0 ? (
         <p class="stream-empty">No news or events have been published yet.</p>
       ) : (
         <div class="feed-grid cards-grid" data-feed-grid>
-          {feedItems.map((item) => {
+          {currentFeedItems.map((item) => {
             const isEventStyle = item.type === "event" || item.eventDate != null;
             return (
             <article
-              class:list={["news-card", { "event-card": isEventStyle, "event-card--past": item.past }]}
+              class:list={["news-card", { "event-card": isEventStyle }]}
               data-feed-type={item.feedFilter}
             >
               {item.image && (
@@ -180,7 +183,6 @@ const feedItems = [
                     <p class="meta meta--tag-only">
                       <span class="category">{item.type === "event" ? "Event" : item.category}</span>
                     </p>
-                    {item.past && <p class="event-status">Past event</p>}
                     <div class="event-facts-card">
                       <div class="event-facts-card__row">
                         <p class="event-facts-card__label">Event dates</p>
@@ -203,13 +205,13 @@ const feedItems = [
                     <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
                   </p>
                 )}
-                <h3 class:list={{ "is-past": item.past }}>
+                <h3>
                   <a href={item.href}>{item.title}</a>
                 </h3>
                 <p class="excerpt">{item.excerpt}</p>
                 <a href={item.href} class="read-more">
                   <span class="read-more-text">
-                    {isEventStyle ? (item.past ? "View details" : item.type === "event" ? "View event" : "Read more") : "Read more"}
+                    {isEventStyle ? (item.type === "event" ? "View event" : "Read more") : "Read more"}
                   </span>
                   <span aria-hidden="true">→</span>
                 </a>
@@ -218,6 +220,52 @@ const feedItems = [
             );
           })}
         </div>
+      )}
+
+      {previousEvents.length > 0 && (
+        <details class="previous-events">
+          <summary>Previous events ({previousEvents.length})</summary>
+          <p class="previous-events__intro">Browse ended events and their original details.</p>
+          <div class="feed-grid cards-grid">
+            {previousEvents.map((item) => (
+              <article class="news-card event-card event-card--past">
+                {item.image && (
+                  <a href={item.href} class="thumb-link">
+                    <img src={item.image} alt="" loading="lazy" />
+                  </a>
+                )}
+                <div class="news-card-body">
+                  <p class="meta meta--tag-only">
+                    <span class="category">Event</span>
+                  </p>
+                  <p class="event-status">Previous event</p>
+                  <div class="event-facts-card">
+                    <div class="event-facts-card__row">
+                      <p class="event-facts-card__label">Event dates</p>
+                      <p class="event-facts-card__value">
+                        <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
+                      </p>
+                    </div>
+                    {item.location ? (
+                      <div class="event-facts-card__row">
+                        <p class="event-facts-card__label">Location</p>
+                        <p class="event-facts-card__value">{item.location}</p>
+                      </div>
+                    ) : null}
+                  </div>
+                  <h3>
+                    <a href={item.href}>{item.title}</a>
+                  </h3>
+                  <p class="excerpt">{item.excerpt}</p>
+                  <a href={item.href} class="read-more">
+                    <span class="read-more-text">View details</span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </details>
       )}
     </div>
   </section>
@@ -353,6 +401,41 @@ const feedItems = [
     justify-content: center;
     gap: 8px;
     margin: 0 0 18px;
+  }
+
+  .previous-events {
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 1px solid #cfdcf0;
+  }
+
+  .previous-events > summary {
+    cursor: pointer;
+    color: #15355d;
+    font-size: var(--type-body);
+    font-weight: 800;
+    list-style: none;
+  }
+
+  .previous-events > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .previous-events > summary::before {
+    content: "▸";
+    display: inline-block;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+  }
+
+  .previous-events[open] > summary::before {
+    transform: rotate(90deg);
+  }
+
+  .previous-events__intro {
+    margin: 10px 0 14px;
+    color: #4c607c;
+    font-size: var(--type-body-small);
   }
 
   .feed-filter__btn {
