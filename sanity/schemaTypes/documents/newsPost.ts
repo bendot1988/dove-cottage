@@ -22,6 +22,23 @@ export default defineType({
     defineField({ name: "eventLocation", title: "Event Location (optional)", type: "string" }),
     defineField({ name: "featuredImage", title: "Featured Image", type: "image", options: { hotspot: true } }),
     defineField({ name: "draft", title: "Draft", type: "boolean", initialValue: false }),
-    defineField({ name: "body", title: "Body", type: "array", of: [{ type: "block" }] }),
+    defineField({
+      name: "body",
+      title: "Body",
+      type: "array",
+      of: [
+        { type: "block" },
+        defineField({
+          name: "inlineImage",
+          title: "Image",
+          type: "image",
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: "alt", title: "Alt text", type: "string" }),
+            defineField({ name: "caption", title: "Caption", type: "string" }),
+          ],
+        }),
+      ],
+    }),
   ],
 });
