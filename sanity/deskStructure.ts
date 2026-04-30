@@ -1,4 +1,5 @@
 import type { StructureResolver } from "sanity/structure";
+import DeploySitePane from "./DeploySitePane";
 
 const hospiceSingletons = [
 ] as const;
@@ -30,6 +31,7 @@ export const deskStructure: StructureResolver = (S) =>
     .items([
       S.documentTypeListItem("newsPost").title("News & Events"),
       S.documentTypeListItem("newsletterIssue").title("Newsletters"),
+      S.listItem().title("Deploy Site").child(S.component().title("Deploy Site").component(DeploySitePane)),
       S.listItem()
         .title("Homepage Page")
         .child(S.document().schemaType("homepagePage").documentId("homepagePage.main")),
