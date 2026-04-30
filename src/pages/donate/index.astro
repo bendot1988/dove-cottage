@@ -30,9 +30,6 @@ const structuredDonatePage = await sanityClient.fetch(
       aboutHeading,
       aboutParagraph1,
       aboutParagraph2,
-      impactHeading,
-      impactLede,
-      impactCards,
       suggestedMethodsTitle,
       suggestedMethods
     }
@@ -45,7 +42,6 @@ const d = structuredDonatePage
       ...singletonDonate,
       ...structuredDonatePage,
       heroImage: resolveSanityImageUrl(structuredDonatePage.heroImage, singletonDonate.heroImage),
-      impactCards: structuredDonatePage.impactCards?.length ? structuredDonatePage.impactCards : singletonDonate.impactCards,
       suggestedMethods: structuredDonatePage.suggestedMethods?.length
         ? structuredDonatePage.suggestedMethods
         : singletonDonate.suggestedMethods,
@@ -73,15 +69,8 @@ const h = {
   trustCharity: toTitleCase(c.trustCharityLine),
   aboutEyebrow: toTitleCase(d.aboutEyebrow),
   aboutHeading: toTitleCase(d.aboutHeading),
-  impactHeading: toTitleCase(d.impactHeading),
   methodsTitle: toTitleCase(d.suggestedMethodsTitle)
 };
-
-const impactCards = d.impactCards.map((card) => ({
-  ...card,
-  title: toTitleCase(card.title),
-  ctaLabel: toTitleCase(card.ctaLabel)
-}));
 
 const methods = d.suggestedMethods.map((m) => ({
   ...m,
@@ -195,23 +184,6 @@ const donateFormIntro = d.donateFormIntro ?? "";
             {d.aboutParagraph2}
           </p>
 
-          <h3 class="impact-section-title">{h.impactHeading}</h3>
-          <p class="impact-lede">
-            {d.impactLede}
-          </p>
-          <div class="donate-impact-grid impact-grid" role="list">
-            {
-              impactCards.map((card) => (
-                <article class="donate-impact-card" role="listitem">
-                  <h4 class="donate-impact-card-title">{card.title}</h4>
-                  <p class="donate-impact-card-body">{card.description}</p>
-                  <a class="donate-impact-btn" href={card.ctaHref}>
-                    {card.ctaLabel}
-                  </a>
-                </article>
-              ))
-            }
-          </div>
         </div>
 
         <aside class="donate-side" aria-label={sideLabel}>
@@ -546,89 +518,6 @@ const donateFormIntro = d.donateFormIntro ?? "";
     margin-bottom: 32px;
   }
 
-  .impact-section-title {
-    margin: 0 0 8px;
-    font-size: var(--type-section-title);
-    color: #0f2240;
-    line-height: 1.2;
-  }
-
-  .impact-lede {
-    margin: 0 0 18px;
-    font-size: var(--type-body);
-    line-height: 1.55;
-    color: #3f5370;
-    max-width: 640px;
-  }
-
-  .donate-impact-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px 20px;
-  }
-
-  .donate-impact-card {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-    padding: 18px 16px 16px;
-    background: #f6f7fb;
-    border: 1px solid #e1e6f0;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(16, 38, 72, 0.05);
-    transition:
-      background-color 0.22s var(--motion-ease-out),
-      box-shadow 0.22s var(--motion-ease-out),
-      border-color 0.22s var(--motion-ease-out),
-      transform 0.22s var(--motion-ease-out);
-  }
-
-  .donate-impact-card:hover,
-  .donate-impact-card:focus-within {
-    background: #fff;
-    border-color: #d0d8e8;
-    box-shadow: 0 12px 28px rgba(16, 38, 72, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .donate-impact-card-title {
-    margin: 0 0 10px;
-    font-size: var(--type-card-title);
-    font-weight: 800;
-    color: #0f2240;
-    line-height: 1.25;
-  }
-
-  .donate-impact-card-body {
-    margin: 0 0 16px;
-    flex: 1;
-    font-size: var(--type-body);
-    line-height: 1.55;
-    color: #3f4f68;
-  }
-
-  .donate-impact-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: auto;
-    min-height: 40px;
-    padding: 0 16px;
-    align-self: flex-start;
-    font-size: var(--type-button-small);
-    font-weight: 700;
-    text-decoration: none;
-    color: #fff;
-    background: var(--color-steel-blue-1);
-    border: none;
-    border-radius: 8px;
-  }
-
-  .donate-impact-btn:hover,
-  .donate-impact-btn:focus-visible {
-    background: #164f89;
-  }
-
   .side-card {
     background: #fff;
     border: 1px solid #d9e3f0;
@@ -710,9 +599,6 @@ const donateFormIntro = d.donateFormIntro ?? "";
       order: 2;
     }
 
-    .donate-impact-grid {
-      grid-template-columns: 1fr;
-    }
   }
 
   @media (max-width: 640px) {
@@ -727,14 +613,4 @@ const donateFormIntro = d.donateFormIntro ?? "";
     }
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .donate-impact-card {
-      transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-
-    .donate-impact-card:hover,
-    .donate-impact-card:focus-within {
-      transform: none;
-    }
-  }
 </style>

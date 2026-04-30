@@ -54,9 +54,6 @@ await client.createOrReplace({
   aboutHeading: data.aboutHeading,
   aboutParagraph1: data.aboutParagraph1,
   aboutParagraph2: data.aboutParagraph2,
-  impactHeading: data.impactHeading,
-  impactLede: data.impactLede,
-  impactCards: withKeys(data.impactCards, "impact"),
   suggestedMethodsTitle: data.suggestedMethodsTitle,
   suggestedMethods: withKeys(data.suggestedMethods, "method"),
 });

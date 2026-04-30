@@ -1,12 +1,5 @@
 import { defineField, defineType } from "sanity";
 
-const impactCardFields = [
-  defineField({ name: "title", title: "Title", type: "string" }),
-  defineField({ name: "description", title: "Description", type: "text", rows: 3 }),
-  defineField({ name: "ctaLabel", title: "Button Label", type: "string" }),
-  defineField({ name: "ctaHref", title: "Button URL", type: "string" }),
-];
-
 const suggestedMethodFields = [
   defineField({ name: "icon", title: "Icon", type: "string" }),
   defineField({ name: "kicker", title: "Kicker", type: "string" }),
@@ -38,14 +31,6 @@ export default defineType({
     defineField({ name: "aboutHeading", title: "About Heading", type: "string" }),
     defineField({ name: "aboutParagraph1", title: "About Paragraph 1", type: "text", rows: 3 }),
     defineField({ name: "aboutParagraph2", title: "About Paragraph 2", type: "text", rows: 3 }),
-    defineField({ name: "impactHeading", title: "Impact Heading", type: "string" }),
-    defineField({ name: "impactLede", title: "Impact Intro", type: "text", rows: 3 }),
-    defineField({
-      name: "impactCards",
-      title: "Impact Cards",
-      type: "array",
-      of: [defineField({ type: "object", fields: impactCardFields })],
-    }),
     defineField({ name: "suggestedMethodsTitle", title: "Suggested Methods Title", type: "string" }),
     defineField({
       name: "suggestedMethods",
