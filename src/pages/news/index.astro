@@ -164,62 +164,65 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
       {currentFeedItems.length === 0 ? (
         <p class="stream-empty">No news or events have been published yet.</p>
       ) : (
-        <div class="feed-grid cards-grid" data-feed-grid>
-          {currentFeedItems.map((item) => {
-            const isEventStyle = item.type === "event" || item.eventDate != null;
-            return (
-            <article
-              class:list={["news-card", { "event-card": isEventStyle }]}
-              data-feed-type={item.feedFilter}
-            >
-              {item.image && (
-                <a href={item.href} class="thumb-link">
-                  <img src={item.image} alt="" loading="lazy" />
-                </a>
-              )}
-              <div class="news-card-body">
-                {isEventStyle ? (
-                  <>
-                    <p class="meta meta--tag-only">
-                      <span class="category">{item.type === "event" ? "Event" : item.category}</span>
-                    </p>
-                    <div class="event-facts-card">
-                      <div class="event-facts-card__row">
-                        <p class="event-facts-card__label">Event dates</p>
-                        <p class="event-facts-card__value">
-                          <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
-                        </p>
-                      </div>
-                      {item.location ? (
-                        <div class="event-facts-card__row">
-                          <p class="event-facts-card__label">Location</p>
-                          <p class="event-facts-card__value">{item.location}</p>
-                        </div>
-                      ) : null}
-                    </div>
-                  </>
-                ) : (
-                  <p class="meta">
-                    <span class="category">{item.category}</span>
-                    <span>·</span>
-                    <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
-                  </p>
+        <>
+          <p class="feed-empty-message" data-feed-empty-message hidden></p>
+          <div class="feed-grid cards-grid" data-feed-grid>
+            {currentFeedItems.map((item) => {
+              const isEventStyle = item.type === "event" || item.eventDate != null;
+              return (
+              <article
+                class:list={["news-card", { "event-card": isEventStyle }]}
+                data-feed-type={item.feedFilter}
+              >
+                {item.image && (
+                  <a href={item.href} class="thumb-link">
+                    <img src={item.image} alt="" loading="lazy" />
+                  </a>
                 )}
-                <h3>
-                  <a href={item.href}>{item.title}</a>
-                </h3>
-                <p class="excerpt">{item.excerpt}</p>
-                <a href={item.href} class="read-more">
-                  <span class="read-more-text">
-                    {isEventStyle ? (item.type === "event" ? "View event" : "Read more") : "Read more"}
-                  </span>
-                  <span aria-hidden="true">→</span>
-                </a>
-              </div>
-            </article>
-            );
-          })}
-        </div>
+                <div class="news-card-body">
+                  {isEventStyle ? (
+                    <>
+                      <p class="meta meta--tag-only">
+                        <span class="category">{item.type === "event" ? "Event" : item.category}</span>
+                      </p>
+                      <div class="event-facts-card">
+                        <div class="event-facts-card__row">
+                          <p class="event-facts-card__label">Event dates</p>
+                          <p class="event-facts-card__value">
+                            <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
+                          </p>
+                        </div>
+                        {item.location ? (
+                          <div class="event-facts-card__row">
+                            <p class="event-facts-card__label">Location</p>
+                            <p class="event-facts-card__value">{item.location}</p>
+                          </div>
+                        ) : null}
+                      </div>
+                    </>
+                  ) : (
+                    <p class="meta">
+                      <span class="category">{item.category}</span>
+                      <span>·</span>
+                      <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
+                    </p>
+                  )}
+                  <h3>
+                    <a href={item.href}>{item.title}</a>
+                  </h3>
+                  <p class="excerpt">{item.excerpt}</p>
+                  <a href={item.href} class="read-more">
+                    <span class="read-more-text">
+                      {isEventStyle ? (item.type === "event" ? "View event" : "Read more") : "Read more"}
+                    </span>
+                    <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </article>
+              );
+            })}
+          </div>
+        </>
       )}
 
       {previousEvents.length > 0 && (
@@ -276,6 +279,7 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
 
     const filterButtons = Array.from(document.querySelectorAll("[data-feed-filter]"));
     const cards = Array.from(document.querySelectorAll("[data-feed-type]"));
+    const feedEmptyMessage = document.querySelector("[data-feed-empty-message]");
 
     const applyFilter = (filter) => {
       filterButtons.forEach((btn) => {
@@ -289,6 +293,18 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
         const show = filter === "all" || type === filter;
         card.hidden = !show;
       });
+
+      if (feedEmptyMessage) {
+        const visibleCount = cards.filter((card) => !card.hidden).length;
+        if (visibleCount === 0 && filter === "event") {
+          feedEmptyMessage.innerHTML =
+            'No upcoming events at the moment. You can see our previous events below. If you are interested in starting or creating an event, please <a href="/contact/">contact us</a>.';
+          feedEmptyMessage.hidden = false;
+        } else {
+          feedEmptyMessage.hidden = true;
+          feedEmptyMessage.textContent = "";
+        }
+      }
     };
 
     if (filterButtons.length && cards.length) {
@@ -393,6 +409,22 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
     margin: 0;
     color: #4e627e;
     font-size: var(--type-body);
+  }
+
+  .feed-empty-message {
+    margin: 0 0 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #d7e2f3;
+    background: #f8fbff;
+    color: #3b4f6d;
+    font-size: var(--type-body);
+    line-height: 1.6;
+  }
+
+  .feed-empty-message a {
+    color: var(--color-steel-blue);
+    font-weight: 700;
   }
 
   .feed-filter {
