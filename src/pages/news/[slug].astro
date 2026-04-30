@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import EventKeyInfo from "../../components/EventKeyInfo.astro";
 import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 import { portableTextToHtml } from "../../lib/portableText";
+import { estimateReadingTimeLabel } from "../../lib/readTime";
 
 export async function getStaticPaths() {
   const posts = await sanityClient.fetch(`
@@ -62,6 +63,7 @@ const relatedPostsWithImage = relatedPosts.map((item) => ({
 const contentHtml = portableTextToHtml(entry.body);
 const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date();
 const heroImageUrl = featuredImageUrl || "/images/uploads/news/latest-news-featured.png";
+const readingTimeLabel = estimateReadingTimeLabel(contentHtml);
 ---
 
 <BaseLayout title={`${entry.title} | Dove Cottage`} description={entry.excerpt}>
@@ -93,6 +95,8 @@ const heroImageUrl = featuredImageUrl || "/images/uploads/news/latest-news-featu
         </time>
         <span>·</span>
         <span>{entry.author}</span>
+        <span>·</span>
+        <span>{readingTimeLabel}</span>
       </p>
       <h1>{entry.title}</h1>
     </div>

@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import EventKeyInfo from "../../components/EventKeyInfo.astro";
 import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 import { portableTextToHtml } from "../../lib/portableText";
+import { estimateReadingTimeLabel } from "../../lib/readTime";
 
 export async function getStaticPaths() {
   const events = await sanityClient.fetch(`
@@ -46,6 +47,7 @@ const isPastEvent = comparisonDate.getTime() < now.getTime();
 const contentHtml = portableTextToHtml(entry.body);
 const featuredImageUrl = resolveSanityImageUrl(entry.featuredImage, "");
 const heroImageUrl = featuredImageUrl || "/images/uploads/news/latest-news-featured.png";
+const readingTimeLabel = estimateReadingTimeLabel(contentHtml);
 ---
 
 <BaseLayout title={`${entry.title} | Dove Cottage`} description={entry.excerpt}>
@@ -67,6 +69,8 @@ const heroImageUrl = featuredImageUrl || "/images/uploads/news/latest-news-featu
       </a>
       <p class="story-hero-meta">
         <span class="story-hero-category">{entry.category}</span>
+        <span>·</span>
+        <span>{readingTimeLabel}</span>
       </p>
       {isPastEvent && <p class="past-flag">Past event</p>}
       <h1 class:list={{ "is-past": isPastEvent }}>{entry.title}</h1>
