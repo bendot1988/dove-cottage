@@ -1,5 +1,25 @@
 import { defineField, defineType } from "sanity";
 
+const imageSourceField = (name: string, title: string) =>
+  defineField({
+    name,
+    title,
+    type: "object",
+    fields: [
+      defineField({
+        name: "image",
+        title: "Uploaded image",
+        type: "image",
+        options: { hotspot: true },
+      }),
+      defineField({
+        name: "legacyUrl",
+        title: "Legacy URL/Path",
+        type: "string",
+      }),
+    ],
+  });
+
 export default defineType({
   name: "meetTheTeamPage",
   title: "Meet The Team Page",
@@ -7,7 +27,7 @@ export default defineType({
   fields: [
     defineField({ name: "pageTitle", title: "Page Title", type: "string" }),
     defineField({ name: "metaDescription", title: "Meta Description", type: "text", rows: 3 }),
-    defineField({ name: "heroImage", title: "Hero Image URL/Path", type: "string" }),
+    imageSourceField("heroImage", "Hero Image"),
     defineField({ name: "heroImageAlt", title: "Hero Image Alt", type: "string" }),
     defineField({ name: "parentNavLabel", title: "Back Link Label", type: "string" }),
     defineField({ name: "parentNavHref", title: "Back Link URL", type: "string" }),
@@ -36,7 +56,7 @@ export default defineType({
                   fields: [
                     defineField({ name: "name", title: "Name", type: "string" }),
                     defineField({ name: "jobTitle", title: "Job Title", type: "string" }),
-                    defineField({ name: "photo", title: "Photo URL/Path", type: "string" }),
+                    imageSourceField("photo", "Photo"),
                     defineField({ name: "photoAlt", title: "Photo Alt", type: "string" }),
                   ],
                 }),
@@ -76,7 +96,7 @@ export default defineType({
             defineField({ name: "rating", title: "Rating (1-5)", type: "number" }),
             defineField({ name: "authorName", title: "Author Name", type: "string" }),
             defineField({ name: "authorRole", title: "Author Role", type: "string" }),
-            defineField({ name: "authorPhoto", title: "Author Photo URL/Path", type: "string" }),
+            imageSourceField("authorPhoto", "Author Photo"),
             defineField({ name: "authorPhotoAlt", title: "Author Photo Alt", type: "string" }),
           ],
         }),
@@ -84,6 +104,6 @@ export default defineType({
     }),
   ],
   preview: {
-    select: { title: "heroH1", subtitle: "pageTitle" },
+    select: { title: "heroH1", subtitle: "pageTitle", media: "heroImage.image" },
   },
 });

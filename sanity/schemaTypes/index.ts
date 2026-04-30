@@ -30,6 +30,8 @@ import supportUsOverviewPage from "./documents/supportUsOverviewPage";
 import leaveGiftInWillPage from "./documents/leaveGiftInWillPage";
 import shopsOverviewPage from "./documents/shopsOverviewPage";
 import hireOurFacilitiesPage from "./documents/hireOurFacilitiesPage";
+import meetTheTeamPage from "./documents/meetTheTeamPage";
+import ourFacilitiesPage from "./documents/ourFacilitiesPage";
 import singletonPage from "./documents/singletonPage";
 import shop from "./documents/shop";
 import { imageWithAlt, linkItem, textBullet } from "./objects/shared";
@@ -67,6 +69,8 @@ export const schemaTypes = [
   leaveGiftInWillPage,
   shopsOverviewPage,
   hireOurFacilitiesPage,
+  meetTheTeamPage,
+  ourFacilitiesPage,
   singletonPage,
   shop,
   linkItem,

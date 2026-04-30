@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import fallbackData from "../../../data/meet-the-team.json";
-import { sanityClient } from "../../../lib/sanity";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
@@ -21,7 +21,38 @@ const structuredData = await sanityClient.fetch(`
   }
 `);
 const singletonData = (await fetchSingletonPageJson<typeof fallbackData>("meet_the_team")) ?? null;
-const data = structuredData ?? singletonData ?? fallbackData;
+const data = {
+  ...fallbackData,
+  ...(singletonData ?? {}),
+  ...(structuredData ?? {}),
+  heroImage: resolveSanityImageUrl(
+    structuredData?.heroImage?.image,
+    structuredData?.heroImage?.legacyUrl || singletonData?.heroImage || fallbackData.heroImage
+  ),
+  teamGroups:
+    structuredData?.teamGroups?.map((group, groupIndex) => ({
+      ...group,
+      _key: group._key || `group-${groupIndex}`,
+      members: (group.members ?? []).map((member, memberIndex) => ({
+        ...member,
+        _key: member._key || `member-${groupIndex}-${memberIndex}`,
+        photo: resolveSanityImageUrl(member?.photo?.image, member?.photo?.legacyUrl || member?.photo || ""),
+      })),
+    })) ??
+    singletonData?.teamGroups ??
+    fallbackData.teamGroups,
+  testimonials:
+    structuredData?.testimonials?.map((item, idx) => ({
+      ...item,
+      _key: item._key || `testimonial-${idx}`,
+      authorPhoto: resolveSanityImageUrl(
+        item?.authorPhoto?.image,
+        item?.authorPhoto?.legacyUrl || item?.authorPhoto || ""
+      ),
+    })) ??
+    singletonData?.testimonials ??
+    fallbackData.testimonials,
+};
 ---
 
 <BaseLayout title={data.pageTitle} description={data.metaDescription}>

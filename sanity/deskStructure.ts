@@ -38,6 +38,18 @@ export const deskStructure: StructureResolver = (S) =>
         .title("Hire Our Facilities")
         .child(S.document().schemaType("hireOurFacilitiesPage").documentId("hireOurFacilitiesPage.main")),
       S.listItem()
+        .title("About Us")
+        .child(
+          S.list().title("About Us").items([
+            S.listItem()
+              .title("Our Team")
+              .child(S.document().schemaType("meetTheTeamPage").documentId("meetTheTeamPage.main")),
+            S.listItem()
+              .title("Our Facilities")
+              .child(S.document().schemaType("ourFacilitiesPage").documentId("ourFacilitiesPage.main")),
+          ])
+        ),
+      S.listItem()
         .title("Hospice Services")
         .child(
           S.list().title("Hospice Services").items([
