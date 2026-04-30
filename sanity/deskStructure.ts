@@ -28,8 +28,7 @@ export const deskStructure: StructureResolver = (S) =>
   S.list()
     .title("Content")
     .items([
-      S.documentTypeListItem("newsPost").title("News"),
-      S.documentTypeListItem("eventPost").title("Events"),
+      S.documentTypeListItem("newsPost").title("News & Events"),
       S.documentTypeListItem("newsletterIssue").title("Newsletters"),
       S.listItem()
         .title("Homepage Page")
