@@ -36,6 +36,9 @@ export const deskStructure: StructureResolver = (S) =>
         .title("Homepage Page")
         .child(S.document().schemaType("homepagePage").documentId("homepagePage.main")),
       S.listItem()
+        .title("Hire Our Facilities")
+        .child(S.document().schemaType("hireOurFacilitiesPage").documentId("hireOurFacilitiesPage.main")),
+      S.listItem()
         .title("Hospice Services")
         .child(
           S.list().title("Hospice Services").items([

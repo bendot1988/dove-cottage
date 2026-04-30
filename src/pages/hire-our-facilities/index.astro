@@ -6,12 +6,67 @@ import p from "../../data/hire-our-facilities.json";
 import contact from "../../data/contact.json";
 import { toTitleCase } from "../../lib/titleCase";
 import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 
-const pageData = (await fetchSingletonPageJson<typeof p>("hire_our_facilities")) ?? p;
+const structuredPageData = await sanityClient.fetch(`
+  *[_type == "hireOurFacilitiesPage"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    introBlocks,
+    sections,
+    impactHeading,
+    impactBody,
+    formHeading,
+    formIntro,
+    sideFormLinkText,
+    sideFormHint,
+    sidebarPeekTitle,
+    sidebarPeekViewAllHref,
+    sidebarPeekViewAllLabel,
+    sidebarPeekCards,
+    gallerySections
+  }
+`);
+const singletonPageData = (await fetchSingletonPageJson<typeof p>("hire_our_facilities")) ?? null;
+const pageData = {
+  ...p,
+  ...(singletonPageData ?? {}),
+  ...(structuredPageData ?? {}),
+};
 const c = (await fetchSingletonPageJson<typeof contact>("contact")) ?? contact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
-const layoutTitle = pageData.pageTitle
+const imageUrlFromField = (
+  value?: { image?: unknown; legacyUrl?: string } | string | null,
+  fallback = ""
+) => {
+  if (typeof value === "string") return value || fallback;
+  if (!value) return fallback;
+  return resolveSanityImageUrl(value.image, value.legacyUrl || fallback);
+};
+
+const sectionGalleryRows = Array.isArray(pageData.gallerySections) ? pageData.gallerySections : [];
+const sectionGalleries = new Map(
+  sectionGalleryRows.map((gallery) => [
+    gallery.heading,
+    (gallery.images ?? []).map((image) => ({
+      src: imageUrlFromField(image?.image, image?.src || ""),
+      alt: image?.alt || "",
+    })),
+  ])
+);
+
+const sidebarPeekCards = (pageData.sidebarPeekCards ?? []).map((card) => ({
+  ...card,
+  image: imageUrlFromField(card.image, typeof card.image === "string" ? card.image : ""),
+}));
+
+const layoutTitle = (pageData.pageTitle || p.pageTitle)
   .split(/\s*\|\s*/)
   .map((part) => toTitleCase(part.trim()))
   .join(" | ");
@@ -20,14 +75,19 @@ const asideTitle = toTitleCase("Get in touch");
 const phoneLabel = toTitleCase("Phone");
 const formLabel = toTitleCase("Enquiry");
 const line = (row: { text: string } | string) => (typeof row === "string" ? row : row.text);
-const introBlocks = [pageData.mainIntro1, pageData.mainIntro2, pageData.mainIntro3, pageData.mainIntro4].filter((block) => block?.trim().length);
-const sectionGalleries = new Map((pageData.gallerySections ?? []).map((gallery) => [gallery.heading, gallery.images]));
+const introBlocks =
+  Array.isArray(pageData.introBlocks) && pageData.introBlocks.length > 0
+    ? pageData.introBlocks
+    : [pageData.mainIntro1, pageData.mainIntro2, pageData.mainIntro3, pageData.mainIntro4];
+const introParagraphs = introBlocks.filter((block) => block?.trim().length);
+const heroImageSrc = imageUrlFromField(pageData.heroImage, p.heroImage);
+const sections = Array.isArray(pageData.sections) ? pageData.sections : p.sections;
 ---
 
 <BaseLayout title={layoutTitle} description={pageData.heroShortDescription}>
   <div class="svc-page">
     <section class="hospice-svc-hero" aria-label={pageData.heroH1}>
-      <img class="hospice-svc-hero-bg" src={pageData.heroImage} alt={pageData.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
+      <img class="hospice-svc-hero-bg" src={heroImageSrc} alt={pageData.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
       <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
       <div class="container hospice-svc-hero-inner">
         <a class="interior-hero-eyebrow" href={pageData.parentNavHref}>
@@ -45,10 +105,10 @@ const sectionGalleries = new Map((pageData.gallerySections ?? []).map((gallery) 
         <img src="/images/sunflower-brand-small.png" alt="" class="svc-sunflower" loading="lazy" aria-hidden="true" />
         <div class="container svc-layout">
           <div class="svc-primary">
-            {introBlocks.map((para) => <p class="svc-lede">{para}</p>)}
+            {introParagraphs.map((para) => <p class="svc-lede">{para}</p>)}
 
             {
-              pageData.sections.map((section) => (
+              sections.map((section) => (
                 <div class="svc-card" role="group" aria-label={section.heading}>
                   <h2 class="svc-card__title">{section.heading}</h2>
                   {section.subheading && <p class="svc-body svc-body--strong">{section.subheading}</p>}
@@ -143,7 +203,7 @@ const sectionGalleries = new Map((pageData.gallerySections ?? []).map((gallery) 
               <p class="side-charity">{toTitleCase(c.sideCharityFooter)}</p>
             </div>
             <ArchiveSidebarPeek
-              staticCards={pageData.sidebarPeekCards}
+              staticCards={sidebarPeekCards}
               staticTitle={pageData.sidebarPeekTitle}
               staticViewAllHref={pageData.sidebarPeekViewAllHref}
               staticViewAllLabel={pageData.sidebarPeekViewAllLabel}

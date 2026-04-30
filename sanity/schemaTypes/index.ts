@@ -27,6 +27,7 @@ import ourCorporatePartnersPage from "./documents/ourCorporatePartnersPage";
 import supportUsOverviewPage from "./documents/supportUsOverviewPage";
 import leaveGiftInWillPage from "./documents/leaveGiftInWillPage";
 import shopsOverviewPage from "./documents/shopsOverviewPage";
+import hireOurFacilitiesPage from "./documents/hireOurFacilitiesPage";
 import singletonPage from "./documents/singletonPage";
 import shop from "./documents/shop";
 import { imageWithAlt, linkItem, textBullet } from "./objects/shared";
@@ -61,6 +62,7 @@ export const schemaTypes = [
   supportUsOverviewPage,
   leaveGiftInWillPage,
   shopsOverviewPage,
+  hireOurFacilitiesPage,
   singletonPage,
   shop,
   linkItem,
