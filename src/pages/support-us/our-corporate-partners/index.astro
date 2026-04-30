@@ -3,7 +3,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import fallbackData from "../../../data/our-corporate-partners.json";
 import fallbackContact from "../../../data/contact.json";
-import { sanityClient } from "../../../lib/sanity";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
@@ -30,6 +30,16 @@ const singletonData =
 const data = structuredData ?? singletonData ?? fallbackData;
 const contact = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
+const partners = data.partners.map((partner) => {
+  const legacyLogo = typeof partner.logo === "object" && partner.logo !== null ? partner.logo.legacyUrl || "" : "";
+  return {
+    ...partner,
+    logo: resolveSanityImageUrl(
+      typeof partner.logo === "object" && partner.logo !== null ? partner.logo.image ?? partner.logo : partner.logo,
+      legacyLogo || (typeof partner.logo === "string" ? partner.logo : "")
+    ),
+  };
+});
 ---
 
 <BaseLayout title={data.pageTitle} description={data.metaDescription}>
@@ -70,7 +80,7 @@ const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
             <p class="svc-lede">{data.introParagraph2}</p>
 
             <div class="partner-grid">
-              {data.partners.map((partner) => (
+              {partners.map((partner) => (
                 <article class="partner-card">
                   <a href={partner.website} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${partner.name} website`}>
                     <img src={partner.logo} alt={partner.logoAlt || `${partner.name} logo`} loading="lazy" decoding="async" />

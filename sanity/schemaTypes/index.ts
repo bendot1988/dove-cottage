@@ -20,6 +20,13 @@ import bottesfordShopPage from "./documents/bottesfordShopPage";
 import stathernShopPage from "./documents/stathernShopPage";
 import asfordbyShopPage from "./documents/asfordbyShopPage";
 import makeDonationPage from "./documents/makeDonationPage";
+import volunteerYourTimePage from "./documents/volunteerYourTimePage";
+import fundraiseForUsPage from "./documents/fundraiseForUsPage";
+import corporatePartnershipsPage from "./documents/corporatePartnershipsPage";
+import ourCorporatePartnersPage from "./documents/ourCorporatePartnersPage";
+import supportUsOverviewPage from "./documents/supportUsOverviewPage";
+import leaveGiftInWillPage from "./documents/leaveGiftInWillPage";
+import shopsOverviewPage from "./documents/shopsOverviewPage";
 import singletonPage from "./documents/singletonPage";
 import shop from "./documents/shop";
 import { imageWithAlt, linkItem, textBullet } from "./objects/shared";
@@ -47,6 +54,13 @@ export const schemaTypes = [
   stathernShopPage,
   asfordbyShopPage,
   makeDonationPage,
+  volunteerYourTimePage,
+  fundraiseForUsPage,
+  corporatePartnershipsPage,
+  ourCorporatePartnersPage,
+  supportUsOverviewPage,
+  leaveGiftInWillPage,
+  shopsOverviewPage,
   singletonPage,
   shop,
   linkItem,

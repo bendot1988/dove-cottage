@@ -1,24 +1,73 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
+import fallbackData from "../../../data/leave-a-gift-in-your-will.json";
 import fallbackContact from "../../../data/contact.json";
+import { sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
+const structuredData = await sanityClient.fetch(`
+  *[_type == "leaveGiftInWillPage" && _id == "leaveGiftInWillPage.main"][0]{
+    pageTitle,
+    metaDescription,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    lastingGiftHeading,
+    lastingGiftParagraphs,
+    legacyHeading,
+    legacyParagraphs,
+    typesHeading,
+    typesParagraphs,
+    typesList,
+    whyHeading,
+    whyParagraphs,
+    makingHeading,
+    makingParagraphs,
+    freeWillTitle,
+    freeWillParagraphs,
+    freeWillCtaLabel,
+    freeWillCtaHref,
+    codicilsHeading,
+    codicilsParagraphs
+  }
+`);
+const normalizeParagraphs = (items) =>
+  Array.isArray(items)
+    ? items.map((item) => (typeof item === "string" ? item : item?.text || "")).filter(Boolean)
+    : [];
+const data = structuredData
+  ? {
+      ...fallbackData,
+      ...structuredData,
+      lastingGiftParagraphs: normalizeParagraphs(structuredData.lastingGiftParagraphs),
+      legacyParagraphs: normalizeParagraphs(structuredData.legacyParagraphs),
+      typesParagraphs: normalizeParagraphs(structuredData.typesParagraphs),
+      typesList: normalizeParagraphs(structuredData.typesList),
+      whyParagraphs: normalizeParagraphs(structuredData.whyParagraphs),
+      makingParagraphs: normalizeParagraphs(structuredData.makingParagraphs),
+      freeWillParagraphs: normalizeParagraphs(structuredData.freeWillParagraphs),
+      codicilsParagraphs: normalizeParagraphs(structuredData.codicilsParagraphs),
+    }
+  : fallbackData;
 const contact = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
 ---
 
 <BaseLayout
-  title="Leave a Gift in Your Will | Support Us | Dove Cottage"
-  description="Learn how to leave a legacy gift to Dove Cottage Day Hospice and help fund compassionate local care for future generations."
+  title={data.pageTitle}
+  description={data.metaDescription}
 >
   <div class="svc-page legacy-page">
-    <section class="hospice-svc-hero" aria-label="Leave a Gift in Your Will">
+    <section class="hospice-svc-hero" aria-label={data.heroH1}>
       <img
         class="hospice-svc-hero-bg"
-        src="/images/uploads/support-us/leave-a-gift-in-your-will-featured.png"
-        alt="Person signing a will beside glasses and a model house"
+        src={data.heroImage}
+        alt={data.heroImageAlt}
         width="1920"
         height="720"
         loading="eager"
@@ -26,13 +75,13 @@ const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
       />
       <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
       <div class="container hospice-svc-hero-inner">
-        <a class="interior-hero-eyebrow" href="/support-us/">
+        <a class="interior-hero-eyebrow" href={data.parentNavHref}>
           <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
-          {toTitleCase("Support us")}
+          {toTitleCase(data.parentNavLabel)}
         </a>
-        <h1>Leave a Gift in Your Will</h1>
+        <h1>{data.heroH1}</h1>
         <p class="hospice-svc-hero-dek">
-          A legacy gift can help ensure local families continue receiving specialist hospice care for years to come.
+          {data.heroShortDescription}
         </p>
       </div>
     </section>
@@ -48,96 +97,41 @@ const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
         />
         <div class="container svc-layout">
           <div class="svc-primary">
-            <h2 class="svc-section-h2">A Lasting Gift</h2>
-            <p class="svc-lede">
-              The work of Dove Cottage Day Hospice relies on the generosity of people who believe their giving can
-              make a difference - if not in life, then in death, to those who are suffering now.
-            </p>
-            <p class="svc-lede">
-              By making a will, you can ensure that your wishes, and the people and causes you care about, are
-              provided for.
-            </p>
+            <h2 class="svc-section-h2">{data.lastingGiftHeading}</h2>
+            {data.lastingGiftParagraphs.map((paragraph) => <p class="svc-lede">{paragraph}</p>)}
 
-            <h2 class="svc-section-h2">What Exactly Is a Legacy?</h2>
-            <p class="svc-lede">
-              A legacy is a gift that you choose to pass on to someone after you have died. It can be either a
-              physical item or an amount of money. The details of the legacy should be stated in your will.
-            </p>
+            <h2 class="svc-section-h2">{data.legacyHeading}</h2>
+            {data.legacyParagraphs.map((paragraph) => <p class="svc-lede">{paragraph}</p>)}
 
-            <h2 class="svc-section-h2">Types of Legacy</h2>
-            <p class="svc-lede">
-              There are several types of legacy and any solicitor will advise you on what type of legacy would be
-              suitable for your circumstances. You do not have to be rich to make an affordable gift and it can reduce
-              any inheritance tax liability for your family.
-            </p>
+            <h2 class="svc-section-h2">{data.typesHeading}</h2>
+            {data.typesParagraphs.map((paragraph) => <p class="svc-lede">{paragraph}</p>)}
             <ul class="legacy-list">
-              <li>
-                A residual legacy, in which the rest of your estate, after debts and expenses have been paid, is left
-                either in entirety or shared among named beneficiaries.
-              </li>
-              <li>A specific cash sum, often linked to inflation.</li>
-              <li>An item of property, such as a house, shares, or a piece of jewellery.</li>
+              {data.typesList.map((item) => <li>{item}</li>)}
             </ul>
 
-            <h2 class="svc-section-h2">Why Leave a Legacy to Dove Cottage Day Hospice?</h2>
-            <p class="svc-lede">
-              Leaving a legacy in your will is one of the best ways of ensuring that we can continue our valuable
-              work. It costs around <strong>GBP 740,000 a year</strong> to keep our hospice services running, and a
-              massive <strong>96%</strong> of this is funded through donations from the community.
-            </p>
+            <h2 class="svc-section-h2">{data.whyHeading}</h2>
+            {data.whyParagraphs.map((paragraph) => <p class="svc-lede">{paragraph}</p>)}
 
-            <h2 class="svc-section-h2">Making a Will</h2>
-            <p class="svc-lede">
-              For the sake of your dependents and to ensure that your wishes are met regarding your estate, it is
-              important for everyone to make a will. It is easy to incorporate a legacy in this process if you choose
-              to do so.
-            </p>
+            <h2 class="svc-section-h2">{data.makingHeading}</h2>
+            {data.makingParagraphs.map((paragraph) => <p class="svc-lede">{paragraph}</p>)}
 
             <div class="svc-card legacy-highlight">
-              <h3 class="svc-card__subtitle">Free Will Service</h3>
-              <p class="svc-body">
-                We have partnered with FreeWills to give you the opportunity to make your fully comprehensive,
-                legally-binding will for free.
-              </p>
-              <p class="svc-body">
-                You can make your personalised will online in three simple steps, from the comfort of your own home,
-                with added reassurance that your will is checked, vetted, and approved by a solicitor.
-              </p>
-              <p class="svc-body">
-                This service is available to anyone, and you are under no obligation to leave a gift to us if you use
-                it.
-              </p>
-              <p class="svc-body">
-                If you do choose to leave a gift, a legacy of any size can help ensure we continue to support local
-                families living with life-limiting conditions.
-              </p>
+              <h3 class="svc-card__subtitle">{data.freeWillTitle}</h3>
+              {data.freeWillParagraphs.map((paragraph) => <p class="svc-body">{paragraph}</p>)}
               <p class="svc-body">
                 <a
                   class="svc-inline-link"
-                  href="https://www.freewills.co.uk/charity/dovecottage"
+                  href={data.freeWillCtaHref}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Visit FreeWills to Start Your Will
+                  {data.freeWillCtaLabel}
                 </a>
               </p>
             </div>
 
-            <h2 class="svc-section-h2">Codicils</h2>
-            <p class="svc-lede">
-              If you have already made a will and now wish to consider leaving a legacy, then it is possible to add a
-              codicil, which is a new clause to your original will.
-            </p>
-            <p class="svc-lede">
-              Codicils can be added to an existing will for minor changes. These must be signed and witnessed in the
-              same way as the will, but the witnesses need not be the same as for the original will. The codicil
-              should then be kept with your existing will.
-            </p>
-            <p class="svc-lede">
-              If anything substantial needs to be changed, you should make a new will revoking the former one. Never
-              make alterations on the original document: either add a codicil or make a new will. We always recommend
-              using a qualified solicitor when making changes to your will.
-            </p>
+            <h2 class="svc-section-h2">{data.codicilsHeading}</h2>
+            {data.codicilsParagraphs.map((paragraph) => <p class="svc-lede">{paragraph}</p>)}
           </div>
 
           <aside class="svc-side" aria-label={toTitleCase("Get in touch")}>

@@ -123,6 +123,29 @@ export const deskStructure: StructureResolver = (S) =>
             S.listItem()
               .title("Make a Donation")
               .child(S.document().schemaType("makeDonationPage").documentId("makeDonationPage.main")),
+            S.listItem()
+              .title("Volunteer Your Time")
+              .child(S.document().schemaType("volunteerYourTimePage").documentId("volunteerYourTimePage.main")),
+            S.listItem()
+              .title("Leave a Gift in Your Will")
+              .child(S.document().schemaType("leaveGiftInWillPage").documentId("leaveGiftInWillPage.main")),
+            S.listItem()
+              .title("Fundraise for Us")
+              .child(S.document().schemaType("fundraiseForUsPage").documentId("fundraiseForUsPage.main")),
+            S.listItem()
+              .title("Visit Our Shops (Overview)")
+              .child(S.document().schemaType("shopsOverviewPage").documentId("shopsOverviewPage.main")),
+            S.listItem()
+              .title("Become a Corporate Partner")
+              .child(
+                S.document().schemaType("corporatePartnershipsPage").documentId("corporatePartnershipsPage.main")
+              ),
+            S.listItem()
+              .title("Our Corporate Partners")
+              .child(S.document().schemaType("ourCorporatePartnersPage").documentId("ourCorporatePartnersPage.main")),
+            S.listItem()
+              .title("Support Us Overview")
+              .child(S.document().schemaType("supportUsOverviewPage").documentId("supportUsOverviewPage.main")),
           ])
         ),
     ]);

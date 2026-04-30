@@ -23,6 +23,22 @@ const [cotgravePage, bottesfordPage, stathernPage, asfordbyPage] = await Promise
   ),
 ]);
 
+const shopsOverviewPage = await sanityClient.fetch(
+  `*[_type == "shopsOverviewPage" && _id == "shopsOverviewPage.main"][0]{
+    pageTitle,
+    metaDescription,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    introEyebrow,
+    introHeading,
+    intro
+  }`
+);
+
 const structuredBySlug: Record<string, any> = {
   cotgrave: cotgravePage,
   bottesford: bottesfordPage,
@@ -46,18 +62,21 @@ const shops = collectionShops.map((shop) => {
   };
 });
 
-const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Every purchase helps us continue to provide free specialist care.";
+const intro = shopsOverviewPage?.intro || "Visit our charity shops to support Dove Cottage Day Hospice. Every purchase helps us continue to provide free specialist care.";
 ---
 
 <BaseLayout
-  title="Our Shops | Dove Cottage"
-  description="Find your nearest Dove Cottage charity shop and support local hospice care through every purchase."
+  title={shopsOverviewPage?.pageTitle || "Our Shops | Dove Cottage"}
+  description={
+    shopsOverviewPage?.metaDescription ||
+    "Find your nearest Dove Cottage charity shop and support local hospice care through every purchase."
+  }
 >
   <section class="hospice-svc-hero" aria-label="Our Shops">
     <img
       class="hospice-svc-hero-bg"
-      src="/images/uploads/shops/shops-featured-asfordby.png"
-      alt="Dove Cottage charity shop storefront in Asfordby"
+      src={shopsOverviewPage?.heroImage || "/images/uploads/shops/shops-featured-asfordby.png"}
+      alt={shopsOverviewPage?.heroImageAlt || "Dove Cottage charity shop storefront in Asfordby"}
       width="1920"
       height="720"
       loading="eager"
@@ -65,12 +84,12 @@ const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Ever
     />
     <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
     <div class="container hospice-svc-hero-inner">
-      <a class="interior-hero-eyebrow" href="/support-us/">
+      <a class="interior-hero-eyebrow" href={shopsOverviewPage?.parentNavHref || "/support-us/"}>
         <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
-        Support Us
+        {shopsOverviewPage?.parentNavLabel || "Support Us"}
       </a>
-      <h1>Our Shops</h1>
-      <p class="hospice-svc-hero-dek">{intro}</p>
+      <h1>{shopsOverviewPage?.heroH1 || "Our Shops"}</h1>
+      <p class="hospice-svc-hero-dek">{shopsOverviewPage?.heroShortDescription || intro}</p>
     </div>
   </section>
 
@@ -78,8 +97,8 @@ const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Ever
   <section class="shops-listing">
     <div class="container">
       <header class="shops-intro">
-        <p class="shops-eyebrow">Find your local shop</p>
-        <h2>Visit Us in Person</h2>
+        <p class="shops-eyebrow">{shopsOverviewPage?.introEyebrow || "Find your local shop"}</p>
+        <h2>{shopsOverviewPage?.introHeading || "Visit Us in Person"}</h2>
         <p class="intro">{intro}</p>
       </header>
       {shops.length === 0 ? (

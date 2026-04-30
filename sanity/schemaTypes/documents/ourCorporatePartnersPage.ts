@@ -26,7 +26,30 @@ export default defineType({
           type: "object",
           fields: [
             defineField({ name: "name", title: "Name", type: "string" }),
-            defineField({ name: "logo", title: "Logo URL/Path", type: "string" }),
+            defineField({
+              name: "logo",
+              title: "Logo",
+              type: "object",
+              fields: [
+                defineField({ name: "image", title: "Uploaded image", type: "image", options: { hotspot: true } }),
+                defineField({
+                  name: "legacyUrl",
+                  title: "Legacy URL/Path",
+                  type: "string",
+                  description: "Old migration value. Prefer uploading a proper image instead.",
+                }),
+              ],
+              preview: {
+                select: { media: "image", legacyUrl: "legacyUrl" },
+                prepare({ media, legacyUrl }) {
+                  return {
+                    title: "Partner logo",
+                    subtitle: legacyUrl ? `Legacy: ${legacyUrl}` : "Uploaded image",
+                    media,
+                  };
+                },
+              },
+            }),
             defineField({ name: "logoAlt", title: "Logo Alt", type: "string" }),
             defineField({ name: "website", title: "Website", type: "string" }),
           ],

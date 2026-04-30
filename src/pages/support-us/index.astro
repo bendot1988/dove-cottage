@@ -1,9 +1,25 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import supportUsOverview from "../../data/support-us-overview.json";
+import { sanityClient } from "../../lib/sanity";
 import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 
-const data = (await fetchSingletonPageJson<typeof supportUsOverview>("support_us_overview")) ?? supportUsOverview;
+const structuredData = await sanityClient.fetch(`
+  *[_type == "supportUsOverviewPage" && _id == "supportUsOverviewPage.main"][0]{
+    pageTitle,
+    heroImage,
+    heroImageAlt,
+    parentNavLabel,
+    parentNavHref,
+    heroH1,
+    heroShortDescription,
+    introEyebrow,
+    introHeading,
+    cards
+  }
+`);
+const singletonData = (await fetchSingletonPageJson<typeof supportUsOverview>("support_us_overview")) ?? null;
+const data = structuredData ?? singletonData ?? supportUsOverview;
 ---
 
 <BaseLayout title={data.pageTitle} description={data.heroShortDescription}>
