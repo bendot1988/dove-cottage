@@ -29,6 +29,10 @@ const structuredHomepage = await sanityClient.fetch(`
 const singletonHomepage =
   (await fetchSingletonPageJson<typeof fallbackHomepage>("homepage-content")) ?? null;
 
+const DEFAULT_VINTED_URL =
+  "https://www.vinted.co.uk/member/252874220?fbclid=IwY2xjawQ4pd9leHRuA2FlbQIxMABicmlkETFJdGhyNEREbkhVVFdOemJuc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHi00iNDgOAYkIWBCIO2gz7E0lGbWoqMMkaJKvTCL6QZLgYkElq5qttzhr_5Z_aem_EU0jUNIxlOzWEsOvaSEbsA";
+const DEFAULT_EBAY_URL = "https://www.charity.ebay.co.uk/charity/i/Dove-Cottage-Day-Hospice/99401";
+
 function mergeHomepageForSite(
   structured: typeof structuredHomepage,
   singleton: typeof singletonHomepage,
@@ -59,6 +63,18 @@ function mergeHomepageForSite(
     shopsSection: {
       ...fb.shopsSection,
       ...src.shopsSection,
+      vintedUrl:
+        src.shopsSection?.vintedUrl && src.shopsSection.vintedUrl !== "#"
+          ? src.shopsSection.vintedUrl
+          : fb.shopsSection.vintedUrl && fb.shopsSection.vintedUrl !== "#"
+            ? fb.shopsSection.vintedUrl
+            : DEFAULT_VINTED_URL,
+      ebayUrl:
+        src.shopsSection?.ebayUrl && src.shopsSection.ebayUrl !== "#"
+          ? src.shopsSection.ebayUrl
+          : fb.shopsSection.ebayUrl && fb.shopsSection.ebayUrl !== "#"
+            ? fb.shopsSection.ebayUrl
+            : DEFAULT_EBAY_URL,
       sunflowerImage: resolveSanityImageUrl(src.shopsSection?.sunflowerImage, fb.shopsSection.sunflowerImage)
     },
     reachSection: {

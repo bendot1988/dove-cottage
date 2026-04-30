@@ -1,10 +1,53 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { sanityClient } from "../../lib/sanity";
 
-const entries = (await getCollection("newsletters", ({ data }) => !data.draft)).sort(
+const sanityEntries = await sanityClient.fetch(`
+  *[_type == "newsletterIssue" && !coalesce(draft, false)] | order(issueDate desc) {
+    title,
+    issueDate,
+    fileLabel,
+    excerpt,
+    externalLink,
+    file{
+      legacyUrl,
+      assetFile{
+        asset->{url}
+      }
+    }
+  }
+`);
+
+const fallbackEntries = (await getCollection("newsletters", ({ data }) => !data.draft)).sort(
   (a, b) => b.data.issueDate.getTime() - a.data.issueDate.getTime()
 );
+
+const entries =
+  sanityEntries.length > 0
+    ? sanityEntries
+        .map((entry) => {
+          const fileUrl = entry.file?.assetFile?.asset?.url || entry.file?.legacyUrl || "";
+          const href = entry.externalLink?.trim() || fileUrl;
+          if (!href) return null;
+          return {
+            title: entry.title,
+            issueDate: new Date(entry.issueDate),
+            fileLabel: entry.fileLabel || "Open newsletter",
+            excerpt: entry.excerpt,
+            href,
+            isExternal: Boolean(entry.externalLink?.trim()),
+          };
+        })
+        .filter(Boolean)
+    : fallbackEntries.map((entry) => ({
+        title: entry.data.title,
+        issueDate: entry.data.issueDate,
+        fileLabel: entry.data.fileLabel,
+        excerpt: entry.data.excerpt,
+        href: entry.data.file,
+        isExternal: false,
+      }));
 
 const dateLabel = (d: Date) =>
   d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
@@ -41,13 +84,19 @@ const dateLabel = (d: Date) =>
           <ul class="nl-grid">
             {entries.map((entry) => (
               <li class="nl-card">
-                <h2 class="nl-card-title">{entry.data.title}</h2>
+                <h2 class="nl-card-title">{entry.title}</h2>
                 <p class="nl-card-meta">
-                  <time datetime={entry.data.issueDate.toISOString()}>{dateLabel(entry.data.issueDate)}</time>
+                  <time datetime={entry.issueDate.toISOString()}>{dateLabel(entry.issueDate)}</time>
                 </p>
-                {entry.data.excerpt && <p class="nl-card-excerpt">{entry.data.excerpt}</p>}
-                <a class="nl-download" href={entry.data.file} download>
-                  {entry.data.fileLabel}
+                {entry.excerpt && <p class="nl-card-excerpt">{entry.excerpt}</p>}
+                <a
+                  class="nl-download"
+                  href={entry.href}
+                  download={entry.isExternal ? undefined : true}
+                  target={entry.isExternal ? "_blank" : undefined}
+                  rel={entry.isExternal ? "noopener noreferrer" : undefined}
+                >
+                  {entry.fileLabel}
                 </a>
               </li>
             ))}
