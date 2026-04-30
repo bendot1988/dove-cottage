@@ -225,51 +225,55 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
         </>
       )}
 
-      {previousEvents.length > 0 && (
-        <details class="previous-events">
-          <summary>Previous events ({previousEvents.length})</summary>
-          <p class="previous-events__intro">Browse ended events and their original details.</p>
-          <div class="feed-grid cards-grid">
-            {previousEvents.map((item) => (
-              <article class="news-card event-card event-card--past">
-                {item.image && (
-                  <a href={item.href} class="thumb-link">
-                    <img src={item.image} alt="" loading="lazy" />
-                  </a>
-                )}
-                <div class="news-card-body">
-                  <p class="meta meta--tag-only">
-                    <span class="category">Event</span>
-                  </p>
-                  <p class="event-status">Previous event</p>
-                  <div class="event-facts-card">
-                    <div class="event-facts-card__row">
-                      <p class="event-facts-card__label">Event dates</p>
-                      <p class="event-facts-card__value">
-                        <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
-                      </p>
-                    </div>
-                    {item.location ? (
+      <details class="previous-events" data-previous-events>
+        <summary>Previous events ({previousEvents.length})</summary>
+        {previousEvents.length > 0 ? (
+          <>
+            <p class="previous-events__intro">Browse ended events and their original details.</p>
+            <div class="feed-grid cards-grid">
+              {previousEvents.map((item) => (
+                <article class="news-card event-card event-card--past">
+                  {item.image && (
+                    <a href={item.href} class="thumb-link">
+                      <img src={item.image} alt="" loading="lazy" />
+                    </a>
+                  )}
+                  <div class="news-card-body">
+                    <p class="meta meta--tag-only">
+                      <span class="category">Event</span>
+                    </p>
+                    <p class="event-status">Previous event</p>
+                    <div class="event-facts-card">
                       <div class="event-facts-card__row">
-                        <p class="event-facts-card__label">Location</p>
-                        <p class="event-facts-card__value">{item.location}</p>
+                        <p class="event-facts-card__label">Event dates</p>
+                        <p class="event-facts-card__value">
+                          <time datetime={item.date.toISOString()}>{item.dateLabel}</time>
+                        </p>
                       </div>
-                    ) : null}
+                      {item.location ? (
+                        <div class="event-facts-card__row">
+                          <p class="event-facts-card__label">Location</p>
+                          <p class="event-facts-card__value">{item.location}</p>
+                        </div>
+                      ) : null}
+                    </div>
+                    <h3>
+                      <a href={item.href}>{item.title}</a>
+                    </h3>
+                    <p class="excerpt">{item.excerpt}</p>
+                    <a href={item.href} class="read-more">
+                      <span class="read-more-text">View details</span>
+                      <span aria-hidden="true">→</span>
+                    </a>
                   </div>
-                  <h3>
-                    <a href={item.href}>{item.title}</a>
-                  </h3>
-                  <p class="excerpt">{item.excerpt}</p>
-                  <a href={item.href} class="read-more">
-                    <span class="read-more-text">View details</span>
-                    <span aria-hidden="true">→</span>
-                  </a>
-                </div>
-              </article>
-            ))}
-          </div>
-        </details>
-      )}
+                </article>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p class="previous-events__empty">No previous events are published yet.</p>
+        )}
+      </details>
     </div>
   </section>
   </div>
@@ -280,6 +284,7 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
     const filterButtons = Array.from(document.querySelectorAll("[data-feed-filter]"));
     const cards = Array.from(document.querySelectorAll("[data-feed-type]"));
     const feedEmptyMessage = document.querySelector("[data-feed-empty-message]");
+    const previousEventsPanel = document.querySelector("[data-previous-events]");
 
     const applyFilter = (filter) => {
       filterButtons.forEach((btn) => {
@@ -298,8 +303,11 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
         const visibleCount = cards.filter((card) => !card.hidden).length;
         if (visibleCount === 0 && filter === "event") {
           feedEmptyMessage.innerHTML =
-            'No upcoming events at the moment. You can see our previous events below. If you are interested in starting or creating an event, please <a href="/contact/">contact us</a>.';
+            'No upcoming events at the moment. You can see our previous events below.<br>If you are interested in starting or creating an event, please <a class="feed-empty-message__button" href="/contact/">Contact us</a>.';
           feedEmptyMessage.hidden = false;
+          if (previousEventsPanel instanceof HTMLDetailsElement) {
+            previousEventsPanel.open = true;
+          }
         } else {
           feedEmptyMessage.hidden = true;
           feedEmptyMessage.textContent = "";
@@ -412,19 +420,34 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
   }
 
   .feed-empty-message {
-    margin: 0 0 14px;
-    padding: 12px 14px;
+    margin: 0 auto 16px;
+    max-width: 720px;
+    padding: 16px 18px;
     border-radius: 10px;
     border: 1px solid #d7e2f3;
     background: #f8fbff;
     color: #3b4f6d;
     font-size: var(--type-body);
     line-height: 1.6;
+    text-align: center;
   }
 
-  .feed-empty-message a {
-    color: var(--color-steel-blue);
+  .feed-empty-message__button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    text-decoration: none;
+    background: var(--color-steel-blue-1);
+    color: #fff;
     font-weight: 700;
+  }
+
+  .feed-empty-message__button:hover,
+  .feed-empty-message__button:focus-visible {
+    filter: brightness(0.95);
   }
 
   .feed-filter {
@@ -466,6 +489,12 @@ const previousEvents = feedItems.filter((item) => item.feedFilter === "event" &&
 
   .previous-events__intro {
     margin: 10px 0 14px;
+    color: #4c607c;
+    font-size: var(--type-body-small);
+  }
+
+  .previous-events__empty {
+    margin: 10px 0 0;
     color: #4c607c;
     font-size: var(--type-body-small);
   }
