@@ -16,6 +16,10 @@ import dementiaHomeSittingPage from "./documents/dementiaHomeSittingPage";
 import counsellingSupportOverviewPage from "./documents/counsellingSupportOverviewPage";
 import carerPatientWellbeingPage from "./documents/carerPatientWellbeingPage";
 import cotgraveShopPage from "./documents/cotgraveShopPage";
+import bottesfordShopPage from "./documents/bottesfordShopPage";
+import stathernShopPage from "./documents/stathernShopPage";
+import asfordbyShopPage from "./documents/asfordbyShopPage";
+import makeDonationPage from "./documents/makeDonationPage";
 import singletonPage from "./documents/singletonPage";
 import shop from "./documents/shop";
 import { imageWithAlt, linkItem, textBullet } from "./objects/shared";
@@ -39,6 +43,10 @@ export const schemaTypes = [
   counsellingSupportOverviewPage,
   carerPatientWellbeingPage,
   cotgraveShopPage,
+  bottesfordShopPage,
+  stathernShopPage,
+  asfordbyShopPage,
+  makeDonationPage,
   singletonPage,
   shop,
   linkItem,

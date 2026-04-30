@@ -8,29 +8,40 @@ const collectionShops = (await getCollection("shops", ({ data }) => !data.draft)
   a.data.title.localeCompare(b.data.title)
 );
 
-const cotgravePage = await sanityClient.fetch(
-  `
-    *[_type == "cotgraveShopPage" && _id == "cotgraveShopPage.main"][0]{
-      title,
-      shopInfo,
-      shopMainImage,
-      buttonColour,
-      address
-    }
-  `
-);
+const [cotgravePage, bottesfordPage, stathernPage, asfordbyPage] = await Promise.all([
+  sanityClient.fetch(
+    `*[_type == "cotgraveShopPage" && _id == "cotgraveShopPage.main"][0]{title,shopInfo,shopMainImage,buttonColour,address}`
+  ),
+  sanityClient.fetch(
+    `*[_type == "bottesfordShopPage" && _id == "bottesfordShopPage.main"][0]{title,shopInfo,shopMainImage,buttonColour,address}`
+  ),
+  sanityClient.fetch(
+    `*[_type == "stathernShopPage" && _id == "stathernShopPage.main"][0]{title,shopInfo,shopMainImage,buttonColour,address}`
+  ),
+  sanityClient.fetch(
+    `*[_type == "asfordbyShopPage" && _id == "asfordbyShopPage.main"][0]{title,shopInfo,shopMainImage,buttonColour,address}`
+  ),
+]);
+
+const structuredBySlug: Record<string, any> = {
+  cotgrave: cotgravePage,
+  bottesford: bottesfordPage,
+  stathern: stathernPage,
+  "asfordby-shop": asfordbyPage,
+};
 
 const shops = collectionShops.map((shop) => {
-  if (shop.slug !== "cotgrave" || !cotgravePage) return shop;
+  const structured = structuredBySlug[shop.slug];
+  if (!structured) return shop;
   return {
     ...shop,
     data: {
       ...shop.data,
-      title: cotgravePage.title || shop.data.title,
-      shop_info: cotgravePage.shopInfo || shop.data.shop_info,
-      shop_main_image: resolveSanityImageUrl(cotgravePage.shopMainImage, shop.data.shop_main_image),
-      button_colour: cotgravePage.buttonColour || shop.data.button_colour,
-      address: cotgravePage.address || shop.data.address,
+      title: structured.title || shop.data.title,
+      shop_info: structured.shopInfo || shop.data.shop_info,
+      shop_main_image: resolveSanityImageUrl(structured.shopMainImage, shop.data.shop_main_image),
+      button_colour: structured.buttonColour || shop.data.button_colour,
+      address: structured.address || shop.data.address,
     },
   };
 });

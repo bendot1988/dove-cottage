@@ -5,8 +5,52 @@ import donate from "../../data/donate.json";
 import contact from "../../data/contact.json";
 import { toTitleCase } from "../../lib/titleCase";
 import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 
-const d = (await fetchSingletonPageJson<typeof donate>("donate")) ?? donate;
+const structuredDonatePage = await sanityClient.fetch(
+  `
+    *[_type == "makeDonationPage" && _id == "makeDonationPage.main"][0]{
+      pageTitle,
+      donateFormSectionTitle,
+      donateFormIntro,
+      beaconAccount,
+      beaconDonateFormId,
+      heroImage,
+      heroImageAlt,
+      allWaysToSupportLabel,
+      allWaysToSupportHref,
+      heroTitleBefore,
+      heroTitleHighlight,
+      heroDescription,
+      heroPrimaryCtaLabel,
+      heroPrimaryCtaHref,
+      heroSecondaryCtaLabel,
+      heroSecondaryCtaHref,
+      aboutEyebrow,
+      aboutHeading,
+      aboutParagraph1,
+      aboutParagraph2,
+      impactHeading,
+      impactLede,
+      impactCards,
+      suggestedMethodsTitle,
+      suggestedMethods
+    }
+  `
+);
+
+const singletonDonate = (await fetchSingletonPageJson<typeof donate>("donate")) ?? donate;
+const d = structuredDonatePage
+  ? {
+      ...singletonDonate,
+      ...structuredDonatePage,
+      heroImage: resolveSanityImageUrl(structuredDonatePage.heroImage, singletonDonate.heroImage),
+      impactCards: structuredDonatePage.impactCards?.length ? structuredDonatePage.impactCards : singletonDonate.impactCards,
+      suggestedMethods: structuredDonatePage.suggestedMethods?.length
+        ? structuredDonatePage.suggestedMethods
+        : singletonDonate.suggestedMethods,
+    }
+  : singletonDonate;
 const c = (await fetchSingletonPageJson<typeof contact>("contact")) ?? contact;
 
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;

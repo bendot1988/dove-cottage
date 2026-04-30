@@ -13,12 +13,18 @@ export async function getStaticPaths() {
 }
 
 const { shop } = Astro.props as { shop: CollectionEntry<"shops"> };
-const isCotgravePage = shop.slug === "cotgrave";
+const STRUCTURED_SHOP_DOCS = {
+  cotgrave: { type: "cotgraveShopPage", id: "cotgraveShopPage.main" },
+  bottesford: { type: "bottesfordShopPage", id: "bottesfordShopPage.main" },
+  stathern: { type: "stathernShopPage", id: "stathernShopPage.main" },
+  "asfordby-shop": { type: "asfordbyShopPage", id: "asfordbyShopPage.main" },
+} as const;
 
-const cotgravePage = isCotgravePage
+const structuredConfig = STRUCTURED_SHOP_DOCS[shop.slug as keyof typeof STRUCTURED_SHOP_DOCS];
+const structuredShopPage = structuredConfig
   ? await sanityClient.fetch(
       `
-        *[_type == "cotgraveShopPage" && _id == "cotgraveShopPage.main"][0]{
+        *[_type == $type && _id == $id][0]{
           title,
           heroLocation,
           heroTagline,
@@ -37,7 +43,8 @@ const cotgravePage = isCotgravePage
           instagramLink,
           htmlTest
         }
-      `
+      `,
+      structuredConfig
     )
   : null;
 
@@ -46,24 +53,26 @@ const getGalleryImageUrl = (value: unknown) =>
 
 const shopData = {
   ...shop.data,
-  title: cotgravePage?.title || shop.data.title,
-  hero_location: cotgravePage?.heroLocation || shop.data.hero_location,
-  hero_tagline: cotgravePage?.heroTagline || shop.data.hero_tagline,
-  shop_info: cotgravePage?.shopInfo || shop.data.shop_info,
-  callout: cotgravePage?.callout || shop.data.callout,
-  shop_main_image: cotgravePage ? resolveSanityImageUrl(cotgravePage.shopMainImage, shop.data.shop_main_image) : shop.data.shop_main_image,
-  opening_hours: cotgravePage?.openingHours || shop.data.opening_hours,
-  gallery: cotgravePage?.gallery?.length
-    ? cotgravePage.gallery.map(getGalleryImageUrl).filter(Boolean)
+  title: structuredShopPage?.title || shop.data.title,
+  hero_location: structuredShopPage?.heroLocation || shop.data.hero_location,
+  hero_tagline: structuredShopPage?.heroTagline || shop.data.hero_tagline,
+  shop_info: structuredShopPage?.shopInfo || shop.data.shop_info,
+  callout: structuredShopPage?.callout || shop.data.callout,
+  shop_main_image: structuredShopPage
+    ? resolveSanityImageUrl(structuredShopPage.shopMainImage, shop.data.shop_main_image)
+    : shop.data.shop_main_image,
+  opening_hours: structuredShopPage?.openingHours || shop.data.opening_hours,
+  gallery: structuredShopPage?.gallery?.length
+    ? structuredShopPage.gallery.map(getGalleryImageUrl).filter(Boolean)
     : shop.data.gallery,
-  button_colour: cotgravePage?.buttonColour || shop.data.button_colour,
-  phone: cotgravePage?.phone || shop.data.phone,
-  address: cotgravePage?.address || shop.data.address,
-  map_embed_url: cotgravePage?.mapEmbedUrl || shop.data.map_embed_url,
-  donations_blurb: cotgravePage?.donationsBlurb || shop.data.donations_blurb,
-  facebook_link: cotgravePage?.facebookLink || shop.data.facebook_link,
-  instagram_link: cotgravePage?.instagramLink || shop.data.instagram_link,
-  html_test: cotgravePage?.htmlTest || shop.data.html_test,
+  button_colour: structuredShopPage?.buttonColour || shop.data.button_colour,
+  phone: structuredShopPage?.phone || shop.data.phone,
+  address: structuredShopPage?.address || shop.data.address,
+  map_embed_url: structuredShopPage?.mapEmbedUrl || shop.data.map_embed_url,
+  donations_blurb: structuredShopPage?.donationsBlurb || shop.data.donations_blurb,
+  facebook_link: structuredShopPage?.facebookLink || shop.data.facebook_link,
+  instagram_link: structuredShopPage?.instagramLink || shop.data.instagram_link,
+  html_test: structuredShopPage?.htmlTest || shop.data.html_test,
 };
 
 const allShops = await getCollection("shops", ({ data }) => !data.draft);

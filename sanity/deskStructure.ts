@@ -104,7 +104,25 @@ export const deskStructure: StructureResolver = (S) =>
             S.listItem()
               .title("Cotgrave Shop")
               .child(S.document().schemaType("cotgraveShopPage").documentId("cotgraveShopPage.main")),
+            S.listItem()
+              .title("Bottesford Shop")
+              .child(S.document().schemaType("bottesfordShopPage").documentId("bottesfordShopPage.main")),
+            S.listItem()
+              .title("Stathern Shop")
+              .child(S.document().schemaType("stathernShopPage").documentId("stathernShopPage.main")),
+            S.listItem()
+              .title("Asfordby Shop")
+              .child(S.document().schemaType("asfordbyShopPage").documentId("asfordbyShopPage.main")),
             S.documentTypeListItem("shop").title("Other Shops (Legacy)"),
+          ])
+        ),
+      S.listItem()
+        .title("Support Us")
+        .child(
+          S.list().title("Support Us").items([
+            S.listItem()
+              .title("Make a Donation")
+              .child(S.document().schemaType("makeDonationPage").documentId("makeDonationPage.main")),
           ])
         ),
     ]);
