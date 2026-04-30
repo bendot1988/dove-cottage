@@ -82,11 +82,12 @@ const introBlocks =
 const introParagraphs = introBlocks.filter((block) => block?.trim().length);
 const heroImageSrc = imageUrlFromField(pageData.heroImage, p.heroImage);
 const sections = Array.isArray(pageData.sections) ? pageData.sections : p.sections;
+const heroTitle = toTitleCase(pageData.heroH1 || p.heroH1);
 ---
 
 <BaseLayout title={layoutTitle} description={pageData.heroShortDescription}>
   <div class="svc-page">
-    <section class="hospice-svc-hero" aria-label={pageData.heroH1}>
+    <section class="hospice-svc-hero" aria-label={heroTitle}>
       <img class="hospice-svc-hero-bg" src={heroImageSrc} alt={pageData.heroImageAlt} width="1920" height="720" loading="eager" fetchpriority="high" />
       <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
       <div class="container hospice-svc-hero-inner">
@@ -94,7 +95,7 @@ const sections = Array.isArray(pageData.sections) ? pageData.sections : p.sectio
           <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
           {pageData.parentNavLabel}
         </a>
-        <h1>{pageData.heroH1}</h1>
+        <h1>{heroTitle}</h1>
         <p class="hospice-svc-hero-dek">{pageData.heroShortDescription}</p>
       </div>
     </section>

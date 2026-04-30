@@ -31,7 +31,6 @@ export const deskStructure: StructureResolver = (S) =>
     .items([
       S.documentTypeListItem("newsPost").title("News & Events"),
       S.documentTypeListItem("newsletterIssue").title("Newsletters"),
-      S.listItem().title("Deploy Site").child(S.component().title("Deploy Site").component(DeploySitePane)),
       S.listItem()
         .title("Homepage Page")
         .child(S.document().schemaType("homepagePage").documentId("homepagePage.main")),
@@ -42,11 +41,6 @@ export const deskStructure: StructureResolver = (S) =>
         .title("Hospice Services")
         .child(
           S.list().title("Hospice Services").items([
-            S.listItem()
-              .title("Hospice Services Overview")
-              .child(
-                S.document().schemaType("hospiceServicesOverviewPage").documentId("hospiceServicesOverviewPage.main")
-              ),
             S.listItem()
               .title("Bereavement Support")
               .child(S.document().schemaType("bereavementSupportPage").documentId("bereavementSupportPage.main")),
@@ -86,6 +80,21 @@ export const deskStructure: StructureResolver = (S) =>
               .child(
                 S.document().schemaType("spiritualChaplaincySupportPage").documentId("spiritualChaplaincySupportPage.main")
               ),
+            ...hospiceSingletons.map((item) => singletonEditorItem(S, item)),
+          ])
+        ),
+      S.listItem()
+        .title("What We Offer")
+        .child(
+          S.list().title("What We Offer").items([
+            S.listItem()
+              .title("Hospice Services Overview")
+              .child(
+                S.document().schemaType("hospiceServicesOverviewPage").documentId("hospiceServicesOverviewPage.main")
+              ),
+            S.listItem()
+              .title("Carer & Patient Wellbeing")
+              .child(S.document().schemaType("carerPatientWellbeingPage").documentId("carerPatientWellbeingPage.main")),
             S.listItem()
               .title("Dementia Home Sitting")
               .child(S.document().schemaType("dementiaHomeSittingPage").documentId("dementiaHomeSittingPage.main")),
@@ -96,10 +105,6 @@ export const deskStructure: StructureResolver = (S) =>
                   .schemaType("counsellingSupportOverviewPage")
                   .documentId("counsellingSupportOverviewPage.main")
               ),
-            S.listItem()
-              .title("Carer & Patient Wellbeing")
-              .child(S.document().schemaType("carerPatientWellbeingPage").documentId("carerPatientWellbeingPage.main")),
-            ...hospiceSingletons.map((item) => singletonEditorItem(S, item)),
           ])
         ),
       S.listItem()
@@ -153,4 +158,5 @@ export const deskStructure: StructureResolver = (S) =>
               .child(S.document().schemaType("supportUsOverviewPage").documentId("supportUsOverviewPage.main")),
           ])
         ),
+      S.listItem().title("Deploy Site").child(S.component().title("Deploy Site").component(DeploySitePane)),
     ]);
