@@ -209,8 +209,16 @@ const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date()
   }
 
   .content :global(h2),
-  .content :global(h3) {
+  .content :global(h3),
+  .content :global(h4),
+  .content :global(h5) {
     color: #12335f;
+  }
+
+  .content :global(h4),
+  .content :global(h5) {
+    margin: 1rem 0 0.55rem;
+    line-height: 1.35;
   }
 
   .content :global(.yt-embed) {

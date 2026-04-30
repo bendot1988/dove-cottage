@@ -6,17 +6,18 @@ type PortableTextSpan = {
 type PortableTextBlock = {
   _type: "block";
   children?: PortableTextSpan[];
+  style?: string;
 };
 
 type PortableTextImageBlock = {
-  _type: "image";
+  _type: "image" | "inlineImage" | "galleryImage";
   alt?: string;
   caption?: string;
   asset?: { _ref?: string };
 };
 
 type PortableTextGalleryImage = {
-  _type: "image";
+  _type: "image" | "inlineImage" | "galleryImage";
   alt?: string;
   caption?: string;
   asset?: { _ref?: string };
@@ -51,7 +52,7 @@ export const portableTextToHtml = (
 
   return blocks
     .map((block) => {
-      if (block?._type === "image") {
+      if (isImageBlock(block)) {
         const src = resolveSanityImageUrl(block, "");
         if (!src) return "";
         const alt = escapeHtml(block.alt ?? "");
@@ -90,9 +91,23 @@ export const portableTextToHtml = (
         .filter((child) => child?._type === "span")
         .map((child) => child.text ?? "")
         .join("");
-      return `<p>${escapeHtml(text)}</p>`;
+      const tag = getBlockTag(block.style);
+      return `<${tag}>${escapeHtml(text)}</${tag}>`;
     })
     .join("");
+};
+
+const getBlockTag = (style?: string) => {
+  if (style === "h2" || style === "h3" || style === "h4" || style === "h5") return style;
+  return "p";
+};
+
+const isImageBlock = (value: unknown): value is PortableTextImageBlock => {
+  if (!value || typeof value !== "object") return false;
+  const candidate = value as { _type?: string; asset?: { _ref?: string } };
+  const isKnownType = candidate._type === "image" || candidate._type === "inlineImage" || candidate._type === "galleryImage";
+  const hasAssetRef = typeof candidate.asset?._ref === "string" && candidate.asset._ref.length > 0;
+  return isKnownType || hasAssetRef;
 };
 
 const getYoutubeEmbedUrl = (value: string) => {
