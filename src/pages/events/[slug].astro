@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import EventKeyInfo from "../../components/EventKeyInfo.astro";
-import { sanityClient } from "../../lib/sanity";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 import { portableTextToHtml } from "../../lib/portableText";
 
 export async function getStaticPaths() {
@@ -44,36 +44,44 @@ const comparisonDate = eventEnd ?? eventStart;
 const now = new Date();
 const isPastEvent = comparisonDate.getTime() < now.getTime();
 const contentHtml = portableTextToHtml(entry.body);
+const featuredImageUrl = resolveSanityImageUrl(entry.featuredImage, "");
+const heroImageUrl = featuredImageUrl || "/images/uploads/news/latest-news-featured.png";
 ---
 
 <BaseLayout title={`${entry.title} | Dove Cottage`} description={entry.excerpt}>
+  <section class="story-hero" aria-label="Event">
+    <img
+      class="story-hero-bg"
+      src={heroImageUrl}
+      alt=""
+      width="1920"
+      height="720"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="story-hero-overlay" aria-hidden="true"></div>
+    <div class="container story-hero-inner">
+      <a href="/news/" class="interior-hero-eyebrow">
+        <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+        Back to News &amp; Events
+      </a>
+      <p class="story-hero-meta">
+        <span class="story-hero-category">{entry.category}</span>
+      </p>
+      {isPastEvent && <p class="past-flag">Past event</p>}
+      <h1 class:list={{ "is-past": isPastEvent }}>{entry.title}</h1>
+    </div>
+  </section>
+
   <article class="event-post">
     <div class="motion-scope">
       <section class="event-article-inner" aria-label="Event">
         <div class="container container--narrow">
-          <p class="back-link back-link--top">
-            <a href="/news/">← Back to News &amp; Events</a>
-          </p>
-          <p class="meta">
-            <span class="category">{entry.category}</span>
-          </p>
-          {isPastEvent && <p class="past-flag">Past event</p>}
-          <h1 class:list={{ "is-past": isPastEvent }}>{entry.title}</h1>
-
           <EventKeyInfo
             eventStart={eventStart}
             eventEnd={eventEnd}
             location={entry.location}
           />
-
-          {entry.featuredImage && (
-            <img
-              class="featured"
-              src={entry.featuredImage}
-              alt=""
-              loading="eager"
-            />
-          )}
 
           <div class="content">
             <div set:html={contentHtml} />
@@ -99,14 +107,42 @@ const contentHtml = portableTextToHtml(entry.body);
 </BaseLayout>
 
 <style>
-  .event-post {
-    background: var(--color-lavender);
-    padding: 56px 0 72px;
+  .story-hero {
+    position: relative;
+    isolation: isolate;
+    display: flex;
+    align-items: center;
+    min-height: min(52vh, 460px);
+    padding: clamp(2.75rem, 6vw, 3.8rem) 0 clamp(2rem, 5vw, 3rem);
+    color: #fff;
+    overflow: hidden;
   }
 
-  .meta {
-    margin: 0 0 10px;
-    color: #596d89;
+  .story-hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  .story-hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(110deg, rgba(8, 22, 48, 0.9) 0%, rgba(8, 22, 48, 0.62) 46%, rgba(8, 22, 48, 0.42) 100%);
+  }
+
+  .story-hero-inner {
+    position: relative;
+    z-index: 2;
+  }
+
+  .story-hero-meta {
+    margin: 0 0 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
     font-size: var(--type-body-small);
     display: flex;
     align-items: center;
@@ -114,11 +150,16 @@ const contentHtml = portableTextToHtml(entry.body);
     gap: 8px;
   }
 
-  .category {
+  .story-hero-category {
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    color: var(--color-steel-blue);
-    font-weight: 700;
+    color: var(--color-golden-yellow);
+    font-weight: 800;
+  }
+
+  .event-post {
+    background: var(--color-lavender);
+    padding: 40px 0 72px;
   }
 
   .past-flag {
@@ -131,23 +172,18 @@ const contentHtml = portableTextToHtml(entry.body);
   }
 
   h1 {
-    margin: 0 0 16px;
-    font-size: var(--type-section-title);
-    color: #102a4e;
+    margin: 0;
+    max-width: 18ch;
+    font-size: var(--type-hero-title);
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
 
   h1.is-past {
     text-decoration: line-through;
     text-decoration-thickness: 2px;
     text-decoration-color: rgba(142, 91, 62, 0.42);
-  }
-
-  .featured {
-    width: 100%;
-    border-radius: 14px;
-    border: 1px solid #dce5f2;
-    box-shadow: 0 8px 18px rgba(18, 44, 83, 0.08);
-    margin-bottom: 18px;
   }
 
   .content {
@@ -167,10 +203,6 @@ const contentHtml = portableTextToHtml(entry.body);
   .back-link {
     margin: 0;
     font-size: var(--type-body-small);
-  }
-
-  .back-link--top {
-    margin-bottom: 14px;
   }
 
   .back-link--bottom {
