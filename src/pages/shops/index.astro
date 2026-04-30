@@ -2,10 +2,38 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { marked } from "marked";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 
-const shops = (await getCollection("shops", ({ data }) => !data.draft)).sort((a, b) =>
+const collectionShops = (await getCollection("shops", ({ data }) => !data.draft)).sort((a, b) =>
   a.data.title.localeCompare(b.data.title)
 );
+
+const cotgravePage = await sanityClient.fetch(
+  `
+    *[_type == "cotgraveShopPage" && _id == "cotgraveShopPage.main"][0]{
+      title,
+      shopInfo,
+      shopMainImage,
+      buttonColour,
+      address
+    }
+  `
+);
+
+const shops = collectionShops.map((shop) => {
+  if (shop.slug !== "cotgrave" || !cotgravePage) return shop;
+  return {
+    ...shop,
+    data: {
+      ...shop.data,
+      title: cotgravePage.title || shop.data.title,
+      shop_info: cotgravePage.shopInfo || shop.data.shop_info,
+      shop_main_image: resolveSanityImageUrl(cotgravePage.shopMainImage, shop.data.shop_main_image),
+      button_colour: cotgravePage.buttonColour || shop.data.button_colour,
+      address: cotgravePage.address || shop.data.address,
+    },
+  };
+});
 
 const intro = "Visit our charity shops to support Dove Cottage Day Hospice. Every purchase helps us continue to provide free specialist care.";
 ---

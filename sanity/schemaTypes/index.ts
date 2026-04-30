@@ -15,6 +15,7 @@ import spiritualChaplaincySupportPage from "./documents/spiritualChaplaincySuppo
 import dementiaHomeSittingPage from "./documents/dementiaHomeSittingPage";
 import counsellingSupportOverviewPage from "./documents/counsellingSupportOverviewPage";
 import carerPatientWellbeingPage from "./documents/carerPatientWellbeingPage";
+import cotgraveShopPage from "./documents/cotgraveShopPage";
 import singletonPage from "./documents/singletonPage";
 import shop from "./documents/shop";
 import { imageWithAlt, linkItem, textBullet } from "./objects/shared";
@@ -37,6 +38,7 @@ export const schemaTypes = [
   dementiaHomeSittingPage,
   counsellingSupportOverviewPage,
   carerPatientWellbeingPage,
+  cotgraveShopPage,
   singletonPage,
   shop,
   linkItem,

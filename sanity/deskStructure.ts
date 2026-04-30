@@ -97,5 +97,14 @@ export const deskStructure: StructureResolver = (S) =>
             ...hospiceSingletons.map((item) => singletonEditorItem(S, item)),
           ])
         ),
-      S.documentTypeListItem("shop").title("Shops"),
+      S.listItem()
+        .title("Shops")
+        .child(
+          S.list().title("Shops").items([
+            S.listItem()
+              .title("Cotgrave Shop")
+              .child(S.document().schemaType("cotgraveShopPage").documentId("cotgraveShopPage.main")),
+            S.documentTypeListItem("shop").title("Other Shops (Legacy)"),
+          ])
+        ),
     ]);

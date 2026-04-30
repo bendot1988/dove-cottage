@@ -2,6 +2,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { marked } from "marked";
+import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
 
 export async function getStaticPaths() {
   const shops = await getCollection("shops", ({ data }) => !data.draft);
@@ -12,29 +13,81 @@ export async function getStaticPaths() {
 }
 
 const { shop } = Astro.props as { shop: CollectionEntry<"shops"> };
+const isCotgravePage = shop.slug === "cotgrave";
+
+const cotgravePage = isCotgravePage
+  ? await sanityClient.fetch(
+      `
+        *[_type == "cotgraveShopPage" && _id == "cotgraveShopPage.main"][0]{
+          title,
+          heroLocation,
+          heroTagline,
+          shopInfo,
+          callout,
+          shopMainImage,
+          shopMainImageAlt,
+          openingHours,
+          gallery,
+          buttonColour,
+          phone,
+          address,
+          mapEmbedUrl,
+          donationsBlurb,
+          facebookLink,
+          instagramLink,
+          htmlTest
+        }
+      `
+    )
+  : null;
+
+const getGalleryImageUrl = (value: unknown) =>
+  resolveSanityImageUrl(value, typeof value === "string" ? value : "");
+
+const shopData = {
+  ...shop.data,
+  title: cotgravePage?.title || shop.data.title,
+  hero_location: cotgravePage?.heroLocation || shop.data.hero_location,
+  hero_tagline: cotgravePage?.heroTagline || shop.data.hero_tagline,
+  shop_info: cotgravePage?.shopInfo || shop.data.shop_info,
+  callout: cotgravePage?.callout || shop.data.callout,
+  shop_main_image: cotgravePage ? resolveSanityImageUrl(cotgravePage.shopMainImage, shop.data.shop_main_image) : shop.data.shop_main_image,
+  opening_hours: cotgravePage?.openingHours || shop.data.opening_hours,
+  gallery: cotgravePage?.gallery?.length
+    ? cotgravePage.gallery.map(getGalleryImageUrl).filter(Boolean)
+    : shop.data.gallery,
+  button_colour: cotgravePage?.buttonColour || shop.data.button_colour,
+  phone: cotgravePage?.phone || shop.data.phone,
+  address: cotgravePage?.address || shop.data.address,
+  map_embed_url: cotgravePage?.mapEmbedUrl || shop.data.map_embed_url,
+  donations_blurb: cotgravePage?.donationsBlurb || shop.data.donations_blurb,
+  facebook_link: cotgravePage?.facebookLink || shop.data.facebook_link,
+  instagram_link: cotgravePage?.instagramLink || shop.data.instagram_link,
+  html_test: cotgravePage?.htmlTest || shop.data.html_test,
+};
 
 const allShops = await getCollection("shops", ({ data }) => !data.draft);
 const otherShops = allShops
   .filter((s) => s.slug !== shop.slug)
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 
-const telHref = `tel:${shop.data.phone.replace(/\s+/g, "")}`;
+const telHref = `tel:${shopData.phone.replace(/\s+/g, "")}`;
 const mapSrc =
-  shop.data.map_embed_url?.trim() ||
-  `https://www.google.com/maps?q=${encodeURIComponent(shop.data.address)}&output=embed`;
+  shopData.map_embed_url?.trim() ||
+  `https://www.google.com/maps?q=${encodeURIComponent(shopData.address)}&output=embed`;
 
-const heroLine1 = shop.data.hero_location ?? shop.data.title;
-const heroLine2 = shop.data.hero_location
-  ? (shop.data.hero_tagline ?? "Hospice Shop")
+const heroLine1 = shopData.hero_location ?? shopData.title;
+const heroLine2 = shopData.hero_location
+  ? (shopData.hero_tagline ?? "Hospice Shop")
   : null;
-const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.address}. ${shop.data.donations_blurb ?? "Shop pre-loved items and support Dove Cottage Day Hospice."}`;
+const shopSeoDescription = `${shopData.title} charity shop at ${shopData.address}. ${shopData.donations_blurb ?? "Shop pre-loved items and support Dove Cottage Day Hospice."}`;
 ---
 
-<BaseLayout title={`${shop.data.title} | Our Shops | Dove Cottage`} description={shopSeoDescription}>
+<BaseLayout title={`${shopData.title} | Our Shops | Dove Cottage`} description={shopSeoDescription}>
   <section class="hospice-svc-hero shop-hero" aria-label={heroLine1}>
     <img
       class="hospice-svc-hero-bg"
-      src={shop.data.shop_main_image}
+      src={shopData.shop_main_image}
       alt=""
       width="1920"
       height="720"
@@ -49,7 +102,7 @@ const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.addre
       </a>
       <h1>{heroLine1}</h1>
       <p class="hospice-svc-hero-dek">
-        {heroLine2 ?? shop.data.address}
+        {heroLine2 ?? shopData.address}
       </p>
     </div>
   </section>
@@ -59,23 +112,23 @@ const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.addre
       <div class="container shop-layout">
         <div class="shop-primary">
           <p class="shop-eyebrow">About the shop</p>
-          <div class="shop-story rich-content" set:html={marked.parse(shop.data.shop_info)} />
+          <div class="shop-story rich-content" set:html={marked.parse(shopData.shop_info)} />
 
           {
-            shop.data.callout && (
+            shopData.callout && (
               <aside class="shop-callout" aria-label="How your purchase helps">
                 <span class="shop-callout-icon" aria-hidden="true">♥</span>
-                <div class="shop-callout-body rich-content" set:html={marked.parse(shop.data.callout)} />
+                <div class="shop-callout-body rich-content" set:html={marked.parse(shopData.callout)} />
               </aside>
             )
           }
 
           {
-            shop.data.gallery.length > 0 && (
+            shopData.gallery.length > 0 && (
               <div class="shop-gallery-block">
                 <h2 class="shop-gallery-title">Gallery</h2>
                 <div class="shop-gallery-grid cards-grid">
-                  {shop.data.gallery.map((image, i) => (
+                  {shopData.gallery.map((image, i) => (
                     <figure class="shop-gallery-item">
                       <img
                         src={image}
@@ -90,7 +143,7 @@ const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.addre
             )
           }
 
-          {shop.data.html_test && <div class="shop-custom rich-content" set:html={shop.data.html_test} />}
+          {shopData.html_test && <div class="shop-custom rich-content" set:html={shopData.html_test} />}
         </div>
 
         <aside class="visit-card" aria-label="Visit this shop">
@@ -98,7 +151,7 @@ const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.addre
           <div class="visit-map">
             <iframe
               src={mapSrc}
-              title={`Map of ${shop.data.title}`}
+              title={`Map of ${shopData.title}`}
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
               allowfullscreen
@@ -107,23 +160,23 @@ const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.addre
           <ul class="visit-list">
             <li>
               <span class="visit-icon" aria-hidden="true">📍</span>
-              <span>{shop.data.address}</span>
+              <span>{shopData.address}</span>
             </li>
             {
-              shop.data.facebook_link && (
+              shopData.facebook_link && (
                 <li>
                   <span class="visit-icon" aria-hidden="true">f</span>
-                  <a href={shop.data.facebook_link} target="_blank" rel="noreferrer">
+                  <a href={shopData.facebook_link} target="_blank" rel="noreferrer">
                     Facebook
                   </a>
                 </li>
               )
             }
             {
-              shop.data.instagram_link && (
+              shopData.instagram_link && (
                 <li>
                   <span class="visit-icon visit-icon-ig" aria-hidden="true">◎</span>
-                  <a href={shop.data.instagram_link} target="_blank" rel="noreferrer">
+                  <a href={shopData.instagram_link} target="_blank" rel="noreferrer">
                     Instagram
                   </a>
                 </li>
@@ -131,19 +184,19 @@ const shopSeoDescription = `${shop.data.title} charity shop at ${shop.data.addre
             }
             <li>
               <span class="visit-icon" aria-hidden="true">☎</span>
-              <a href={telHref}>{shop.data.phone}</a>
+              <a href={telHref}>{shopData.phone}</a>
             </li>
             {
-              shop.data.donations_blurb && (
+              shopData.donations_blurb && (
                 <li class="visit-donations">
                   <span class="visit-icon" aria-hidden="true">♥</span>
-                  <span class="visit-donations-text">{shop.data.donations_blurb}</span>
+                  <span class="visit-donations-text">{shopData.donations_blurb}</span>
                 </li>
               )
             }
             <li class="visit-hours">
               <span class="visit-icon" aria-hidden="true">🕐</span>
-              <div class="visit-hours-body rich-content" set:html={marked.parse(shop.data.opening_hours)} />
+              <div class="visit-hours-body rich-content" set:html={marked.parse(shopData.opening_hours)} />
             </li>
           </ul>
           <a href="/donate/" class="btn btn-primary btn-shine visit-donate">Donate to support our hospice</a>
