@@ -4,6 +4,7 @@ import fallbackData from "../../../data/support-groups.json";
 import fallbackMensShedData from "../../../data/mens-shed.json";
 import fallbackBereavementSupportGroupData from "../../../data/bereavement-support-group.json";
 import fallbackCarerSupportData from "../../../data/carer-support.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 type SupportCard = {
   title: string;
@@ -15,7 +16,21 @@ type SupportCard = {
   href: string;
 };
 
-const p = (await fetchSingletonPageJson<typeof fallbackData>("support_groups")) ?? fallbackData;
+const structuredData = await sanityClient.fetch(`*[_type == "supportGroupsPage"][0]`);
+const singletonData = (await fetchSingletonPageJson<typeof fallbackData>("support_groups")) ?? null;
+const p = {
+  ...fallbackData,
+  ...(singletonData ?? {}),
+  ...(structuredData ?? {}),
+  heroImage: resolveSanityImageUrl(structuredData?.heroImage?.image, structuredData?.heroImage?.legacyUrl || singletonData?.heroImage || fallbackData.heroImage),
+  cards:
+    structuredData?.cards?.map((card) => ({
+      ...card,
+      image: resolveSanityImageUrl(card?.image?.image, card?.image?.legacyUrl || ""),
+    })) ??
+    singletonData?.cards ??
+    fallbackData.cards,
+};
 const mensShedData =
   (await fetchSingletonPageJson<typeof fallbackMensShedData>("mens_shed")) ?? fallbackMensShedData;
 const bereavementSupportGroupData =

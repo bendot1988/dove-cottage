@@ -15,6 +15,8 @@ import spiritualChaplaincySupportPage from "./documents/spiritualChaplaincySuppo
 import dementiaHomeSittingPage from "./documents/dementiaHomeSittingPage";
 import counsellingSupportOverviewPage from "./documents/counsellingSupportOverviewPage";
 import carerPatientWellbeingPage from "./documents/carerPatientWellbeingPage";
+import supportGroupsPage from "./documents/supportGroupsPage";
+import resourceHubPage from "./documents/resourceHubPage";
 import cotgraveShopPage from "./documents/cotgraveShopPage";
 import bottesfordShopPage from "./documents/bottesfordShopPage";
 import stathernShopPage from "./documents/stathernShopPage";
@@ -50,6 +52,8 @@ export const schemaTypes = [
   dementiaHomeSittingPage,
   counsellingSupportOverviewPage,
   carerPatientWellbeingPage,
+  supportGroupsPage,
+  resourceHubPage,
   cotgraveShopPage,
   bottesfordShopPage,
   stathernShopPage,

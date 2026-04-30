@@ -42,16 +42,10 @@ export const deskStructure: StructureResolver = (S) =>
         .child(
           S.list().title("Hospice Services").items([
             S.listItem()
-              .title("Bereavement Support")
-              .child(S.document().schemaType("bereavementSupportPage").documentId("bereavementSupportPage.main")),
-            S.listItem()
               .title("Bereavement Support Group")
               .child(
                 S.document().schemaType("bereavementSupportGroupPage").documentId("bereavementSupportGroupPage.main")
               ),
-            S.listItem()
-              .title("Counselling")
-              .child(S.document().schemaType("counsellingPage").documentId("counsellingPage.main")),
             S.listItem()
               .title("Nursing Care & Medical Advice")
               .child(
@@ -98,13 +92,31 @@ export const deskStructure: StructureResolver = (S) =>
             S.listItem()
               .title("Dementia Home Sitting")
               .child(S.document().schemaType("dementiaHomeSittingPage").documentId("dementiaHomeSittingPage.main")),
+          ])
+        ),
+      S.listItem()
+        .title("Counselling & Support")
+        .child(
+          S.list().title("Counselling & Support").items([
             S.listItem()
-              .title("Counselling Support Overview")
+              .title("Counselling & Support Overview")
               .child(
                 S.document()
                   .schemaType("counsellingSupportOverviewPage")
                   .documentId("counsellingSupportOverviewPage.main")
               ),
+            S.listItem()
+              .title("Counselling")
+              .child(S.document().schemaType("counsellingPage").documentId("counsellingPage.main")),
+            S.listItem()
+              .title("Bereavement Support")
+              .child(S.document().schemaType("bereavementSupportPage").documentId("bereavementSupportPage.main")),
+            S.listItem()
+              .title("Support Groups")
+              .child(S.document().schemaType("supportGroupsPage").documentId("supportGroupsPage.main")),
+            S.listItem()
+              .title("Resource Hub")
+              .child(S.document().schemaType("resourceHubPage").documentId("resourceHubPage.main")),
           ])
         ),
       S.listItem()

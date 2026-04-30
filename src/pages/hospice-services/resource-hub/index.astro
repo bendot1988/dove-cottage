@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
 import resourceHub from "../../../data/resource-hub.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 
 type ResourceRow = {
@@ -14,7 +15,17 @@ type ResourceRow = {
   linkLabel: string;
 };
 
-const p = (await fetchSingletonPageJson<typeof resourceHub>("resource_hub_page")) ?? resourceHub;
+const structuredData = await sanityClient.fetch(`*[_type == "resourceHubPage"][0]`);
+const singletonData = (await fetchSingletonPageJson<typeof resourceHub>("resource_hub_page")) ?? null;
+const p = {
+  ...resourceHub,
+  ...(singletonData ?? {}),
+  ...(structuredData ?? {}),
+  heroImage: resolveSanityImageUrl(
+    structuredData?.heroImage?.image,
+    structuredData?.heroImage?.legacyUrl || singletonData?.heroImage || resourceHub.heroImage
+  ),
+};
 
 const layoutTitle = p.pageTitle
   .split(/\s*\|\s*/)
