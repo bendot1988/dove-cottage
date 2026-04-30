@@ -129,11 +129,11 @@ a.interior-hero-eyebrow:focus-visible {
   line-height: 1;
 }
 
-/* --- Site motion: wrap page content in `.motion-scope` (and optional `.page-home`) — see /style-guide/ --- */
+/* --- Site motion: subtle load-in only (no scroll trigger) --- */
 @keyframes motion-fade-up {
   from {
-    opacity: 0;
-    transform: translate3d(0, var(--motion-distance), 0);
+    opacity: 0.86;
+    transform: translate3d(0, 10px, 0);
   }
 
   to {
@@ -142,123 +142,19 @@ a.interior-hero-eyebrow:focus-visible {
   }
 }
 
-.page-home .reveal-on-scroll,
-.motion-scope .reveal-on-scroll {
-  opacity: 0;
-  transform: translate3d(0, var(--motion-distance), 0);
-  transition:
-    opacity var(--motion-duration-reveal) var(--motion-ease-out),
-    transform var(--motion-duration-reveal) var(--motion-ease-out);
+.motion-scope .reveal-on-load {
+  animation: motion-fade-up 0.48s var(--motion-ease-out) both;
+  animation-delay: var(--motion-load-delay, 0s);
 }
 
-.page-home .reveal-on-scroll.is-visible,
-.motion-scope .reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/* Stagger card-style blocks when their section scrolls into view */
-.page-home .reveal-on-scroll.is-visible .cards-grid > *,
-.motion-scope .reveal-on-scroll.is-visible .cards-grid > *,
-.page-home .reveal-on-scroll.is-visible .impact-grid > *,
-.motion-scope .reveal-on-scroll.is-visible .impact-grid > *,
-.page-home .reveal-on-scroll.is-visible .featured-grid > *,
-.motion-scope .reveal-on-scroll.is-visible .featured-grid > *,
-.page-home .reveal-on-scroll.is-visible .reach-grid > .main-card,
-.motion-scope .reveal-on-scroll.is-visible .reach-grid > .main-card,
-.page-home .reveal-on-scroll.is-visible .side-stack > .side-card,
-.motion-scope .reveal-on-scroll.is-visible .side-stack > .side-card {
-  animation: motion-fade-up var(--motion-duration-stagger) var(--motion-ease-out) backwards;
-}
-
-.page-home .reveal-on-scroll.is-visible .cards-grid > *:nth-child(1),
-.motion-scope .reveal-on-scroll.is-visible .cards-grid > *:nth-child(1),
-.page-home .reveal-on-scroll.is-visible .impact-grid > *:nth-child(1),
-.motion-scope .reveal-on-scroll.is-visible .impact-grid > *:nth-child(1),
-.page-home .reveal-on-scroll.is-visible .featured-grid > *:nth-child(1),
-.motion-scope .reveal-on-scroll.is-visible .featured-grid > *:nth-child(1) {
-  animation-delay: var(--motion-stagger-step);
-}
-
-.page-home .reveal-on-scroll.is-visible .cards-grid > *:nth-child(2),
-.motion-scope .reveal-on-scroll.is-visible .cards-grid > *:nth-child(2),
-.page-home .reveal-on-scroll.is-visible .impact-grid > *:nth-child(2),
-.motion-scope .reveal-on-scroll.is-visible .impact-grid > *:nth-child(2),
-.page-home .reveal-on-scroll.is-visible .featured-grid > *:nth-child(2),
-.motion-scope .reveal-on-scroll.is-visible .featured-grid > *:nth-child(2) {
-  animation-delay: calc(var(--motion-stagger-step) * 2);
-}
-
-.page-home .reveal-on-scroll.is-visible .cards-grid > *:nth-child(3),
-.motion-scope .reveal-on-scroll.is-visible .cards-grid > *:nth-child(3),
-.page-home .reveal-on-scroll.is-visible .impact-grid > *:nth-child(3),
-.motion-scope .reveal-on-scroll.is-visible .impact-grid > *:nth-child(3),
-.page-home .reveal-on-scroll.is-visible .featured-grid > *:nth-child(3),
-.motion-scope .reveal-on-scroll.is-visible .featured-grid > *:nth-child(3) {
-  animation-delay: calc(var(--motion-stagger-step) * 3);
-}
-
-.page-home .reveal-on-scroll.is-visible .cards-grid > *:nth-child(4),
-.motion-scope .reveal-on-scroll.is-visible .cards-grid > *:nth-child(4),
-.page-home .reveal-on-scroll.is-visible .impact-grid > *:nth-child(4),
-.motion-scope .reveal-on-scroll.is-visible .impact-grid > *:nth-child(4),
-.page-home .reveal-on-scroll.is-visible .featured-grid > *:nth-child(4),
-.motion-scope .reveal-on-scroll.is-visible .featured-grid > *:nth-child(4) {
-  animation-delay: calc(var(--motion-stagger-step) * 4);
-}
-
-.page-home .reveal-on-scroll.is-visible .cards-grid > *:nth-child(5),
-.motion-scope .reveal-on-scroll.is-visible .cards-grid > *:nth-child(5),
-.page-home .reveal-on-scroll.is-visible .impact-grid > *:nth-child(5),
-.motion-scope .reveal-on-scroll.is-visible .impact-grid > *:nth-child(5) {
-  animation-delay: calc(var(--motion-stagger-step) * 5);
-}
-
-.page-home .reveal-on-scroll.is-visible .cards-grid > *:nth-child(6),
-.motion-scope .reveal-on-scroll.is-visible .cards-grid > *:nth-child(6) {
-  animation-delay: calc(var(--motion-stagger-step) * 6);
-}
-
-.page-home .reveal-on-scroll.is-visible .reach-grid > .main-card,
-.motion-scope .reveal-on-scroll.is-visible .reach-grid > .main-card {
-  animation-delay: var(--motion-stagger-step);
-}
-
-.page-home .reveal-on-scroll.is-visible .side-stack > .side-card:nth-child(1),
-.motion-scope .reveal-on-scroll.is-visible .side-stack > .side-card:nth-child(1) {
-  animation-delay: calc(var(--motion-stagger-step) * 2);
-}
-
-.page-home .reveal-on-scroll.is-visible .side-stack > .side-card:nth-child(2),
-.motion-scope .reveal-on-scroll.is-visible .side-stack > .side-card:nth-child(2) {
-  animation-delay: calc(var(--motion-stagger-step) * 3);
-}
-
-.page-home .reveal-on-scroll.is-visible .video-frame,
-.motion-scope .reveal-on-scroll.is-visible .video-frame {
-  animation: motion-fade-up var(--motion-duration-video) var(--motion-ease-out) 0.08s backwards;
+/* Home gets a touch more polish */
+.page-home .reveal-on-load {
+  animation-duration: 0.56s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .page-home .reveal-on-scroll,
-  .motion-scope .reveal-on-scroll {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .page-home .reveal-on-scroll.is-visible .cards-grid > *,
-  .motion-scope .reveal-on-scroll.is-visible .cards-grid > *,
-  .page-home .reveal-on-scroll.is-visible .impact-grid > *,
-  .motion-scope .reveal-on-scroll.is-visible .impact-grid > *,
-  .page-home .reveal-on-scroll.is-visible .featured-grid > *,
-  .motion-scope .reveal-on-scroll.is-visible .featured-grid > *,
-  .page-home .reveal-on-scroll.is-visible .reach-grid > .main-card,
-  .motion-scope .reveal-on-scroll.is-visible .reach-grid > .main-card,
-  .page-home .reveal-on-scroll.is-visible .side-stack > .side-card,
-  .motion-scope .reveal-on-scroll.is-visible .side-stack > .side-card,
-  .page-home .reveal-on-scroll.is-visible .video-frame,
-  .motion-scope .reveal-on-scroll.is-visible .video-frame {
+  .motion-scope .reveal-on-load,
+  .page-home .reveal-on-load {
     animation: none;
   }
 }
