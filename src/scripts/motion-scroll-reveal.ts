@@ -1,6 +1,6 @@
 /**
- * Subtle load-in animation (not scroll-triggered).
- * Keeps content visible immediately while adding light polish.
+ * Scroll-triggered motion without hiding full sections.
+ * Sections stay visible; inner elements gently ease in on view.
  */
 export function initMotionScrollReveal(rootSelector = ".motion-scope"): void {
   const root = document.querySelector(rootSelector);
@@ -14,9 +14,21 @@ export function initMotionScrollReveal(rootSelector = ".motion-scope"): void {
     "section:not(.hero-section):not(.contact-hero):not(.donate-hero):not(.shop-hero):not(.hospice-svc-hero):not(.archive-hero)"
   );
 
-  sections.forEach((el, idx) => {
-    const delay = Math.min(idx * 0.045, 0.28);
+  sections.forEach((el) => {
     el.classList.add("reveal-on-load");
-    el.style.setProperty("--motion-load-delay", `${delay}s`);
   });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      }
+    },
+    { rootMargin: "0px 0px -12% 0px", threshold: 0.08 }
+  );
+
+  sections.forEach((el) => observer.observe(el));
 }
