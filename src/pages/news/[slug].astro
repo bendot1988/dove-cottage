@@ -252,6 +252,33 @@ const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date()
     margin: 0.75rem 0;
   }
 
+  .content :global(.inline-gallery) {
+    margin: 1.2rem 0;
+  }
+
+  .content :global(.inline-gallery__title) {
+    margin: 0 0 0.55rem;
+    color: #1a3558;
+    font-size: var(--type-body-small);
+    font-weight: 700;
+  }
+
+  .content :global(.inline-gallery__grid) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .content :global(.inline-gallery__item) {
+    margin: 0;
+  }
+
+  .content :global(.inline-gallery__item figcaption) {
+    margin-top: 0.35rem;
+    font-size: var(--type-body-small);
+    color: #4b5f7a;
+  }
+
   .content :global(blockquote) {
     margin: 1rem 0;
     padding: 0.75rem 1rem 0.75rem 1.1rem;
@@ -460,6 +487,10 @@ const publishDate = entry.publishDate ? new Date(entry.publishDate) : new Date()
   }
 
   @media (max-width: 680px) {
+    .content :global(.inline-gallery__grid) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .related-grid {
       grid-template-columns: 1fr;
     }
