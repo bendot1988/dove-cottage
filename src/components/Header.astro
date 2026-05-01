@@ -369,7 +369,6 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
       <div class="mobile-cta">
         <a href="tel:01949860303" class="mobile-phone">☎ 01949 860303</a>
         <a href={contact.trustDonateUrl} class="btn btn-primary btn-shine mobile-donate">{donateLabel}</a>
-        <a href="/support-us/volunteer-your-time/" class="btn btn-secondary mobile-secondary-cta">Volunteer</a>
       </div>
     </aside>
   </div>
@@ -1294,7 +1293,8 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
     .mobile-nav {
       position: fixed;
       inset: 0;
-      z-index: 90;
+      /* Above .nav-row (z-index 220) so the sticky desktop bar cannot paint over this overlay */
+      z-index: 240;
       pointer-events: none;
     }
 
@@ -1480,19 +1480,10 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
       padding: 6px 0 2px;
     }
 
-    .mobile-donate,
-    .mobile-secondary-cta {
+    .mobile-donate {
       border-radius: 999px;
       width: 100%;
-    }
-
-    .mobile-donate {
       color: #233a5a;
-    }
-
-    .mobile-secondary-cta {
-      color: #204a81;
-      border-color: #204a81;
     }
   }
 
@@ -1571,10 +1562,6 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
     }
 
     .donate-btn {
-      display: none;
-    }
-
-    .mobile-donate {
       display: none;
     }
   }
