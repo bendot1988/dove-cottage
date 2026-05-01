@@ -24,7 +24,6 @@ const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 function asImageSource(url) {
   return {
-    image: null,
     legacyUrl: url || "",
   };
 }
