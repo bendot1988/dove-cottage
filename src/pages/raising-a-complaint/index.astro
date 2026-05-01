@@ -1,0 +1,105 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Raising a Complaint | Dove Cottage"
+  description="How to raise a concern or complaint with Dove Cottage Day Hospice."
+>
+  <section class="complaint-page">
+    <div class="container complaint-container">
+      <p class="complaint-eyebrow">Legal Information</p>
+      <h1>Raising a complaint and/or concern</h1>
+
+      <p>
+        Whilst we trust that all our guests will be satisfied with the quality of the care they receive, there
+        may be occasions when you or your relative may wish to raise a concern or make a formal complaint.
+      </p>
+
+      <p>
+        We want you to know that you should always feel free to raise your concerns. It is hoped that a
+        discussion with the Clinical Lead or the CEO will resolve the issue. We may however need to carry out
+        an investigation. If this is the case then we will contact you again within 28 days with the result of
+        our investigation and what action we intend to take.
+      </p>
+
+      <p>
+        In the first instance we would advise you to contact the CEO, Dan Smeeton, via email
+        <a href="mailto:dan@dovecottage.org">dan@dovecottage.org</a> or by post: Dan Smeeton, Dove Cottage Day
+        Hospice, Canal Lane, Stathern, LE14 4EX.
+      </p>
+
+      <p>
+        Your complaint will be dealt with at all stages thoroughly and in the strictest confidence.
+      </p>
+
+      <p>
+        If your complaint remains unresolved you can contact the Health Service Ombudsman at
+        <a href="https://www.ombudsman.org.uk/about-us/contact-us" target="_blank" rel="noopener noreferrer">
+          ombudsman.org.uk/about-us/contact-us
+        </a>.
+        Or contact their Helpline: 0345 015 4033.
+      </p>
+
+      <p>
+        The Care Quality Commission has a responsibility for checking every care provider that is registered
+        meets important standards of quality and safety. Even though they cannot look into individual complaints,
+        they would like to hear from you about your experience.
+      </p>
+
+      <h2>You can write to them at:</h2>
+      <p>
+        Care Quality Commission, East Midlands Office, Citygate, Gallowgate, Newcastle Upon Tyne, NE1 4PA.
+      </p>
+
+      <p>
+        Phone: 03000 616161 or visit their website at
+        <a href="https://www.cqc.org.uk" target="_blank" rel="noopener noreferrer">www.cqc.org.uk</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .complaint-page {
+    background: #f5f7fc;
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+
+  .complaint-container {
+    max-width: 820px;
+  }
+
+  .complaint-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-steel-blue-1);
+  }
+
+  h1 {
+    margin: 0 0 1rem;
+    color: #0f2240;
+  }
+
+  h2 {
+    margin: 2rem 0 0.5rem;
+    color: #15305b;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+  }
+
+  p {
+    margin: 0 0 0.95rem;
+    color: #2c3f5d;
+    line-height: 1.65;
+  }
+
+  a {
+    color: var(--color-steel-blue);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+</style>
