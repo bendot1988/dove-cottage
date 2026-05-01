@@ -4,10 +4,21 @@ import ArchiveSidebarPeek from "../../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../../components/SubpageReviewCarousel.astro";
 import fallbackData from "../../../data/mens-shed.json";
 import fallbackContact from "../../../data/contact.json";
+import { resolveSanityImageUrl, sanityClient } from "../../../lib/sanity";
 import { fetchSingletonPageJson } from "../../../lib/sanitySingleton";
 import { toTitleCase } from "../../../lib/titleCase";
 
-const p = (await fetchSingletonPageJson<typeof fallbackData>("mens_shed")) ?? fallbackData;
+const structuredPage = await sanityClient.fetch(`*[_type == "mensShedPage" && _id == "mensShedPage.main"][0]`);
+const singletonPage = (await fetchSingletonPageJson<typeof fallbackData>("mens_shed")) ?? null;
+const p = {
+  ...fallbackData,
+  ...(singletonPage ?? {}),
+  ...(structuredPage ?? {}),
+  heroImage: resolveSanityImageUrl(
+    structuredPage?.heroImage,
+    singletonPage?.heroImage || fallbackData.heroImage
+  ),
+};
 const c = (await fetchSingletonPageJson<typeof fallbackContact>("contact")) ?? fallbackContact;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
