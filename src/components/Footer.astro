@@ -5,6 +5,9 @@ const footerMapHref = `https://www.google.com/maps/search/?api=1&query=${encodeU
 const charityCommissionHref =
   contact.charityCommissionUrl ??
   "https://register-of-charities.charitycommission.gov.uk/en/charity-search/-/charity-details/1057941/charity-overview";
+
+const mailingListFormUrl =
+  "https://dovecottagedayhospice.beaconforms.com/form/3501530c";
 ---
 
 <footer class="site-footer">
@@ -64,13 +67,28 @@ const charityCommissionHref =
         <a href="/sitemap/">Site Map</a>
       </div>
 
-      <div class="newsletter-card">
-        <h3>Join Our Mailing List</h3>
-        <p>Get the latest news about our events and hospice community.</p>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Email" aria-label="Email" />
-          <button type="submit" class="btn btn-primary">Join</button>
-        </form>
+      <div class="mailing-list-card">
+        <h3>Join our mailing list</h3>
+        <p>Hear about events, news, and hospice life. Signing up takes a minute on our secure form.</p>
+        <a
+          href={mailingListFormUrl}
+          class="btn btn-primary btn-shine mailing-list-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Join our mailing list — opens signup form in a new tab"
+        >
+          Sign Up
+          <svg class="mailing-list-cta-external" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M14 3h7v7M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+            />
+          </svg>
+        </a>
       </div>
     </div>
 
@@ -271,7 +289,7 @@ const charityCommissionHref =
   }
 
   .footer-col h3,
-  .newsletter-card h3 {
+  .mailing-list-card h3 {
     margin: 0 0 10px;
     font-size: var(--type-micro);
     line-height: 1.2;
@@ -361,43 +379,60 @@ const charityCommissionHref =
     border-radius: 2px;
   }
 
-  .newsletter-card {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 14px;
+  .mailing-list-card {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.16) 0%,
+      rgba(255, 255, 255, 0.07) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 10px 28px rgba(8, 24, 58, 0.22);
   }
 
-  .newsletter-card p {
-    margin: 0 0 10px;
+  .mailing-list-card p {
+    margin: 0 0 14px;
     font-size: var(--type-body-small);
-    line-height: 1.45;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.94);
+    max-width: 36ch;
   }
 
-  .newsletter-form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 0;
-  }
-
-  .newsletter-form input {
+  .mailing-list-card .mailing-list-cta {
     width: 100%;
     box-sizing: border-box;
-    min-height: 44px;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font: inherit;
-  }
-
-  .newsletter-form .btn {
-    width: 100%;
-    box-sizing: border-box;
+    min-height: 46px;
     height: auto;
-    min-height: 44px;
-    padding: 0 16px;
+    padding: 11px 18px;
     border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+    transition:
+      transform 0.18s ease,
+      box-shadow 0.18s ease;
+  }
+
+  .mailing-list-card .mailing-list-cta:hover,
+  .mailing-list-card .mailing-list-cta:focus-visible {
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.2);
+  }
+
+  .mailing-list-cta:focus-visible {
+    outline: 2px solid var(--color-golden-yellow);
+    outline-offset: 3px;
+  }
+
+  .mailing-list-cta-external {
+    width: 1.1em;
+    height: 1.1em;
+    flex-shrink: 0;
+    opacity: 0.92;
+    margin-inline-start: 0.15em;
+    translate: 0 1px;
   }
 
   .footer-contact {
