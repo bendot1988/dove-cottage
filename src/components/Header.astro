@@ -1361,6 +1361,9 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
     }
 
     .mobile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
       padding: 12px;
       border-bottom: 1px solid #e2eaf5;
       background: #f7fafe;
@@ -1398,7 +1401,6 @@ const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
       border: 1px solid #dbe5f4;
       border-radius: 12px;
       box-shadow: 0 4px 14px rgba(16, 38, 72, 0.06);
-      margin-bottom: 8px;
       appearance: none;
       -webkit-appearance: none;
     }
