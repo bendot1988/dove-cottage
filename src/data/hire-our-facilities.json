@@ -162,17 +162,17 @@
     {
       "title": "Contact",
       "href": "/contact/",
-      "image": "/images/hero-family-alt.png"
+      "image": "/images/uploads/contact/contact-featured.png"
     },
     {
       "title": "News & Events",
       "href": "/news/",
-      "image": "/images/hero-supporting-journey.png"
+      "image": "/images/uploads/news/latest-news-featured.png"
     },
     {
       "title": "Donate",
       "href": "/donate/",
-      "image": "/images/care-counselling.png"
+      "image": "/images/hero-supporting-journey.png"
     },
     {
       "title": "Support us",

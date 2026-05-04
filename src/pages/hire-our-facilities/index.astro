@@ -4,6 +4,7 @@ import ArchiveSidebarPeek from "../../components/ArchiveSidebarPeek.astro";
 import SubpageReviewCarousel from "../../components/SubpageReviewCarousel.astro";
 import p from "../../data/hire-our-facilities.json";
 import contact from "../../data/contact.json";
+import donateFallback from "../../data/donate.json";
 import { toTitleCase } from "../../lib/titleCase";
 import { fetchSingletonPageJson } from "../../lib/sanitySingleton";
 import { resolveSanityImageUrl, sanityClient } from "../../lib/sanity";
@@ -39,6 +40,7 @@ const pageData = {
   ...(structuredPageData ?? {}),
 };
 const c = (await fetchSingletonPageJson<typeof contact>("contact")) ?? contact;
+const donateData = (await fetchSingletonPageJson<typeof donateFallback>("donate")) ?? donateFallback;
 const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
 
 const imageUrlFromField = (
@@ -61,10 +63,30 @@ const sectionGalleries = new Map(
   ])
 );
 
-const sidebarPeekCards = (pageData.sidebarPeekCards ?? []).map((card) => ({
-  ...card,
-  image: imageUrlFromField(card.image, typeof card.image === "string" ? card.image : ""),
-}));
+/** Same listing hero as `src/pages/news/index.astro` — sidebar cards must match destination pages, not CMS placeholders */
+const newsListingPeekImage = "/images/uploads/news/latest-news-featured.png";
+
+function normPeekHref(href: string): string {
+  const base = (href.split(/[?#]/)[0] ?? href).trim();
+  if (!base || base === "/") return "/";
+  return base.endsWith("/") ? base : `${base}/`;
+}
+
+const sidebarPeekCards = (pageData.sidebarPeekCards ?? []).map((card) => {
+  let image = imageUrlFromField(card.image, typeof card.image === "string" ? card.image : "");
+  const nh = normPeekHref(card.href);
+  if (nh === "/contact/") {
+    image = imageUrlFromField(c.heroImage as Parameters<typeof imageUrlFromField>[0], contact.heroImage);
+  } else if (nh === "/news/" || nh === "/newsletter/") {
+    image = newsListingPeekImage;
+  } else if (nh === "/donate/") {
+    image = imageUrlFromField(
+      donateData.heroImage as Parameters<typeof imageUrlFromField>[0],
+      donateFallback.heroImage
+    );
+  }
+  return { ...card, image };
+});
 
 const layoutTitle = (pageData.pageTitle || p.pageTitle)
   .split(/\s*\|\s*/)

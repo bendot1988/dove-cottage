@@ -112,6 +112,12 @@ function categoryLabelsForKeys(keys: string[]): string[] {
 
 type HeroRef = { heroImage: string; heroImageAlt: string };
 
+/** Matches `/news/` listing hero in `src/pages/news/index.astro` */
+const newsListingHero: HeroRef = {
+  heroImage: "/images/uploads/news/latest-news-featured.png",
+  heroImageAlt: "Printed Dove Cottage newsletter copies on a wooden table"
+};
+
 const featuredByHref = new Map<string, HeroRef>([
   ["/hospice-services/", { heroImage: hospiceServicesOverviewData.heroImage, heroImageAlt: hospiceServicesOverviewData.heroImageAlt }],
   ["/what-we-offer/carer-patient-wellbeing/", { heroImage: carerPatientWellbeingData.heroImage, heroImageAlt: carerPatientWellbeingData.heroImageAlt }],
@@ -132,11 +138,21 @@ const featuredByHref = new Map<string, HeroRef>([
   ["/hire-our-facilities/", { heroImage: hireFacilitiesData.heroImage, heroImageAlt: hireFacilitiesData.heroImageAlt }],
   ["/support-us/", { heroImage: supportUsOverviewData.heroImage, heroImageAlt: supportUsOverviewData.heroImageAlt }],
   ["/support-us/volunteer-your-time/", { heroImage: volunteerData.heroImage, heroImageAlt: volunteerData.heroImageAlt }],
-  ["/donate/", { heroImage: donateData.heroImage, heroImageAlt: donateData.heroImageAlt }]
+  ["/donate/", { heroImage: donateData.heroImage, heroImageAlt: donateData.heroImageAlt }],
+  ["/news/", newsListingHero],
+  ["/newsletter/", newsListingHero],
+  ["/contact/", { heroImage: contact.heroImage, heroImageAlt: contact.heroImageAlt }]
 ]);
 
+function featuredHeroForArchiveHref(href: string): HeroRef | undefined {
+  if (featuredByHref.has(href)) return featuredByHref.get(href);
+  const pathOnly = href.split(/[?#]/)[0] ?? href;
+  const normalized = pathOnly.endsWith("/") ? pathOnly : `${pathOnly}/`;
+  return featuredByHref.get(normalized);
+}
+
 const syncedItems = archive.items.map((item) => {
-  const featured = featuredByHref.get(item.href);
+  const featured = featuredHeroForArchiveHref(item.href);
   return featured
     ? { ...item, image: featured.heroImage, imageAlt: featured.heroImageAlt }
     : item;
