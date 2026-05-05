@@ -1,12 +1,22 @@
 type PortableTextSpan = {
   _type: "span";
   text?: string;
+  marks?: string[];
+};
+
+type PortableTextMarkDef = {
+  _key: string;
+  _type?: string;
+  href?: string;
+  blank?: boolean;
+  openInNewTab?: boolean;
 };
 
 type PortableTextBlock = {
   _type: "block";
   children?: PortableTextSpan[];
   style?: string;
+  markDefs?: PortableTextMarkDef[];
 };
 
 type PortableTextImageBlock = {
@@ -87,12 +97,9 @@ export const portableTextToHtml = (
       }
 
       if (block?._type !== "block") return "";
-      const text = (block.children ?? [])
-        .filter((child) => child?._type === "span")
-        .map((child) => child.text ?? "")
-        .join("");
+      const text = renderPortableTextChildren(block);
       const tag = getBlockTag(block.style);
-      return `<${tag}>${escapeHtml(text)}</${tag}>`;
+      return `<${tag}>${text}</${tag}>`;
     })
     .join("");
 };
@@ -100,6 +107,46 @@ export const portableTextToHtml = (
 const getBlockTag = (style?: string) => {
   if (style === "h2" || style === "h3" || style === "h4" || style === "h5") return style;
   return "p";
+};
+
+const renderPortableTextChildren = (block: PortableTextBlock) => {
+  const markDefByKey = new Map((block.markDefs ?? []).map((def) => [def._key, def]));
+  return (block.children ?? [])
+    .filter((child) => child?._type === "span")
+    .map((child) => {
+      const text = escapeHtml(child.text ?? "");
+      const marks = child.marks ?? [];
+      return marks.reduce((acc, mark) => applyMark(acc, mark, markDefByKey), text);
+    })
+    .join("");
+};
+
+const applyMark = (value: string, mark: string, markDefByKey: Map<string, PortableTextMarkDef>) => {
+  if (!value) return value;
+  if (mark === "strong") return `<strong>${value}</strong>`;
+  if (mark === "em") return `<em>${value}</em>`;
+  if (mark === "underline") return `<u>${value}</u>`;
+  if (mark === "strike-through") return `<s>${value}</s>`;
+  if (mark === "code") return `<code>${value}</code>`;
+
+  const markDef = markDefByKey.get(mark);
+  if (!markDef || markDef._type !== "link") return value;
+
+  const href = sanitizeHref(markDef.href ?? "");
+  if (!href) return value;
+
+  const opensNewTab = markDef.blank === true || markDef.openInNewTab === true;
+  const rel = opensNewTab ? ' rel="noopener noreferrer"' : "";
+  const target = opensNewTab ? ' target="_blank"' : "";
+  return `<a href="${escapeHtml(href)}"${target}${rel}>${value}</a>`;
+};
+
+const sanitizeHref = (href: string) => {
+  const value = href.trim();
+  if (!value) return "";
+  if (value.startsWith("/") || value.startsWith("#")) return value;
+  if (/^(https?:|mailto:|tel:)/i.test(value)) return value;
+  return "";
 };
 
 const isImageBlock = (value: unknown): value is PortableTextImageBlock => {
