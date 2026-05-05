@@ -78,6 +78,7 @@ const methods = d.suggestedMethods.map((m) => ({
 }));
 
 const sideLabel = toTitleCase("Ways to give");
+const heroSecondaryHref = "/support-us/";
 
 const beaconAccount = (d.beaconAccount ?? "dovecottagedayhospice").trim();
 const beaconDonateFormId = (d.beaconDonateFormId ?? "").trim();
@@ -114,17 +115,7 @@ const donateFormIntro = d.donateFormIntro ?? "";
         </p>
         <div class="donate-hero-ctas">
           <a class="btn btn-primary donate-hero-btn-pill" href={d.heroPrimaryCtaHref}>{h.heroPrimary}</a>
-          <a class="donate-hero-btn-secondary" href={d.heroSecondaryCtaHref}>
-            {h.heroSecondary}
-            <span class="donate-hero-gift" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-                <rect x="3" y="8" width="18" height="4" rx="1" />
-                <path d="M12 8v13M8 4h.01M16 4h.01" />
-                <path d="M3 12s2-2 3.5-2S9 10 9 10s-1-2-3.5-2-3.5 2-3.5 2" />
-                <path d="M15 8s-1-2-3.5-2-3.5 2-3.5 2 1.5 0 3.5 0 3.5 0 3.5 0" />
-              </svg>
-            </span>
-          </a>
+          <a class="donate-hero-btn-secondary" href={heroSecondaryHref}>{h.heroSecondary}</a>
         </div>
       </div>
     </section>
@@ -342,14 +333,6 @@ const donateFormIntro = d.donateFormIntro ?? "";
   .donate-hero-btn-secondary:hover,
   .donate-hero-btn-secondary:focus-visible {
     background: rgba(255, 255, 255, 0.1);
-  }
-
-  .donate-hero-gift {
-    display: inline-flex;
-  }
-
-  .donate-hero-gift svg {
-    display: block;
   }
 
   .donate-trust {
