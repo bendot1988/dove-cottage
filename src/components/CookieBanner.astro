@@ -1,0 +1,251 @@
+<div class="cookie-consent" data-cookie-consent hidden>
+  <div class="cookie-consent__panel" role="dialog" aria-live="polite" aria-label="Cookie preferences">
+    <h2>Cookies on this site</h2>
+    <p>
+      We use essential cookies to make the website work, plus optional analytics cookies to understand visits and
+      improve content. You can accept all, reject optional cookies, or choose preferences.
+    </p>
+    <div class="cookie-consent__actions cookie-consent__actions--primary">
+      <button type="button" class="btn btn-primary cookie-btn" data-cookie-action="accept-all">Accept all</button>
+      <button type="button" class="btn btn-secondary cookie-btn" data-cookie-action="reject-optional">Reject optional</button>
+      <button type="button" class="btn btn-ghost cookie-btn" data-cookie-action="toggle-preferences">Choose preferences</button>
+    </div>
+
+    <div class="cookie-consent__prefs" data-cookie-prefs hidden>
+      <div class="cookie-pref">
+        <div>
+          <p class="cookie-pref__label">Strictly necessary</p>
+          <p class="cookie-pref__hint">Always on. Required for core website functions.</p>
+        </div>
+        <span class="cookie-pref__pill cookie-pref__pill--on">Always on</span>
+      </div>
+      <div class="cookie-pref">
+        <label for="cookie-analytics-toggle">
+          <p class="cookie-pref__label">Analytics</p>
+          <p class="cookie-pref__hint">Helps us understand usage and improve pages.</p>
+        </label>
+        <input id="cookie-analytics-toggle" type="checkbox" data-cookie-analytics-toggle />
+      </div>
+      <div class="cookie-consent__actions">
+        <button type="button" class="btn btn-primary cookie-btn" data-cookie-action="save-preferences">Save preferences</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const consentKey = "dc_cookie_consent_v1";
+    const analyticsScriptId = "dotwall-analytics-script";
+    const analyticsSrc = "https://dotwallstats.co.uk/js/script.js";
+    const analyticsDomain = "dovecottage.org";
+
+    const root = document.querySelector("[data-cookie-consent]");
+    if (!(root instanceof HTMLElement)) return;
+
+    const prefsPanel = root.querySelector("[data-cookie-prefs]");
+    const analyticsToggle = root.querySelector("[data-cookie-analytics-toggle]");
+    const acceptBtn = root.querySelector('[data-cookie-action="accept-all"]');
+    const rejectBtn = root.querySelector('[data-cookie-action="reject-optional"]');
+    const togglePrefsBtn = root.querySelector('[data-cookie-action="toggle-preferences"]');
+    const savePrefsBtn = root.querySelector('[data-cookie-action="save-preferences"]');
+
+    const parseStored = () => {
+      try {
+        const raw = localStorage.getItem(consentKey);
+        if (!raw) return null;
+        const parsed = JSON.parse(raw);
+        if (typeof parsed !== "object" || parsed == null) return null;
+        return {
+          necessary: true,
+          analytics: parsed.analytics === true,
+        };
+      } catch {
+        return null;
+      }
+    };
+
+    const persist = (value) => {
+      try {
+        localStorage.setItem(
+          consentKey,
+          JSON.stringify({
+            necessary: true,
+            analytics: value.analytics === true,
+            updatedAt: new Date().toISOString(),
+          })
+        );
+      } catch {
+        // ignore storage failures
+      }
+    };
+
+    const ensureAnalyticsScript = () => {
+      if (document.getElementById(analyticsScriptId)) return;
+      const script = document.createElement("script");
+      script.id = analyticsScriptId;
+      script.defer = true;
+      script.src = analyticsSrc;
+      script.setAttribute("data-domain", analyticsDomain);
+      document.head.appendChild(script);
+    };
+
+    const applyConsent = (consent) => {
+      if (consent?.analytics) {
+        ensureAnalyticsScript();
+      }
+    };
+
+    const hideBanner = () => {
+      root.hidden = true;
+    };
+
+    const showBanner = () => {
+      root.hidden = false;
+    };
+
+    const saveAndApply = (consent) => {
+      persist(consent);
+      applyConsent(consent);
+      hideBanner();
+    };
+
+    const stored = parseStored();
+    if (stored) {
+      applyConsent(stored);
+      hideBanner();
+    } else {
+      showBanner();
+    }
+
+    if (acceptBtn instanceof HTMLButtonElement) {
+      acceptBtn.addEventListener("click", () => {
+        saveAndApply({ necessary: true, analytics: true });
+      });
+    }
+
+    if (rejectBtn instanceof HTMLButtonElement) {
+      rejectBtn.addEventListener("click", () => {
+        saveAndApply({ necessary: true, analytics: false });
+      });
+    }
+
+    if (togglePrefsBtn instanceof HTMLButtonElement && prefsPanel instanceof HTMLElement) {
+      togglePrefsBtn.addEventListener("click", () => {
+        const next = prefsPanel.hidden;
+        prefsPanel.hidden = !next;
+        if (analyticsToggle instanceof HTMLInputElement) {
+          analyticsToggle.checked = parseStored()?.analytics === true;
+        }
+      });
+    }
+
+    if (savePrefsBtn instanceof HTMLButtonElement && analyticsToggle instanceof HTMLInputElement) {
+      savePrefsBtn.addEventListener("click", () => {
+        saveAndApply({ necessary: true, analytics: analyticsToggle.checked });
+      });
+    }
+  })();
+</script>
+
+<style>
+  .cookie-consent {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1000;
+    padding: 12px;
+    pointer-events: none;
+  }
+
+  .cookie-consent__panel {
+    pointer-events: auto;
+    max-width: 920px;
+    margin: 0 auto;
+    background: #fff;
+    border: 1px solid #d6e1f1;
+    border-radius: 14px;
+    box-shadow: 0 14px 30px rgba(13, 33, 64, 0.2);
+    padding: 14px;
+  }
+
+  .cookie-consent h2 {
+    margin: 0 0 6px;
+    font-size: var(--type-subtitle);
+    color: #143560;
+  }
+
+  .cookie-consent p {
+    margin: 0;
+    color: #3b4f6d;
+    line-height: 1.45;
+    font-size: var(--type-body-small);
+  }
+
+  .cookie-consent__actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .cookie-btn {
+    min-height: 40px;
+    border-radius: 999px;
+  }
+
+  .cookie-consent__prefs {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e4ebf7;
+  }
+
+  .cookie-pref {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 0 0 8px;
+  }
+
+  .cookie-pref__label {
+    margin: 0;
+    font-weight: 700;
+    color: #143560;
+    font-size: var(--type-body-small);
+  }
+
+  .cookie-pref__hint {
+    margin-top: 2px;
+    color: #4f6382;
+    font-size: var(--type-micro);
+    line-height: 1.4;
+  }
+
+  .cookie-pref__pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid #bfd2ef;
+    background: #edf4ff;
+    color: #204b84;
+    font-size: var(--type-micro);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 680px) {
+    .cookie-consent {
+      padding: 8px;
+    }
+    .cookie-consent__actions {
+      flex-direction: column;
+    }
+    .cookie-btn {
+      width: 100%;
+    }
+  }
+</style>

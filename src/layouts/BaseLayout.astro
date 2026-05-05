@@ -2,6 +2,7 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import QuickLinksFab from "../components/QuickLinksFab.astro";
+import CookieBanner from "../components/CookieBanner.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -54,6 +55,7 @@ const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin)
     </main>
     <Footer />
     <QuickLinksFab />
+    <CookieBanner />
     <script is:inline>
       (() => {
         const hash = window.location.hash || "";

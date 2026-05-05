@@ -1,0 +1,147 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Cookie Policy | Dove Cottage"
+  description="Read how Dove Cottage uses cookies and similar technologies, including analytics and embedded services."
+>
+  <section class="cookie-page">
+    <div class="container cookie-container">
+      <p class="cookie-eyebrow">Legal Information</p>
+      <h1>Cookie Policy</h1>
+      <p class="cookie-updated"><strong>Last updated:</strong> 5 May 2026</p>
+
+      <p>
+        This Cookie Policy explains how Dove Cottage Day Hospice uses cookies and similar technologies when you visit
+        this website.
+      </p>
+
+      <h2>What Are Cookies?</h2>
+      <p>
+        Cookies are small text files stored on your device when you visit a website. Similar technologies can include
+        local storage and scripts that remember preferences or measure website performance.
+      </p>
+
+      <h2>How We Use Cookies and Similar Technologies</h2>
+      <p>We currently use the following categories:</p>
+      <ul>
+        <li>
+          <strong>Strictly necessary:</strong> required for core site behaviour and your cookie preference settings.
+        </li>
+        <li>
+          <strong>Analytics (optional):</strong> used to understand page visits and improve content and user journeys.
+        </li>
+      </ul>
+
+      <h2>Technologies in Use on This Site</h2>
+      <ul>
+        <li>
+          <strong>Cookie consent preference storage:</strong> we store your consent choice in browser local storage
+          under the key <code>dc_cookie_consent_v1</code>.
+        </li>
+        <li>
+          <strong>Analytics:</strong> if you accept analytics cookies, we load our analytics script from
+          <code>dotwallstats.co.uk</code> (Plausible-based analytics implementation).
+        </li>
+        <li>
+          <strong>Embedded forms and services:</strong> certain pages load third-party form scripts (for example Beacon
+          forms and Fillout) only when those pages are used; these services may set their own cookies according to
+          their policies.
+        </li>
+        <li>
+          <strong>Embedded media:</strong> video embeds may use YouTube’s privacy-enhanced domain
+          <code>youtube-nocookie.com</code>; third-party cookies may still be set after interaction.
+        </li>
+      </ul>
+
+      <h2>Your Choices</h2>
+      <p>
+        On your first visit, our cookie banner lets you accept all, reject optional cookies, or choose preferences.
+        If you reject optional cookies, analytics tracking is not loaded.
+      </p>
+      <p>
+        You can also clear cookies and local storage from your browser settings at any time. This may reset your
+        consent preferences.
+      </p>
+
+      <h2>Third-Party Services</h2>
+      <p>
+        We use selected third-party providers for forms, payments, maps, and media embeds. Where those services set
+        cookies, their own privacy/cookie policies apply in addition to this policy.
+      </p>
+
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this policy from time to time to reflect legal, technical, or operational changes. The latest
+        version will always appear on this page.
+      </p>
+
+      <h2>Contact Us</h2>
+      <p>
+        If you have questions about cookies or data use on this website, contact us at
+        <a href="mailto:admin@dovecottage.org">admin@dovecottage.org</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .cookie-page {
+    background: #f5f7fc;
+    padding: clamp(2.5rem, 5vw, 4rem) 0;
+  }
+
+  .cookie-container {
+    max-width: 820px;
+  }
+
+  .cookie-eyebrow {
+    margin: 0 0 0.5rem;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-steel-blue-1);
+  }
+
+  h1 {
+    margin: 0 0 0.75rem;
+    color: #0f2240;
+  }
+
+  .cookie-updated {
+    margin: 0 0 1.5rem;
+    color: #435b7c;
+  }
+
+  h2 {
+    margin: 2rem 0 0.5rem;
+    color: #15305b;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+  }
+
+  p,
+  li {
+    color: #2c3f5d;
+    line-height: 1.65;
+  }
+
+  ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1.1rem;
+  }
+
+  a {
+    color: #1d4f92;
+    font-weight: 600;
+  }
+
+  code {
+    background: #eaf1fb;
+    border: 1px solid #d5e1f2;
+    border-radius: 4px;
+    padding: 0 0.35rem;
+    font-size: 0.9em;
+  }
+</style>

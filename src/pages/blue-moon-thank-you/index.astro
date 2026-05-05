@@ -1,0 +1,71 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Thank You | Dove Cottage"
+  description="Thank you for supporting Dove Cottage Day Hospice."
+  noindex={true}
+>
+  <section class="thank-you-page">
+    <div class="container thank-you-container">
+      <p class="thank-you-eyebrow">Blue Moon Ball</p>
+      <h1>Thank You for Your Support</h1>
+      <p class="thank-you-lede">
+        Your payment has been received and we are so grateful for your support. Every contribution helps Dove
+        Cottage continue providing compassionate care to local families.
+      </p>
+      <a href="/" class="btn btn-primary btn-shine thank-you-home">Return to Home Page</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .thank-you-page {
+    background: linear-gradient(180deg, #f4f7fc 0%, #edf3fb 100%);
+    padding: clamp(3rem, 7vw, 5rem) 0;
+  }
+
+  .thank-you-container {
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .thank-you-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0 0.75rem;
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #c6d6ee;
+    background: #fff;
+    color: #1d4f92;
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0 0 0.8rem;
+    color: #0f2240;
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .thank-you-lede {
+    margin: 0 auto;
+    max-width: 60ch;
+    color: #3a4f6c;
+    font-size: var(--type-body-large);
+    line-height: 1.6;
+  }
+
+  .thank-you-home {
+    margin-top: 1.4rem;
+    border-radius: 999px;
+    min-height: 46px;
+    padding: 0 24px;
+  }
+</style>
