@@ -1,0 +1,190 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import contact from "../../data/contact.json";
+import meetTeam from "../../data/meet-the-team.json";
+import facilities from "../../data/hire-our-facilities.json";
+import { toTitleCase } from "../../lib/titleCase";
+
+const cards = [
+  {
+    title: "Meet the Team",
+    href: "/about-us/meet-the-team/",
+    image: meetTeam.heroImage,
+    imageAlt: meetTeam.heroImageAlt,
+    excerpt: "Meet the people behind Dove Cottage, from our clinical team to staff and volunteers."
+  },
+  {
+    title: "Our Facilities",
+    href: "/about-us/our-facilities/",
+    image: facilities.heroImage,
+    imageAlt: facilities.heroImageAlt,
+    excerpt: "Explore the welcoming spaces and facilities available at Dove Cottage."
+  }
+];
+const c = contact;
+const telHref = `tel:${c.trustPhone.replace(/\s+/g, "")}`;
+const trustDonate = toTitleCase(c.trustDonateLabel);
+const trustCharity = toTitleCase(c.trustCharityLine);
+---
+
+<BaseLayout
+  title="About Us | Dove Cottage"
+  description="Learn more about Dove Cottage and explore our team and facilities."
+>
+  <div class="svc-page about-page">
+    <section class="hospice-svc-hero" aria-label="About us">
+      <img
+        class="hospice-svc-hero-bg"
+        src={meetTeam.heroImage}
+        alt={meetTeam.heroImageAlt}
+        width="1920"
+        height="720"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hospice-svc-hero-overlay" aria-hidden="true"></div>
+      <div class="container hospice-svc-hero-inner">
+        <a class="interior-hero-eyebrow" href="/">
+          <span class="interior-hero-eyebrow__arrow" aria-hidden="true">←</span>
+          Home
+        </a>
+        <h1>About Us</h1>
+        <p class="hospice-svc-hero-dek">
+          Find out more about the people and places that make Dove Cottage a welcoming, compassionate hospice for
+          local families.
+        </p>
+      </div>
+    </section>
+
+    <div class="contact-trust" aria-label="Key details">
+      <div class="container contact-trust-inner">
+        <span class="contact-trust-charity">{trustCharity}</span>
+        <div class="contact-trust-actions">
+          <a class="contact-trust-phone" href={telHref}>☎ {c.trustPhoneDisplay}</a>
+          <a href={c.trustDonateUrl} class="btn btn-primary btn-shine contact-trust-donate">{trustDonate}</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="svc-main about-main" aria-label="About us links">
+      <img src="/images/sunflower-brand-small.png" alt="" class="svc-sunflower" loading="lazy" aria-hidden="true" />
+      <div class="container">
+        <p class="svc-lede">
+          Choose one of the pages below to learn more about our team and the facilities we provide.
+        </p>
+        <div class="about-overview-grid">
+          {
+            cards.map((card) => (
+              <a class="about-overview-card" href={card.href} aria-label={`View ${card.title}`}>
+                <div class="about-overview-card__media">
+                  <img src={card.image} alt={card.imageAlt} loading="lazy" decoding="async" />
+                  <div class="about-overview-card__shade" aria-hidden="true"></div>
+                  <h2>{card.title}</h2>
+                </div>
+                <p>{card.excerpt}</p>
+                <span class="about-overview-card__cta">
+                  View page <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .about-main {
+    padding-top: clamp(2rem, 5vw, 3rem);
+  }
+
+  .about-overview-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .about-overview-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #d9e3f0;
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: 0 8px 18px rgba(18, 44, 83, 0.08);
+    transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  }
+
+  .about-overview-card:hover,
+  .about-overview-card:focus-visible {
+    transform: translateY(-3px);
+    border-color: #c4d2e6;
+    box-shadow: 0 14px 28px rgba(18, 44, 83, 0.14);
+    outline: none;
+  }
+
+  .about-overview-card__media {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+  }
+
+  .about-overview-card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .about-overview-card:hover .about-overview-card__media img,
+  .about-overview-card:focus-visible .about-overview-card__media img {
+    transform: scale(1.04);
+  }
+
+  .about-overview-card__shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 18, 40, 0.08) 0%, rgba(5, 18, 40, 0.72) 100%);
+  }
+
+  .about-overview-card h2 {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0;
+    padding: 14px 16px;
+    font-size: var(--type-card-title);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  .about-overview-card > p {
+    margin: 0;
+    padding: 14px 16px 0;
+    color: #415773;
+    font-size: var(--type-body);
+    line-height: 1.55;
+    flex: 1;
+  }
+
+  .about-overview-card__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 14px 16px 16px;
+    color: var(--color-steel-blue-1);
+    font-size: var(--type-body-small);
+    font-weight: 800;
+  }
+
+  @media (max-width: 780px) {
+    .about-overview-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -6,3 +6,13 @@
   from = "/admin"
   to = "/admin/"
   status = 301
+
+[[redirects]]
+  from = "/bluemoonball"
+  to = "/news/blue-moon-ball/"
+  status = 301
+
+[[redirects]]
+  from = "/teamdove"
+  to = "/news/join-team-dove-tough-mudder-2026/"
+  status = 301
