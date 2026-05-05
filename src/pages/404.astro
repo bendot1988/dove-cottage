@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Page Not Found | Dove Cottage"
+  description="The page you are looking for could not be found. Explore Dove Cottage services, support options, or contact the team."
+  noindex={true}
+>
+  <section class="not-found">
+    <div class="container not-found__container">
+      <p class="not-found__eyebrow">404 Error</p>
+      <h1>Sorry, we could not find that page.</h1>
+      <p class="not-found__lede">
+        The page may have moved, the link might be out of date, or the address may have been typed incorrectly.
+      </p>
+
+      <div class="not-found__actions">
+        <a href="/" class="btn btn-primary btn-shine">Back to Home</a>
+        <a href="/explore/" class="btn btn-secondary">Explore Services</a>
+        <a href="/contact/" class="btn btn-ghost">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    background: linear-gradient(180deg, #f4f7fc 0%, #eef3fb 100%);
+    padding: clamp(3rem, 7vw, 5.5rem) 0;
+  }
+
+  .not-found__container {
+    max-width: 760px;
+    text-align: center;
+  }
+
+  .not-found__eyebrow {
+    display: inline-block;
+    margin: 0 0 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid #c5d5ee;
+    background: #fff;
+    color: var(--color-steel-blue-1);
+    font-size: var(--type-micro);
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin: 0 0 0.8rem;
+    color: #0f2240;
+    font-size: clamp(1.85rem, 4vw, 2.6rem);
+    line-height: 1.18;
+    letter-spacing: -0.02em;
+  }
+
+  .not-found__lede {
+    margin: 0 auto;
+    max-width: 60ch;
+    color: #3c4f6a;
+    font-size: var(--type-body-large);
+    line-height: 1.6;
+  }
+
+  .not-found__actions {
+    margin-top: 1.7rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px 12px;
+  }
+
+  .not-found__actions .btn {
+    border-radius: 999px;
+    min-height: 44px;
+  }
+  @media (max-width: 640px) {
+    .not-found__actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .not-found__actions .btn {
+      width: 100%;
+    }
+  }
+</style>
