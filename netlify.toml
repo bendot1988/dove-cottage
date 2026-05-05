@@ -8,11 +8,386 @@
   status = 301
 
 [[redirects]]
+  from = "/500-club-lottery-terms-and-conditions/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/500-club-lottery-winners/"
+  to = "/news"
+  status = 301
+
+[[redirects]]
+  from = "/500-club-lottery/"
+  to = "/news"
+  status = 301
+
+[[redirects]]
+  from = "/about/"
+  to = "/about-us/"
+  status = 301
+
+[[redirects]]
+  from = "/activities/"
+  to = "/hospice-services/wellbeing-activities/"
+  status = 301
+
+[[redirects]]
+  from = "/asfordby/"
+  to = "/shops/asfordby-shop/"
+  status = 301
+
+[[redirects]]
+  from = "/basket/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/befriending-service/"
+  to = "/explore/"
+  status = 301
+
+[[redirects]]
+  from = "/bereavement-support/"
+  to = "/hospice-services/bereavement-support-group/"
+  status = 301
+
+[[redirects]]
+  from = "/best-of-belvoir-prize-draw/"
+  to = "/news"
+  status = 301
+
+[[redirects]]
+  from = "/biggive/"
+  to = "/news"
+  status = 301
+
+[[redirects]]
+  from = "/bluemoonball/"
+  to = "/news/blue-moon-ball/"
+  status = 301
+
+[[redirects]]
+  from = "/bottesford/"
+  to = "/shops/bottesford/"
+  status = 301
+
+[[redirects]]
+  from = "/case-study/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/category/events/"
+  to = "/news/?feed=event"
+  status = 301
+
+[[redirects]]
+  from = "/category/news/"
+  to = "/news/?feed=news"
+  status = 301
+
+[[redirects]]
+  from = "/category/recognition/"
+  to = "/news/?feed=news"
+  status = 301
+
+[[redirects]]
+  from = "/celebrating-sally/"
+  to = "/news/celebrating-sally-over-20-years-of-compassionate-care-at-dove-cottage/"
+  status = 301
+
+[[redirects]]
+  from = "/challenge-25/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/challenges/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/checkout/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/christmas-store/thank-you/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/christmas/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/codicils/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/community-fundraising/"
+  to = "/support-us/fundraise-for-us/"
+  status = 301
+
+[[redirects]]
+  from = "/complementary-therapies/"
+  to = "/hospice-services/complementary-therapies/"
+  status = 301
+
+[[redirects]]
+  from = "/corporate-fundraising/"
+  to = "/support-us/corporate-partnerships/"
+  status = 301
+
+[[redirects]]
+  from = "/cotgrave/"
+  to = "/shops/cotgrave/"
+  status = 301
+
+[[redirects]]
+  from = "/dementia-support/"
+  to = "/what-we-offer/dementia-home-sitting/"
+  status = 301
+
+[[redirects]]
+  from = "/donate/in-memory/"
+  to = "/support-us/leave-a-gift-in-your-will/"
+  status = 301
+
+[[redirects]]
+  from = "/donate/memory-meadow/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/downloads/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/ebay-shop/"
+  to = "https://www.charity.ebay.co.uk/charity/i/Dove-Cottage-Day-Hospice/99401"
+  status = 301
+
+[[redirects]]
+  from = "/ebay/"
+  to = "https://www.charity.ebay.co.uk/charity/i/Dove-Cottage-Day-Hospice/99401"
+  status = 301
+
+[[redirects]]
+  from = "/family-support-group/"
+  to = "/hospice-services/counselling/"
+  status = 301
+
+[[redirects]]
+  from = "/family-support/"
+  to = "/hospice-services/counselling/"
+  status = 301
+
+[[redirects]]
+  from = "/feedback-form/"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/feedback/"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/future-events/"
+  to = "/news/?feed=event"
+  status = 301
+
+[[redirects]]
+  from = "/gallery-page/"
+  to = "/hire-our-facilities/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/"
+  to = "/hire-our-facilities/"
+  status = 301
+
+[[redirects]]
+  from = "/guests-families-carers/"
+  to = "/what-we-offer/carer-patient-wellbeing/"
+  status = 301
+
+[[redirects]]
+  from = "/history/"
+  to = "/about-us/meet-the-team/"
+  status = 301
+
+[[redirects]]
+  from = "/jumble-sale/"
+  to = "/news/?feed=news"
+  status = 301
+
+[[redirects]]
+  from = "/leaving-a-legacy/"
+  to = "/support-us/leave-a-gift-in-your-will/"
+  status = 301
+
+[[redirects]]
+  from = "/mental-health-support/"
+  to = "/explore/"
+  status = 301
+
+[[redirects]]
+  from = "/news-events/"
+  to = "/news/?feed=news"
+  status = 301
+
+[[redirects]]
+  from = "/newsletter/"
+  to = "https://dovecottagedayhospice.beaconforms.com/form/3501530c"
+  status = 301
+
+[[redirects]]
+  from = "/nursing-support/"
+  to = "/hospice-services/nursing-care-medical-advice/"
+  status = 301
+
+[[redirects]]
+  from = "/one-off-donations/"
+  to = "/donate/"
+  status = 301
+
+[[redirects]]
+  from = "/openday/"
+  to = "/news/?feed=news"
+  status = 301
+
+[[redirects]]
+  from = "/our-care-services/"
+  to = "/support-us/"
+  status = 301
+
+[[redirects]]
+  from = "/our-shops/"
+  to = "/shops/"
+  status = 301
+
+[[redirects]]
+  from = "/prize-draw/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/quiz/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/regular-giving/"
+  to = "/donate/"
+  status = 301
+
+[[redirects]]
+  from = "/sample-page/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/santa-registration/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/spiritual-care/"
+  to = "/hospice-services/spiritual-chaplaincy-support/"
+  status = 301
+
+[[redirects]]
+  from = "/stathern/"
+  to = "/shops/stathern/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/dove-cottage-tea-room-closure/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/dove-cottage/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/hospice-care/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/hospice/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/long-service/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/tag/newsletter/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/tea-room-closure/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/teamdove/"
+  to = "/about-us/meet-the-team/"
+  status = 301
+
+[[redirects]]
+  from = "/tearoomupdate/"
+  to = "/news/"
+  status = 301
+
+[[redirects]]
+  from = "/testimonials/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/testpage/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/vacancies/"
+  to = "/hospice-services/vacancies/"
+  status = 301
+
+[[redirects]]
+  from = "/volunteering/"
+  to = "/support-us/volunteer-your-time/"
+  status = 301
+
+[[redirects]]
+  from = "/what-is-hospice-day-care/"
+  to = "/hospice-services/"
+  status = 301
+
+[[redirects]]
+  from = "/where-do-we-go-next/"
+  to = "/news/?feed=news"
+  status = 301
+
+[[redirects]]
   from = "/bluemoonball"
   to = "/news/blue-moon-ball/"
   status = 301
 
 [[redirects]]
   from = "/teamdove"
-  to = "/news/join-team-dove-tough-mudder-2026/"
+  to = "/about-us/meet-the-team/"
   status = 301
