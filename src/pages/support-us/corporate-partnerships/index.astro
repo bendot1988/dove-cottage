@@ -37,6 +37,7 @@ const telHref = `tel:${contact.trustPhone.replace(/\s+/g, "")}`;
 const cap = toEachWordCapitalized;
 const pageHeading = data.heroH1;
 const layoutTitle = data.pageTitle;
+const corporateIntroPackHref = "/resources/dove-corporate-intro-pack.pdf";
 
 ---
 
@@ -95,6 +96,27 @@ const layoutTitle = data.pageTitle;
 
             <p class="svc-lede">{data.sponsorshipBody}</p>
             <p class="svc-lede">{data.expectIntro}</p>
+            <a
+              class="corporate-download"
+              href={corporateIntroPackHref}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download the Dove Cottage corporate intro pack PDF"
+            >
+              <span class="corporate-download__icon" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <path d="M14 2v6h6" />
+                  <path d="M12 12v6" />
+                  <path d="m9.5 15 2.5 3 2.5-3" />
+                </svg>
+              </span>
+              <span>
+                <strong>Download Corporate Intro Pack</strong>
+                <small>PDF · opens in a new tab</small>
+              </span>
+            </a>
             <p class="svc-lede">{data.ctaBody}</p>
             <p class="svc-lede">
               <a class="svc-inline-link" href={telHref}>{contact.trustPhoneDisplay}</a>
@@ -182,5 +204,59 @@ const layoutTitle = data.pageTitle;
     border: 1px solid #dce5f2;
     border-radius: 10px;
     background: #fbfcfe;
+  }
+
+  .corporate-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0.25rem 0 1.1rem;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid #cddbef;
+    background: #f6f9ff;
+    color: #173b6d;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(16, 38, 72, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .corporate-download:hover,
+  .corporate-download:focus-visible {
+    transform: translateY(-1px);
+    border-color: #b8cae6;
+    box-shadow: 0 10px 22px rgba(16, 38, 72, 0.14);
+    outline: none;
+  }
+
+  .corporate-download__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(29, 80, 141, 0.1);
+    color: #1d4f92;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .corporate-download__icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .corporate-download strong {
+    display: block;
+    font-size: var(--type-body);
+    line-height: 1.25;
+  }
+
+  .corporate-download small {
+    display: block;
+    margin-top: 2px;
+    color: #4a6387;
+    font-size: var(--type-body-small);
+    line-height: 1.3;
   }
 </style>
