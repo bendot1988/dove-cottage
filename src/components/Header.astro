@@ -1,6 +1,7 @@
 ---
 import contact from "../data/contact.json";
 import archive from "../data/site-archive.json";
+import { sanityClient } from "../lib/sanity";
 import { toTitleCase } from "../lib/titleCase";
 
 const path = Astro.url.pathname;
@@ -61,7 +62,56 @@ const archiveSearchEntries = archive.items
     };
   });
 
-const searchIndex = [...baseSearchEntries, ...archiveSearchEntries].filter(
+type NewsSearchDoc = {
+  title?: string;
+  excerpt?: string;
+  slug?: string;
+};
+
+let newsAndEventsSearchEntries: { title: string; href: string; section: string; excerpt?: string }[] = [];
+
+try {
+  const [newsPosts, eventPosts] = await Promise.all([
+    sanityClient.fetch<NewsSearchDoc[]>(
+      `*[_type == "newsPost" && !coalesce(draft, false) && defined(slug.current)] | order(publishDate desc)[0...60]{
+        title,
+        excerpt,
+        "slug": slug.current
+      }`
+    ),
+    sanityClient.fetch<NewsSearchDoc[]>(
+      `*[_type == "eventPost" && !coalesce(draft, false) && defined(slug.current)] | order(eventDate desc)[0...60]{
+        title,
+        excerpt,
+        "slug": slug.current
+      }`
+    )
+  ]);
+
+  const newsEntries = (newsPosts ?? [])
+    .filter((item) => item?.title && item?.slug)
+    .map((item) => ({
+      title: item.title as string,
+      href: `/news/${item.slug}/`,
+      section: "News",
+      excerpt: item.excerpt ?? ""
+    }));
+
+  const eventEntries = (eventPosts ?? [])
+    .filter((item) => item?.title && item?.slug)
+    .map((item) => ({
+      title: item.title as string,
+      href: `/events/${item.slug}/`,
+      section: "Events",
+      excerpt: item.excerpt ?? ""
+    }));
+
+  newsAndEventsSearchEntries = [...newsEntries, ...eventEntries];
+} catch {
+  newsAndEventsSearchEntries = [];
+}
+
+const searchIndex = [...baseSearchEntries, ...archiveSearchEntries, ...newsAndEventsSearchEntries].filter(
   (entry, idx, all) => all.findIndex((x) => x.href === entry.href) === idx
 );
 ---
